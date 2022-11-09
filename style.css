@@ -424,7 +424,7 @@ body.active { overflow: hidden; }
 }
 
 .hero {
-  background: url(../images/hero-bg.jpg) no-repeat;
+  background: url(hero-bg.jpg) no-repeat;
   background-size: cover;
   background-position: center;
   min-height: 750px;
@@ -450,7 +450,7 @@ body.active { overflow: hidden; }
 .hero-title > strong { color: var(--citrine); }
 
 .upcoming {
-  background: url("../images/upcoming-bg.png") no-repeat;
+  background: url("upcoming-bg.png") no-repeat;
   background-size: cover;
   background-position: center;
   padding-block: var(--section-padding);
@@ -486,7 +486,7 @@ body.active { overflow: hidden; }
 }
 
 .service {
-  background: url("../images/service-bg.jpg")no-repeat;
+  background: url("service-bg.jpg")no-repeat;
   background-size: cover;
   background-position: center;
   padding-block: var(--section-padding);
@@ -582,7 +582,7 @@ body.active { overflow: hidden; }
 .service-card .card-title { margin-bottom: 10px; } 
 
 .top-rated {
-  background: url(../images/top-rated-bg.jpg) no-repeat;
+  background: url("top-rated-bg.jpg") no-repeat;
   background-size: cover;
   background-position: center;
   padding-block: var(--section-padding);
@@ -628,7 +628,7 @@ body.active { overflow: hidden; }
 .top-rated .filter-btn:focus::before { right: 0; }
 
 .tv-series {
-  background: url(../images/tv-series-bg.jpg) no-repeat;
+  background: url("tv-series-bg.jpg") no-repeat;
   background-size: cover;
   background-position: center;
   padding-block: var(--section-padding); 
@@ -637,7 +637,7 @@ body.active { overflow: hidden; }
 .tv-series .section-title { margin-bottom: 50px; }
 
 .cta {
-  background: url(../images/cta-bg.jpg) no-repeat;
+  background: url("cta-bg.jpg") no-repeat;
   background-size: cover;
   background-position: center;
   text-align: center;
@@ -690,7 +690,7 @@ body.active { overflow: hidden; }
 }
 
 .footer-top {
-  background: url(../images/footer-bg.jpg) no-repeat;
+  background: url("footer-bg.jpg") no-repeat;
   background-size: cover;
   background-position: center;
   padding-block: 80px 50px;
@@ -802,7 +802,7 @@ body.active { overflow: hidden; }
 }
 
 .movie-detail {
-  background: url(../images/banner-1.jpg) no-repeat;
+  background: url("banner-1.jpg") no-repeat;
   background-size: cover;
   background-position: center;
   padding-top: 160px;
