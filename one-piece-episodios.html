@@ -1,69 +1,465 @@
- <!DOCTYPE html>
- <html lang="pt-br">
- 
- <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <title>Assistir One-Piece</title>
-     <link rel="stylesheet" href="episodios.css">
- </head>
- <style>
-    .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding-block: 25px;
-  transition: var(--transition-2);
-  z-index: 4;
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeFlix - Assista Animes Gratis!</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    <style>
+        :root {
+    --primary : linear-gradient(to bottom right, #151515, #1C1C1C);
+    --secondary : gold;
+    --text : #fff;
+    
 }
 
-.header.active {
-  background: var(--eerie-black);
-  padding-block: 20px;
+p {
+    color: white;
 }
 
-.header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.container {
+    width: 100vw;
+
+    display: grid;
+    grid-template-columns: 1.8fr 1.2fr;
+    gap: 1rem;
+    
+    padding: .5rem 1rem;
+    text-transform: capitalize;
 }
 
-.header-actions { display: none; }
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: hsla(204, 18%, 11%, 0.8);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 1;
-  transition: var(--transition-2);
+@media screen and (max-width: 990px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
 }
 
-.overlay.active {
-  opacity: 1;
-  pointer-events: all;
-}
-.social-list { column-gap: 10px; }
+.main-video, .video-playlist {
 
-.social-link {
-  background: var(--rich-black-fogra-29);
-  color: var(--gray-x);
-  font-size: 14px;
-  width: 35px;
-  height: 35px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  box-shadow: inset 0 4px 8px hsla(0, 0%, 0%, 0.25);
-  transition: var(--transition-2);
-  font-style: normal;
+    padding-top: 110px;
+    width: 100%;
+    height: 30rem;
 }
- </style>
- <body>
-        <header class="header" data-header>
+
+.main-video .title {
+    margin-top: 1rem;
+}
+
+.video-playlist .title {
+    padding-left: 1rem;
+}
+
+.video-playlist > p {
+    padding: 1rem;
+    color: var(--secondary);
+}
+
+.video-playlist .videos{
+    height: 70%;
+    overflow-y: auto;
+}
+
+.video-playlist .videos::-webkit-scrollbar {
+    width: .4rem;
+    border-radius: .4rem;
+    background-color: #0005;
+}
+
+.video-playlist .videos::-webkit-scrollbar-thumb {
+    border-radius: .4rem;
+    background-color: #fff;
+}
+
+.video-playlist .videos .video {
+    position: relative;
+    width: 100%;
+    height: 4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 1rem;
+    margin-top: .1rem;
+    cursor: pointer;
+
+    border-radius: .5rem;
+}
+
+.video-playlist .videos .video:hover {
+    background-color: #0003;
+}
+
+.video-playlist .videos .video.active {
+    background-color: #0003;
+    color: var(--secondary);
+}
+
+.main-video video {
+    width: 100%;
+    border-radius: .5rem;
+}
+
+.video img {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    width: 1.5rem;
+    height: 1.5rem;
+    
+    filter: invert(100%);
+}
+
+.video-playlist .videos .video.active img {
+    filter: invert(100%) sepia(100%) saturate(2000%) hue-rotate(360deg);
+}
+
+.video p {
+   margin-left: 2.5rem;
+}
+
+.video h3 {
+    width: 23rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font: 100 1rem sans-serif;
+    padding: 0 .5rem;
+}
+
+@media (min-width: 550px) {
+    :root{
+        --fs-1: 42px;
+    }
+  
+    .container {
+        max-width: 540px;
+        margin-inline: auto;
+    }
+  
+    .movies-list {
+        grid-template-columns: lfr lfr;
+        gap: 60px 30px;
+    }
+  
+    .hero { min-height: unset; }
+  
+    .hero-content { margin-top: 20px; }
+  
+    .upcoming .movies-list > li { min-width: calc(50% - 15px); }
+  
+    .service-list > li:first-child { padding-bottom: 30px; }
+  
+    .service-card {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+  
+    .service-card .card-icon { margin-bottom: 0; }
+  
+    .service-card .card-content { width: calc(100% - 115px); }
+  
+    .detail-subtitle { --fs-5: 22px }
+  
+    .detail-title { --fs-1: 46px }
+  
+  }
+  
+  @media (min-width: 768px) {
+    :root{
+        --fs-2: 36px;
+    }
+  
+    .container { max-width: 720px;}
+  
+  
+  
+    .header .container { gap: 30px; }
+  
+    .header-actions {
+        display: flex;
+        margin-left: auto;
+        align-items: center;
+        gap: 35px;
+    }
+  
+    .header-actions .btn-primary { display: none; }
+  
+    .search-btn {
+        position: relative;
+        color: var(--white);
+    }
+  
+    .search-btn ion-icon { --ionicon-stroke-width: 80px }
+  
+    .search-btn::after {
+        content: "";
+        position: absolute;
+        top: 1px;
+        right: -20px;
+        background: hsla(0, 0%, 100%, 0.1);
+        width: 2px;
+        height: 14px;
+    }
+  
+    .lang-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+  
+    .lang-wrapper label {
+        color: var(--citrine);
+        font-size: 20px;
+    }
+  
+    .lang-wrapper select {
+        color: var(--white);
+        font-size: var(--fs-9);
+        font-weight: var(--fw-700);
+    }
+  
+    .lang-wrapper option { color: var(--black); }
+  
+    .hero-content { margin-top: 90px; }
+  
+    .service-btn {
+        right: -20px;
+        padding: 40px 50px;
+    }
+  
+    .service-content { padding-inline: 40px; }
+  
+    .cta-form {
+        position: relative;
+        max-width: 530px;
+        margin-inline: auto;
+    }
+  
+    .cta .email-field { margin-bottom: 0; }
+  
+    .cta-form-btn {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        bottom: 2px;
+    }
+  
+    .footer-brand-wrapper .logo { margin: 0; }
+  
+    .footer-brand-wrapper,
+    .quicklink-wrapper,
+    .footer-bottom .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+  
+    .quicklink-list { margin-bottom: 0; }
+    
+    .copyright { margin-bottom: 0; }
+  
+    .footer-bottom-img { margin-inline: 0; }
+  
+    .detail-subtitle { --fs-5: 26px; }
+  
+    .detail-title { --fs-1: 50px; }
+  
+  }
+  
+  @media (min-width: 992px) {
+    .container { max-width: 960px; }
+  
+    .movies-list {grid-template-columns: repeat(3, 1fr); }
+  
+    .header.active { padding-block: 5px; }
+  
+    .menu-open-btn,
+    .navbar-top,
+    .navbar-social-list { display: none; }
+  
+    .navbar {
+        all: unset;
+        margin-left: auto;
+    }
+  
+    .header-actions {
+        order: 1;
+        margin-left: 0;
+    }
+  
+    .navbar-list {
+        all: unset;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+  
+    .navbar-link {
+        border-bottom: none;
+        font-size: var(--fs-9);
+        font-weight: var(--fw-700);
+        text-transform: uppercase;
+        padding: 30px 15px;
+    }
+  
+    .overlay { display: none; }
+  
+    .hero { background-position: right; }
+  
+    .hero .container { width: 950px; }
+  
+    .hero-content {
+        margin-top: 100px;
+        max-width: 600px;
+    }
+  
+    .upcoming .flex-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+  
+    .upcoming :is(.section-subtitle, .section-title) { text-align: left; }
+  
+    .upcoming .section-title { margin-bottom: 0; }
+  
+    .upcoming .movies-list > li { min-width: calc(33.33% - 20px); }
+  
+    .service .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 70px;
+    }
+  
+    .service-content {  
+        padding-inline: 0;
+        width: calc(100% - 470px);
+    }
+  
+    .service-banner { margin-bottom: 0; }
+  
+    .service-btn { right: 111px; }
+  
+    .cta { text-align: left; }
+  
+    .cta .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+  
+    .cta .title-wrapper {
+        margin-bottom: 0;
+        width: 100%;
+    }
+  
+    .cta-form {
+        margin-inline: 0;
+        max-width: unset;
+        width: 100%;
+    }
+  
+    .movie-detail { padding-bottom: 200px; }
+  
+    .movie-detail .container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 50px;
+    }
+  
+    .movie-detail-banner,
+    .details-actions { margin: 0; }
+  
+    .download-btn {
+        position: absolute;
+        left: 15px;
+        bottom: -80px;
+    }
+  
+  }
+  
+  @media (min-width: 1200px) {
+    :root {
+        --fs-1: 60px;
+        --fs-4: 26px;
+    }
+  
+    .container { max-width: 1320px; }
+  
+    .movies-list { grid-template-columns: repeat(4, 1fr); }
+  
+    .navbar { margin-inline: auto; }
+  
+    .header-actions .btn-primary {
+        display: block;
+        --fs-11: 14px;
+        padding: 10px 35px;
+        letter-spacing: 1px;
+    }
+  
+    .hero .container { width: 1320px; }
+  
+    .upcoming .movies-list > li { min-width: calc(25% - 22.5px); }
+  
+    .service-content { width: calc(100% - 700px); }
+  
+    .service-btn { right: -20px; }
+  
+    .service-list,
+    .service-title { max-width: 480px; }
+  
+    .cta .container { max-width: 1150px; }
+  
+    .movie-detail { padding-bottom: var(--section-padding); }
+  
+    .movie-detail-content { max-width: 620px; }
+  
+    .detail-title { --fs-1: 60px }
+  
+    .download-btn {
+        left: auto;
+        right: 15px;
+        transform: rotate(0.25turn) translateY(100%);
+        transform-origin: bottom right;
+        padding: 40px 50px;
+    }
+  
+    .download-btn ion-icon {
+        font-size: 30px;
+        transform: rotate(-0.25turn);
+    }
+  
+  }
+  
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--citrine);
+  }
+  h1,
+  h2,
+  h3 {
+    color: white;
+  }
+    </style>
+</head>
+<body id="#top">
+
+    <header class="header" data-header>
         <div class="container">
 
         <div class="overlay" data-overlay></div>
@@ -170,58 +566,270 @@
 
        </div>
     </header>
-     <main class="container">
-         <section class="main-video">
-             <video src="https://rr1---sn-jvoxm5vuxaxjvhcg-8j2l.googlevideo.com/videoplayback?expire=1668072536&ei=2FNsY6iECbKZ0_wPkOSbsAc&ip=131.196.76.173&id=e8012196e17a0829&itag=22&source=blogger&mh=Oi&mm=31&mn=sn-jvoxm5vuxaxjvhcg-8j2l&ms=au&mv=m&mvi=1&pl=23&susc=bl&eaua=BT_oKJnHb2U&mime=video/mp4&vprv=1&dur=1477.183&lmt=1603672499959359&mt=1668043257&txp=1311224&sparams=expire,ei,ip,id,itag,source,susc,eaua,mime,vprv,dur,lmt&sig=AOq0QJ8wRAIgROEXGEgGhFOVFn7levfrMuWVYhHoaMGCRJGMTymZRuECIEqbHhdeLhCXmMdjQtl88t3uwgBRQYew6xknskO99qNY&lsparams=mh,mm,mn,ms,mv,mvi,pl&lsig=AG3C_xAwRgIhALZA75di-8_QLivH80JSLOkm_9RGb39NsUh8VJo9Ejc4AiEA67ol42TrcbQ791sTjX6qsswsnwnRkRNQdf5C5E-bwsM%3D&cpn=k1s3c3e5Wg_V8bkp&c=WEB_EMBEDDED_PLAYER&cver=1.20221106.00.00" controls autoplay></video>
-             <h3 class="title">One-Piece</h3>
-         </section>
- 
-         <section class="video-playlist">
-             <h3 class="title">One-Piece</h3>
-             <p>10 lessions &nbsp; . &nbsp; 24m 36s</p>
-             <div class="videos">
-                <div class="video active">
-                    <img src="play.png" alt="">
-                    <p>01. </p>
-                    <h3>One-Piece Episodio 1</h3>
+    <body>
+        <main class="container">
+            <section class="main-video">
+                <video src="https://rr1---sn-jvoxm5vuxaxjvhcg-8j2l.googlevideo.com/videoplayback?expire=1668072536&ei=2FNsY6iECbKZ0_wPkOSbsAc&ip=131.196.76.173&id=e8012196e17a0829&itag=22&source=blogger&mh=Oi&mm=31&mn=sn-jvoxm5vuxaxjvhcg-8j2l&ms=au&mv=m&mvi=1&pl=23&susc=bl&eaua=BT_oKJnHb2U&mime=video/mp4&vprv=1&dur=1477.183&lmt=1603672499959359&mt=1668043257&txp=1311224&sparams=expire,ei,ip,id,itag,source,susc,eaua,mime,vprv,dur,lmt&sig=AOq0QJ8wRAIgROEXGEgGhFOVFn7levfrMuWVYhHoaMGCRJGMTymZRuECIEqbHhdeLhCXmMdjQtl88t3uwgBRQYew6xknskO99qNY&lsparams=mh,mm,mn,ms,mv,mvi,pl&lsig=AG3C_xAwRgIhALZA75di-8_QLivH80JSLOkm_9RGb39NsUh8VJo9Ejc4AiEA67ol42TrcbQ791sTjX6qsswsnwnRkRNQdf5C5E-bwsM%3D&cpn=k1s3c3e5Wg_V8bkp&c=WEB_EMBEDDED_PLAYER&cver=1.20221106.00.00" controls autoplay></video>
+                <h3 class="title">One-Piece</h3>
+            </section>
+    
+            <section class="video-playlist">
+                <h3 class="title">One-Piece</h3>
+                <p>10 lessions &nbsp; . &nbsp; 24m 36s</p>
+                <div class="videos">
+                   <div class="video active">
+                       <img src="play.png" alt="">
+                       <p>01. </p>
+                       <h3>One-Piece Episodio 1</h3>
+                   </div>
+                   <div class="video">
+                       <img src="play.png" alt="">
+                       <p>02. </p>
+                       <h3>One-Piece Episodio 2</h3>
+                   </div>
+                   <div class="video">
+                       <img src="play.png" alt="">
+                       <p>03. </p>
+                       <h3>One-Piece Episodio 3</h3>
+                   </div>
+                   <div class="video">
+                       <img src="play.png" alt="">
+                       <p>04. </p>
+                       <h3>One-Piece Episodio 4</h3>
+                   </div>
+                   <div class="video">
+                       <img src="play.png" alt="">
+                       <p>05. </p>
+                       <h3>One-Piece Episodio 5</h3>
+                   </div>
+                   <div class="video">
+                       <img src="play.png" alt="">
+                       <p>06. </p>
+                       <h3>One-Piece Episodio 6</h3>
+                   </div>
+                   <div class="video">
+                       <img src="play.png" alt="">
+                       <p>07. </p>
+                       <h3>One-Piece Episodio 7</h3>
+                   </div>
                 </div>
-                <div class="video">
-                    <img src="play.png" alt="">
-                    <p>02. </p>
-                    <h3>One-Piece Episodio 2</h3>
-                </div>
-                <div class="video">
-                    <img src="play.png" alt="">
-                    <p>03. </p>
-                    <h3>One-Piece Episodio 3</h3>
-                </div>
-                <div class="video">
-                    <img src="play.png" alt="">
-                    <p>04. </p>
-                    <h3>One-Piece Episodio 4</h3>
-                </div>
-                <div class="video">
-                    <img src="play.png" alt="">
-                    <p>05. </p>
-                    <h3>One-Piece Episodio 5</h3>
-                </div>
-                <div class="video">
-                    <img src="play.png" alt="">
-                    <p>06. </p>
-                    <h3>One-Piece Episodio 6</h3>
-                </div>
-                <div class="video">
-                    <img src="play.png" alt="">
-                    <p>07. </p>
-                    <h3>One-Piece Episodio 7</h3>
-                </div>
-             </div>
-         </section>
-     </main>
+            </section>
+        </main>
+   
+               
+        <script src="script.js"></script>
+        <script src="episodios.js"></script>
+    </body>
+    
+    </html>
 
-            
-     <script src="script.js"></script>
-     <script src="episodios.js"></script>
- </body>
- 
- </html>
+            <section class="service">
+                <div class="container">
+                    <div class="service-banner">
+                        <figure>
+                            <img src="service-banner.jpg" alt="HD 4K Resolução! Apenas R$2.99">
+                        </figure>
+
+                        <a href="service-banner.jpg" download class="service-btn">
+                            <span>download</span>
+
+                            <ion-icon name="download-outline"></ion-icon>
+                        </a>
+
+                    </div>
+
+                    <div class="service-content">
+
+                        <p class="service-subtitle">Outros Serviços</p>
+
+                        <h2 class="h2 service-title">Faça download Para Ver OffLine.</h2>
+
+                        <p class="service-text">
+                            Filmes, séries e muito mais. Sem limites. Assista onde quiser. Cancele quando quiser.
+                        </p>
+
+                        <ul class="service-list">
+
+                            <li>
+                                <div class="service-card">
+
+                                    <div class="card-icon">
+                                        <ion-icon name="TV"></ion-icon>
+                                    </div>
+
+                                    <div class="card-content">
+                                        <h3 class="h3 card-title">Aproveite na TV.</h3>
+
+                                        <p class="card-text">
+                                            Assista em Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, aparelhos de Blu-ray e outros dispositivos.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="service-card">
+
+                                    <div class="card-icon">
+                                        <ion-icon name="videocam"></ion-icon>
+                                    </div>
+
+                                    <div class="card-content">
+                                        <h3 class="h3 card-title">Baixe Animes para assistir offline.</h3>
+
+                                        <p class="card-text">
+                                            Salve seus títulos favoritos e sempre tenha algo para assistir.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="cta">
+                <div class="container">
+
+                    <div class="title-wrapper">
+                        <h2 class="cta-title">Teste Gratis Por 30 Dias</h2>
+
+                        <p class="cta-text">
+                            Entre Com Seu E-mail E Começe Seus Dias De Aventura!
+                        </p>
+                    </div>
+
+                    <form action="" class="cta-form">
+                        <input type="email" name="email" required placeholder="Entre Com Email" class="email-field">
+
+                        <button type="submit" class="cta-form-btn">Pronto</button>
+                    </form>
+
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+    <footer class="footer">
+
+        <div class="footer-top">
+            <div class="container">
+
+                <div class="footer-brand-wrapper">
+
+                <a href="index.html" class="logo">
+                    <img src="logo-animeflix.png" alt="AnimeFlix logo">
+                </a>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <a href="index.html" class="footer-link">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="index.html" class="footer-link">Animes</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Filmes</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Famosos</a>
+                    </li>
+
+                    <li>
+                        <a href="recomendados.html" class="footer-link">Recomendados</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="quicklink-wrapper">
+
+                <ul class="quicklink-list">
+
+                    <li>
+                        <a href="copyright.html" class="quicklink-link">Faq</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="quicklink-link">Centro De Ajuda</a>
+                    </li>
+
+                    <li>
+                        <a href="copyright.html" class="quicklink-link">Termos De Uso</a>
+                    </li>
+
+                    <li>
+                        <a href="copyright.html" class="quicklink-link">Privacidade</a>
+                    </li>
+
+                </ul>
+
+                <ul class="social-list">
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-pinterest"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-linkedin"></ion-icon>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+
+                <p class="copyright">
+                    $copy; 2022 <a href="copyright.html">Kalebzaki</a>. All Rights Reserved
+                </p>
+
+                <img src="footer-bottom-img.png" alt="online baking companies logo" class="footer-bottom-img">
+
+            </div>
+        </div>
+
+    </footer>
+
+        <a href="#top" class="go-top" data-go-top>
+            <ion-icon name="chevron-up"></ion-icon>
+        </a>
+
+    <script src="script.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
