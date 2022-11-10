@@ -5,13 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>One-Piece - Assista Animes Gratis!</title>
-    <link rel="shortcut icon" href="./assets/images/favicon.ico" type="image/svg+xml">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
 </head>
 <style>
+    .movie-detail {
+    background: url("banner-2.png") no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding-top: 160px;
+    padding-bottom: var(--section-padding);
+}
     a {
         font-style: none;
         color: white;
@@ -24,8 +31,8 @@
 
         <div class="overlay" data-overlay></div>
 
-        <a href="./index.html" class="logo">
-            <img src="./assets/images/logo-animeflix.png" alt="AnimeFlix logo" width="200px">
+        <a href="index.html" class="logo">
+            <img src="logo-animeflix.png" alt="AnimeFlix logo" width="200px">
         </a>
 
         <div class="header-actions">
@@ -59,8 +66,8 @@
 
             <div class="navbar-top">
 
-                <a href="./index.html" class="logo">
-                    <img src="./assets/images/logo-animeflix.png" alt="AnimeFlix logo">
+                <a href="index.html" class="logo">
+                    <img src="logo-animeflix.png" alt="AnimeFlix logo">
                 </a>
 
                 <button class="menu-close-btn" data-menu-close-btn>
@@ -71,7 +78,7 @@
             <ul class="navbar-list">
 
                 <li>
-                    <a href="./index.html" class="navbar-link">Home</a>
+                    <a href="index.html" class="navbar-link">Home</a>
                 </li>
 
                 <li>
@@ -134,11 +141,13 @@
                 <div class="container">
                     <figure class="movie-detail-banner">
 
-                        <img src="./assets/images/anime-2.jpg" alt="naruto Poster">
+                        <img src="anime-2.jpg" alt="naruto Poster">
 
-                        <button class="play-btn">
-                            <ion-icon name="play-circle-outline"></ion-icon>
-                        </button>
+                        <a href="#">
+                            <button class="play-btn">
+                                <ion-icon name="play-circle-outline"></ion-icon>
+                            </button>
+                        </a>
 
                     </figure>
 
@@ -226,14 +235,14 @@
 
                 <div class="footer-brand-wrapper">
 
-                <a href="./index.html" class="logo">
-                    <img src="assets/images/logo-animeflix.png" alt="AnimeFlix logo" width="400px">
+                <a href="index.html" class="logo">
+                    <img src="logo-animeflix.png" alt="AnimeFlix logo" width="400px">
                 </a>
 
                 <ul class="footer-list">
 
                     <li>
-                        <a href="./index.html" class="footer-link">Home</a>
+                        <a href="index.html" class="footer-link">Home</a>
                     </li>
 
                     <li>
@@ -319,7 +328,7 @@
                     $copy; 2022 <a href="#">Kalebzaki</a>. All Rights Reserved
                 </p>
 
-                <img src="./assets/images/footer-bottom-img.png" alt="online baking companies logo" class="footer-bottom-img">
+                <img src="footer-bottom-img.png" alt="online baking companies logo" class="footer-bottom-img">
 
             </div>
         </div>
@@ -330,7 +339,7 @@
             <ion-icon name="chevron-up"></ion-icon>
         </a>
 
-    <script src="./assets/js/script.js"></script>
+    <script src="script.js"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>    
