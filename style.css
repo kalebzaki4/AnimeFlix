@@ -931,6 +931,10 @@ body.active { overflow: hidden; }
       --fs-1: 42px;
   }
 
+  .movie-detail{
+    background: url("banner-2.png") no-repeat;
+  }
+
   .container {
       max-width: 540px;
       margin-inline: auto;
@@ -970,9 +974,11 @@ body.active { overflow: hidden; }
       --fs-2: 36px;
   }
 
+  .movie-detail{
+    background: url("banner-2.png") no-repeat;
+  }
+
   .container { max-width: 720px;}
-
-
 
   .header .container { gap: 30px; }
 
@@ -1073,6 +1079,10 @@ body.active { overflow: hidden; }
 
 @media (min-width: 992px) {
   .container { max-width: 960px; }
+
+  .movie-detail{
+    background: url("banner-2.png") no-repeat;
+  }
 
   .movies-list {grid-template-columns: repeat(3, 1fr); }
 
