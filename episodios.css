@@ -1,0 +1,36 @@
+:root {
+    --primary : linear-gradient(to bottom right, #3B0B0B, #DF0101);
+    --secondary : gold;
+    --text: #fff
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-image: var(--primary);
+    font-family: sans-serif;
+    color: var(--text);
+}
+
+.container {
+    width: 100vw;
+
+    display: grid;
+    grid-template-columns: 1.9fr 1.1fr;
+    gap: 1rem;
+}
+
+.main-video video {
+    width: 100%;
+    border-radius: .5rem;
+}
+
+.video img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
