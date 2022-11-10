@@ -697,10 +697,15 @@ body.active { overflow: hidden; }
 }
 
 .footer-brand-wrapper .logo {
-  width: max-content;
+  width: 100%;
   margin-inline: auto;
   margin-bottom: 60px;
 }
+
+.footer-brand-wrapper .logo img {
+  width: 100%;
+}
+
 
 .footer-list,
 .quicklink-list,
@@ -1045,9 +1050,13 @@ body.active { overflow: hidden; }
   .footer-brand-wrapper,
   .quicklink-wrapper,
   .footer-bottom .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .quicklink-wrapper,
+  .footer-bottom .container {
+    display: flex;
   }
 
   .quicklink-list { margin-bottom: 0; }
