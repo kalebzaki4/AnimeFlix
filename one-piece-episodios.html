@@ -8,17 +8,177 @@
      <title>Assistir One-Piece</title>
      <link rel="stylesheet" href="episodios.css">
  </head>
- 
+ <style>
+    .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-block: 25px;
+  transition: var(--transition-2);
+  z-index: 4;
+}
+
+.header.active {
+  background: var(--eerie-black);
+  padding-block: 20px;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-actions { display: none; }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: hsla(204, 18%, 11%, 0.8);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: var(--transition-2);
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.social-list { column-gap: 10px; }
+
+.social-link {
+  background: var(--rich-black-fogra-29);
+  color: var(--gray-x);
+  font-size: 14px;
+  width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  box-shadow: inset 0 4px 8px hsla(0, 0%, 0%, 0.25);
+  transition: var(--transition-2);
+  font-style: normal;
+}
+ </style>
  <body>
+        <header class="header" data-header>
+        <div class="container">
+
+        <div class="overlay" data-overlay></div>
+
+        <a href="index.html" class="logo">
+            <img src="logo-animeflix.png" alt="AnimeFlix logo" width="200px">
+        </a>
+
+        <div class="header-actions">
+
+        <button class="search-btn">
+         <ion-icon name="search-outline"></ion-icon>
+        </button>
+
+        <div class="lang-wrapper">
+            <label for="language">
+                <ion-icon name="globe-outline"></ion-icon>
+            </label>
+
+            <select name="language" id="language">
+                <option value="en">EN</option>
+                <option value="au">AU</option>
+                <option value="ar">AR</option>
+                <option value="br">BR</option>
+            </select>
+        </div>
+
+        <a href="login.html"><button class="btn btn-primary">Entrar</button></a>
+
+        </div>
+
+        <button class="menu-open-btn" data-menu-open-btn>
+            <ion-icon name="reorder-two"></ion-icon>
+        </button>
+
+        <nav class="navbar" data-navbar>
+
+            <div class="navbar-top">
+
+                <a href="index.html" class="logo">
+                    <img src="logo-animeflix.png" alt="AnimeFlix logo" width="200px">
+                </a>
+
+                <button class="menu-close-btn" data-menu-close-btn>
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+
+            <ul class="navbar-list">
+
+                <li>
+                    <a href="index.html" class="navbar-link">Home</a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-link">Famosos</a>
+                </li>
+
+                <li>
+                    <a href="recomendados.html" class="navbar-link">Recomendados</a>
+                </li>
+
+                <li>
+                    <a href="minha-lista.html" class="navbar-link">Minha Lista</a>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-social-list">
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-pinterest"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-youtube"></ion-icon>
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+       </div>
+    </header>
      <main class="container">
          <section class="main-video">
-             <video src="videos/manipulate text background.mp4" controls autoplay></video>
-             <h3 class="title">Title of the playing Video.</h3>
+             <video src="https://rr1---sn-jvoxm5vuxaxjvhcg-8j2l.googlevideo.com/videoplayback?expire=1668072536&ei=2FNsY6iECbKZ0_wPkOSbsAc&ip=131.196.76.173&id=e8012196e17a0829&itag=22&source=blogger&mh=Oi&mm=31&mn=sn-jvoxm5vuxaxjvhcg-8j2l&ms=au&mv=m&mvi=1&pl=23&susc=bl&eaua=BT_oKJnHb2U&mime=video/mp4&vprv=1&dur=1477.183&lmt=1603672499959359&mt=1668043257&txp=1311224&sparams=expire,ei,ip,id,itag,source,susc,eaua,mime,vprv,dur,lmt&sig=AOq0QJ8wRAIgROEXGEgGhFOVFn7levfrMuWVYhHoaMGCRJGMTymZRuECIEqbHhdeLhCXmMdjQtl88t3uwgBRQYew6xknskO99qNY&lsparams=mh,mm,mn,ms,mv,mvi,pl&lsig=AG3C_xAwRgIhALZA75di-8_QLivH80JSLOkm_9RGb39NsUh8VJo9Ejc4AiEA67ol42TrcbQ791sTjX6qsswsnwnRkRNQdf5C5E-bwsM%3D&cpn=k1s3c3e5Wg_V8bkp&c=WEB_EMBEDDED_PLAYER&cver=1.20221106.00.00" controls autoplay></video>
+             <h3 class="title">One-Piece</h3>
          </section>
  
          <section class="video-playlist">
-             <h3 class="title">Title of Video Playlist</h3>
-             <p>10 lessions &nbsp; . &nbsp; 50m 48s</p>
+             <h3 class="title">One-Piece</h3>
+             <p>10 lessions &nbsp; . &nbsp; 24m 36s</p>
              <div class="videos">
                 <div class="video active">
                     <img src="play.png" alt="">
@@ -27,38 +187,41 @@
                 </div>
                 <div class="video">
                     <img src="play.png" alt="">
-                    <p>01. </p>
+                    <p>02. </p>
                     <h3>One-Piece Episodio 2</h3>
                 </div>
                 <div class="video">
                     <img src="play.png" alt="">
-                    <p>01. </p>
+                    <p>03. </p>
                     <h3>One-Piece Episodio 3</h3>
                 </div>
                 <div class="video">
                     <img src="play.png" alt="">
-                    <p>01. </p>
+                    <p>04. </p>
                     <h3>One-Piece Episodio 4</h3>
                 </div>
                 <div class="video">
                     <img src="play.png" alt="">
-                    <p>01. </p>
+                    <p>05. </p>
                     <h3>One-Piece Episodio 5</h3>
                 </div>
                 <div class="video">
                     <img src="play.png" alt="">
-                    <p>01. </p>
+                    <p>06. </p>
                     <h3>One-Piece Episodio 6</h3>
                 </div>
                 <div class="video">
                     <img src="play.png" alt="">
-                    <p>01. </p>
+                    <p>07. </p>
                     <h3>One-Piece Episodio 7</h3>
                 </div>
              </div>
          </section>
      </main>
+
+            
      <script src="script.js"></script>
+     <script src="episodios.js"></script>
  </body>
  
  </html>
