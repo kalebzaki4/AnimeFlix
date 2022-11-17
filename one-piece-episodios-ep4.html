@@ -22,6 +22,50 @@ p {
     color: white;
 }
 
+@media (min-width: 412px) {
+  :root{
+      --fs-1: 42px;
+  }
+
+  .video-playlist {
+      max-width: 390px;
+      margin-inline: auto;
+  }
+
+  .container {
+      max-width: 440px;
+      margin-inline: auto;
+  }
+
+  .movies-list {
+      grid-template-columns: lfr lfr;
+      gap: 50px 20px;
+  }
+
+  .hero { min-height: unset; }
+
+  .hero-content { margin-top: 10px; }
+
+  .upcoming .movies-list > li { min-width: calc(50% - 15px); }
+
+  .service-list > li:first-child { padding-bottom: 20px; }
+
+  .service-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+
+  .service-card .card-icon { margin-bottom: 0; }
+
+  .service-card .card-content { width: calc(100% - 115px); }
+
+  .detail-subtitle { --fs-5: 22px }
+
+  .detail-title { --fs-1: 46px }
+
+}
+
 .container {
     width: 100vw;
 
