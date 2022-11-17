@@ -970,13 +970,14 @@ body.active { overflow: hidden; }
 
 }
 
-@media (min-width: 550px) {
+@media (min-width: 549px) {
   :root{
       --fs-1: 42px;
   }
 
-  .movie-detail{
-    background: url("banner-2.png") no-repeat;
+  .video-playlist {
+      max-width: 540px;
+      margin-inline: auto;
   }
 
   .container {
@@ -1015,16 +1016,12 @@ body.active { overflow: hidden; }
 
 
 
-@media (min-width: 768px) {
+@media (min-width: 767px) {
   :root{
       --fs-2: 36px;
   }
 
-  .movie-detail{
-    background: url("banner-2.png") no-repeat;
-  }
-
-  .container { max-width: 720px;}
+  .container { max-width: 620px;}
 
   .header .container { gap: 30px; }
 
@@ -1102,13 +1099,9 @@ body.active { overflow: hidden; }
   .footer-brand-wrapper,
   .quicklink-wrapper,
   .footer-bottom .container {
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .quicklink-wrapper,
-  .footer-bottom .container {
-    display: flex;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
   }
 
   .quicklink-list { margin-bottom: 0; }
