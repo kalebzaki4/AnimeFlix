@@ -171,42 +171,42 @@ p {
 
 @media (min-width: 550px) {
     :root{
-        --fs-1: 42px;
-    }
-  
-    .container {
-        max-width: 540px;
-        margin-inline: auto;
-    }
-  
-    .movies-list {
-        grid-template-columns: lfr lfr;
-        gap: 60px 30px;
-    }
-  
-    .hero { min-height: unset; }
-  
-    .hero-content { margin-top: 20px; }
-  
-    .upcoming .movies-list > li { min-width: calc(50% - 15px); }
-  
-    .service-list > li:first-child { padding-bottom: 30px; }
-  
-    .service-card {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-    }
-  
-    .service-card .card-icon { margin-bottom: 0; }
-  
-    .service-card .card-content { width: calc(100% - 115px); }
-  
-    .detail-subtitle { --fs-5: 22px }
-  
-    .detail-title { --fs-1: 46px }
-  
+      --fs-1: 42px;
   }
+
+  .video-playlist .video.active {
+    background-color: #0003;
+    color: var(--secondary);
+}
+
+  .main-video {
+    max-width: 100px;
+}
+
+  img {
+    width: 500px;
+  }
+
+  .movies-list {
+      grid-template-columns: lfr lfr;
+      gap: 50px 20px;
+  }
+
+  .hero { min-height: unset; }
+
+  .hero-content { margin-top: 10px; }
+
+  .upcoming .movies-list > li { min-width: calc(50% - 15px); }
+
+  .service-list > li:first-child { padding-bottom: 20px; }
+
+  .service-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+
+}
   
   @media (min-width: 768px) {
     :root{
