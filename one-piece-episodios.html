@@ -33,6 +33,44 @@ p {
     text-transform: capitalize;
 }
 
+@media (min-width: 412px) {
+    :root{
+      --fs-1: 42px;
+  }
+
+  .video-playlist .video.active {
+    background-color: #0003;
+    color: var(--secondary);
+}
+
+  .main-video {
+    max-width: 100px;
+}
+
+  img {
+    width: 380px;
+  }
+
+  .movies-list {
+      grid-template-columns: lfr lfr;
+      gap: 50px 20px;
+  }
+
+  .hero { min-height: unset; }
+
+  .hero-content { margin-top: 10px; }
+
+  .upcoming .movies-list > li { min-width: calc(50% - 15px); }
+
+  .service-list > li:first-child { padding-bottom: 20px; }
+
+  .service-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+
+}
 
 @media screen and (max-width: 990px) {
     .container {
@@ -575,9 +613,9 @@ p {
             <section class="video-playlist">
                 <h3 class="title">One-Piece</h3>
                 <p>1.038 episodios &nbsp;  &nbsp;</p>
-                <div class="videos">
+                <div class="videos active">
                    <a href="one-piece-episodios.html">
-                       <div class="video active">
+                       <div class="video">
                            <img src="pause.png" alt="">
                            <p>01. </p>
                            <h3>One-Piece Episodio 1</h3>
