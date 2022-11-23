@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeFlix - Assista Animes Gratis!</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    <style>
+        :root {
+    --primary : linear-gradient(to bottom right, #151515, #1C1C1C);
+    --secondary : gold;
+    --text : #fff;
+    
+}
+
+p {
+    color: white;
+}
+
+.container {
+    width: 100vw;
+
+    display: grid;
+    grid-template-columns: 1.8fr 1.2fr;
+    gap: 1rem;
+    
+    padding: .5rem 1rem;
+    text-transform: capitalize;
+}
+
+@media (min-width: 412px) {
+    :root{
+      --fs-1: 42px;
+  }
+
+  .main-video {
+    max-width: 100px;
+}
+
+  img {
+    width: 380px;
+  }
+
+  .movies-list {
+      grid-template-columns: lfr lfr;
+      gap: 50px 20px;
+  }
+
+  .hero { min-height: unset; }
+
+  .hero-content { margin-top: 10px; }
+
+  .upcoming .movies-list > li { min-width: calc(50% - 15px); }
+
+  .service-list > li:first-child { padding-bottom: 20px; }
+
+  .service-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+
+}
+
+@media (min-width: 359px) {
+    :root{
+      --fs-1: 42px;
+  }
+
+  .main-video {
+    max-width: 100px;
+}
+
+  img {
+    width: 380px;
+  }
+
+  .movies-list {
+      grid-template-columns: lfr lfr;
+      gap: 50px 20px;
+  }
+
+  .hero { min-height: unset; }
+
+  .hero-content { margin-top: 10px; }
+
+  .upcoming .movies-list > li { min-width: calc(50% - 15px); }
+
+  .service-list > li:first-child { padding-bottom: 20px; }
+
+  .service-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+
+}
+
+@media (min-width: 393px) {
+    :root{
+      --fs-1: 42px;
+  }
+
+  .main-video {
+    max-width: 100px;
+}
+
+  img {
+    width: 380px;
+  }
+
+  .movies-list {
+      grid-template-columns: lfr lfr;
+      gap: 50px 20px;
+  }
+
+  .hero { min-height: unset; }
+
+  .hero-content { margin-top: 10px; }
+
+  .upcoming .movies-list > li { min-width: calc(50% - 15px); }
+
+  .service-list > li:first-child { padding-bottom: 20px; }
+
+  .service-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+
+}
+
+@media (min-width: 375px) {
+    :root{
+      --fs-1: 42px;
+  }
+
+  .main-video {
+    max-width: 50px;
+}
+
+  img {
+    width: 300px;
+  }
+
+  .movies-list {
+      grid-template-columns: lfr lfr;
+      gap: 50px 20px;
+  }
+
+  .hero { min-height: unset; }
+
+  .hero-content { margin-top: 10px; }
+
+  .upcoming .movies-list > li { min-width: calc(50% - 15px); }
+
+  .service-list > li:first-child { padding-bottom: 20px; }
+
+  .service-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+
+}
+
+@media screen and (max-width: 990px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.main-video, .video-playlist {
+
+    padding-top: 110px;
+    width: 100%;
+    height: 30rem;
+}
+
+.main-video .title {
+    margin-top: 1rem;
+}
+
+.video-playlist .title {
+    padding-left: 1rem;
+}
+
+.video-playlist > p {
+    padding: 1rem;
+    color: var(--secondary);
+}
+
+.video-playlist .videos{
+    height: 70%;
+    overflow-y: auto;
+}
+
+.video-playlist .videos::-webkit-scrollbar {
+    width: .4rem;
+    border-radius: .4rem;
+    background-color: #0005;
+}
+
+.video-playlist .videos::-webkit-scrollbar-thumb {
+    border-radius: .4rem;
+    background-color: #fff;
+}
+
+.video-playlist .videos .video {
+    position: relative;
+    width: 100%;
+    height: 4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 1rem;
+    margin-top: .1rem;
+    cursor: pointer;
+
+    border-radius: .5rem;
+}
+
+.video-playlist .videos .video:hover {
+    background-color: #0003;
+}
+
+.video-playlist .videos .video.active {
+    background-color: #0003;
+    color: var(--secondary);
+}
+
+.main-video video {
+    width: 100%;
+    border-radius: .5rem;
+}
+
+.video img {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    width: 1.5rem;
+    height: 1.5rem;
+    
+    filter: invert(100%);
+}
+
+.video-playlist .videos .video.active img {
+    filter: invert(100%) sepia(100%) saturate(2000%) hue-rotate(360deg);
+}
+
+.video p {
+   margin-left: 2.5rem;
+}
+
+.video h3 {
+    width: 23rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font: 100 1rem sans-serif;
+    padding: 0 .5rem;
+}
+
+@media (min-width: 720px) {
+    :root{
+      --fs-1: 42px;
+  }
+
+  .video-playlist .video.active {
+    background-color: #0003;
+    color: var(--secondary);
+}
+
+  .main-video {
+    max-width: 100px;
+}
+
+  img {
+    width: 500px;
+  }
+
+  .movies-list {
+      grid-template-columns: lfr lfr;
+      gap: 50px 20px;
+  }
+
+  .hero { min-height: unset; }
+
+  .hero-content { margin-top: 10px; }
+
+  .upcoming .movies-list > li { min-width: calc(50% - 15px); }
+
+  .service-list > li:first-child { padding-bottom: 20px; }
+
+  .service-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+
+}
+
+@media (min-width: 550px) {
+    :root{
+      --fs-1: 42px;
+  }
+
+  .video-playlist .video.active {
+    background-color: #0003;
+    color: var(--secondary);
+}
+
+  .main-video {
+    max-width: 100px;
+}
+
+  img {
+    width: 500px;
+  }
+
+  .movies-list {
+      grid-template-columns: lfr lfr;
+      gap: 50px 20px;
+  }
+
+  .hero { min-height: unset; }
+
+  .hero-content { margin-top: 10px; }
+
+  .upcoming .movies-list > li { min-width: calc(50% - 15px); }
+
+  .service-list > li:first-child { padding-bottom: 20px; }
+
+  .service-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+
+}
+  
+  @media (min-width: 768px) {
+    :root{
+        --fs-2: 36px;
+    }
+  
+    .container { max-width: 720px;}
+  
+    .header .container { gap: 30px; }
+  
+    .header-actions {
+        display: flex;
+        margin-left: auto;
+        align-items: center;
+        gap: 35px;
+    }
+  
+    .header-actions .btn-primary { display: none; }
+  
+    .search-btn {
+        position: relative;
+        color: var(--white);
+    }
+  
+    .search-btn ion-icon { --ionicon-stroke-width: 80px }
+  
+    .search-btn::after {
+        content: "";
+        position: absolute;
+        top: 1px;
+        right: -20px;
+        background: hsla(0, 0%, 100%, 0.1);
+        width: 2px;
+        height: 14px;
+    }
+  
+    .lang-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+  
+    .lang-wrapper label {
+        color: var(--citrine);
+        font-size: 20px;
+    }
+  
+    .lang-wrapper select {
+        color: var(--white);
+        font-size: var(--fs-9);
+        font-weight: var(--fw-700);
+    }
+  
+    .lang-wrapper option { color: var(--black); }
+  
+    .hero-content { margin-top: 90px; }
+  
+    .service-btn {
+        right: -20px;
+        padding: 40px 50px;
+    }
+  
+    .service-content { padding-inline: 40px; }
+  
+    .cta-form {
+        position: relative;
+        max-width: 530px;
+        margin-inline: auto;
+    }
+  
+    .cta .email-field { margin-bottom: 0; }
+  
+    .cta-form-btn {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        bottom: 2px;
+    }
+  
+    .footer-brand-wrapper .logo { margin: 0; }
+  
+    .footer-brand-wrapper,
+    .quicklink-wrapper,
+    .footer-bottom .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+  
+    .quicklink-list { margin-bottom: 0; }
+    
+    .copyright { margin-bottom: 0; }
+  
+    .footer-bottom-img { margin-inline: 0; }
+  
+    .detail-subtitle { --fs-5: 26px; }
+  
+    .detail-title { --fs-1: 50px; }
+  
+  }
+  
+  @media (min-width: 992px) {
+    .container { max-width: 960px; }
+  
+    .movies-list {grid-template-columns: repeat(3, 1fr); }
+  
+    .header.active { padding-block: 5px; }
+  
+    .menu-open-btn,
+    .navbar-top,
+    .navbar-social-list { display: none; }
+  
+    .navbar {
+        all: unset;
+        margin-left: auto;
+    }
+  
+    .header-actions {
+        order: 1;
+        margin-left: 0;
+    }
+  
+    .navbar-list {
+        all: unset;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+  
+    .navbar-link {
+        border-bottom: none;
+        font-size: var(--fs-9);
+        font-weight: var(--fw-700);
+        text-transform: uppercase;
+        padding: 30px 15px;
+    }
+  
+    .overlay { display: none; }
+  
+    .hero { background-position: right; }
+  
+    .hero .container { width: 950px; }
+  
+    .hero-content {
+        margin-top: 100px;
+        max-width: 600px;
+    }
+  
+    .upcoming .flex-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+  
+    .upcoming :is(.section-subtitle, .section-title) { text-align: left; }
+  
+    .upcoming .section-title { margin-bottom: 0; }
+  
+    .upcoming .movies-list > li { min-width: calc(33.33% - 20px); }
+  
+    .service .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 70px;
+    }
+  
+    .service-content {  
+        padding-inline: 0;
+        width: calc(100% - 470px);
+    }
+  
+    .service-banner { margin-bottom: 0; }
+  
+    .service-btn { right: 111px; }
+  
+    .cta { text-align: left; }
+  
+    .cta .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+  
+    .cta .title-wrapper {
+        margin-bottom: 0;
+        width: 100%;
+    }
+  
+    .cta-form {
+        margin-inline: 0;
+        max-width: unset;
+        width: 100%;
+    }
+  
+    .movie-detail { padding-bottom: 200px; }
+  
+    .movie-detail .container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 50px;
+    }
+  
+    .movie-detail-banner,
+    .details-actions { margin: 0; }
+  
+    .download-btn {
+        position: absolute;
+        left: 15px;
+        bottom: -80px;
+    }
+  
+  }
+  
+  @media (min-width: 1200px) {
+    :root {
+        --fs-1: 60px;
+        --fs-4: 26px;
+    }
+  
+    .container { max-width: 1320px; }
+  
+    .movies-list { grid-template-columns: repeat(4, 1fr); }
+  
+    .navbar { margin-inline: auto; }
+  
+    .header-actions .btn-primary {
+        display: block;
+        --fs-11: 14px;
+        padding: 10px 35px;
+        letter-spacing: 1px;
+    }
+  
+    .hero .container { width: 1320px; }
+  
+    .upcoming .movies-list > li { min-width: calc(25% - 22.5px); }
+  
+    .service-content { width: calc(100% - 700px); }
+  
+    .service-btn { right: -20px; }
+  
+    .service-list,
+    .service-title { max-width: 480px; }
+  
+    .cta .container { max-width: 1150px; }
+  
+    .movie-detail { padding-bottom: var(--section-padding); }
+  
+    .movie-detail-content { max-width: 620px; }
+  
+    .detail-title { --fs-1: 60px }
+  
+    .download-btn {
+        left: auto;
+        right: 15px;
+        transform: rotate(0.25turn) translateY(100%);
+        transform-origin: bottom right;
+        padding: 40px 50px;
+    }
+  
+    .download-btn ion-icon {
+        font-size: 30px;
+        transform: rotate(-0.25turn);
+    }
+  
+  }
+  
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--citrine);
+  }
+  h1,
+  h2,
+  h3 {
+    color: white;
+  }
+    </style>
+</head>
+<body id="#top">
+
+    <header class="header" data-header>
+        <div class="container">
+
+        <div class="overlay" data-overlay></div>
+
+        <a href="index.html" class="logo">
+            <img src="logo-animeflix.png" alt="AnimeFlix logo" width="200px">
+        </a>
+
+        <div class="header-actions">
+
+        <button class="search-btn">
+         <ion-icon name="search-outline"></ion-icon>
+        </button>
+
+        <div class="lang-wrapper">
+            <label for="language">
+                <ion-icon name="globe-outline"></ion-icon>
+            </label>
+
+            <select name="language" id="language">
+                <option value="en">EN</option>
+                <option value="au">AU</option>
+                <option value="ar">AR</option>
+                <option value="br">BR</option>
+            </select>
+        </div>
+
+        <a href="login.html"><button class="btn btn-primary">Entrar</button></a>
+
+        </div>
+
+        <button class="menu-open-btn" data-menu-open-btn>
+            <ion-icon name="reorder-two"></ion-icon>
+        </button>
+
+        <nav class="navbar" data-navbar>
+
+            <div class="navbar-top">
+
+                <a href="index.html" class="logo">
+                    <img src="logo-animeflix.png" alt="AnimeFlix logo" width="200px">
+                </a>
+
+                <button class="menu-close-btn" data-menu-close-btn>
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+
+            <ul class="navbar-list">
+
+                <li>
+                    <a href="index.html" class="navbar-link">Home</a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-link">Famosos</a>
+                </li>
+
+                <li>
+                    <a href="recomendados.html" class="navbar-link">Recomendados</a>
+                </li>
+
+                <li>
+                    <a href="minha-lista.html" class="navbar-link">Minha Lista</a>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-social-list">
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-pinterest"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-youtube"></ion-icon>
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+       </div>
+    </header>
+    <body>
+        <main class="container">
+            <section class="main-video">
+                <a rel="nofollow" href="https://receiita.xyz/CE98F4EE9DB1759E9A61F5ACBFEAB00617D264293AB032EB1F97BE32A40A521C/26BD7B12DE5D82A05554867F5597F260BCA3BDF9D7751DD387298C767257DF4E4EE692C724BB7E50D058A7D546E2498C4B9997DF3DAFA6BFB57DD5D4856B3888F3A2740CB7A25D5F17D96FB10B44DD15E22589C84B1FB40265423E451D6BD9FFBC2899FF1A0DE87F70C541DBF4C70BF4F3AC2A2982EEFCBC27C084346F98EB26/87DEF11A3F43A639EFED01C6B4E1ABF260067006C115FED585F54984CF05E59C39DD34D7F1A58757BB987F0ABD2BE6C7A8860F2A3DB37EAC9A45C5704A3B8911A3E47F3D0BBA963FF081BB73901297DE/BA64713A9BBF2A04E33B079370B289E3E9CC01A38BC348F4833E13465B1A6A8FACA374C04FB1C7320986D0F24787180795AAFAC869FB55CC7AEA4E74FB5E11A340EE22FB021D9AA7D1C542992A1960A5/C399D79BFF1627BDA1811FC975619D05A6A24225EE140359D85D40D08289A03CB5877EE063BCCF72228211D6E724C6B3" target="_blank"><img src="anime-play-aviso.jpg" alt="" width="650px"> </a>
+                <h3 class="title">One-Piece</h3>
+            </section>
+            
+            <section class="video-playlist">
+                <h3 class="title">One-Piece</h3>
+                <p>1.038 episodios &nbsp;  &nbsp;</p>
+                <div class="videos">
+                   <a href="one-piece-episodios.html">
+                       <div class="video">
+                           <img src="play.png" alt="">
+                           <p>01. </p>
+                           <h3>One-Piece Episodio 1</h3>
+                       </div>
+                   </a>
+                   <a href="one-piece-episodios-ep2.html">
+                       <div class="video">
+                           <img src="play.png" alt="">
+                           <p>02. </p>
+                           <h3>One-Piece Episodio 2</h3>
+                       </div>
+                   </a>
+                   <a href="one-piece-episodios-ep3.html">
+                       <div class="video">
+                           <img src="play.png" alt="">
+                           <p>03. </p>
+                           <h3>One-Piece Episodio 3</h3>
+                       </div>
+                   </a>
+                   <a href="one-piece-episodios-ep4.html">
+                       <div class="video">
+                           <img src="play.png" alt="">
+                           <p>04. </p>
+                           <h3>One-Piece Episodio 4</h3>
+                       </div>
+                   </a>
+                   <a href="one-piece-episodios-ep5.html">
+                       <div class="video">
+                           <img src="play.png" alt="">
+                           <p>05. </p>
+                           <h3>One-Piece Episodio 5</h3>
+                       </div>
+                   </a>
+                   <a href="one-piece-episodios-ep6.html">
+                       <div class="video">
+                           <img src="play.png" alt="">
+                           <p>06. </p>
+                           <h3>One-Piece Episodio 6</h3>
+                       </div>
+                   </a>
+                   <a href="one-piece-episodios-ep7.html">
+                       <div class="video">
+                           <img src="play.png" alt="">
+                           <p>07. </p>
+                           <h3>One-Piece Episodio 7</h3>
+                       </div>
+                   </a>
+                   <a href="one-piece-episodios-ep8.html">
+                    <div class="video">
+                        <img src="play.png" alt="">
+                        <p>08. </p>
+                        <h3>One-Piece Episodio 8</h3>
+                    </div>
+                </a>
+                <a href="one-piece-episodios-ep9.html">
+                    <div class="video">
+                        <img src="play.png" alt="">
+                        <p>09. </p>
+                        <h3>One-Piece Episodio 9</h3>
+                    </div>
+                </a>
+                <a href="one-piece-episodios-ep10.html">
+                    <div class="video">
+                        <img src="play.png" alt="">
+                        <p>10. </p>
+                        <h3>One-Piece Episodio 10</h3>
+                    </div>
+                </a>
+                <a href="one-piece-episodios-ep11.html">
+                    <div class="video">
+                        <img src="play.png" alt="">
+                        <p>11. </p>
+                        <h3>One-Piece Episodio 11</h3>
+                    </div>
+                </a>
+                <a href="one-piece-episodios-ep12.html">
+                    <div class="video">
+                        <img src="play.png" alt="">
+                        <p>12. </p>
+                        <h3>One-Piece Episodio 12</h3>
+                    </div>
+                </a>
+                <a href="one-piece-episodios-ep13.html">
+                    <div class="video">
+                        <img src="play.png" alt="">
+                        <p>13. </p>
+                        <h3>One-Piece Episodio 13</h3>
+                    </div>
+                </a>
+                <a href="one-piece-episodios-ep14.html">
+                    <div class="video">
+                        <img src="play.png" alt="">
+                        <p>14. </p>
+                        <h3>One-Piece Episodio 14</h3>
+                    </div>
+                </a>
+                <a href="one-piece-episodios-ep15.html">
+                    <div class="video active">
+                        <img src="pause.png" alt="">
+                        <p>01. </p>
+                        <h3>One-Piece Episodio 15</h3>
+                    </div>
+                </a>
+                <a href="one-piece-episodios-ep16.html">
+                    <div class="video">
+                        <img src="play.png" alt="">
+                        <p>02. </p>
+                        <h3>One-Piece Episodio 16</h3>
+                    </div>
+                </a>
+                <a href="one-piece-episodios-ep17.html">
+                    <div class="video">
+                        <img src="play.png" alt="">
+                        <p>03. </p>
+                        <h3>One-Piece Episodio 17</h3>
+                    </div>
+                </a>
+                <a href="one-piece-episodios-ep18.html">
+                    <div class="video">
+                        <img src="play.png" alt="">
+                        <p>04. </p>
+                        <h3>One-Piece Episodio 18</h3>
+                    </div>
+                </a>
+                <a href="one-piece-episodios-ep19.html">
+                    <div class="video">
+                        <img src="play.png" alt="">
+                        <p>05. </p>
+                        <h3>One-Piece Episodio 19</h3>
+                    </div>
+                </a>
+                <a href="one-piece-episodios-ep20.html">
+                    <div class="video">
+                        <img src="play.png" alt="">
+                        <p>06. </p>
+                        <h3>One-Piece Episodio 20</h3>
+                    </div>
+                </a>
+                <a href="one-piece-episodios-ep21.html">
+                    <div class="video">
+                        <img src="play.png" alt="">
+                        <p>07. </p>
+                        <h3>One-Piece Episodio 21</h3>
+                    </div>
+                </a>
+                <a href="one-piece-episodios-ep22.html">
+                 <div class="video">
+                     <img src="play.png" alt="">
+                     <p>08. </p>
+                     <h3>One-Piece Episodio 22</h3>
+                 </div>
+             </a>
+             <a href="one-piece-episodios-ep23.html">
+                 <div class="video">
+                     <img src="play.png" alt="">
+                     <p>09. </p>
+                     <h3>One-Piece Episodio 23</h3>
+                 </div>
+             </a>
+             <a href="one-piece-episodios-ep24.html">
+                 <div class="video">
+                     <img src="play.png" alt="">
+                     <p>10. </p>
+                     <h3>One-Piece Episodio 24</h3>
+                 </div>
+             </a>
+             <a href="one-piece-episodios-ep25.html">
+                 <div class="video">
+                     <img src="play.png" alt="">
+                     <p>11. </p>
+                     <h3>One-Piece Episodio 25</h3>
+                 </div>
+             </a>
+             <a href="one-piece-episodios-ep26.html">
+                 <div class="video">
+                     <img src="play.png" alt="">
+                     <p>12. </p>
+                     <h3>One-Piece Episodio 26</h3>
+                 </div>
+             </a>
+             <a href="one-piece-episodios-ep13.html">
+                 <div class="video">
+                     <img src="play.png" alt="">
+                     <p>13. </p>
+                     <h3>One-Piece Episodio 27</h3>
+                 </div>
+             </a>
+             <a href="one-piece-episodios-ep28.html">
+                 <div class="video">
+                     <img src="play.png" alt="">
+                     <p>14. </p>
+                     <h3>One-Piece Episodio 28</h3>
+                 </div>
+             </a>
+                </div>
+            </section>
+        </main>
+   
+               
+        <script src="script.js"></script>
+        <script src="episodios.js"></script>
+    </body>
+    
+    </html>
+
+            <section class="service">
+                <div class="container">
+                    <div class="service-banner">
+                        <figure>
+                            <img src="service-banner.jpg" alt="HD 4K Resolução! Apenas R$2.99">
+                        </figure>
+
+                        <a href="service-banner.jpg" download class="service-btn">
+                            <span>download</span>
+
+                            <ion-icon name="download-outline"></ion-icon>
+                        </a>
+
+                    </div>
+
+                    <div class="service-content">
+
+                        <p class="service-subtitle">Outros Serviços</p>
+
+                        <h2 class="h2 service-title">Faça download Para Ver OffLine.</h2>
+
+                        <p class="service-text">
+                            Filmes, séries e muito mais. Sem limites. Assista onde quiser. Cancele quando quiser.
+                        </p>
+
+                        <ul class="service-list">
+
+                            <li>
+                                <div class="service-card">
+
+                                    <div class="card-icon">
+                                        <ion-icon name="TV"></ion-icon>
+                                    </div>
+
+                                    <div class="card-content">
+                                        <h3 class="h3 card-title">Aproveite na TV.</h3>
+
+                                        <p class="card-text">
+                                            Assista em Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, aparelhos de Blu-ray e outros dispositivos.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="service-card">
+
+                                    <div class="card-icon">
+                                        <ion-icon name="videocam"></ion-icon>
+                                    </div>
+
+                                    <div class="card-content">
+                                        <h3 class="h3 card-title">Baixe Animes para assistir offline.</h3>
+
+                                        <p class="card-text">
+                                            Salve seus títulos favoritos e sempre tenha algo para assistir.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="cta">
+                <div class="container">
+
+                    <div class="title-wrapper">
+                        <h2 class="cta-title">Teste Gratis Por 30 Dias</h2>
+
+                        <p class="cta-text">
+                            Entre Com Seu E-mail E Começe Seus Dias De Aventura!
+                        </p>
+                    </div>
+
+                    <form action="" class="cta-form">
+                        <input type="email" name="email" required placeholder="Entre Com Email" class="email-field">
+
+                        <button type="submit" class="cta-form-btn">Pronto</button>
+                    </form>
+
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+    <footer class="footer">
+
+        <div class="footer-top">
+            <div class="container">
+
+                <div class="footer-brand-wrapper">
+
+                <a href="index.html" class="logo">
+                    <img src="logo-animeflix.png" alt="AnimeFlix logo">
+                </a>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <a href="index.html" class="footer-link">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="index.html" class="footer-link">Animes</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Filmes</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Famosos</a>
+                    </li>
+
+                    <li>
+                        <a href="recomendados.html" class="footer-link">Recomendados</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="quicklink-wrapper">
+
+                <ul class="quicklink-list">
+
+                    <li>
+                        <a href="copyright.html" class="quicklink-link">Faq</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="quicklink-link">Centro De Ajuda</a>
+                    </li>
+
+                    <li>
+                        <a href="copyright.html" class="quicklink-link">Termos De Uso</a>
+                    </li>
+
+                    <li>
+                        <a href="copyright.html" class="quicklink-link">Privacidade</a>
+                    </li>
+
+                </ul>
+
+                <ul class="social-list">
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-pinterest"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-linkedin"></ion-icon>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+
+                <p class="copyright">
+                    $copy; 2022 <a href="copyright.html">Kalebzaki</a>. All Rights Reserved
+                </p>
+
+                <img src="footer-bottom-img.png" alt="online baking companies logo" class="footer-bottom-img">
+
+            </div>
+        </div>
+
+    </footer>
+
+        <a href="#top" class="go-top" data-go-top>
+            <ion-icon name="chevron-up"></ion-icon>
+        </a>
+
+    <script src="script.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
