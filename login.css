@@ -1,5 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@100;300;400;500;700;900&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
 
+
+
+ :root {
+    --rich-black-fogra-29: hsl(225, 25%, 9%);
+    --rich-black-fogra-39: hsl(170, 21%, 5%);
+    --raisin-black: hsl(228, 13%, 15%);
+    --eerie-black: hsl(207, 19%, 11%);
+    --light-gray: hsl(0, 3%, 80%);
+    --gunmetal-1: hsl(229, 15%, 21%);
+    --gunmetal-2: hsl(216, 22%, 18%);
+    --gainsboro: hsl(0, 7%, 88%);
+    --citrine: rgb(224, 3, 3);
+    --xiketic: hsl(253, 21%, 13%);
+    --gray-x: hsl(0, 0%, 74%);
+    --white: hsl(0, 100%, 100%);
+    --black: hsl(0, 0%, 0%);
+    --jet: hsl(0, 0%, 20%);
+  
+    --ff-poppins: 'Poppins', sans-serif;
+  
+    --fs-1: 36px;
+    --fs-2: 32px;
+    --fs-3: 30px;
+    --fs-4: 24px;
+    --fs-5: 20px;
+    --fs-6: 18px;
+    --fs-7: 16px;
+    --fs-8: 15px;
+    --fs-9: 14px;
+    --fs-10: 13px;
+    --fs-11: 12px;
+    --fs-12: 11px;
+  
+    --fw-500: 500;
+    --fw-700: 700;
+  
+    --transition-1: 0.15s ease;
+    --transition-2: 0.25s ease-in;
+  
+    --section-padding: 100px;
+  }
+
 * {
   margin: 0;
   padding: 0;
@@ -8,6 +50,7 @@
 }
 
 body {
+    background-color: var(--raisin-black);
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -16,7 +59,7 @@ body {
 }
 
 .container {
-  background-color: whitesmoke;
+  background-color: rgb(70, 70, 70);
   padding: 6px;
   width: 350px;
   height: 450px;
@@ -26,7 +69,7 @@ body {
   position: relative;
   overflow: hidden;
   border-radius: 10px;
-  box-shadow: 0 0 20px 0 darkgrey;
+  box-shadow: 0 0 20px 0 rgb(70, 70, 70);
 }
 
 form {
@@ -41,7 +84,7 @@ form {
   margin-top: 40px;
   position: relative;
   border-radius: 30px;
-  box-shadow: 0 0 7px 0 blueviolet;
+  box-shadow: 0 0 7px 0 var(--citrine);
 }
 
 .buttonsForm button {
@@ -56,7 +99,7 @@ form {
   position: absolute;
   width: 108px;
   height: 100%;
-  background: linear-gradient(to right, #5956e9, #a963f8);
+  background: linear-gradient(to right, #ac0000, #ff0000);
   border-radius: 30px;
   transition: .3s;
 }
@@ -71,7 +114,7 @@ input[type="text"], input[type="password"] {
 }
 
 button[type="submit"] {
-  background: #660fc8;
+  background: var(--citrine);
   color: white;
   border-radius: 30px;
   width: 100%;
@@ -113,4 +156,8 @@ i {
 
 .iPassword2 {
   top: 190px;
+}
+
+span {
+    color: white;
 }
