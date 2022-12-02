@@ -22,7 +22,7 @@ body{
    padding:20px;
 }
 
-.container{
+.container2{
    max-width: 1200px;
    margin:100px auto;
    display: flex;
@@ -31,7 +31,7 @@ body{
    gap:20px;
 }
 
-.container .main-video-container{
+.container2 .main-video-container{
    flex:1 1 700px;
    border-radius: 5px;
    box-shadow: 0 5px 15px rgba(0,0,0,.1);
@@ -39,18 +39,18 @@ body{
    padding:15px;
 }
 
-.container .main-video-container .main-video{
+.container2 .main-video-container .main-video{
    margin-bottom: 7px;
    border-radius: 5px;
    width: 100%;
 }
 
-.container .main-video-container .main-vid-title{
+.container2 .main-video-container .main-vid-title{
    font-size: 20px;
    color:#fff;
 }
 
-.container .video-list-container{
+.container2 .video-list-container{
    flex:1 1 350px;
    height: 485px;
    overflow-y: scroll;
@@ -60,21 +60,21 @@ body{
    padding:15px;
 }
 
-.container .video-list-container::-webkit-scrollbar{
+.container2 .video-list-container::-webkit-scrollbar{
    width: 10px;
 }
 
-.container .video-list-container::-webkit-scrollbar-track{
+.container2 .video-list-container::-webkit-scrollbar-track{
    background-color: hsl(225, 25%, 9%);
    border-radius: 5px;
 }
 
-.container .video-list-container::-webkit-scrollbar-thumb{
+.container2 .video-list-container::-webkit-scrollbar-thumb{
    background-color: #444;
    border-radius: 5px;
 }
 
-.container .video-list-container .list{
+.container2 .video-list-container .list{
    display: flex;
    align-items: center;
    gap:15px;
@@ -85,31 +85,31 @@ body{
    margin-bottom: 10px;
 }
 
-.container .video-list-container .list:last-child{
+.container2 .video-list-container .list:last-child{
    margin-bottom: 0;
 }
 
-.container .video-list-container .list.active{
+.container2 .video-list-container .list.active{
    background-color: #444;
 }
 
-.container .video-list-container .list.active .list-title{
+.container2 .video-list-container .list.active .list-title{
    color:#fff;
 }
 
-.container .video-list-container .list .list-video{
+.container2 .video-list-container .list .list-video{
    width: 100px;
    border-radius: 5px;
 }
 
-.container .video-list-container .list .list-title{
+.container2 .video-list-container .list .list-title{
    font-size: 17px;
    color:#fff;
 }
 
 @media (max-width:1200px){
 
-   .container{
+   .container2{
       margin:0;
    }
 
@@ -117,21 +117,21 @@ body{
 
 @media (max-width:450px){
 
-   .container .main-video-container .main-vid-title{
+   .container2 .main-video-container .main-vid-title{
       font-size: 15px;
       text-align: center;
    }
 
-   .container .video-list-container .list{
+   .container2 .video-list-container .list{
       flex-flow: column;
       gap:10px;
    }
 
-   .container .video-list-container .list .list-video{
+   .container2 .video-list-container .list .list-video{
       width: 100%;
    }
 
-   .container .video-list-container .list .list-title{
+   .container2 .video-list-container .list .list-title{
       font-size: 15px;
       text-align: center;
       
@@ -142,10 +142,117 @@ body{
    <link rel="stylesheet" href="style.css">
 
 </head>
-<body>
+<body id="#top">
 
+    <header class="header" data-header>
+        <div class="container">
+
+        <div class="overlay" data-overlay></div>
+
+        <a href="index.html" class="logo">
+            <img src="logo-animeflix.png" alt="AnimeFlix logo" width="200px">
+        </a>
+
+        <div class="header-actions">
+
+        <button class="search-btn">
+         <ion-icon name="search-outline"></ion-icon>
+        </button>
+
+        <div class="lang-wrapper">
+            <label for="language">
+                <ion-icon name="globe-outline"></ion-icon>
+            </label>
+
+            <select name="language" id="language">
+                <option value="en">EN</option>
+                <option value="au">AU</option>
+                <option value="ar">AR</option>
+                <option value="br">BR</option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary">Entrar</button>
+
+        </div>
+
+        <button class="menu-open-btn" data-menu-open-btn>
+            <ion-icon name="reorder-two"></ion-icon>
+        </button>
+
+        <nav class="navbar" data-navbar>
+
+            <div class="navbar-top">
+
+                <a href="index.html" class="logo">
+                    <img src="logo-animeflix.png" alt="AnimeFlix logo">
+                </a>
+
+                <button class="menu-close-btn" data-menu-close-btn>
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+
+            <ul class="navbar-list">
+
+                <li>
+                    <a href="index.html" class="navbar-link">Home</a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-link">Famosos</a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-link">Recomendados</a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-link">Minha Lista</a>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-social-list">
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-pinterest"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-youtube"></ion-icon>
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+       </div>
+    </header> 
    
-<div class="container">
+<div class="container2">
     
 
    <div class="main-video-container">
@@ -304,6 +411,7 @@ body{
 
 <!-- custom js file link  -->
 <script src="script2.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
