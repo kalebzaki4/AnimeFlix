@@ -1292,5 +1292,6 @@ body.active { overflow: hidden; }
 }
 
 ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
   background-color: var(--citrine);
 }
