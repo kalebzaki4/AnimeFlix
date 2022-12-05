@@ -4,7 +4,7 @@ body {
   height: 100vh;
   width: 100%;
   position: relative;
-  background-image: url(../img/background.jpg);
+  background-image: url(todos-animes.png);
   background-image: cover;
   background-repeat: no-repeat;
   font-family: Arial, Helvetica, sans-serif;
@@ -23,8 +23,7 @@ body::before {
 }
 
 .logo img {
-  height: 45px;
-  width: 167px;
+  width: 400px;
 }
 
 .header {
@@ -38,7 +37,7 @@ body::before {
   z-index: 90;
   position: relative;
   max-width: 450px;
-  height: 550px;
+  height: 650px;
   margin-left: 50%;
   background-color: rgb(0, 0, 0, 0.75);
   border-radius: 10px;
@@ -69,7 +68,7 @@ body::before {
 }
 
 .input_box {
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
 .login_body button {
