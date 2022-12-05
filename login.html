@@ -1,49 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet" href="login.css">
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <script src="https://kit.fontawesome.com/cf6fa412bd.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Document</title>
 </head>
+
 <body>
-  <div class="container">
-    <div class="buttonsForm">
-      <div class="btnColor"></div>
-      <button id="btnSignin">Entrar</button>
-      <button id="btnSignup">Login</button>
+    <div class="header">
+        <div class="logo">
+            <a href="#">
+                <img src="assets/img/netflixlogo.png" alt="">
+            </a>
+        </div>
     </div>
 
-    <form id="signin">
-      <input type="text" placeholder="Email" required />
-      <i class="fas fa-envelope iEmail"></i>
-      <input type="password" placeholder="Senha" required />
-      <i class="fas fa-lock iPassword"></i>
-      <div class="divCheck">
-        <input type="checkbox" />
-        <span>Lembrar Senha</span>
-      </div>
-      <button type="submit">Entrar</button>
-    </form>
+    <div class="login_body">
+        <div class="login_box">
+            <h2>Entrar</h2>
+            <form>
+                <div class="input_box">
+                    <input required type="email" placeholder="Email ou número de telefone">
+                </div>
 
-    <form id="signup">
-      <input type="text" placeholder="Email" required />
-      <i class="fas fa-envelope iEmail"></i>
-      <input type="password" placeholder="Senha" required />
-      <i class="fas fa-lock iPassword"></i>
-      <input type="password" placeholder="Confirmar Senha" required />
-      <i class="fas fa-lock iPassword2"></i>
-      <div class="divCheck">
-        <input type="checkbox" required />
-        <span>Enviar novos episodios!</span>
-      </div>
-      <button type="submit">Cadastrar</button>
-    </form>
-  </div>
+                <div class="input_box">
+                    <input required type="password" placeholder="Senha">
+                </div>
 
-  <script src="login.js"></script>
+                <div>
+                    <button class="submit">
+                        Entrar
+                    </button>
+                </div>
+            </form>
+
+            <div class="support">
+                <div class="remember">
+                    <span><input type="checkbox" style="margin: 0;padding: 0; height: 13px;"></span>
+                    <span>Lembre-se de mim</span>
+                </div>
+                <div class="help">
+                    <a href="#">
+                        Precisa de ajuda?
+                    </a>
+                </div>
+            </div>
+
+            <div class="login_footer">
+                <div class="login_facebook">
+                    <span><img height="20px" src="assets/img/Facebook_logo.png" alt="facebook"></span>
+                    <span><a href="#">Conectar com Facebook</a></span>
+                </div>
+
+                <div class="sign_up">
+                    <p>Novo por aqui? <a href="#">Assine agora.</a></p>
+                </div>
+
+                <div class="terms">
+                    <p>Esta página é protegida pelo Google reCAPTCHA para garantir que você não é um robô. <a href="#">Saiba mais</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
