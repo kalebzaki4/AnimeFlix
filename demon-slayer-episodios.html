@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+   <title>Assistir Demon Slayer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+*{
+   font-family: 'Poppins', sans-serif;
+   margin:0; padding:0;
+   box-sizing: border-box;
+   outline: none; border:none;
+   text-decoration: none;
+   text-transform: capitalize;
+}
+
+.container3 {
+    padding-bottom: 100px;
+    align-items: center;
+}
+
+body{
+   padding:20px;
+}
+
+.container2{
+   max-width: 1200px;
+   margin:100px auto;
+   display: flex;
+   flex-wrap: wrap;
+   align-items: flex-start;
+   gap:20px;
+}
+
+.container2 .main-video-container{
+   flex:1 1 700px;
+   border-radius: 5px;
+   box-shadow: 0 5px 15px rgba(0,0,0,.1);
+   background-color: rgb(156, 1, 1);
+   padding:15px;
+}
+
+.container2 .main-video-container .main-video{
+   margin-bottom: 7px;
+   border-radius: 5px;
+   width: 100%;
+}
+
+.container2 .main-video-container .main-vid-title{
+   font-size: 20px;
+   color:#fff;
+}
+
+.container2 .video-list-container{
+   flex:1 1 350px;
+   height: 485px;
+   overflow-y: scroll;
+   border-radius: 5px;
+   box-shadow: 0 5px 15px rgba(0,0,0,.1);
+   background-color: rgb(156, 1, 1);
+   padding:15px;
+}
+
+.container2 .video-list-container::-webkit-scrollbar{
+   width: 10px;
+}
+
+.container2 .video-list-container::-webkit-scrollbar-track{
+   background-color: hsl(225, 25%, 9%);
+   border-radius: 5px;
+}
+
+.container2 .video-list-container::-webkit-scrollbar-thumb{
+   background-color: rgb(156, 1, 1);
+   border-radius: 4px;
+}
+
+.container2 .video-list-container .list{
+   display: flex;
+   align-items: center;
+   gap:15px;
+   padding:10px;
+   background-color: #444;
+   cursor: pointer;
+   border-radius: 5px;
+   margin-bottom: 10px;
+}
+
+.container2 .video-list-container .list:last-child{
+   margin-bottom: 0;
+}
+
+.container2 .video-list-container .list.active{
+   background-color: #444;
+   
+}
+
+.container2 .video-list-container .list.active .list-title{
+   color:#fff;
+}
+
+.container2 .video-list-container .list .list-video{
+   width: 100px;
+   border-radius: 5px;
+}
+
+.container2 .video-list-container .list .list-title{
+   font-size: 17px;
+   color:#fff;
+}
+
+@media (max-width:1200px){
+
+   .container2{
+      margin:0;
+   }
+
+}
+
+@media (max-width:450px){
+
+   .container2 .main-video-container .main-vid-title{
+      font-size: 15px;
+      text-align: center;
+   }
+
+   .container2 .video-list-container .list{
+      flex-flow: column;
+      gap:10px;
+   }
+
+   .container2 .video-list-container .list .list-video{
+      width: 100%;
+   }
+
+   .container2 .video-list-container .list .list-title{
+      font-size: 15px;
+      text-align: center;
+      
+   }
+
+}
+    </style>
+   <link rel="stylesheet" href="style.css">
+
+</head>
+<body id="#top">
+
+    <header class="header" data-header>
+        <div class="container">
+
+        <div class="overlay" data-overlay></div>
+
+        <a href="index.html" class="logo">
+            <img src="logo-animeflix.png" alt="AnimeFlix logo" width="200px">
+        </a>
+
+        <div class="header-actions">
+
+        <button class="search-btn">
+         <ion-icon name="search-outline"></ion-icon>
+        </button>
+
+        <div class="lang-wrapper">
+            <label for="language">
+                <ion-icon name="globe-outline"></ion-icon>
+            </label>
+
+            <select name="language" id="language">
+                <option value="en">EN</option>
+                <option value="au">AU</option>
+                <option value="ar">AR</option>
+                <option value="br">BR</option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary">Entrar</button>
+
+        </div>
+
+        <button class="menu-open-btn" data-menu-open-btn>
+            <ion-icon name="reorder-two"></ion-icon>
+        </button>
+
+        <nav class="navbar" data-navbar>
+
+            <div class="navbar-top">
+
+                <a href="index.html" class="logo">
+                    <img src="logo-animeflix.png" alt="AnimeFlix logo">
+                </a>
+
+                <button class="menu-close-btn" data-menu-close-btn>
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+
+            <ul class="navbar-list">
+
+                <li>
+                    <a href="index.html" class="navbar-link">Home</a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-link">Famosos</a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-link">Recomendados</a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-link">Minha Lista</a>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-social-list">
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-pinterest"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-youtube"></ion-icon>
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+       </div>
+    </header> 
+   
+<div class="container2">
+    
+
+   <div class="main-video-container">
+      <video src="aviso-para-episodios.mp4" controls class="main-video" ></video>
+      <h3 class="main-vid-title">AVISO!! CASO OS EPISODIOS NÃO CARREGUEM, ATUALIZE A PAGINA E TENHA PACIÊNCIA!!!</h3>
+   </div>
+
+   <div class="video-list-container">
+
+      <div class="list">
+         <video src="https://cld.pt/dl/download/24bd74c5-9d9a-4f1f-a0a3-165f41656ea3/01-HD.mp4" class="list-video" ></video>
+         <h3 class="list-title">Demon Slayer Episodio 1</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://cld.pt/dl/download/5d5df596-f75b-4556-9852-39aaf784c69e/02-HD.mp4" class="list-video" ></video>
+         <h3 class="list-title">Demon Slayer Episodio 2</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://cld.pt/dl/download/abb1a953-cbd0-4adc-820d-99ea85d4de85/03-HD.mp4" class="list-video" ></video>
+         <h3 class="list-title">Demon Slayer Episodio 3</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://cld.pt/dl/download/58652b43-0568-4e8c-a870-324f3ddfa2e7/04-HD.mp4" class="list-video" ></video>
+         <h3 class="list-title">Demon Slayer Episodio 4</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://cld.pt/dl/download/245197f3-5112-496c-ac11-d696afdb5fc4/05-HD.mp4" class="list-video" ></video>
+         <h3 class="list-title">Demon Slayer Episodio 5</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://cld.pt/dl/download/7702274e-6400-438a-9a25-6218b08d5bb0/06-HD.mp4" class="list-video" ></video>
+         <h3 class="list-title">Demon Slayer Episodio 6</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://cld.pt/dl/download/2283f5f0-0326-4848-84f2-db5f5743722b/07-HD.mp4" class="list-video" ></video>
+         <h3 class="list-title">Demon Slayer Episodio 7</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://cld.pt/dl/download/18aeb7e6-b0be-4b67-b9a6-3381ade6ae85/08-HD.mp4" class="list-video" ></video>
+         <h3 class="list-title">Demon Slayer Episodio 8</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://cld.pt/dl/download/a64c9ef5-8740-40ec-ad02-acbaabca3c45/09-HD.mp4" class="list-video" ></video>
+         <h3 class="list-title">Demon Slayer Episodio 9</h3>
+      </div>
+      <div class="list active">
+        <video src="https://cld.pt/dl/download/b8459795-786e-4684-98c4-6374de2ca39c/10-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 10</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/b93ab04b-3392-4c45-ab09-c6d8bcd96caf/11-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 11</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/3ece7fef-ee91-4c30-b79b-16b532b78050/12-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 12</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/f70106f4-cc6a-4d6c-8033-458aecbfc816/13-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 13</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/b80f05c3-30fc-470e-a926-688cd7d09aad/14-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 14</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/3e0f4f07-dfd2-40a9-9658-c900239fe234/15-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 15</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/f990bbfa-e143-4b3d-b2dd-7736dc12095b/16-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 16</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/1de0eaab-e4e4-4ee6-9f4d-cc78567f3e74/17-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 17</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/08d9641e-4997-49fd-b15d-bac374b8c55f/18-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 18</h3>
+     </div>
+     <div class="list">
+        <video src="https://cld.pt/dl/download/2ee21157-1200-4367-b0ef-1aa4b8a39c35/19-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 19</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/be8c544e-862b-4533-9c77-7c1f5d170591/20-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 20</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/1dea8c99-5baf-46f4-a601-5fb92fd76a74/21-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 21</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/bc6a1fa1-79b3-4c51-b4ff-a66a55a73606/22-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 22</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/fef71859-f606-4fa2-b93d-8d91f8f3d3dd/23-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 23</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/d48a81e7-22b4-48ba-ac3b-469779a70223/24-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 24</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/8f7c6e2e-3005-4e31-b018-271eef9f2d65/25-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 25</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://cld.pt/dl/download/c44ffd3d-f9f2-4675-b2f8-310e61d974cc/26-HD.mp4" class="list-video" ></video>
+        <h3 class="list-title">Demon Slayer Episodio 26</h3>
+     </div>
+</div>
+
+<section class="service">
+    <div class="container">
+        <div class="service-banner">
+            <figure>
+                <img src="service-banner.jpg" alt="HD 4K Resolução! Apenas R$2.99">
+            </figure>
+
+            <a href="service-banner.jpg" download class="service-btn">
+                <span>download</span>
+
+                <ion-icon name="download-outline"></ion-icon>
+            </a>
+
+        </div>
+
+        <div class="service-content">
+
+            <p class="service-subtitle">Outros Serviços</p>
+
+            <h2 class="h2 service-title">Faça download Para Ver OffLine.</h2>
+
+            <p class="service-text">
+                Filmes, séries e muito mais. Sem limites. Assista onde quiser. Cancele quando quiser.
+            </p>
+
+            <ul class="service-list">
+
+                <li>
+                    <div class="service-card">
+
+                        <div class="card-icon">
+                            <ion-icon name="TV"></ion-icon>
+                        </div>
+
+                        <div class="card-content">
+                            <h3 class="h3 card-title">Aproveite na TV.</h3>
+
+                            <p class="card-text">
+                                Assista em Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, aparelhos de Blu-ray e outros dispositivos.
+                            </p>
+                        </div>
+
+                    </div>
+                </li>
+
+                <li>
+                    <div class="service-card">
+
+                        <div class="card-icon">
+                            <ion-icon name="videocam"></ion-icon>
+                        </div>
+
+                        <div class="card-content">
+                            <h3 class="h3 card-title">Baixe Animes para assistir offline.</h3>
+
+                            <p class="card-text">
+                                Salve seus títulos favoritos e sempre tenha algo para assistir.
+                            </p>
+                        </div>
+
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+
+    <div class="footer-top">
+        <div class="container">
+
+            <div class="footer-brand-wrapper">
+
+            <a href="index.html" class="logo">
+                <img src="logo-animeflix.png" alt="AnimeFlix logo" width="400px">
+            </a>
+
+            <ul class="footer-list">
+
+                <li>
+                    <a href="index.html" class="footer-link">Home</a>
+                </li>
+
+                <li>
+                    <a href="#" class="footer-link">Animes</a>
+                </li>
+
+                <li>
+                    <a href="#" class="footer-link">Filmes</a>
+                </li>
+
+                <li>
+                    <a href="#" class="footer-link">Famosos</a>
+                </li>
+
+                <li>
+                    <a href="#" class="footer-link">Recomendados</a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="quicklink-wrapper">
+
+            <ul class="quicklink-list">
+
+                <li>
+                    <a href="#" class="quicklink-link">Faq</a>
+                </li>
+
+                <li>
+                    <a href="#" class="quicklink-link">Centro De Ajuda</a>
+                </li>
+
+                <li>
+                    <a href="#" class="quicklink-link">Termos De Uso</a>
+                </li>
+
+                <li>
+                    <a href="#" class="quicklink-link">Privacidade</a>
+                </li>
+
+            </ul>
+
+            <ul class="social-list">
+
+                <li>
+                    <a href="#" class="social-link">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="social-link">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="social-link">
+                        <ion-icon name="logo-pinterest"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="social-link">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+
+            <p class="copyright">
+                $copy; 2022 <a href="#">Kalebzaki</a>. All Rights Reserved
+            </p>
+
+            <img src="footer-bottom-img.png" alt="online baking companies logo" class="footer-bottom-img">
+
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+
+
+
+<!-- custom js file link  -->
+<script src="script2.js"></script>
+<script src="script.js"></script>
+<script>
+   alert("AVISO!! CASO OS EPISODIOS NÃO CARREGUEM, ATUALIZE A PAGINA E TENHA PACIÊNCIA!!!");
+</script>  
+
+</body>
+</html>
