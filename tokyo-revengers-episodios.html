@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+   <title>Assistir Naruto</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+*{
+   font-family: 'Poppins', sans-serif;
+   margin:0; padding:0;
+   box-sizing: border-box;
+   outline: none; border:none;
+   text-decoration: none;
+   text-transform: capitalize;
+}
+
+.container3 {
+    padding-bottom: 100px;
+    align-items: center;
+}
+
+body{
+   padding:20px;
+}
+
+.container2{
+   max-width: 1200px;
+   margin:100px auto;
+   display: flex;
+   flex-wrap: wrap;
+   align-items: flex-start;
+   gap:20px;
+}
+
+.container2 .main-video-container{
+   flex:1 1 700px;
+   border-radius: 5px;
+   box-shadow: 0 5px 15px rgba(0,0,0,.1);
+   background-color: rgb(156, 1, 1);
+   padding:15px;
+}
+
+.container2 .main-video-container .main-video{
+   margin-bottom: 7px;
+   border-radius: 5px;
+   width: 100%;
+}
+
+.container2 .main-video-container .main-vid-title{
+   font-size: 20px;
+   color:#fff;
+}
+
+.container2 .video-list-container{
+   flex:1 1 350px;
+   height: 485px;
+   overflow-y: scroll;
+   border-radius: 5px;
+   box-shadow: 0 5px 15px rgba(0,0,0,.1);
+   background-color: rgb(156, 1, 1);
+   padding:15px;
+}
+
+.container2 .video-list-container::-webkit-scrollbar{
+   width: 10px;
+}
+
+.container2 .video-list-container::-webkit-scrollbar-track{
+   background-color: hsl(225, 25%, 9%);
+   border-radius: 5px;
+}
+
+.container2 .video-list-container::-webkit-scrollbar-thumb{
+   background-color: rgb(156, 1, 1);
+   border-radius: 4px;
+}
+
+.container2 .video-list-container .list{
+   display: flex;
+   align-items: center;
+   gap:15px;
+   padding:10px;
+   background-color: #444;
+   cursor: pointer;
+   border-radius: 5px;
+   margin-bottom: 10px;
+}
+
+.container2 .video-list-container .list:last-child{
+   margin-bottom: 0;
+}
+
+.container2 .video-list-container .list.active{
+   background-color: #444;
+   
+}
+
+.container2 .video-list-container .list.active .list-title{
+   color:#fff;
+}
+
+.container2 .video-list-container .list .list-video{
+   width: 100px;
+   border-radius: 5px;
+}
+
+.container2 .video-list-container .list .list-title{
+   font-size: 17px;
+   color:#fff;
+}
+
+@media (max-width:1200px){
+
+   .container2{
+      margin:0;
+   }
+
+}
+
+@media (max-width:450px){
+
+   .container2 .main-video-container .main-vid-title{
+      font-size: 15px;
+      text-align: center;
+   }
+
+   .container2 .video-list-container .list{
+      flex-flow: column;
+      gap:10px;
+   }
+
+   .container2 .video-list-container .list .list-video{
+      width: 100%;
+   }
+
+   .container2 .video-list-container .list .list-title{
+      font-size: 15px;
+      text-align: center;
+      
+   }
+
+}
+    </style>
+   <link rel="stylesheet" href="style.css">
+
+</head>
+<body id="#top">
+
+    <header class="header" data-header>
+        <div class="container">
+
+        <div class="overlay" data-overlay></div>
+
+        <a href="index.html" class="logo">
+            <img src="logo-animeflix.png" alt="AnimeFlix logo" width="200px">
+        </a>
+
+        <div class="header-actions">
+
+        <button class="search-btn">
+         <ion-icon name="search-outline"></ion-icon>
+        </button>
+
+        <div class="lang-wrapper">
+            <label for="language">
+                <ion-icon name="globe-outline"></ion-icon>
+            </label>
+
+            <select name="language" id="language">
+                <option value="en">EN</option>
+                <option value="au">AU</option>
+                <option value="ar">AR</option>
+                <option value="br">BR</option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary">Entrar</button>
+
+        </div>
+
+        <button class="menu-open-btn" data-menu-open-btn>
+            <ion-icon name="reorder-two"></ion-icon>
+        </button>
+
+        <nav class="navbar" data-navbar>
+
+            <div class="navbar-top">
+
+                <a href="index.html" class="logo">
+                    <img src="logo-animeflix.png" alt="AnimeFlix logo">
+                </a>
+
+                <button class="menu-close-btn" data-menu-close-btn>
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+
+            <ul class="navbar-list">
+
+                <li>
+                    <a href="index.html" class="navbar-link">Home</a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-link">Famosos</a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-link">Recomendados</a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-link">Minha Lista</a>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-social-list">
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-pinterest"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-youtube"></ion-icon>
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+       </div>
+    </header> 
+   
+<div class="container2">
+    
+
+   <div class="main-video-container">
+      <video src="aviso-para-episodios.mp4" controls class="main-video" ></video>
+      <h3 class="main-vid-title">AVISO!! CASO OS EPISODIOS NÃO CARREGUEM, ATUALIZE A PAGINA E TENHA PACIÊNCIA!!!</h3>
+   </div>
+
+   <div class="video-list-container">
+
+      <div class="list">
+         <video src="https://cld.pt/dl/download/a81eca9d-6c7a-47bf-a115-b8360a8042b2/01-HD.mp4" class="list-video" ></video>
+         <h3 class="list-title">Tokyo Revengers Episodio 1</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://cld.pt/dl/download/e77a552c-a42c-4023-9fe7-7c2c5ab16f74/02-HD.mp4" class="list-video" ></video>
+         <h3 class="list-title">Tokyo Revengers Episodio 2</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/03.mp4" class="list-video" ></video>
+         <h3 class="list-title">Tokyo Revengers Episodio 3 (INDISPONIVEL!)</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/04.mp4" class="list-video" ></video>
+         <h3 class="list-title">Tokyo Revengers Episodio 4 (INDISPONIVEL!)</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/05.mp4" class="list-video" ></video>
+         <h3 class="list-title">Tokyo Revengers Episodio 5 (INDISPONIVEL!)</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/06.mp4" class="list-video" ></video>
+         <h3 class="list-title">Tokyo Revengers Episodio 6 (INDISPONIVEL!)</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/07.mp4" class="list-video" ></video>
+         <h3 class="list-title">Tokyo Revengers Episodio 7 (INDISPONIVEL!)</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/08.mp4" class="list-video" ></video>
+         <h3 class="list-title">Tokyo Revengers Episodio 8 (INDISPONIVEL!)</h3>
+      </div>
+
+      <div class="list">
+         <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/09.mp4" class="list-video" ></video>
+         <h3 class="list-title">Tokyo Revengers Episodio 9 (INDISPONIVEL!)</h3>
+      </div>
+      <div class="list active">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/10.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 10 (INDISPONIVEL!)</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/11.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 11 (INDISPONIVEL!)</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/12.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 12 (INDISPONIVEL!)</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/13.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 13 (INDISPONIVEL!)</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/14.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 14 (INDISPONIVEL!)</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/15.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 15 (INDISPONIVEL!)</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/16.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 16 (INDISPONIVEL!)</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/17.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 17 (INDISPONIVEL!)</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/18.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 18 (INDISPONIVEL!)</h3>
+     </div>
+     <div class="list">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/19.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 19 (INDISPONIVEL!)</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/20.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 20 (INDISPONIVEL!)</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/21.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 21 (INDISPONIVEL!)</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/22.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 22 (INDISPONIVEL!)</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/23.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 23 (INDISPONIVEL!)</h3>
+     </div>
+
+     <div class="list">
+        <video src="https://animeq.xyz/Animes/Letra-N/Tokyo Revengers/24.mp4" class="list-video" ></video>
+        <h3 class="list-title">Tokyo Revengers Episodio 24 (INDISPONIVEL!)</h3>
+     </div>
+</div>
+
+<section class="service">
+    <div class="container">
+        <div class="service-banner">
+            <figure>
+                <img src="service-banner.jpg" alt="HD 4K Resolução! Apenas R$2.99">
+            </figure>
+
+            <a href="service-banner.jpg" download class="service-btn">
+                <span>download</span>
+
+                <ion-icon name="download-outline"></ion-icon>
+            </a>
+
+        </div>
+
+        <div class="service-content">
+
+            <p class="service-subtitle">Outros Serviços</p>
+
+            <h2 class="h2 service-title">Faça download Para Ver OffLine.</h2>
+
+            <p class="service-text">
+                Filmes, séries e muito mais. Sem limites. Assista onde quiser. Cancele quando quiser.
+            </p>
+
+            <ul class="service-list">
+
+                <li>
+                    <div class="service-card">
+
+                        <div class="card-icon">
+                            <ion-icon name="TV"></ion-icon>
+                        </div>
+
+                        <div class="card-content">
+                            <h3 class="h3 card-title">Aproveite na TV.</h3>
+
+                            <p class="card-text">
+                                Assista em Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, aparelhos de Blu-ray e outros dispositivos.
+                            </p>
+                        </div>
+
+                    </div>
+                </li>
+
+                <li>
+                    <div class="service-card">
+
+                        <div class="card-icon">
+                            <ion-icon name="videocam"></ion-icon>
+                        </div>
+
+                        <div class="card-content">
+                            <h3 class="h3 card-title">Baixe Animes para assistir offline.</h3>
+
+                            <p class="card-text">
+                                Salve seus títulos favoritos e sempre tenha algo para assistir.
+                            </p>
+                        </div>
+
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+
+    <div class="footer-top">
+        <div class="container">
+
+            <div class="footer-brand-wrapper">
+
+            <a href="index.html" class="logo">
+                <img src="logo-animeflix.png" alt="AnimeFlix logo" width="400px">
+            </a>
+
+            <ul class="footer-list">
+
+                <li>
+                    <a href="index.html" class="footer-link">Home</a>
+                </li>
+
+                <li>
+                    <a href="#" class="footer-link">Animes</a>
+                </li>
+
+                <li>
+                    <a href="#" class="footer-link">Filmes</a>
+                </li>
+
+                <li>
+                    <a href="#" class="footer-link">Famosos</a>
+                </li>
+
+                <li>
+                    <a href="#" class="footer-link">Recomendados</a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="quicklink-wrapper">
+
+            <ul class="quicklink-list">
+
+                <li>
+                    <a href="#" class="quicklink-link">Faq</a>
+                </li>
+
+                <li>
+                    <a href="#" class="quicklink-link">Centro De Ajuda</a>
+                </li>
+
+                <li>
+                    <a href="#" class="quicklink-link">Termos De Uso</a>
+                </li>
+
+                <li>
+                    <a href="#" class="quicklink-link">Privacidade</a>
+                </li>
+
+            </ul>
+
+            <ul class="social-list">
+
+                <li>
+                    <a href="#" class="social-link">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="social-link">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="social-link">
+                        <ion-icon name="logo-pinterest"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="social-link">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+
+            <p class="copyright">
+                $copy; 2022 <a href="#">Kalebzaki</a>. All Rights Reserved
+            </p>
+
+            <img src="footer-bottom-img.png" alt="online baking companies logo" class="footer-bottom-img">
+
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+
+
+
+<!-- custom js file link  -->
+<script src="script2.js"></script>
+<script src="script.js"></script>
+<script>
+   alert("AVISO!! CASO OS EPISODIOS NÃO CARREGUEM, ATUALIZE A PAGINA E TENHA PACIÊNCIA!!!");
+</script>
+
+</body>
+</html>
