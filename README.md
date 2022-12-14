@@ -1,5 +1,7 @@
 ### Olá! Este é meu maior projeto desde então! O Animeflix! ❤️
 
+> Status do projeto: Em desenvolvimento.
+
 [![site](https://img.shields.io/website-up-down-green-red/http/monip.org.svg)](https://kalebzaki4.github.io/AnimeFlix/)
 
 ![AnimeFlix GitHub stats](https://github-readme-stats.vercel.app/api?username=kalebzaki4&show_icons=true&theme=dracula)
