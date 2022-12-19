@@ -1,198 +1,260 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - AnimeFlix</title>
-</head>
-<style> @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'); 
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Singin</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
-body{
-    background-image: url(http://cdn.shopify.com/s/files/1/2693/0654/articles/bannakatsuki.jpg?v=1571854597);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+body {
+  background-image: url("login-image.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed
+  
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 100px;
 }
 
 .card {
-    background-color: #ffffff80;
-    padding: 30px;
-    border-radius: 4%;
-    box-shadow: 3px 3px 1px 0px #00000060;
-    width: 400px;
+  background-color: #ffffff80;
+  padding: 30px;
+  border-radius: 4%;
+  box-shadow: 3px 3px 1px 0px #00000060;
+  width: 300px;
 }
 
 h1{
-    text-align: center;
-    margin-bottom: 20px;
-    color: rgb(99, 0, 0);
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgb(99, 0, 0)
 }
 
-.label-float input {
-    width: 100%;
-    padding: 5px 5px;
-    display: inline-block;
-    border: 0;
-    border-bottom: 3px solid rgb(99, 0, 0);
-    background-color: transparent;
-    outline: none;
-    min-width: 280px;
-    font-size: 16px;
-    transition: all .3s ease-out;
-    border-radius: 0;
+.label-float input{
+  width: 100%;
+  padding: 5px 5px;
+  display: inline-block;
+  border: 0;
+  border-bottom: 2px solid rgb(99, 0, 0);
+  background-color: transparent;
+  outline: none;
+  min-width: 180px;
+  font-size: 16px;
+  transition: all .3s ease-out;
+  border-radius: 0;
+  
 }
 
-.label-float {
-    position: relative;
-    padding-top: 13px;
-    margin-top: 5%;
-    margin-bottom: 5%;
+.label-float{
+  position: relative;
+  padding-top: 13px;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
-.label-float input:focus {
-    border-bottom: 2px solid rgb(126, 1, 1);
+.label-float input:focus{
+  border-bottom: 2px solid rgb(99, 0, 0);
 }
 
 .label-float label{
-    color: rgb(99, 0, 0);
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin-top: 13px;
-    transition: all 0.3s ease-out;
+  color: rgb(99, 0, 0);
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 13px;
+  transition: all .3s ease-out;
 }
 
 .label-float input:focus + label,
-.label-float input:valid + label {
-    font-size: 13px;
-    margin-top: 0;
-    color: rgb(126, 1, 1);
+.label-float input:valid + label{
+  font-size: 13px;
+  margin-top: 0;
+  color: rgb(99, 0, 0)
 }
 
-button {
-    background-color: transparent;
-    border-color: rgb(99, 0, 0);
-    color: rgb(99, 0, 0);
-    padding: 7px;
-    font-weight: bold;
-    font-size: 12pt;
-    margin-top: 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.4s ease-out;
-    width: 200px;
+button{
+  background-color: transparent;
+  border-color: rgb(99, 0, 0);
+  color: rgb(99, 0, 0);
+  padding: 7px;
+  font-weight: bold;
+  font-size: 12pt;
+  margin-top: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  transition: all .4s ease-out;
+  width: 200px;
 }
 
-button:hover {
-    background-color: rgb(99, 0, 0);
-    color: white;
+button:hover{
+  background-color: rgb(99, 0, 0);
+  color: #fff;
 }
 
-.justify-center {
-    display: flex;
-    justify-content: center;
+.justify-center{
+  display: flex;
+  justify-content: center;
 }
 
-hr {
-    margin-top: 10%;
-    margin-bottom: 10%;
-    width: 60%;
+hr{
+  margin-top: 10%;
+  margin-bottom: 10%;
+  width: 60%;
 }
 
-p {
-    color: rgb(99, 0, 0);
-    font-size: 14pt;
-    text-align: center;
+p{
+  color: rgb(99, 0, 0);
+  font-size: 14pt;
+  text-align: center;
 }
 
-a {
-    color: rgb(177, 1, 1);
-    font-weight: bold;
-    text-decoration: none;
-    transition: all 0.4s ease-out;
+a{
+  color: rgb(99, 0, 0);
+  font-weight: bold;
+  text-decoration: none;
+  transition: all .3s ease-out;
 }
 
-a:hover {
-    color: rgb(99, 0, 0);
+a:hover{
+  color: rgb(190, 0, 0);
 }
 
-.fa-eye {
-    position: absolute;
-    top: 15px;
-    right: 10px;
-    cursor: pointer;
-    color: rgb(99, 0, 0);
+.fa-eye{
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  cursor: pointer;
+  color: rgb(99, 0, 0);
 }
 
-</style>
-<body>
-    <div class="header">
-        <div class="logo">
-            <a href="index.html">
-                <img src="logo-animeflix.png" alt="" width="400px">
-            </a>
-        </div>
-    </div>
+ #msgError{
+  text-align: center;
+  color: #ff0000;
+  background-color: #ffbbbb;
+  padding: 10px;
+  border-radius: 4px;
+  display: none;
+}
+    </style>
+  </head>
+  <body>
     <div class="container">
-        <div class="card">
-            <h1>Entrar</h1>
+      <div class="card">
+        <h1>Entrar</h1>
 
-            <div class="label-float">
-                <input type="text" id="usuario" placeholder=" " required>
-                <label for="ususario">Usuario</label>
-            </div>
+        <div id="msgError"></div>
 
-            <div class="label-float">
-                <input type="password" id="senha" placeholder=" " required>
-                <label for="senha">senha</label>
-                <i class="fa fa-eye" aria-hidden="true"></i>
-            </div>
-
-            <div class="justify-center">
-                <button>Entrar</button>
-            </div>
-
-            <div class="justify-center">
-                <hr>
-            </div>
-
-            <p> Não tem uma conta?
-                <a href="cadastrar.html">Cadastre-se</a>
-            </p>
-
+        <div class="label-float">
+          <input type="text" id="usuario" paceholder="" required />
+          <label id="userLabel" for="usuario">Usuario</label>
         </div>
+
+        <div class="label-float">
+          <input type="password" id="senha" paceholder="" required />
+          <label id="senhaLabel" for="senha">Senha</label>
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </div>
+
+        <div class="justify-center">
+          <button onclick="entrar()">Entrar</button>
+        </div>
+
+        <div class="justify-center">
+          <hr />
+        </div>
+
+        <p>
+          Não tem uma conta?
+          <a href="cadastrar.html">
+            Cadastre-se
+          </a>
+        </p>
+      </div>
     </div>
-</body>
+  </body>
 
 <script>
-    let btn = document.querySelector('.fa-eye')
+let btn = document.querySelector('.fa-eye')
 
-    btn.addEventListener('click', ()=> {
-        let inputSenha = document.querySelector('#senha')
+btn.addEventListener('click', ()=>{
+  let inputSenha = document.querySelector('#senha')
+  
+  if(inputSenha.getAttribute('type') == 'password'){
+    inputSenha.setAttribute('type', 'text')
+  } else {
+    inputSenha.setAttribute('type', 'password')
+  }
+})
 
-        if(inputSenha.getAttribute('type') == 'password'){
-            inputSenha.setAttribute('type', 'text')
-        }else{
-            inputSenha.setAttribute('type', 'password')
-        }
-    })
-</script>
+function entrar(){
+  let usuario = document.querySelector('#usuario')
+  let userLabel = document.querySelector('#userLabel')
+  
+  let senha = document.querySelector('#senha')
+  let senhaLabel = document.querySelector('#senhaLabel')
+  
+  let msgError = document.querySelector('#msgError')
+  let listaUser = []
+  
+  let userValid = {
+    nome: '',
+    user: '',
+    senha: ''
+  }
+  
+  listaUser = JSON.parse(localStorage.getItem('listaUser'))
+  
+  listaUser.forEach((item) => {
+    if(usuario.value == item.userCad && senha.value == item.senhaCad){
+       
+      userValid = {
+         nome: item.nomeCad,
+         user: item.userCad,
+         senha: item.senhaCad
+       }
+      
+    }
+  })
+   
+  if(usuario.value == userValid.user && senha.value == userValid.senha){
+    window.location.href = 'index.html'
+    
+    let mathRandom = Math.random().toString(16).substr(2)
+    let token = mathRandom + mathRandom
+    
+    localStorage.setItem('token', token)
+    localStorage.setItem('userLogado', JSON.stringify(userValid))
+  } else {
+    userLabel.setAttribute('style', 'color: red')
+    usuario.setAttribute('style', 'border-color: red')
+    senhaLabel.setAttribute('style', 'color: red')
+    senha.setAttribute('style', 'border-color: red')
+    msgError.setAttribute('style', 'display: block')
+    msgError.innerHTML = 'Usuário ou senha incorretos'
+    usuario.focus()
+  }
+  
+}
+
+  </script>
 
 </html>
