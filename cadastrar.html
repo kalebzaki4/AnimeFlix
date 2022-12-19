@@ -1,257 +1,319 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - AnimeFlix</title>
-</head>
-<style> @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'); 
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Singup</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
-body{
-    background-image: url(http://cdn.shopify.com/s/files/1/2693/0654/articles/bannakatsuki.jpg?v=1571854597);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+body {
+  background-image: url("login-image.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed
+  
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 100px;
 }
 
 .card {
-    background-color: #ffffff80;
-    padding: 30px;
-    border-radius: 4%;
-    box-shadow: 3px 3px 1px 0px #00000060;
-    width: 400px;
+  background-color: #ffffff80;
+  padding: 30px;
+  border-radius: 4%;
+  box-shadow: 3px 3px 1px 0px #00000060;
+  width: 400px;
 }
 
 h1{
-    text-align: center;
-    margin-bottom: 20px;
-    color: rgb(99, 0, 0);
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgb(99, 0, 0);
 }
 
-.label-float input {
-    width: 100%;
-    padding: 5px 5px;
-    display: inline-block;
-    border: 0;
-    border-bottom: 3px solid rgb(99, 0, 0);
-    background-color: transparent;
-    outline: none;
-    min-width: 280px;
-    font-size: 16px;
-    transition: all .3s ease-out;
-    border-radius: 0;
+.label-float input{
+  width: 100%;
+  padding: 5px 5px;
+  display: inline-block;
+  border: 0;
+  border-bottom: 2px solid rgb(99, 0, 0);
+  background-color: transparent;
+  outline: none;
+  min-width: 180px;
+  font-size: 16px;
+  transition: all .3s ease-out;
+  border-radius: 0;
+  
 }
 
-.label-float {
-    position: relative;
-    padding-top: 13px;
-    margin-top: 5%;
-    margin-bottom: 5%;
+.label-float{
+  position: relative;
+  padding-top: 13px;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
-.label-float input:focus {
-    border-bottom: 2px solid rgb(126, 1, 1);
+.label-float input:focus{
+  border-bottom: 2px solid rgb(158, 0, 0);
 }
 
 .label-float label{
-    color: rgb(99, 0, 0);
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin-top: 13px;
-    transition: all 0.3s ease-out;
+  color: rgb(99, 0, 0);
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 13px;
+  transition: all .3s ease-out;
 }
 
 .label-float input:focus + label,
-.label-float input:valid + label {
-    font-size: 13px;
-    margin-top: 0;
-    color: rgb(126, 1, 1);
+.label-float input:valid + label{
+  font-size: 13px;
+  margin-top: 0;
+  color: rgb(158, 0, 0);
 }
 
-button {
-    background-color: transparent;
-    border-color: rgb(99, 0, 0);
-    color: rgb(99, 0, 0);
-    padding: 7px;
-    font-weight: bold;
-    font-size: 12pt;
-    margin-top: 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.4s ease-out;
+button{
+  background-color: transparent;
+  border-color: rgb(99, 0, 0);
+  color: rgb(99, 0, 0);
+  padding: 7px;
+  font-weight: bold;
+  font-size: 12pt;
+  margin-top: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  transition: all .4s ease-out;
 }
 
-button:hover {
-    background-color: rgb(99, 0, 0);
-    color: white;
+button:hover{
+  background-color: rgb(99, 0, 0);
+  color: #fff;
 }
 
-.justify-center {
-    display: flex;
-    justify-content: center;
+.justify-center{
+  display: flex;
+  justify-content: center;
 }
 
-.fa-eye {
-    position: absolute;
-    top: 15px;
-    right: 10px;
-    cursor: pointer;
-    color: rgb(99, 0, 0);
+.fa-eye{
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  cursor: pointer;
+  color: rgb(99, 0, 0);
 }
 
+#msgError{
+  text-align: center;
+  color: #ff0000;
+  background-color: #ffbbbb;
+  padding: 10px;
+  border-radius: 4px;
+  display: none;
+}
 
-</style>
-<body>
-    <div class="header">
-        <div class="logo">
-            <a href="index.html">
-                <img src="logo-animeflix.png" alt="" width="400px">
-            </a>
-        </div>
-    </div>
+#msgSuccess{
+  text-align: center;
+  color: #00bb00;
+  background-color: #bbffbe;
+  padding: 10px;
+  border-radius: 4px;
+  display: none;
+}
+
+    </style>
+  </head>
+  <body>
     <div class="container">
-        <div class="card">
-            <h1>Cadastrar</h1>
+      <div class="card">
+        <h1>Cadastrar</h1>
 
-            <div class="label-float">
-                <input type="text" id="nome" placeholder=" " required>
-                <label id="labelNome" for="nome">Nome</label>
-            </div>
+        <div id="msgError"></div>
+        <div id="msgSuccess"></div>
 
-            <div class="label-float">
-                <input type="text" id="usuario" placeholder=" " required>
-                <label id="labelUsuario" for="usuario">Usuario</label>
-            </div>
-
-            <div class="label-float">
-                <input type="password" id="senha" placeholder=" " required>
-                <label id="labelSenha" for="usuario">senha</label>
-                <i id="verSenha" class="fa fa-eye" aria-hidden="true"></i>
-            </div>
-
-            <div class="label-float">
-                <input type="password" id="confirmSenha" placeholder=" " required>
-                <label id="labelConfirmSenha" for="confirmSenha">Confirmar senha</label>
-                <i id="verConfirmSenha" class="fa fa-eye" aria-hidden="true"></i>
-            </div>
-            
-
-            <div class="justify-center">
-                <button onclick="cadastrar()">Cadastrar</button>
-            </div>
-
+        <div class="label-float">
+          <input type="text" id="nome" placeholder=" " required />
+          <label id="labelNome" for="nome">Nome</label>
         </div>
+
+        <div class="label-float">
+          <input type="text" id="usuario" placeholder=" " required />
+          <label id="labelUsuario" for="usuario">Usuário</label>
+        </div>
+
+        <div class="label-float">
+          <input type="password" id="senha" placeholder=" " required />
+          <label id="labelSenha" for="senha">Senha</label>
+          <i id="verSenha" class="fa fa-eye" aria-hidden="true"></i>
+        </div>
+
+        <div class="label-float">
+          <input type="password" id="confirmSenha" placeholder=" " required />
+          <label id="labelConfirmSenha" for="confirmSenha"
+            >Confirmar Senha</label
+          >
+          <i id="verConfirmSenha" class="fa fa-eye" aria-hidden="true"></i>
+        </div>
+
+        <div class="justify-center">
+          <button onclick="cadastrar()">Cadastrar</button>
+        </div>
+      </div>
     </div>
-</body>
 
-<script>
-    let btn = document.querySelector('#verSenha')
-    let btnConfirm = document.querySelector('#verConfirmSenha')
+    <script>
 
-    let nome = document.querySelector('#nome')
-    let labelNome = document.querySelector('#labelNome')
+let btn = document.querySelector('#verSenha')
+let btnConfirm = document.querySelector('#verConfirmSenha')
 
-    let usuario = document.querySelector('#usuario')
-    let labelUsuario = document.querySelector('#labelUsuario')
 
-    let senha = document.querySelector('#senha')
-    let labelSenha = document.querySelector('#labelSenha')
+let nome = document.querySelector('#nome')
+let labelNome = document.querySelector('#labelNome')
+let validNome = false
 
-    let confirmSenha = document.querySelector('#confirmSenha')
-    let labelConfirmSenha = document.querySelector('#labelConfirmSenha')
+let usuario = document.querySelector('#usuario')
+let labelUsuario = document.querySelector('#labelUsuario')
+let validUsuario = false
 
-    nome.addEventListener('keyup', ()=>{
-        if(nome.value.length  <= 2){
-          labelNome.setAttribute('style', 'color: red')
-          labelNome.innerHTML = 'Nome *Insira no minimo 3 caracteres'
-          nome.setAttribute('style', 'border-color: red')
-        }else{
-            labelNome.setAttribute('style', 'color: green')
-            labelNome.innerHTML = 'Nome'
-            nome.setAttribute('style', 'border-color: green')
-        }
-    })
+let senha = document.querySelector('#senha')
+let labelSenha = document.querySelector('#labelSenha')
+let validSenha = false
 
-    usuario.addEventListener('keyup', ()=>{
-        if(usuario.value.length  <= 4){
-          labelUsuario.setAttribute('style', 'color: red')
-          labelUsuario.innerHTML = 'Usuario *Insira no minimo 5 caracteres'
-          usuario.setAttribute('style', 'border-color: red')
-        }else{
-            labelUsuario.setAttribute('style', 'color: green')
-            labelUsuario.innerHTML = 'Usuario'
-            usuario.setAttribute('style', 'border-color: green')
-        }
-    })
+let confirmSenha = document.querySelector('#confirmSenha')
+let labelConfirmSenha = document.querySelector('#labelConfirmSenha')
+let validConfirmSenha = false
 
-    senha.addEventListener('keyup', ()=>{
-        if(senha.value.length  <= 7){
-          labelSenha.setAttribute('style', 'color: red')
-          labelSenha.innerHTML = 'Senha *Insira no minimo 8 caracteres'
-          senha.setAttribute('style', 'border-color: red')
-        }else{
-            labelSenha.setAttribute('style', 'color: green')
-            labelSenha.innerHTML = 'Senha'
-            senha.setAttribute('style', 'border-color: green')
-        }
-    })
+let msgError = document.querySelector('#msgError')
+let msgSuccess = document.querySelector('#msgSuccess')
 
-    confirmSenha.addEventListener('keyup', ()=>{
-        if(senha.value != confirmSenha.value ){
-          labelConfirmSenha.setAttribute('style', 'color: red')
-          labelConfirmSenha.innerHTML = 'Confirmar Senha *As senhas não colidem'
-          confirmSenha.setAttribute('style', 'border-color: red')
-        }else{
-            labelConfirmSenha.setAttribute('style', 'color: green')
-            labelConfirmSenha.innerHTML = 'Confirmar Senha'
-            confirmSenha.setAttribute('style', 'border-color: green')
-        }
-    })
+nome.addEventListener('keyup', () => {
+  if(nome.value.length <= 2){
+    labelNome.setAttribute('style', 'color: red')
+    labelNome.innerHTML = 'Nome *Insira no minimo 3 caracteres'
+    nome.setAttribute('style', 'border-color: red')
+    validNome = false
+  } else {
+    labelNome.setAttribute('style', 'color: green')
+    labelNome.innerHTML = 'Nome'
+    nome.setAttribute('style', 'border-color: green')
+    validNome = true
+  }
+})
 
-    function cadastrar(){
-        
+usuario.addEventListener('keyup', () => {
+  if(usuario.value.length <= 4){
+    labelUsuario.setAttribute('style', 'color: red')
+    labelUsuario.innerHTML = 'Usuário *Insira no minimo 5 caracteres'
+    usuario.setAttribute('style', 'border-color: red')
+    validUsuario = false
+  } else {
+    labelUsuario.setAttribute('style', 'color: green')
+    labelUsuario.innerHTML = 'Usuário'
+    usuario.setAttribute('style', 'border-color: green')
+    validUsuario = true
+  }
+})
+
+senha.addEventListener('keyup', () => {
+  if(senha.value.length <= 5){
+    labelSenha.setAttribute('style', 'color: red')
+    labelSenha.innerHTML = 'Senha *Insira no minimo 6 caracteres'
+    senha.setAttribute('style', 'border-color: red')
+    validSenha = false
+  } else {
+    labelSenha.setAttribute('style', 'color: green')
+    labelSenha.innerHTML = 'Senha'
+    senha.setAttribute('style', 'border-color: green')
+    validSenha = true
+  }
+})
+
+confirmSenha.addEventListener('keyup', () => {
+  if(senha.value != confirmSenha.value){
+    labelConfirmSenha.setAttribute('style', 'color: red')
+    labelConfirmSenha.innerHTML = 'Confirmar Senha *As senhas não conferem'
+    confirmSenha.setAttribute('style', 'border-color: red')
+    validConfirmSenha = false
+  } else {
+    labelConfirmSenha.setAttribute('style', 'color: green')
+    labelConfirmSenha.innerHTML = 'Confirmar Senha'
+    confirmSenha.setAttribute('style', 'border-color: green')
+    validConfirmSenha = true
+  }
+})
+
+function cadastrar(){
+  if(validNome && validUsuario && validSenha && validConfirmSenha){
+    let listaUser = JSON.parse(localStorage.getItem('listaUser') || '[]')
+    
+    listaUser.push(
+    {
+      nomeCad: nome.value,
+      userCad: usuario.value,
+      senhaCad: senha.value
     }
+    )
+    
+    localStorage.setItem('listaUser', JSON.stringify(listaUser))
+    
+   
+    msgSuccess.setAttribute('style', 'display: block')
+    msgSuccess.innerHTML = '<strong>Cadastrando usuário...</strong>'
+    msgError.setAttribute('style', 'display: none')
+    msgError.innerHTML = ''
+    
+    setTimeout(()=>{
+        window.location.href = '../html/signin.html'
+    }, 3000)
+  
+    
+  } else {
+    msgError.setAttribute('style', 'display: block')
+    msgError.innerHTML = '<strong>Preencha todos os campos corretamente antes de cadastrar</strong>'
+    msgSuccess.innerHTML = ''
+    msgSuccess.setAttribute('style', 'display: none')
+  }
+}
 
-    btn.addEventListener('click', ()=> {
-        let inputSenha = 
-        document.querySelector('#senha')
+btn.addEventListener('click', ()=>{
+  let inputSenha = document.querySelector('#senha')
+  
+  if(inputSenha.getAttribute('type') == 'password'){
+    inputSenha.setAttribute('type', 'text')
+  } else {
+    inputSenha.setAttribute('type', 'password')
+  }
+})
 
-        if(inputSenha.getAttribute('type') == 'password'){
-            inputSenha.setAttribute('type', 'text')
-        }else{
-            inputSenha.setAttribute('type', 'password')
-        }
-    })
+btnConfirm.addEventListener('click', ()=>{
+  let inputConfirmSenha = document.querySelector('#confirmSenha')
+  
+  if(inputConfirmSenha.getAttribute('type') == 'password'){
+    inputConfirmSenha.setAttribute('type', 'text')
+  } else {
+    inputConfirmSenha.setAttribute('type', 'password')
+  }
+})
 
-    btnConfirm.addEventListener('click', ()=>{
-        let inputConfirmSenha = 
-    document.querySelector('#confirmSenha')
-
-    if(inputConfirmSenha.getAttribute('type') == 'password'){
-        inputConfirmSenha.setAttribute('type', 'text')
-    }else{
-        inputConfirmSenha.setAttribute('type', 'password')
-    }
-    })
-
-</script>
-
+    </script>
+  </body>
 </html>
