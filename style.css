@@ -196,11 +196,15 @@ body.active { overflow: hidden; }
 
 .btn > ion-icon { font-size: 18px; }
 
-.btn-primary { background: var(--rich-black-fogra-29); }
+.btn-primary { background: var(--rich-black-fogra-29);}
 
 .btn-primary:is(:hover, :focus) {
-  background: var(--citrine);
-  color: var(--xiketic);
+  background: var(--rich-black-fogra-29);
+  color: var(--white);
+  transform: scale(1);
+  box-shadow: 0 0 60px var(--citrine);
+  cursor: grab;
+  border: 2px solid var(--citrine);
 }
 
 .movies-list {
