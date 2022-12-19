@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +34,7 @@ body{
     padding: 30px;
     border-radius: 4%;
     box-shadow: 3px 3px 1px 0px #00000060;
+    width: 400px;
 }
 
 h1{
@@ -73,30 +75,94 @@ h1{
     top: 0;
     left: 0;
     margin-top: 13px;
-    transition: all .3s ease-out;
+    transition: all 0.3s ease-out;
 }
 
-.label-float input:focus + label {
+.label-float input:focus + label,
+.label-float input:valid + label {
     font-size: 13px;
     margin-top: 0;
     color: rgb(126, 1, 1);
 }
 
+button {
+    background-color: transparent;
+    border-color: rgb(99, 0, 0);
+    color: rgb(99, 0, 0);
+    padding: 7px;
+    font-weight: bold;
+    font-size: 12pt;
+    margin-top: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.4s ease-out;
+    width: 200px;
+}
+
+button:hover {
+    background-color: rgb(99, 0, 0);
+    color: white;
+}
+
+.justify-center {
+    display: flex;
+    justify-content: center;
+}
+
+hr {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    width: 60%;
+}
+
+p {
+    color: rgb(99, 0, 0);
+    font-size: 14pt;
+    text-align: center;
+}
+
+a {
+    color: rgb(177, 1, 1);
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.4s ease-out;
+}
+
+a:hover {
+    color: rgb(99, 0, 0);
+}
+
+.fa-eye {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    cursor: pointer;
+    color: rgb(99, 0, 0);
+}
 
 </style>
 <body>
+    <div class="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo-animeflix.png" alt="" width="400px">
+            </a>
+        </div>
+    </div>
     <div class="container">
         <div class="card">
             <h1>Entrar</h1>
 
             <div class="label-float">
-                <input type="text" id="usuario" placeholder=" ">
+                <input type="text" id="usuario" placeholder=" " required>
                 <label for="ususario">Usuario</label>
             </div>
 
             <div class="label-float">
-                <input type="password" id="senha" placeholder=" ">
-                <label for="ususario">senha</label>
+                <input type="password" id="senha" placeholder=" " required>
+                <label for="senha">senha</label>
+                <i class="fa fa-eye" aria-hidden="true"></i>
             </div>
 
             <div class="justify-center">
@@ -108,10 +174,25 @@ h1{
             </div>
 
             <p> Não tem uma conta?
-                <a href="">Cadastre-se</a>
+                <a href="cadastrar.html">Cadastre-se</a>
             </p>
 
         </div>
     </div>
 </body>
+
+<script>
+    let btn = document.querySelector('.fa-eye')
+
+    btn.addEventListener('click', ()=> {
+        let inputSenha = document.querySelector('#senha')
+
+        if(inputSenha.getAttribute('type') == 'password'){
+            inputSenha.setAttribute('type', 'text')
+        }else{
+            inputSenha.setAttribute('type', 'password')
+        }
+    })
+</script>
+
 </html>
