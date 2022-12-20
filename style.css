@@ -631,14 +631,14 @@ body.active { overflow: hidden; }
 
 .top-rated .filter-btn:focus::before { right: 0; }
 
-.tv-series {
+.tv_series {
   background: url("tv-series-bg.jpg") no-repeat;
   background-size: cover;
   background-position: center;
   padding-block: var(--section-padding); 
 }
 
-.tv-series .section-title { margin-bottom: 50px; }
+.tv_series .section-title { margin-bottom: 50px; }
 
 .cta {
   background: url("cta-bg.jpg") no-repeat;
@@ -1292,8 +1292,9 @@ body.active { overflow: hidden; }
 }
 
 #read_button{
+  bottom: 62px;
   position: relative;
-  left: 43%;
+  left: 45%;
   display: inline-block;
   text-decoration: none;
   color: var(--citrine);
