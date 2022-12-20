@@ -1291,6 +1291,29 @@ body.active { overflow: hidden; }
 
 }
 
+#read_button{
+  position: relative;
+  left: 43%;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--citrine);
+  border: 3px solid var(--citrine);
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 29px var(--citrine);
+  box-shadow: inset 0 0 19px var(--citrine), 0 0 22px var(--citrine);
+  background-color: var(--rich-black-fogra-29);
+  transition: all .3s ease-out;
+}
+
+#read_button:hover {
+  background-color: var(--citrine);
+  color: white;
+  
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -1299,3 +1322,4 @@ body.active { overflow: hidden; }
   border-radius: 5px;
   background-color: var(--citrine);
 }
+
