@@ -8,9 +8,49 @@
    <title>Responsive Video Playlist Tutorial</title>
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+        :root {
+  --rich-black-fogra-29: hsl(225, 25%, 9%);
+  --rich-black-fogra-39: hsl(170, 21%, 5%);
+  --raisin-black: hsl(228, 13%, 15%);
+  --eerie-black: hsl(207, 19%, 11%);
+  --light-gray: hsl(0, 3%, 80%);
+  --gunmetal-1: hsl(229, 15%, 21%);
+  --gunmetal-2: hsl(216, 22%, 18%);
+  --gainsboro: hsl(0, 7%, 88%);
+  --citrine: rgb(224, 3, 3);
+  --xiketic: hsl(253, 21%, 13%);
+  --gray-x: hsl(0, 0%, 74%);
+  --white: hsl(0, 100%, 100%);
+  --black: hsl(0, 0%, 0%);
+  --jet: hsl(0, 0%, 20%);
+
+  --ff-poppins: 'Poppins', sans-serif;
+
+  --fs-1: 36px;
+  --fs-2: 32px;
+  --fs-3: 30px;
+  --fs-4: 24px;
+  --fs-5: 20px;
+  --fs-6: 18px;
+  --fs-7: 16px;
+  --fs-8: 15px;
+  --fs-9: 14px;
+  --fs-10: 13px;
+  --fs-11: 12px;
+  --fs-12: 11px;
+
+  --fw-500: 500;
+  --fw-700: 700;
+
+  --transition-1: 0.15s ease;
+  --transition-2: 0.25s ease-in;
+
+  --section-padding: 100px;
+}
 
 *{
    font-family: 'Poppins', sans-serif;
@@ -106,11 +146,9 @@
    color:#fff;
 }
 
-
-
-
-
-
+.read_button{
+    width: 200px;
+}
 
 
 
@@ -265,60 +303,71 @@
 <div class="container2">
 
    <div class="main-video-container">
-      <video src="https://rr1---sn-jvoxm5vuxaxjvhcg-8j2l.googlevideo.com/videoplayback?expire=1671688866&ei=IoKjY9vxGYrRkAP8xI3ACA&ip=131.196.76.173&id=fedf5582fad64580&itag=18&source=blogger&mh=q_&mm=31&mn=sn-jvoxm5vuxaxjvhcg-8j2l&ms=au&mv=m&mvi=1&pl=23&susc=bl&eaua=BUaGQLwz5Q8&mime=video/mp4&vprv=1&dur=1500.264&lmt=1615561186244443&mt=1671659881&txp=1318224&sparams=expire,ei,ip,id,itag,source,susc,eaua,mime,vprv,dur,lmt&sig=AOq0QJ8wRQIhAL10BvI5oWUg4VfuTSaDDLuqxI-kn6lfv8FSIjy1g99EAiAIl1yvseLI9KklzHuon_Nj5uP7I7VkTWGHBaArS_GKJw%3D%3D&lsparams=mh,mm,mn,ms,mv,mvi,pl&lsig=AG3C_xAwRgIhAKyaccPPDNKjM34hcgacnv0av1gWoKlF_x_4u6TivBVrAiEA_3zR7GAV1L2m8cOafWC-5md7EizFuqweA6aoH61D8fw%3D&cpn=yBPwqCjyd73KnIv2&c=WEB_EMBEDDED_PLAYER&cver=1.20221218.00.00" loop controls class="main-video"></video>
-      <h3 class="main-vid-title">One-Piece Episodio 1</h3>
+      <video src="aviso-para-episodios.mp4" loop controls class="main-video"></video>
+      <h3 class="main-vid-title">AVISO!!!</h3>
    </div>
 
    <div class="video-list-container">
+    <div class="list">
+        <video src="https://lightspeedst.net/s3/mp4/one-piece-dublado/sd/1.mp4" class="list-video"></video>
+        <h3 class="list-title">One-Piece Episodio 1</h3>
+     </div> 
 
       <div class="list active">
-         <video src="images/vid-1.mp4" class="list-video"></video>
+         <video src="https://lightspeedst.net/s3/mp4/one-piece-dublado/sd/2.mp4" class="list-video"></video>
          <h3 class="list-title">One-Piece Episodio 2</h3>
       </div>
 
       <div class="list">
-         <video src="images/vid-2.mp4" class="list-video"></video>
-         <h3 class="list-title">zoombie walking animation</h3>
+         <video src="https://lightspeedst.net/s3/mp4/one-piece-dublado/sd/3.mp4" class="list-video"></video>
+         <h3 class="list-title">One-Piece Episodio 3</h3>
       </div>
 
       <div class="list">
-         <video src="images/vid-3.mp4" class="list-video"></video>
-         <h3 class="list-title">emoji falling animation</h3>
+         <video src="https://lightspeedst.net/s3/mp4/one-piece-dublado/sd/4.mp4" class="list-video"></video>
+         <h3 class="list-title">One-Piece Episodio 4</h3>
       </div>
 
       <div class="list">
-         <video src="images/vid-4.mp4" class="list-video"></video>
-         <h3 class="list-title">3D town animation</h3>
+         <video src="https://lightspeedst.net/s3/mp4/one-piece-dublado/sd/5.mp4" class="list-video"></video>
+         <h3 class="list-title">One-Piece Episodio 5</h3>
       </div>
 
       <div class="list">
-         <video src="images/vid-5.mp4" class="list-video"></video>
-         <h3 class="list-title">man chasing carrot animation</h3>
+         <video src="https://lightspeedst.net/s3/mp4/one-piece-dublado/sd/6.mp4" class="list-video"></video>
+         <h3 class="list-title">One-Piece Episodio 6</h3>
       </div>
 
       <div class="list">
-         <video src="images/vid-6.mp4" class="list-video"></video>
-         <h3 class="list-title">door hinge animation</h3>
+         <video src="https://lightspeedst.net/s3/mp4/one-piece-dublado/sd/7.mp4" class="list-video"></video>
+         <h3 class="list-title">One-Piece Episodio 7</h3>
       </div>
 
       <div class="list">
-         <video src="images/vid-7.mp4" class="list-video"></video>
-         <h3 class="list-title">poeple walking in town animation</h3>
+         <video src="https://lightspeedst.net/s3/mp4/one-piece-dublado/sd/8.mp4" class="list-video"></video>
+         <h3 class="list-title">One-Piece Episodio 8</h3>
       </div>
 
       <div class="list">
-         <video src="images/vid-8.mp4" class="list-video"></video>
-         <h3 class="list-title">knight chasing virus animation</h3>
+         <video src="https://lightspeedst.net/s3/mp4/one-piece-dublado/sd/9.mp4" class="list-video"></video>
+         <h3 class="list-title">One-Piece Episodio 9</h3>
       </div>
 
       <div class="list">
-         <video src="images/vid-9.mp4" class="list-video"></video>
-         <h3 class="list-title">3D helicopter animation</h3>
+         <video src="https://lightspeedst.net/s3/mp4/one-piece-dublado/sd/10.mp4" class="list-video"></video>
+         <h3 class="list-title">One-Piece Episodio 10</h3>
       </div>
+      </div>
+      <div id="Temporada 2" style="display: none;">
+     </div>
+    </div>
+   </div>
+   
 
    </div>
-
+   
 </div>
+<button onclick="toggle('conteudo')" id="read_button" class="read_button">Próxima temporada</button>
 
 <section class="upcoming">
     <div class="container">
@@ -1185,7 +1234,21 @@
 </footer>
 
 
-<script>
+<script> 
+        function toggle(el) {
+            var display = document.getElementById(el).style.display;
+            if(display == "none"){
+                document.getElementById(el).style.display = 'block'
+                document.getElementById('read_button').style.display = 'none'
+            } else {
+                document.getElementById(el).style.display = 'none';
+                
+            }
+            
+        }
+
+
+
     let videoList = document.querySelectorAll('.video-list-container .list');
 
 videoList.forEach(vid =>{
