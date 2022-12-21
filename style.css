@@ -570,7 +570,6 @@ body.active { overflow: hidden; }
 .service-card .card-title { margin-bottom: 10px; } 
 
 .top-rated {
-  background: url("top-rated-bg.jpg") no-repeat;
   background-size: cover;
   background-position: center;
   padding-block: var(--section-padding);
