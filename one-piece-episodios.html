@@ -1,145 +1,1207 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erro 404</title>
-    <style>
-      *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-    text-decoration: none;
-    list-style: none;
-}
-body{
-    background: #c12828;
-    overflow: hidden;
-}
-.header{
-    position: fixed;
-    width: 100%;
-    padding: 40px 60px;
-}
-.navigation{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.logo{
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #fff;
-}
-.navigation ul{
-    display: flex;
-    align-items: center;
-    gap: 60px;
-}
-.navigation ul li a{
-    color: #fff;
-    font-size: 1.2rem;
-    transition: all .1s ease;
-}
-.navigation ul li a:hover{
-    border-bottom: 3px solid #fff;
-}
-.main{
-    overflow: hidden;
-}
-.section{
-    padding: 8rem;
-    height: 100vh;
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <title>Responsive Video Playlist Tutorial</title>
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+*{
+   font-family: 'Poppins', sans-serif;
+   margin:0; padding:0;
+   box-sizing: border-box;
+   outline: none; border:none;
+   text-decoration: none;
+   text-transform: capitalize;
 }
-.left{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+
+.container2{
+   max-width: 1200px;
+   margin:100px auto;
+   display: flex;
+   flex-wrap: wrap;
+   align-items: flex-start;
+   gap:20px;
 }
-.left p{
-    font-size: 2.2rem;
-    color: #fff;
-    margin-bottom: 10px;
+
+.container2 .main-video-container{
+   flex:1 1 700px;
+   border-radius: 5px;
+   box-shadow: 0 5px 15px rgba(0,0,0,.1);
+   background-color: rgb(224, 3, 3);
+   padding:15px;
 }
-.left h4{
-    font-size: 3.5rem;
-    color: #681c1c;
-    margin-bottom: 3rem;
+
+.container2 .main-video-container .main-video{
+   margin-bottom: 7px;
+   border-radius: 5px;
+   width: 100%;
 }
-.btn{
-    padding: 1.5rem 5rem;
-    background: #681c1c;
-    border-radius: 15px;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 700;
-    transition: all 0.3s ease;
+
+.container2 .main-video-container .main-vid-title{
+   font-size: 20px;
+   color:#fff;
 }
-.btn:hover{
-    box-shadow: 0 1px 4px #681c1c;
+
+.container2 .video-list-container{
+   flex:1 1 350px;
+   height: 485px;
+   overflow-y: scroll;
+   border-radius: 5px;
+   box-shadow: 0 5px 15px rgba(0,0,0,.1);
+   background-color: rgb(224, 3, 3);
+   padding:15px;
 }
-.right img{
-    width: 500px;
-    margin-bottom: 1rem;
-    animation: float 1.8s infinite alternate;
+
+.container2 .video-list-container::-webkit-scrollbar{
+   width: 10px;
 }
-.shadow{
-    width: 450px;
-    height: 45px;
-    background: hsla(38, 21%, 19%, .16);
-    border-radius: 50%;
-    margin: 0 auto;
-    filter: blur(5px);
-    animation: shadow 1.8s infinite alternate;
+
+.container2 .video-list-container::-webkit-scrollbar-track{
+   background-color: #444;
+   border-radius: 5px;
 }
-@keyframes float{
-    0%{
-        transform: translateY(0);
-    }
-    100%{
-        transform: translateY(15px);
-    }
+
+.container2 .video-list-container::-webkit-scrollbar-thumb{
+   background-color: rgb(146, 0, 0);
+   border-radius: 5px;
 }
-@keyframes shadow{
-    0%{
-        transform: scale(1.1);
-    }
-    100%{
-        transform: scale(.85,.85);
-    }
+
+.container2 .video-list-container .list{
+   display: flex;
+   align-items: center;
+   gap:15px;
+   padding:10px;
+   background-color: #444;
+   cursor: pointer;
+   border-radius: 5px;
+   margin-bottom: 10px;
+}
+
+.container2 .video-list-container .list:last-child{
+   margin-bottom: 0;
+}
+
+.container2 .video-list-container .list.active{
+   background-color: #444;
+}
+
+.container2 .video-list-container .list.active .list-title{
+   color:#fff;
+}
+
+.container2 .video-list-container .list .list-video{
+   width: 100px;
+   border-radius: 5px;
+}
+
+.container2 .video-list-container .list .list-title{
+   font-size: 17px;
+   color:#fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width:1200px){
+
+   .container2{
+      margin:0;
+   }
+
+}
+
+@media (max-width:450px){
+
+   .container2 .main-video-container .main-vid-title{
+      font-size: 15px;
+      text-align: center;
+   }
+
+   .container2 .video-list-container .list{
+      flex-flow: column;
+      gap:10px;
+   }
+
+   .container2 .video-list-container .list .list-video{
+      width: 100%;
+   }
+
+   .container2 .video-list-container .list .list-title{
+      font-size: 15px;
+      text-align: center;
+   }
+
 }
     </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="navigation">
-            <a href="#" class="logo">Erro 404</a>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Portfólio</a></li>
-                <li><a href="#">Contact</a></li>
+
+    <header class="header" data-header>
+        <div class="container">
+
+        <div class="overlay" data-overlay></div>
+
+        <a href="index.html" class="logo">
+            <img src="logo-animeflix.png" alt="AnimeFlix logo" width="200px">
+        </a>
+
+        <div class="header-actions">
+
+        <button class="search-btn">
+         <ion-icon name="search-outline"></ion-icon>
+        </button>
+
+        <div class="lang-wrapper">
+            <label for="language">
+                <ion-icon name="globe-outline"></ion-icon>
+            </label>
+
+            <select name="language" id="language">
+                <option value="br">BR</option>
+                <option value="au">AU</option>
+                <option value="ar">AR</option>
+                <option value="en">EN</option>
+            </select>
+        </div>
+
+        <a href="login.html"><button class="btn btn-primary">Entrar</button></a>
+
+        </div>
+
+        <button class="menu-open-btn" data-menu-open-btn>
+            <ion-icon name="reorder-two"></ion-icon>
+        </button>
+
+        <nav class="navbar" data-navbar>
+
+            <div class="navbar-top">
+
+                <a href="index.html" class="logo">
+                    <img src="logo-animeflix.png" alt="AnimeFlix logo" width="200px">
+                </a>
+
+                <button class="menu-close-btn" data-menu-close-btn>
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+
+            <ul class="navbar-list">
+
+                <li>
+                    <a href="index.html" class="navbar-link">Home</a>
+                </li>
+
+                <li>
+                    <a href="famosos.html" class="navbar-link">Famosos</a>
+                </li>
+
+                <li>
+                    <a href="recomendados.html" class="navbar-link">Recomendados</a>
+                </li>
+
+                <li>
+                    <a href="login.html" class="navbar-link">Entrar</a>
+                </li>
+
             </ul>
+
+            <ul class="navbar-social-list">
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-pinterest"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-youtube"></ion-icon>
+                    </a>
+                </li>
+
+            </ul>
+
         </nav>
+
+       </div>
     </header>
-    <main class="main">
-        <section class="section">
-            <div class="left">
-                <p>Erro 404</p>
-                <h4>Esta pagína está em sessão de <br> desenvolvimento</h4>
-                <a href="index.html" class="btn">Home</a>
+   
+<div class="container2">
+
+   <div class="main-video-container">
+      <video src="https://rr1---sn-jvoxm5vuxaxjvhcg-8j2l.googlevideo.com/videoplayback?expire=1671688866&ei=IoKjY9vxGYrRkAP8xI3ACA&ip=131.196.76.173&id=fedf5582fad64580&itag=18&source=blogger&mh=q_&mm=31&mn=sn-jvoxm5vuxaxjvhcg-8j2l&ms=au&mv=m&mvi=1&pl=23&susc=bl&eaua=BUaGQLwz5Q8&mime=video/mp4&vprv=1&dur=1500.264&lmt=1615561186244443&mt=1671659881&txp=1318224&sparams=expire,ei,ip,id,itag,source,susc,eaua,mime,vprv,dur,lmt&sig=AOq0QJ8wRQIhAL10BvI5oWUg4VfuTSaDDLuqxI-kn6lfv8FSIjy1g99EAiAIl1yvseLI9KklzHuon_Nj5uP7I7VkTWGHBaArS_GKJw%3D%3D&lsparams=mh,mm,mn,ms,mv,mvi,pl&lsig=AG3C_xAwRgIhAKyaccPPDNKjM34hcgacnv0av1gWoKlF_x_4u6TivBVrAiEA_3zR7GAV1L2m8cOafWC-5md7EizFuqweA6aoH61D8fw%3D&cpn=yBPwqCjyd73KnIv2&c=WEB_EMBEDDED_PLAYER&cver=1.20221218.00.00" loop controls class="main-video"></video>
+      <h3 class="main-vid-title">One-Piece Episodio 1</h3>
+   </div>
+
+   <div class="video-list-container">
+
+      <div class="list active">
+         <video src="images/vid-1.mp4" class="list-video"></video>
+         <h3 class="list-title">One-Piece Episodio 2</h3>
+      </div>
+
+      <div class="list">
+         <video src="images/vid-2.mp4" class="list-video"></video>
+         <h3 class="list-title">zoombie walking animation</h3>
+      </div>
+
+      <div class="list">
+         <video src="images/vid-3.mp4" class="list-video"></video>
+         <h3 class="list-title">emoji falling animation</h3>
+      </div>
+
+      <div class="list">
+         <video src="images/vid-4.mp4" class="list-video"></video>
+         <h3 class="list-title">3D town animation</h3>
+      </div>
+
+      <div class="list">
+         <video src="images/vid-5.mp4" class="list-video"></video>
+         <h3 class="list-title">man chasing carrot animation</h3>
+      </div>
+
+      <div class="list">
+         <video src="images/vid-6.mp4" class="list-video"></video>
+         <h3 class="list-title">door hinge animation</h3>
+      </div>
+
+      <div class="list">
+         <video src="images/vid-7.mp4" class="list-video"></video>
+         <h3 class="list-title">poeple walking in town animation</h3>
+      </div>
+
+      <div class="list">
+         <video src="images/vid-8.mp4" class="list-video"></video>
+         <h3 class="list-title">knight chasing virus animation</h3>
+      </div>
+
+      <div class="list">
+         <video src="images/vid-9.mp4" class="list-video"></video>
+         <h3 class="list-title">3D helicopter animation</h3>
+      </div>
+
+   </div>
+
+</div>
+
+<section class="upcoming">
+    <div class="container">
+
+        <div class="flex-wrapper">
+            <div class="title-wrapper">
+                <p class="section-subtitle">transmissão online</p>
+
+                <h2 class="h2 section-tilte">Recomendados</h2>
             </div>
-            <div class="right">
-                <img src="Erro.png" alt="imagem de erro 404">
-                <div class="shadow"></div>
-            </div>
-        </section>
-    </main>
+
+            <ul class="filter-list">
+
+                <li>
+                    <button class="filter-btn">Filmes</button>
+                </li>
+
+                <li>
+                    <button class="filter-btn">Famosos</button>
+                </li>
+
+                <li>
+                    <button class="filter-btn">Em Breve</button>
+                </li>
+                
+            </ul>
+
+        </div>
+
+        <ul class="movies-list  has-scrollbar">
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="naruto.html">
+                        <figure class="card-banner">
+                            <img src="https://animeq.xyz/wp-content/uploads/naruto.jpg" alt="one piece filme">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="naruto.html">
+                            <h3 class="card-title">Naruto</h3>
+                        </a>
+
+                        <time datetime="2002">2002</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>8.7</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="demon-slayer.html">
+                        <figure class="card-banner">
+                            <img src="https://animeq.xyz/wp-content/uploads/D-S.jpg" alt="one piece filme">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="demon-slayer.html">
+                            <h3 class="card-title">Demon-Slayer</h3>
+                        </a>
+
+                        <time datetime="2019">2019</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>7.5</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="attack-on-titan.html">
+                        <figure class="card-banner">
+                            <img src="https://animeq.xyz/wp-content/uploads/Shingeki-no-Kyojin-The-Final-Season-Parte-2.jpg" alt="one piece">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="attack-on-titan.html">
+                            <h3 class="card-title">Shingeki no Kyojin: The Final Season Parte 2</h3>
+                        </a>
+
+                        <time datetime="2012">2012</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>8.5</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="dragon-ball-z.html">
+                        <figure class="card-banner">
+                            <img src="https://animeq.xyz/wp-content/uploads/Dragon-Ball-Z-Dublado-capa.jpg" alt="Dragon Ball Z">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="dragon-ball-z.html">
+                            <h3 class="card-title">Dragon Ball Z</h3>
+                        </a>
+
+                        <time datetime="1989">1989</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>8.9</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="tokyo-revengers.html">
+                        <figure class="card-banner">
+                            <img src="https://animeq.xyz/wp-content/uploads/Tokyo-Revengers-_Dublado_.jpg" alt="Dragon Ball Z">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="tokyo-revengers.html">
+                            <h3 class="card-title">Tokyo-Revengers</h3>
+                        </a>
+
+                        <time datetime="2021">2021</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>8.4</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="one-pounch-man.html">
+                        <figure class="card-banner">
+                            <img src="https://animeq.xyz/wp-content/uploads/onepunch-man-animeq.jpg" alt="Dragon Ball Z">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="one-pounch-man.html">
+                            <h3 class="card-title">One Pounch-Man</h3>
+                        </a>
+
+                        <time datetime="2009">2009</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>8.2</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="movie-details.html">
+                        <figure class="card-banner">
+                            <img src="https://animeq.xyz/wp-content/uploads/Boku-no-Hero-Academia-1.jpg" alt="Boku no Hero Academia">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="movie-details.html">
+                            <h3 class="card-title">Boku no Hero Academia</h3>
+                        </a>
+
+                        <time datetime="2014">2014</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>7.5</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="movie-details.html">
+                        <figure class="card-banner">
+                            <img src="https://animeq.xyz/wp-content/uploads/qCSKtTjXGnBCfKYzCEjEsKx52v6-scaled-e1605268571861.jpg" alt="Boruto">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="movie-details.html">
+                            <h3 class="card-title">Boruto</h3>
+                        </a>
+
+                        <time datetime="2017">2017</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>4.4</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="movie-details.html">
+                        <figure class="card-banner">
+                            <img src="https://animeq.xyz/wp-content/uploads/Jujutsu-Kaisen.jpg" alt="Jujutsu-Kaisen">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="movie-details.html">
+                            <h3 class="card-title">Jujutsu-Kaisen</h3>
+                        </a>
+
+                        <time datetime="2018">2018</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>7.4</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="movie-details.html">
+                        <figure class="card-banner">
+                            <img src="https://animeq.xyz/wp-content/uploads/black-clover.jpg" alt="Black Clover">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="movie-details.html">
+                            <h3 class="card-title">Black Clover</h3>
+                        </a>
+
+                        <time datetime="2015">2015</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>8.2</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="movie-details.html">
+                        <figure class="card-banner">
+                            <img src="https://animeq.xyz/wp-content/uploads/Chainsaw-Man-Dublado-Capa-AnimeQ.png" alt="chainsaw Man">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="movie-details.html">
+                            <h3 class="card-title">Chainsaw Man</h3>
+                        </a>
+
+                        <time datetime="2022">2022</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>7.5</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="movie-details.html">
+                        <figure class="card-banner">
+                            <img src="https://www.anitube.site/wp-content/uploads/Death-Note-leg.jpg" alt="Death-Note">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="movie-details.html">
+                            <h3 class="card-title">Death-Note</h3>
+                        </a>
+
+                        <time datetime="2006">2006</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>6.0</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="movie-details.html">
+                        <figure class="card-banner">
+                            <img src="https://www.anitube.site/wp-content/uploads/Hunter-x-Hunter-2011.jpg" alt="Hunter X Hunter">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="movie-details.html">
+                            <h3 class="card-title">Hunter X Hunter</h3>
+                        </a>
+
+                        <time datetime="1998">1998</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>8.9</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="movie-details.html">
+                        <figure class="card-banner">
+                            <img src="https://www.anitube.site/wp-content/uploads/Tokyo-Ghoul-I.jpg" alt="Tokyo Ghoul">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="movie-details.html">
+                            <h3 class="card-title">Tokyo Ghoul</h3>
+                        </a>
+
+                        <time datetime="2017">2017</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>7.1</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="movie-details.html">
+                        <figure class="card-banner">
+                            <img src="https://www.anitube.site/wp-content/uploads/Spy-x-Family-AniTube.jpg" alt="SPY x FAMILY">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="movie-details.html">
+                            <h3 class="card-title">SPY x FAMILY</h3>
+                        </a>
+
+                        <time datetime="2022">2022</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>8.4</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="movie-details.html">
+                        <figure class="card-banner">
+                            <img src="https://www.anitube.site/wp-content/uploads/Bleach-dub.jpg" alt="Bleach">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="movie-details.html">
+                            <h3 class="card-title">Bleach</h3>
+                        </a>
+
+                        <time datetime="2001">2001</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>8.8</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="movie-details.html">
+                        <figure class="card-banner">
+                            <img src="https://www.anitube.site/wp-content/uploads/Naruto-Shippuuden-dublado-poster.jpg" alt="Naruto Shippuden">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="movie-details.html">
+                            <h3 class="card-title">Naruto Shippuden</h3>
+                        </a>
+
+                        <time datetime="2007">2007</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>9.4</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="movie-details.html">
+                        <figure class="card-banner">
+                            <img src="https://www.anitube.site/wp-content/uploads/dragon-ball-super-2.png" alt="Dragon-Ball Super">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="movie-details.html">
+                            <h3 class="card-title">Dragon-Ball Super</h3>
+                        </a>
+
+                        <time datetime="2015">2015</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>8.9</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+            <li>
+                <div class="movie-card">
+
+                    <a href="movie-details.html">
+                        <figure class="card-banner">
+                            <img src="https://www.anitube.site/wp-content/uploads/Haikyuu-poster.jpg" alt="Haikyuu!!">
+                        </figure>
+                    </a>
+
+                    <div class="title-wrapper">
+                        <a href="movie-details.html">
+                            <h3 class="card-title">Haikyuu!!</h3>
+                        </a>
+
+                        <time datetime="2014">2014</time>
+                    </div>
+
+                    <div class="card-meta">
+                        <div class="badge badge-outline">HD</div>
+
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+
+                            <time datetime="PT137M">NA</time>
+                        </div>
+
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+
+                            <data>6.8</data>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </li>
+
+        </ul>
+
+    </div>
+</section>
+
+<footer class="footer">
+
+    <div class="footer-top">
+        <div class="container">
+
+            <div class="footer-brand-wrapper">
+
+            <a href="index.html" class="logo">
+                <img src="logo-animeflix.png" alt="AnimeFlix logo">
+            </a>
+
+            <ul class="footer-list">
+
+                <li>
+                    <a href="index.html" class="footer-link">Home</a>
+                </li>
+
+                <li>
+                    <a href="index.html" class="footer-link">Animes</a>
+                </li>
+
+                <li>
+                    <a href="#" class="footer-link">Filmes</a>
+                </li>
+
+                <li>
+                    <a href="#" class="footer-link">Famosos</a>
+                </li>
+
+                <li>
+                    <a href="recomendados.html" class="footer-link">Recomendados</a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="quicklink-wrapper">
+
+            <ul class="quicklink-list">
+
+                <li>
+                    <a href="copyright.html" class="quicklink-link">Faq</a>
+                </li>
+
+                <li>
+                    <a href="copyright.html" class="quicklink-link">Centro De Ajuda</a>
+                </li>
+
+                <li>
+                    <a href="copyright.html" class="quicklink-link">Termos De Uso</a>
+                </li>
+
+                <li>
+                    <a href="copyright.html" class="quicklink-link">Privacidade</a>
+                </li>
+
+            </ul>
+
+            <ul class="social-list">
+
+                <li>
+                    <a href="#" class="social-link">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="social-link">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="social-link">
+                        <ion-icon name="logo-pinterest"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="social-link">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+
+            <p class="copyright">
+                $copy; 2022 <a href="copyright.html">Kalebzaki</a>. All Rights Reserved
+            </p>
+
+            <img src="footer-bottom-img.png" alt="online baking companies logo" class="footer-bottom-img">
+
+        </div>
+    </div>
+
+</footer>
+
+
+<script>
+    let videoList = document.querySelectorAll('.video-list-container .list');
+
+videoList.forEach(vid =>{
+   vid.onclick = () =>{
+      videoList.forEach(remove =>{remove.classList.remove('active')});
+      vid.classList.add('active');
+      let src = vid.querySelector('.list-video').src;
+      let title = vid.querySelector('.list-title').innerHTML;
+      document.querySelector('.main-video-container .main-video').src = src;
+      document.querySelector('.main-video-container .main-video').play();
+      document.querySelector('.main-video-container .main-vid-title').innerHTML = title;
+   };
+});
+</script>
+<script src="script2.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
