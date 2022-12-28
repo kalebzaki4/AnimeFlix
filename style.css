@@ -1318,7 +1318,7 @@ body.active { overflow: hidden; }
 }
 
 .search-box {
-  position: absolute;
+  position: static;
   top: 36%;
   left: 64%;
   transform: translate(-50% -50%);
@@ -1355,6 +1355,6 @@ body.active { overflow: hidden; }
 }
 
 .search-box:hover > .search-txt {
-  width: 150px;
+  width: 170px;
   padding: 0 6px;
 }
