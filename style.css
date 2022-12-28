@@ -1317,3 +1317,46 @@ body.active { overflow: hidden; }
   background-color: var(--citrine);
 }
 
+.search-box {
+  position: absolute;
+  top: 36%;
+  left: 64%;
+  transform: translate(-50% -50%);
+  background: #171D21;
+  height: 40px;
+  padding: 10px;
+  border-radius: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-txt {
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+  color: #f0f5fb;
+  font-size: 16px;
+  line-height: 40px;
+  width: 0;
+  transition: .4s;
+}
+
+.search-button {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #171D21;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .5s;
+}
+
+.search-box:hover > .search-txt {
+  width: 150px;
+  padding: 0 6px;
+}
+
+
