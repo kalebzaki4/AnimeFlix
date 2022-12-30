@@ -928,6 +928,49 @@ body.active { overflow: hidden; }
       --fs-1: 42px;
   }
 
+  .search-box {
+    position: absolute;
+    top: 30%;
+    left: 60%;
+    transform: translate(-50% -50%);
+    background: #212a30;
+    height: 40px;
+    padding: 10px;
+    border-radius: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    color: #f0f5fb;
+    font-size: 16px;
+    line-height: 40px;
+    width: 0;
+    transition: .4s;
+  }
+  
+  .search-button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #212a30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+  }
+  
+  .search-box:hover > .search-txt {
+    width: 170px;
+    padding: 0 6px;
+  }
+  
+
   .video-playlist {
       max-width: 390px;
       margin-inline: auto;
@@ -970,6 +1013,48 @@ body.active { overflow: hidden; }
 @media (min-width: 549px) {
   :root{
       --fs-1: 42px;
+  }
+
+  .search-box {
+    position: absolute;
+    top: 30%;
+    left: 60%;
+    transform: translate(-50% -50%);
+    background: #212a30;
+    height: 40px;
+    padding: 10px;
+    border-radius: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    color: #f0f5fb;
+    font-size: 16px;
+    line-height: 40px;
+    width: 0;
+    transition: .4s;
+  }
+  
+  .search-button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #212a30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+  }
+  
+  .search-box:hover > .search-txt {
+    width: 170px;
+    padding: 0 6px;
   }
 
   .video-playlist {
@@ -1016,6 +1101,48 @@ body.active { overflow: hidden; }
 @media (min-width: 767px) {
   :root{
       --fs-2: 36px;
+  }
+
+  .search-box {
+    position: absolute;
+    top: 30%;
+    left: 60%;
+    transform: translate(-50% -50%);
+    background: #212a30;
+    height: 40px;
+    padding: 10px;
+    border-radius: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    color: #f0f5fb;
+    font-size: 16px;
+    line-height: 40px;
+    width: 0;
+    transition: .4s;
+  }
+  
+  .search-button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #212a30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+  }
+  
+  .search-box:hover > .search-txt {
+    width: 170px;
+    padding: 0 6px;
   }
 
   .container { max-width: 620px;}
@@ -1114,6 +1241,49 @@ body.active { overflow: hidden; }
 }
 
 @media (min-width: 992px) {
+
+  .search-box {
+    position: absolute;
+    top: 30%;
+    left: 60%;
+    transform: translate(-50% -50%);
+    background: #212a30;
+    height: 40px;
+    padding: 10px;
+    border-radius: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    color: #f0f5fb;
+    font-size: 16px;
+    line-height: 40px;
+    width: 0;
+    transition: .4s;
+  }
+  
+  .search-button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #212a30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+  }
+  
+  .search-box:hover > .search-txt {
+    width: 170px;
+    padding: 0 6px;
+  }
+
   .container { max-width: 960px; }
 
   .movie-detail{
@@ -1235,6 +1405,48 @@ body.active { overflow: hidden; }
   :root {
       --fs-1: 60px;
       --fs-4: 26px;
+  }
+
+  .search-box {
+    position: absolute;
+    top: 30%;
+    left: 60%;
+    transform: translate(-50% -50%);
+    background: #212a30;
+    height: 40px;
+    padding: 10px;
+    border-radius: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    color: #f0f5fb;
+    font-size: 16px;
+    line-height: 40px;
+    width: 0;
+    transition: .4s;
+  }
+  
+  .search-button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #212a30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+  }
+  
+  .search-box:hover > .search-txt {
+    width: 170px;
+    padding: 0 6px;
   }
 
   .container { max-width: 1320px; }
