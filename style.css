@@ -1322,7 +1322,7 @@ body.active { overflow: hidden; }
   top: 36%;
   left: 64%;
   transform: translate(-50% -50%);
-  background: #171D21;
+  background: #212a30;
   height: 40px;
   padding: 10px;
   border-radius: 40px;
@@ -1347,7 +1347,7 @@ body.active { overflow: hidden; }
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #171D21;
+  background: #212a30;
   display: flex;
   justify-content: center;
   align-items: center;
