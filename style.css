@@ -1104,7 +1104,7 @@ body.active { overflow: hidden; }
   }
 
   .search-box {
-    position: absolute;
+    position: relative;
     top: 30%;
     left: 60%;
     transform: translate(-50% -50%);
@@ -1243,7 +1243,7 @@ body.active { overflow: hidden; }
 @media (min-width: 992px) {
 
   .search-box {
-    position: absolute;
+    position: relative;
     top: 30%;
     left: 60%;
     transform: translate(-50% -50%);
