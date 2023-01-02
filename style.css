@@ -1576,14 +1576,14 @@ body.active { overflow: hidden; }
   width: 40px;
   height: 40px;
   background: #1b2227;
-  border-radius: 50%;
+  border-radius: 40%;
   overflow: hidden;
 }
 
 .icon::before {
   content: '';
   position: absolute;
-  inset: -5px 10px;
+  inset: -10px 10px;
   background: linear-gradient(315deg, rgb(224, 3, 3), rgb(161, 1, 1));
   transition: .5s;
   animation: animar 4s linear infinite;
@@ -1599,7 +1599,7 @@ body.active { overflow: hidden; }
 }
 
 .icon:hover::before {
-  inset: -10px 0px;
+  inset: -0px 0px;
 }
 
 .icon::after {
@@ -1607,7 +1607,7 @@ body.active { overflow: hidden; }
   position: absolute;
   inset: 3px;
   background: #212A30;
-  border-radius: 50%;
+  border-radius: 40%;
   z-index: 1;
 }
 
@@ -1616,18 +1616,17 @@ body.active { overflow: hidden; }
   inset: 10px;
   border-radius: 50%;
   overflow: hidden;
+
 }
 
 .conteudo img {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 40px;
   top: 0;
   left: 0;
   transition: .5s;
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
 }
 
 
