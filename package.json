@@ -1,0 +1,22 @@
+{
+  "name": "animeflix",
+  "version": "1.0.0",
+  "description": "> Status do projeto: Em desenvolvimento.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalebzaki4/AnimeFlix.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kalebzaki4/AnimeFlix/issues"
+  },
+  "homepage": "https://github.com/kalebzaki4/AnimeFlix#readme",
+  "dependencies": {
+    "json-server": "^0.17.1"
+  }
+}
