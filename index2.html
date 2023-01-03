@@ -25,10 +25,10 @@
         <div class="header-actions">
 
             <div class="search-box">
-                <input type="text" class="search-txt" placeholder="Pesquisar">
-                <a href="#" class="search-button">
+                <input type="text" class="search-txt" placeholder="Pesquisar" data-pesquisa>
+                <button href="#" class="search-button" data-botao-pesquisa>
                 <img src="pesquisa.svg" alt="Lupa" height="20" width="20">
-                </a>
+                </button>
             </div>
 
             <a href="#">
@@ -3664,8 +3664,8 @@
         }
 
     </script>
-    <script src="conectaApi.js"></script>
-    <script src="mostrarVideos.js"></script>
+    <script src="mostrarVideos.js" type="module"></script>
+    <script src="buscarVideo.js" type="module"></script>
 
 </body>
 </html>
