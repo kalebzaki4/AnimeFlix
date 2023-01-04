@@ -44,23 +44,23 @@
     },
     {
       "id": 7,
-      "titulo": "Data Science na prática- com Jéssika Ribeiro do Grupo...",
-      "descricao": "3,2 mil visualizações",
-      "url": "https://www.youtube.com/embed/Nts3P35mHzE",
-      "imagem": "https://github.com/MonicaHillman/aluraplay-requisicoes/blob/main/img/logo.png?raw=true"
+      "titulo": "One Pounch-Man",
+      "descricao": "2009",
+      "url": "one-pounch-man.html",
+      "imagem": "https://animeq.xyz/wp-content/uploads/onepunch-man-animeq.jpg"
     },
     {
       "id": 8,
-      "titulo": "baNaNa | Memes do JavaScript #2",
-      "descricao": "1,2 mil visualizações",
-      "url": "https://www.youtube.com/embed/HBVCsBtsmzA",
-      "imagem": "https://github.com/MonicaHillman/aluraplay-requisicoes/blob/main/img/logo.png?raw=true"
+      "titulo": "Boku no Hero Academia",
+      "descricao": "2014",
+      "url": "boku-no-hero.html",
+      "imagem": "https://animeq.xyz/wp-content/uploads/Boku-no-Hero-Academia-1.jpg"
     },
     {
-      "titulo": "[Casa do Código] Live de lançamento: Navegando no Universo da Programação",
-      "descricao": "1 mil visualizações",
-      "url": "https://www.youtube.com/embed/z43rcfjXOxU",
-      "imagem": "https://purr.objects-us-east-1.dream.io/i/OoNx6.jpg",
+      "titulo": "Boruto",
+      "descricao": "2017",
+      "url": "boruto.html",
+      "imagem": "https://animeq.xyz/wp-content/uploads/qCSKtTjXGnBCfKYzCEjEsKx52v6-scaled-e1605268571861.jpg",
       "id": 9
     },
     {
