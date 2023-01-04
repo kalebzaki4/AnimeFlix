@@ -1,21 +1,21 @@
 {
-  "name": "animeflix",
+  "name": "aluraplay-requisicoes",
   "version": "1.0.0",
-  "description": "> Status do projeto: Em desenvolvimento.",
-  "main": "script.js",
+  "description": "<p align=\"center\"> <img src=\"https://imgur.com/J3hD21O.png\" alt=\"Javascript: criando requisições\"> </p>",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kalebzaki4/AnimeFlix.git"
+    "url": "git+https://github.com/MonicaHillman/aluraplay-requisicoes.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kalebzaki4/AnimeFlix/issues"
+    "url": "https://github.com/MonicaHillman/aluraplay-requisicoes/issues"
   },
-  "homepage": "https://github.com/kalebzaki4/AnimeFlix#readme",
+  "homepage": "https://github.com/MonicaHillman/aluraplay-requisicoes#readme",
   "dependencies": {
     "json-server": "^0.17.1"
   }
