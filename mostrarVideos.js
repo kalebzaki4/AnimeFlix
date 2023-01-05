@@ -5,43 +5,41 @@ const lista = document.querySelector("[data-lista]");
 export default function constroiCard(titulo, descricao, url, imagem) {
     const video = document.createElement("li");
     video.className = "videos__item";
-    video.innerHTML = `<li class="video__item">
-    <div class="movie-card">
+    video.innerHTML = `<div class="movie-card">
 
+    <a href="${url}">
+        <figure class="card-banner">
+            <img src="${imagem}" alt="">
+        </figure>
+    </a>
+
+    <div class="title-wrapper">
         <a href="${url}">
-            <figure class="card-banner">
-                <img src="${imagem}" alt="">
-            </figure>
+            <h3 class="card-title">${titulo}</h3>
         </a>
 
-        <div class="title-wrapper">
-            <a href="${url}">
-                <h3 class="card-title">${titulo}</h3>
-            </a>
+        <time datetime="1997">${descricao}</time>
+    </div>
 
-            <time datetime="1997">${descricao}</time>
+    <div class="card-meta">
+        <div class="badge badge-outline">HD</div>
+
+        <div class="duration">
+            <ion-icon name="time-outline"></ion-icon>
+
+            <time datetime="PT137M">NA</time>
         </div>
 
-        <div class="card-meta">
-            <div class="badge badge-outline">HD</div>
+        <div class="rating">
+            <ion-icon name="star"></ion-icon>
 
-            <div class="duration">
-                <ion-icon name="time-outline"></ion-icon>
-
-                <time datetime="PT137M">NA</time>
-            </div>
-
-            <div class="rating">
-                <ion-icon name="star"></ion-icon>
-
-                <data></data>
-            </div>
-
+            <data>9.5</data>
         </div>
-
 
     </div>
-</li>`
+
+
+</div>`
 
     return video;
 }
