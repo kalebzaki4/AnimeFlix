@@ -1,5 +1,5 @@
 import { conectaApi } from "conectaApi.js";
-import constroiCard from "mostrarVideos.js";
+import { constroiCard } from "mostarVideos.js";
 
 async function buscarVideo(evento) {
     evento.preventDefault();
