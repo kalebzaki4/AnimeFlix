@@ -93,6 +93,10 @@ body.active { overflow: hidden; }
 
 .h3 { font-size: var(--fs-6); }
 
+h2 {
+  color: white;
+}
+
 .section-subtitle {
   color: var(--citrine);
   font-size: var(--fs-11);
@@ -1629,4 +1633,8 @@ body.active { overflow: hidden; }
   z-index: 3;
 }
 
-
+data-pesquisa,
+data-botao-pesquisa,
+data-lista > img {
+  width: 200px;
+}
