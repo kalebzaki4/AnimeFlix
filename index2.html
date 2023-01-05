@@ -25,16 +25,25 @@
         <div class="header-actions">
 
             <div class="search-box">
-                <input type="text" class="search-txt" placeholder="Pesquisar" data-pesquisa>
+                <input type="text" class="search-txt" placeholder="Pesquisar" data-pesquisa list="historico">
                 <button href="#" class="search-button" data-botao-pesquisa>
                 <img src="pesquisa.svg" alt="Lupa" height="20" width="20">
                 </button>
             </div>
 
+            <datalist id="historico">
+                <option value="One Piece"></option>
+                <option value="naruto"></option>
+                <option value="demon-slayer"></option>
+                <option value="shongeki no kyojin"></option>
+                <option value="attack on titan"></option>
+                <option value="dragon ball"></option>
+            </datalist>
+
             <a href="#">
                 <div class="icon">
                     <div class="conteudo">
-                        <img src="user-icon-animeflix.svg" alt="ususario">
+                        <img src="user-icon-animeflix.svg" alt="usuario">
                     </div>
                 </div>
             </a>
@@ -217,7 +226,7 @@
 
                     </div>
 
-                    <ul class="movies-list  has-scrollbar" data-lista>
+                    <ul class="movies-list  has-scrollbar" data-lista >
 
                         <li class="video__item">
                             <div class="movie-card">
