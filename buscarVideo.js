@@ -1,19 +1,20 @@
 import { conectaApi } from "conectaApi.js";
-import { constroiCard } from "mostarVideos.js";
+import constroiCard from "mostrarVideos.js";
 
 async function buscarVideo(evento) {
-    evento.preventDefault();
-    const dadosDePesquisa = document.querySelector("[data-pesquisa]").value;
-    const busca = await conectaApi.buscaVideo(dadosDePesquisa);
+    evento.preventDefalt();
 
-    const lista = document.querySelector("[data-lista]");
+    const dadosDePesquisa = document.querySelector("[data-pesquisa]").value;
+    const busca = await conectaApi.buscaVideo(dadosDePesquisa) 
+
+    const lista  =  document.querySelector("[data-lista]")
 
     while (lista.firstChild) {
-        lista.removeChild(lista.firstChild);
+        lista.removeChild(lista.firstChild)
     }
 
-    busca.forEach(elemento => lista.appendChild(
-        constroiCard(elemento.titulo, elemento.descricao, elemento.url, elemento.imagem)))
+    busca.forEach(elemnto => lista.appendChild(
+        constroiCard(Elemento.titulo, elemento.descricao, elemento.url, elemnto.imagem)))
 }
 
 const botaoDePesquisa = document.querySelector("[data-botao-pesquisa]");
