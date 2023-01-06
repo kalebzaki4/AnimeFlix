@@ -18,6 +18,11 @@ async function buscarVideo(evento) {
     if (busca.length == 0) {
         lista.innerHTML = `<h2 class="mensagem__titulo">Não existem animes com esse termo!</h2>`
     }
+
+    while (lista2.firstChild) {
+        lista2.removeChild(lista2.firstChild)
+    }
+
 }
 
 const botaoDePesquisa = document.querySelector("[data-botao-pesquisa]")
