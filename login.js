@@ -1,21 +1,6 @@
 import ehMaiorDeIdade from "./valida-idade.js"
 let btn = document.querySelector('.fa-eye')
 
-const camposDoFormulario = document.querySelectorAll('[required]')
-
-camposDoFormulario.forEach((campo) => {
-    campo.addEventListener("blur", () => verificaCampo(campo));
-})
-
-function verificaCampo(campo) {
-    if (campo.name == "cpf" && campo.value.length >= 11) {
-        ehUmCPF(campo);
-    }
-    if (campo.name == "aniversario" && campo.value != "") {
-        ehMaiorDeIdade(campo);
-    }
-}
-
 btn.addEventListener('click', ()=>{
   let inputSenha = document.querySelector('#senha')
   
@@ -72,13 +57,6 @@ function entrar(){
     msgError.setAttribute('style', 'display: block')
     msgError.innerHTML = 'Usuário ou senha incorretos'
     usuario.focus()
-  }
-
-  function verificaCampo(campo) {
-    if (campo.name == "aniversario" && campo.value != "") {
-        ehMaiorDeIdade(campo)
-    }
-    
   }
   
 }
