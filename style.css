@@ -74,11 +74,15 @@ html {
   scroll-behavior: smooth;
 }
 
-body { background: var(--eerie-black); height: 200vh;}
+body { background: #1b2227; height: 200vh;}
 
 body.active { overflow: hidden; }
 
 .container { padding-inline: 15px; }
+
+.logo img{
+  width: 200px;
+}
 
 .h1,
 .h2,
@@ -577,6 +581,7 @@ h2 {
   background-size: cover;
   background-position: center;
   padding-block: var(--section-padding);
+  background-color: #1b2227;
 }
 
 .top-rated .section-title { margin-bottom: 50px; }
