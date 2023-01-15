@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/MonicaHillman/aluraplay-requisicoes#readme",
   "dependencies": {
-    "json-server": "^0.17.1"
+    "json-server": "^0.17.1",
+    "next": "^13.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
