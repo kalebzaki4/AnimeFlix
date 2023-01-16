@@ -18,7 +18,7 @@
 
         <div class="overlay" data-overlay></div>
 
-        <a href="index2.html" class="logo">
+        <a href="index.html" class="logo">
             <img src="logo-animeflix.png" alt="AnimeFlix logo" width="300px">
         </a>
 
@@ -26,7 +26,7 @@
 
             <div class="search-box">
                 <input type="text" class="search-txt" placeholder="Pesquisar" list="historico" data-pesquisa>
-                <button href="#" class="search-button" data-botao-pesquisa>
+                <button onclick="toggle2('conteudo2')" class="search-button" data-botao-pesquisa>
                 <img src="pesquisa.svg" alt="Lupa" height="20" width="20">
                 </button>
             </div>
@@ -38,20 +38,6 @@
                     </div>
                 </div>
             </a>
-            
-
-        <div class="lang-wrapper">
-            <label for="language">
-                <ion-icon name="globe-outline"></ion-icon>
-            </label>
-
-            <select name="language" id="language">
-                <option value="br">BR</option>
-                <option value="au">AU</option>
-                <option value="ar">AR</option>
-                <option value="en">EN</option>
-            </select>
-        </div>
 
         </div>
 
@@ -75,19 +61,19 @@
             <ul class="navbar-list">
 
                 <li>
-                    <a href="index2.html" class="navbar-link">Home</a>
+                    <a href="index.html" class="navbar-link">Home</a>
                 </li>
 
                 <li>
-                    <a href="famosos2.html" class="navbar-link">Famosos</a>
+                    <a href="famosos.html" class="navbar-link">Famosos</a>
                 </li>
 
                 <li>
-                    <a href="recomendados2.html" class="navbar-link">Recomendados</a>
+                    <a href="recomendados.html" class="navbar-link">Recomendados</a>
                 </li>
 
                 <li>
-                    <a href="#" class="navbar-link">Lista</a>
+                    <a href="login.html" class="navbar-link">Entrar</a>
                 </li>
 
             </ul>
@@ -133,1420 +119,844 @@
 
     <main>
         <article>
-            <section class="hero">
-                <div class="container">
-
-                    <div class="hero-content">
-
-                        <p class="hero-subtitle"></p>
-
-                        <h1 class="h1 hero-title">
-                            Animes <strong>Ilimitados</strong> Quando Quiser!
-                        </h1>
-
-                            <div class="meta-wrapper">
-
-                                <div class="badge-wrapper">
-                                    <div class="badge badge-fill">HD</div>
-                                </div>
-
-                                <div class="ganre-wrapper">
-                                    <a href="#">Ação</a>
-
-                                    <a href="#">Drama</a>
-                                </div>
-
-                                <div class="date-time">
-                                    <div>
-                                        <ion-icon name="calendar-outline"></ion-icon>
-
-                                        <time datetime="1997">1997</time>
+            <div id="conteudo2">
+                <section class="hero">
+                    <div class="container">
+                        <div class="hero-content">
+                            <p class="hero-subtitle"></p>
+                            <h1 class="h1 hero-title">
+                                Animes <strong>Ilimitados</strong> Quando Quiser!
+                            </h1>
+                                <div class="meta-wrapper">
+                                    <div class="badge-wrapper">
+                                        <div class="badge badge-fill">HD</div>
                                     </div>
-
-                                    <div>
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT128M">NA</time>
+                                    <div class="ganre-wrapper">
+                                        <a href="#">Ação</a>
+                                        <a href="#">Drama</a>
                                     </div>
-
+                                    <div class="date-time">
+                                        <div>
+                                            <ion-icon name="calendar-outline"></ion-icon>
+                                            <time datetime="1997">1997</time>
+                                        </div>
+                                        <div>
+                                            <ion-icon name="time-outline"></ion-icon>
+                                            <time datetime="PT128M">NA</time>
+                                        </div>
+                                    </div>
                                 </div>
-
-                            </div>
-
-                        <a href="one-pice.html">
-                            <button class="btn btn-primary">
-                                <ion-icon name="play"></ion-icon>
-                                <span>Assista agora</span>
-                            </button>
-                        </a>
-
-                    </div>
-
-                </div>
-            </section>
-
-
-
-
-
-            <section class="upcoming">
-                <div class="container">
-
-                    <div class="flex-wrapper">
-                        <div class="title-wrapper">
-                            <p class="section-subtitle">transmissão online</p>
-
-                            <h2 class="h2 section-tilte">Recomendados</h2>
+                            <a href="one-pice.html">
+                                <button class="btn btn-primary">
+                                    <ion-icon name="play"></ion-icon>
+                                    <span>Assista agora</span>
+                                </button>
+                            </a>
                         </div>
-
-                        <ul class="filter-list">
-
-                            <li>
-                                <button class="filter-btn">Filmes</button>
-                            </li>
-
-                            <li>
-                                <button class="filter-btn">Famosos</button>
-                            </li>
-
-                            <li>
-                                <button class="filter-btn">Em Breve</button>
-                            </li>
-                            
-                        </ul>
-
                     </div>
-
-                    <ul class="movies-list  has-scrollbar" data-lista></ul>
-
-                </div>
-            </section>
-
-            <section class="service">
-                <div class="container">
-                    <div class="service-banner">
-                        <figure>
-                            <img src="service-banner.jpg" alt="HD 4K Resolução! Apenas R$2.99">
-                        </figure>
-
-                        <a href="service-banner.jpg" download class="service-btn">
-                            <span>download</span>
-
-                            <ion-icon name="download-outline"></ion-icon>
-                        </a>
-
-                    </div>
-
-                    <div class="service-content">
-
-                        <p class="service-subtitle">Outros Serviços</p>
-
-                        <h2 class="h2 service-title">Faça download Para Ver OffLine.</h2>
-
-                        <p class="service-text">
-                            Filmes, séries e muito mais. Sem limites. Assista onde quiser. Cancele quando quiser.
-                        </p>
-
-                        <ul class="service-list">
-
+                </section>
+                <section class="upcoming">
+                    <div id="conteudo2" class="container">
+                        <div class="flex-wrapper">
+                            <div class="title-wrapper">
+                                <p class="section-subtitle">transmissão online</p>
+                                <h2 class="h2 section-tilte">Recomendados</h2>
+                            </div>
+                            <ul class="filter-list">
+                                <li>
+                                    <button class="filter-btn">Filmes</button>
+                                </li>
+                                <li>
+                                    <button class="filter-btn">Famosos</button>
+                                </li>
+                                <li>
+                                    <button class="filter-btn">Em Breve</button>
+                                </li>
+                
+                            </ul>
+                        </div>
+                        <ul class="movies-list has-scrollbar">
                             <li>
-                                <div class="service-card">
-
-                                    <div class="card-icon">
-                                        <ion-icon name="TV"></ion-icon>
-                                    </div>
-
-                                    <div class="card-content">
-                                        <h3 class="h3 card-title">Aproveite na TV.</h3>
-
-                                        <p class="card-text">
-                                            Assista em Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, aparelhos de Blu-ray e outros dispositivos.
-                                        </p>
-                                    </div>
-
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="service-card">
-
-                                    <div class="card-icon">
-                                        <ion-icon name="videocam"></ion-icon>
-                                    </div>
-
-                                    <div class="card-content">
-                                        <h3 class="h3 card-title">Baixe Animes para assistir offline.</h3>
-
-                                        <p class="card-text">
-                                            Salve seus títulos favoritos e sempre tenha algo para assistir.
-                                        </p>
-                                    </div>
-
-                                </div>
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-                </div>
-            </section>
-
-
-            <section class="top-rated">
-                <div class="container">
-
-                    <p class="section-subtitle">transmissão online</p>
-
-                    <h2 class="h2 section-tilte">Animes</h2>
-
-                    
-                    <ul class="filter-list">
-
-                        <li>
-                            <button class="filter-btn">Filmes</button>
-                        </li>
-
-                        <li>
-                            <button class="filter-btn">Famosos</button>
-                        </li>
-
-                        <li>
-                            <button class="filter-btn">Anime</button>
-                        </li>
-
-                        <li>
-                            <button class="filter-btn">Recomendados</button>
-                        </li>
-                        
-                    </ul>
-
-                    <ul class="movies-list">
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
+                                <div class="movie-card">
+                
+                                  <a href="one-pice.html">
                                     <figure class="card-banner">
-                                        <img src="https://animeq.xyz/wp-content/uploads/Jujutsu-Kaisen.jpg" alt="Jujutsu-Kaisen">
+                                      <img src="https://animeq.xyz/wp-content/uploads/assisitr-one-piece.jpg" alt="The Northman movie poster">
                                     </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Jujutsu-Kaisen</h3>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="one-pice.html">
+                                      <h3 class="card-title">One Piece</h3>
                                     </a>
-
+                
+                                    <time datetime="1997">1997</time>
+                                  </div>
+                
+                                  <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+                
+                                    <div class="duration">
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT137M">NA</time>
+                                    </div>
+                
+                                    <div class="rating">
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>9.5</data>
+                                    </div>
+                                  </div>
+                
+                                </div>
+                              </li>
+                            <li>
+                                <div class="movie-card">
+                
+                                  <a href="naruto.html">
+                                    <figure class="card-banner">
+                                      <img src="https://animeq.xyz/wp-content/uploads/naruto.jpg" alt="The Northman movie poster">
+                                    </figure>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="naruto.html">
+                                      <h3 class="card-title">Naruto</h3>
+                                    </a>
+                
+                                    <time datetime="2002">2002</time>
+                                  </div>
+                
+                                  <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+                
+                                    <div class="duration">
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT137M">NA</time>
+                                    </div>
+                
+                                    <div class="rating">
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>8.0</data>
+                                    </div>
+                                  </div>
+                
+                                </div>
+                              </li>
+                
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="demon-slayer.html">
+                                    <figure class="card-banner">
+                                      <img src="https://animeq.xyz/wp-content/uploads/D-S.jpg"
+                                        alt="Doctor Strange in the Multiverse of Madness movie poster">
+                                    </figure>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="demon-slayer.html">
+                                      <h3 class="card-title">Demon-Slayer</h3>
+                                    </a>
+                
+                                    <time datetime="2019">2019</time>
+                                  </div>
+                
+                                  <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+                
+                                    <div class="duration">
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT126M">NA</time>
+                                    </div>
+                
+                                    <div class="rating">
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>NR</data>
+                                    </div>
+                                  </div>
+                
+                                </div>
+                              </li>
+                
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="jujutsu-kaisen.html">
+                                    <figure class="card-banner">
+                                      <img src="https://animeq.xyz/wp-content/uploads/Jujutsu-Kaisen.jpg" alt="Jujutsu Kaisen">
+                                    </figure>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="jujutsu-kaisen.html">
+                                      <h3 class="card-title">Jujutsu Kaisen</h3>
+                                    </a>
+                
                                     <time datetime="2018">2018</time>
-                                </div>
-
-                                <div class="card-meta">
+                                  </div>
+                
+                                  <div class="card-meta">
                                     <div class="badge badge-outline">HD</div>
-
+                
                                     <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="">NA</time>
                                     </div>
-
+                
                                     <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>7.8</data>
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>8.0</data>
                                     </div>
-
+                                  </div>
+                
                                 </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
+                              </li>
+                
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="death-note.html">
                                     <figure class="card-banner">
-                                        <img src="https://animeq.xyz/wp-content/uploads/black-clover.jpg" alt="Black Cover">
+                                      <img src="https://www.anitube.site/wp-content/uploads/Death-Note-leg.jpg"
+                                        alt="Death-Note">
                                     </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Black Cover</h3>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="death-note.html">
+                                      <h3 class="card-title">Death-Note</h3>
                                     </a>
-
-                                    <time datetime="2015">2015</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>6.9</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://animeq.xyz/wp-content/uploads/Chainsaw-Man-Dublado-Capa-AnimeQ.png" alt="chainsaw man ">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Chainsaw Man </h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>9.0</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Death-Note-leg.jpg" alt="Death-Note">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Death-Note</h3>
-                                    </a>
-
+                
                                     <time datetime="2006">2006</time>
-                                </div>
-
-                                <div class="card-meta">
+                                  </div>
+                
+                                  <div class="card-meta">
                                     <div class="badge badge-outline">SD</div>
-
+                
                                     <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT107M">NA</time>
                                     </div>
-
+                
                                     <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>8.0</data>
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>7.3</data>
                                     </div>
-
+                                  </div>
+                
                                 </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
+                              </li>
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="hunter-x-hunter.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Hunter-x-Hunter-2011.jpg" alt="Hunter X Hunter">
+                                      <img src="https://www.anitube.site/wp-content/uploads/Hunter-x-Hunter-2011.jpg"
+                                        alt="Chainsaw Man">
                                     </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Hunter X Hunter</h3>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="hunter-x-hunter.html">
+                                      <h3 class="card-title">Hunter X Hunter</h3>
                                     </a>
-
-                                    <time datetime="1998">1998</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">SD</div>
-
+                
+                                    <time datetime="2022">2022</time>
+                                  </div>
+                
+                                  <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+                
                                     <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT107M">NA</time>
                                     </div>
-
+                
                                     <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>7.7</data>
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>7.6</data>
                                     </div>
-
+                                  </div>
+                
                                 </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
+                              </li>
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="tokyo-ghoul.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Tokyo-Ghoul-I.jpg" alt="Tokyo Ghoul">
+                                      <img src="https://www.anitube.site/wp-content/uploads/Tokyo-Ghoul-I.jpg" alt="Tokyo Ghoul">
                                     </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Tokyo Ghoul</h3>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="tokyo-ghoul.html">
+                                      <h3 class="card-title">Tokyo Ghoul</h3>
                                     </a>
-
+                
                                     <time datetime="2017">2017</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">SD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>5</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Spy-x-Family-AniTube.jpg" alt="SPY x FAMILY">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">SPY x FAMILY</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
+                                  </div>
+                
+                                  <div class="card-meta">
                                     <div class="badge badge-outline">HD</div>
-
+                
                                     <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT137M">NA</time>
                                     </div>
-
+                
                                     <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>7.5</data>
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>5.1</data>
                                     </div>
-
+                                  </div>
+                
                                 </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
+                              </li>
+                            <li>
+                                <div class="movie-card">
+                
+                                  <a href="SPY-X-FAMILY.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Bleach-dub.jpg" alt="Bleach">
+                                      <img src="https://www.anitube.site/wp-content/uploads/Spy-x-Family-AniTube.jpg" alt="Boku no Hero Academia">
                                     </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Bleach</h3>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="SPY-X-FAMILY.html">
+                                      <h3 class="card-title">SPY x FAMILY</h3>
                                     </a>
-
+                
+                                    <time datetime="2014">2014</time>
+                                  </div>
+                
+                                  <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+                
+                                    <div class="duration">
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT137M">NA</time>
+                                    </div>
+                
+                                    <div class="rating">
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>8.0</data>
+                                    </div>
+                                  </div>
+                
+                                </div>
+                              </li>
+                
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="bleach.html">
+                                    <figure class="card-banner">
+                                      <img src="https://www.anitube.site/wp-content/uploads/Bleach-dub.jpg"
+                                        alt="Bleach">
+                                    </figure>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="bleach.html">
+                                      <h3 class="card-title">Bleach</h3>
+                                    </a>
+                
                                     <time datetime="2001">2001</time>
-                                </div>
-
-                                <div class="card-meta">
+                                  </div>
+                
+                                  <div class="card-meta">
                                     <div class="badge badge-outline">SD</div>
-
+                
                                     <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT126M">NA</time>
                                     </div>
-
+                
                                     <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>8.9</data>
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>NR</data>
                                     </div>
-
+                                  </div>
+                
                                 </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
+                              </li>
+                
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="naruto-shippuden.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/KanColle-Itsuka-Ano-Umi-de-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
+                                      <img src="https://www.anitube.site/wp-content/uploads/Naruto-Shippuuden-dublado-poster.jpg" alt="Naruto Shippuden">
                                     </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">KanColle: Itsuka Ano Umi de 2</h3>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="naruto-shippuden.html">
+                                      <h3 class="card-title">Naruto Shippuden</h3>
                                     </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>5.9</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Fukigen-na-Mononokean-2-Todos-os-Episodios-anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Fukigen na Mononokean 2</h3>
-                                    </a>
-
-                                    <time datetime="2019">2019</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>5</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Arknights-Reimei-Zensou-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Arknights: Reimei Zensou</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>7.7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Cool-Doji-Danshi-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Cool Doji Danshi</h3>
-                                    </a>
-
-                                    <time datetime="2001">2001</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Futoku-no-Guild-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Futoku no Guild</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Lian-Qi-Lianle-300-Nian-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Lian Qi Lianle 300 Nian</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>4.9</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Yowamushi-Pedal-Limit-Break-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Yowamushi Pedal: Limit Break</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>6.3</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Bleach-Sennen-Kessen-hen-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Bleach: Sennen Kessen-hen</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>0.1</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Peter-Grill-to-Kenja-no-Jikan-Super-Extra-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Peter Grill to Kenja no Jikan 2</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>5.4</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Berserk-Ougon-Jidai-hen-Memorial-Edition-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Berserk: Ougon Jidai-hen</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>7.2</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Blue-Lock-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Blue Lock</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>7.7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Mairimashita-Iruma-kun-3-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Mairimashita! Iruma-kun 3</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>3.7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Seiken-Densetsu-Legend-of-Mana-The-Teardrop-Crystal-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Seiken Densetsu: Legend of Mana</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.2</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Akiba-Maid-Sensou-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Akiba Maid Sensou</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>4</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Muv-Luv-Alternative-2-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Muv-Luv Alternative 2nd Season</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>0</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Kage-no-Jitsuryokusha-ni-Naritakute-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Kage no Jitsuryokusha ni Naritakute!</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>8</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Mairimashita-Iruma-kun-2-Todos-os-Episódios-AniTube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Mairimashita! Iruma-kun 2</h3>
-                                    </a>
-
-                                    <time datetime="2021">2021</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Shakunetsu-Kabaddi-Todos-os-Episódios-AniTube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Shakunetsu Kabaddi</h3>
-                                    </a>
-
-                                    <time datetime="2021">2021</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Majutsushi-Orphen-Hagure-Tabi-Kimluck-hen-Todos-os-Episódios-AniTube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Majutsushi Orphen Hagure Tabi: Kimluck-hen</h3>
-                                    </a>
-
-                                    <time datetime="2021">2021</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/The-God-of-High-School-Todos-os-Episódios-AniTube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">The God of High School</h3>
-                                    </a>
-
-                                    <time datetime="2020">2020</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Ken-En-Ken-Aoki-Kagayaki-Todos-os-Episódios.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Ken En Ken: Aoki Kagayaki</h3>
-                                    </a>
-
+                
                                     <time datetime="2018">2018</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
+                                  </div>
+                
+                                  <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+                
                                     <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="">NA</time>
                                     </div>
-
+                
                                     <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.7</data>
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>NR</data>
                                     </div>
-
+                                  </div>
+                
                                 </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
+                              </li>
+                
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="dragon-ball-z.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Tenka-Hyakken-Meiji-kan-e-Youkoso-Todos-os-Episódios.jpg" alt="Bleach">
+                                      <img src="https://www.anitube.site/wp-content/uploads/dragon-ball-super-2.png"
+                                        alt="Dragon-Ball Super">
                                     </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Tenka Hyakken: Meiji-kan e Youkoso!</h3>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="dragon-ball-super.html">
+                                      <h3 class="card-title">Dragon-Ball Super</h3>
                                     </a>
-
-                                    <time datetime="2019">2019</time>
-                                </div>
-
-                                <div class="card-meta">
+                
+                                    <time datetime="1989">1989</time>
+                                  </div>
+                
+                                  <div class="card-meta">
                                     <div class="badge badge-outline">HD</div>
-
+                
                                     <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT107M">NA</time>
                                     </div>
-
+                
                                     <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.7</data>
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>NR</data>
                                     </div>
-
+                                  </div>
+                
                                 </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
+                              </li>
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="tokyo-revengers.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Ninin-ga-Shinobuden-–-Todos-os-Episódios.jpg" alt="Bleach">
+                                      <img src="https://animeq.xyz/wp-content/uploads/Tokyo-Revengers-_Dublado_.jpg"
+                                        alt="Tokyo-Revengers">
                                     </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Ninin ga Shinobuden</h3>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="tokyo-revengers.html">
+                                      <h3 class="card-title">Tokyo-Revengers</h3>
                                     </a>
-
-                                    <time datetime="2004">2004</time>
-                                </div>
-
-                                <div class="card-meta">
+                
+                                    <time datetime="1989">1989</time>
+                                  </div>
+                
+                                  <div class="card-meta">
                                     <div class="badge badge-outline">HD</div>
-
+                
                                     <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT107M">NA</time>
                                     </div>
-
+                
                                     <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.7</data>
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>NR</data>
                                     </div>
-
+                                  </div>
+                
                                 </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
+                              </li>
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="black-cover.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Mugen-no-Juunin-Immortal-Todos-os-Episódios-Online.jpg" alt="Bleach">
+                                      <img src="https://animeq.xyz/wp-content/uploads/black-clover.jpg"
+                                        alt="Death-Note">
                                     </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Mugen no Juunin Immortal</h3>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="death-note.html">
+                                      <h3 class="card-title">Death-Note</h3>
                                     </a>
-
-                                    <time datetime="2019">2019</time>
-                                </div>
-
-                                <div class="card-meta">
+                
+                                    <time datetime="2006">2006</time>
+                                  </div>
+                
+                                  <div class="card-meta">
                                     <div class="badge badge-outline">HD</div>
-
+                
                                     <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT107M">NA</time>
                                     </div>
-
+                
                                     <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.7</data>
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>NR</data>
                                     </div>
-
+                                  </div>
+                
                                 </div>
-
-
-                            </div>
-                        </li>
-
-                    </ul>
-
+                              </li>
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="chainsaw-man.html">
+                                    <figure class="card-banner">
+                                      <img src="https://animeq.xyz/wp-content/uploads/Chainsaw-Man-Dublado-Capa-AnimeQ.png"
+                                        alt="Hunter X Hunter">
+                                    </figure>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="hunter-x-hunter.html">
+                                      <h3 class="card-title">Hunter X Hunter</h3>
+                                    </a>
+                
+                                    <time datetime="1998">1998</time>
+                                  </div>
+                
+                                  <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+                
+                                    <div class="duration">
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT107M">NA</time>
+                                    </div>
+                
+                                    <div class="rating">
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>NR</data>
+                                    </div>
+                                  </div>
+                
+                                </div>
+                              </li>
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="one-pounch-man.html">
+                                    <figure class="card-banner">
+                                      <img src="https://animeq.xyz/wp-content/uploads/onepunch-man-animeq.jpg" alt="One Pounch-Man">
+                                    </figure>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="one-pounch-man.html">
+                                      <h3 class="card-title">One Pounch-Man</h3>
+                                    </a>
+                
+                                    <time datetime="2009">2009</time>
+                                  </div>
+                
+                                  <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+                
+                                    <div class="duration">
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT137M">NA</time>
+                                    </div>
+                
+                                    <div class="rating">
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>9.5</data>
+                                    </div>
+                                  </div>
+                
+                                </div>
+                              </li>
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="dragon-ball-z.html">
+                                    <figure class="card-banner">
+                                      <img src="https://animeq.xyz/wp-content/uploads/Dragon-Ball-Z-Dublado-capa.jpg" alt="SPY x FAMILY">
+                                    </figure>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="dragon-ball-z.html">
+                                      <h3 class="card-title">Dragon Ball Z</h3>
+                                    </a>
+                
+                                    <time datetime="1989">1989</time>
+                                  </div>
+                
+                                  <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+                
+                                    <div class="duration">
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT137M">NA</time>
+                                    </div>
+                
+                                    <div class="rating">
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>8.0</data>
+                                    </div>
+                                  </div>
+                
+                                </div>
+                              </li>
+                            <li>
+                                <div class="movie-card">
+                
+                                  <a href="boku-no-hero.html">
+                                    <figure class="card-banner">
+                                      <img src="https://animeq.xyz/wp-content/uploads/Boku-no-Hero-Academia-1.jpg" alt="SPY x FAMILY">
+                                    </figure>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="SPY-X-FAMILY.html">
+                                      <h3 class="card-title">SPY x FAMILY</h3>
+                                    </a>
+                
+                                    <time datetime="2022">2022</time>
+                                  </div>
+                
+                                  <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+                
+                                    <div class="duration">
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT137M">NA</time>
+                                    </div>
+                
+                                    <div class="rating">
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>8.0</data>
+                                    </div>
+                                  </div>
+                
+                                </div>
+                              </li>
+                
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="boruto.html">
+                                    <figure class="card-banner">
+                                      <img src="https://animeq.xyz/wp-content/uploads/qCSKtTjXGnBCfKYzCEjEsKx52v6-scaled-e1605268571861.jpg"
+                                        alt="Boruto">
+                                    </figure>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="boruto.html">
+                                      <h3 class="card-title">Boruto</h3>
+                                    </a>
+                
+                                    <time datetime="2017">2017</time>
+                                  </div>
+                
+                                  <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+                
+                                    <div class="duration">
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT126M">NA</time>
+                                    </div>
+                
+                                    <div class="rating">
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>NR</data>
+                                    </div>
+                                  </div>
+                
+                                </div>
+                              </li>
+                
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="attack-on-titan.html">
+                                    <figure class="card-banner">
+                                      <img src="https://animeq.xyz/wp-content/uploads/Shingeki-no-Kyojin-The-Final-Season-Parte-2.jpg" alt="Memory movie poster">
+                                    </figure>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="jujutsu-kaisen.html">
+                                      <h3 class="card-title">Jujutsu Kaisen</h3>
+                                    </a>
+                
+                                    <time datetime="2018">2018</time>
+                                  </div>
+                
+                                  <div class="card-meta">
+                                    <div class="badge badge-outline">2K</div>
+                
+                                    <div class="duration">
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="">NA</time>
+                                    </div>
+                
+                                    <div class="rating">
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>NR</data>
+                                    </div>
+                                  </div>
+                
+                                </div>
+                              </li>
+                              <li>
+                                <div class="movie-card">
+                
+                                  <a href="Haikyuu!!.html">
+                                    <figure class="card-banner">
+                                      <img src="https://www.anitube.site/wp-content/uploads/Haikyuu-poster.jpg"
+                                        alt="Haikyuu!!">
+                                    </figure>
+                                  </a>
+                
+                                  <div class="title-wrapper">
+                                    <a href="Haikyuu!!.html">
+                                      <h3 class="card-title">Haikyuu!!</h3>
+                                    </a>
+                
+                                    <time datetime="2014">2014</time>
+                                  </div>
+                
+                                  <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+                
+                                    <div class="duration">
+                                      <ion-icon name="time-outline"></ion-icon>
+                
+                                      <time datetime="PT107M">NA</time>
+                                    </div>
+                
+                                    <div class="rating">
+                                      <ion-icon name="star"></ion-icon>
+                
+                                      <data>NR</data>
+                                    </div>
+                                  </div>
+                
+                                </div>
+                              </li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="service">
+                    <div class="container">
+                        <div class="service-banner">
+                            <figure>
+                                <img src="service-banner.jpg" alt="HD 4K Resolução! Apenas R$2.99">
+                            </figure>
+                            <a href="service-banner.jpg" download class="service-btn">
+                                <span>download</span>
+                                <ion-icon name="download-outline"></ion-icon>
+                            </a>
+                        </div>
+                        <div class="service-content">
+                            <p class="service-subtitle">Outros Serviços</p>
+                            <h2 class="h2 service-title">Faça download Para Ver OffLine.</h2>
+                            <p class="service-text">
+                                Filmes, séries e muito mais. Sem limites. Assista onde quiser. Cancele quando quiser.
+                            </p>
+                            <ul class="service-list">
+                                <li>
+                                    <div class="service-card">
+                                        <div class="card-icon">
+                                            <ion-icon name="TV"></ion-icon>
+                                        </div>
+                                        <div class="card-content">
+                                            <h3 class="h3 card-title">Aproveite na TV.</h3>
+                                            <p class="card-text">
+                                                Assista em Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, aparelhos de Blu-ray e outros dispositivos.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="service-card">
+                                        <div class="card-icon">
+                                            <ion-icon name="videocam"></ion-icon>
+                                        </div>
+                                        <div class="card-content">
+                                            <h3 class="h3 card-title">Baixe Animes para assistir offline.</h3>
+                                            <p class="card-text">
+                                                Salve seus títulos favoritos e sempre tenha algo para assistir.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </section>
+                </section>
+                <section class="top-rated">
+                    <div class="container">
+                        <p class="section-subtitle">transmissão online</p>
+                        <h2 class="h2 section-tilte">Animes</h2>
+                        <ul class="movies-list" data-lista></ul>
+                    </div>
+                </section>
 
             <button onclick="toggle('conteudo')" id="read_button">Ver mais</button>
 
-            <section id="conteudo" class="top-rated"; style="display: none; background-color: #171D21; padding-top: 0px;">
+            <section id="conteudo" class="top-rated"; style="display: none; background-color: #1b2227; padding-top: 0px;">
                 <div class="container" >
 
                     <ul class="movies-list" >
@@ -1554,18 +964,18 @@
                         <li>
                             <div class="movie-card">
 
-                                <a href="movie-details.html">
+                                <a href="A-Channel.html">
                                     <figure class="card-banner">
                                         <img src="https://www.anitube.site/wp-content/uploads/A-Channel.jpg" alt="Jujutsu-Kaisen">
                                     </figure>
                                 </a>
 
                                 <div class="title-wrapper">
-                                    <a href="movie-details.html">
+                                    <a href="A-Channel.html">
                                         <h3 class="card-title">A-Channel – Todos os Episodios</h3>
                                     </a>
 
-                                    <time datetime="2018">2011</time>
+                                    <time datetime="2011">2011</time>
                                 </div>
 
                                 <div class="card-meta">
@@ -2887,6 +2297,7 @@
     <script src="script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="linguagem.js"></script>
     <script>
         function toggle(el) {
             var display = document.getElementById(el).style.display;
@@ -2900,8 +2311,19 @@
             
         }
 
+        function toggle2(el) {
+            var display = document.getElementById(el).style.display;
+            if(display == "none"){
+                document.getElementById('conteudo2').style.display = 'none'
+                document.getElementById('conteudo3').style.display = 'none'
+                document.getElementById('conteudo4').style.display = 'none'
+            } else {
+                document.getElementById(el).style.display = 'none';
+            }
+        }
+
     </script>
     <script src="mostrarVideos.js" type="module"></script>
-
+    <script src="buscarVideo.js" type="module"></script>
 </body>
 </html>
