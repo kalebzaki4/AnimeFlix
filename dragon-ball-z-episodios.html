@@ -12,6 +12,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
 </head>
 <style>
+
+.abrir {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(-100%);
+  transition: all 1s;
+
+}
+
+.show {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+}
+
     .hero {
   background: url(banner-8.jpg) no-repeat;
   background-size: cover;
@@ -696,7 +711,7 @@
                 </div>
             </section>
             
-            <div id="proximo" class="container3">
+            <div id="proximo" class="container3 abrir">
 
                 <div id="proximo" class="main-video-container">
                    <div id="proximo">
@@ -718,7 +733,7 @@
                     <span class="informacao2">PROXIMO</span>
                     <img src="arrow-forward.svg" width="30px" alt="icon flecha">
                 </button>
-                <a href="https://api.whatsapp.com/send?text=https://kalebzaki4.github.io/AnimeFlix/dragon-ball-z-episodios.html">
+                <a href="https://api.whatsapp.com/send?text=https://kalebzaki4.github.io/AnimeFlix/dragon-ball-z-episodios.html" target="_blank">
                     <button class="read_button4">
                         <span class="informacao3">COMAPARTILHAR</span>
                         <img class="flecha" src="compartilhar.svg" width="30px" alt="icon flecha">
@@ -4667,5 +4682,6 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="buscarVideo.js" type="module"></script>
+    <script src="rolagem.js"></script>
 </body>
 </html>
