@@ -19,27 +19,17 @@
         <div class="overlay" data-overlay></div>
 
         <a href="index.html" class="logo">
-            <img src="logo-animeflix.png" alt="AnimeFlix logo" width="200px">
+            <img src="logo-animeflix.png" alt="AnimeFlix logo" width="300px">
         </a>
 
         <div class="header-actions">
 
-        <button class="search-btn">
-         <ion-icon name="search-outline"></ion-icon>
-        </button>
-
-        <div class="lang-wrapper">
-            <label for="language">
-                <ion-icon name="globe-outline"></ion-icon>
-            </label>
-
-            <select name="language" id="language">
-                <option value="en">EN</option>
-                <option value="au">AU</option>
-                <option value="ar">AR</option>
-                <option value="br">BR</option>
-            </select>
-        </div>
+            <div class="search-box">
+                <input type="text" class="search-txt" placeholder="Pesquisar" list="historico" data-pesquisa>
+                <button onclick="toggle2('conteudo2')" class="search-button" data-botao-pesquisa>
+                <img src="pesquisa.svg" alt="Lupa" height="20" width="20">
+                </button>
+            </div>
 
         <a href="login.html"><button class="btn btn-primary">Entrar</button></a>
 
@@ -77,7 +67,7 @@
                 </li>
 
                 <li>
-                    <a href="minha-lista.html" class="navbar-link">Minha Lista</a>
+                    <a href="login.html" class="navbar-link">Entrar</a>
                 </li>
 
             </ul>
@@ -123,58 +113,1259 @@
 
     <main>
         <article>
-
-
-
-
-
-            <section class="upcoming">
-                <div class="container">
-
-                    <div class="flex-wrapper">
-                        <div class="title-wrapper">
-
-                            <h2>ㅤㅤㅤㅤㅤ</h2>
-                            <h2>ㅤㅤㅤㅤㅤ</h2>
-
-                            <h2 class="h2 section-tilte">Recomendados</h2>
-                        </div>
-
-                        <ul class="filter-list">
-
-                            <li>
-                                <button class="filter-btn">Filmes</button>
-                            </li>
-
-                            <li>
-                                <button class="filter-btn">Famosos</button>
-                            </li>
-
-                            <li>
-                                <button class="filter-btn">Em Breve</button>
-                            </li>
-                            
-                        </ul>
-
+                </section>
+                
+                <section class="top-rated">
+                    <div class="container">
+                        <p class="section-subtitle">transmissão online</p>
+                        <h2 class="h2 section-tilte">Recomendados</h2>
+                        <section style="display: none; background-color: #1b2227; padding-top: 0px;">
+            
+                                <ul class="movies-list" >
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="A-Channel.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/A-Channel.jpg" alt="Jujutsu-Kaisen">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="A-Channel.html">
+                                                    <h3 class="card-title">A-Channel – Todos os Episodios</h3>
+                                                </a>
+            
+                                                <time datetime="2011">2011</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>6</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/A3-Season-Autumn-Winter-Todos-os-Episódios-AniTube.jpg" alt="Black Cover">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">A3! Season Autumn & Winter – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2020">2020</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>1.2</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/A3-Season-Spring-Summer-Todos-os-Episódios-AniTube.jpg" alt="chainsaw man ">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">3! Season Spring & Summer – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2020">2020</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>1.2</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/303-1.jpg" alt="Death-Note">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Aa! Megami-sama !: Chichaitte Koto wa Benri da ne – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2018">2018</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">SD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>8.0</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Aa-Megami-sama.jpg" alt="Hunter X Hunter">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Aa! Megami-sama! – Todos os Episodios</h3>
+                                                </a>
+            
+                                                <time datetime="2005">2005</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">SD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>2.6</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Aa-Megami-sama-1.jpg" alt="Tokyo Ghoul">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">a! Megami-sama! Dublado – Todos os Episodios</h3>
+                                                </a>
+            
+                                                <time datetime="2005">2005</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">SD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>5.6</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Abarenbou-Kishi-Matsutarou.jpg" alt="SPY x FAMILY">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Abarenbou Kishi!! Matsutarou – Todos os Episodios</h3>
+                                                </a>
+            
+                                                <time datetime="2014">2014</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">SD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>2.3</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Abenobashi-Mahou-Shoutengai.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Abenobashi Mahou Shoutengai – Todos os Episodios</h3>
+                                                </a>
+            
+                                                <time datetime="2002">2002</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">SD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>1.3</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Absolute-Duo.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Absolute Duo – Todos os Episodios</h3>
+                                                </a>
+            
+                                                <time datetime="2014">2014</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>1.2</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/ACCA.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">ACCA: 13-ku Kansatsu-ka – Todos os Episodios</h3>
+                                                </a>
+            
+                                                <time datetime="2017">2017</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>1.5</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Accel-World.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Accel World – Todos os Episodios</h3>
+                                                </a>
+            
+                                                <time datetime="2012">2012</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>2.4</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Acchi-Kocchi.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Acchi Kocchi – Todos os Episodios</h3>
+                                                </a>
+            
+                                                <time datetime="2012">2012</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">SD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>1.7</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Active-Raid-Kidou-Kyoushuushitsu-Dai-Hachi-Gakari-2nd.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Active Raid: Kidou Kyoushuushitsu Dai Hachi Gakari 2nd – Todos os Episodios</h3>
+                                                </a>
+            
+                                                <time datetime="2015">2015</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>2.1</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Active-Raid-Kidou-Kyoushuushitsu-Dai-Hakkei-1.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Active Raid: Kidou Kyoushuushitsu Dai Hakkei – Todos os Episodios</h3>
+                                                </a>
+            
+                                                <time datetime="2016">2016</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>2.4</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Actors-Songs-Connection-Todos-os-Episodios.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Actors: Songs Connection – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2019">2019</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>1.3</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Adachi-to-Shimamura-Todos-os-Episódios-AniTube.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title"> Adachi to Shimamura – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2020">2020</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>2.1</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/B-Project.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">B Project – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2016">2016</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>4.4</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/b-project-zecchou-emotion.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">B-Project: Zecchou Emotion</h3> 
+                                                </a>
+            
+                                                <time datetime="2019">2019</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>7.2</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/B-The-Beginning.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">B: The Beginning – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2018">2018</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>7.1</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Babel-II-Beyond-Infinity.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Babel II: Beyond Infinity – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2001">2001</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">SD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>1.3</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Baby-Steps.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Baby Steps – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2014">2014</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">SD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>5.0</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Baby-Steps-2.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Baby Steps 2 – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2014">2014</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">SD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>2.5</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Babylon-Todos-os-Episódios.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Babylon – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2019">2019</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>1.0</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Baccano.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Baccano – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2007">2007</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>1.3</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Back-Arrow-Todos-os-Episódios-AniTube.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Back Arrow – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2021">2021</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>2.4</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Back-Street-Girls-Gokudolls.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Back Street Girls: Gokudolls – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2018">2018</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>0.9</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Baka-to-Test-to-Shoukanjuu.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Baka to Test to Shoukanjuu – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2010">2010</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">SD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>2.3</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Baka-to-Test-to-Shoukanjuu-Ni-2-ff.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Baka to Test to Shoukanjuu Ni – [2° Temporada] – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2011">2011</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">SD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>1.7</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/bakemonogatari-2470.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Bakemonogatari – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2009">2009</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">SD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>1.5</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Baki.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Baki (2018) – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2018">2018</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>8.6</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Baki-2-Temporada-Todos-os-Episódios-AniTube.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Baki 2 – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2020">2020</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">HD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>7.1</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                    <li>
+                                        <div class="movie-card">
+            
+                                            <a href="movie-details.html">
+                                                <figure class="card-banner">
+                                                    <img src="https://www.anitube.site/wp-content/uploads/Baki-the-Grappler.jpg" alt="Bleach">
+                                                </figure>
+                                            </a>
+            
+                                            <div class="title-wrapper">
+                                                <a href="movie-details.html">
+                                                    <h3 class="card-title">Baki the Grappler – Todos os Episódios</h3>
+                                                </a>
+            
+                                                <time datetime="2001">2001</time>
+                                            </div>
+            
+                                            <div class="card-meta">
+                                                <div class="badge badge-outline">SD</div>
+            
+                                                <div class="duration">
+                                                    <ion-icon name="time-outline"></ion-icon>
+            
+                                                    <time datetime="PT137M">NA</time>
+                                                </div>
+            
+                                                <div class="rating">
+                                                    <ion-icon name="star"></ion-icon>
+            
+                                                    <data>4.4</data>
+                                                </div>
+            
+                                            </div>
+            
+            
+                                        </div>
+                                    </li>
+            
+                                </ul>
+            
+                            </div>
+                        </section>
                     </div>
+                </section>
 
-                    <ul class="movies-list">
+            <section class="top-rated"; style=" background-color: #1b2227; padding-top: 0px;">
+                <div class="container" >
+
+                    <ul class="movies-list" >
 
                         <li>
                             <div class="movie-card">
 
-                                <a href="movie-details.html">
+                                <a href="A-Channel.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/KanColle-Itsuka-Ano-Umi-de-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
+                                        <img src="https://www.anitube.site/wp-content/uploads/A-Channel.jpg" alt="Jujutsu-Kaisen">
                                     </figure>
                                 </a>
 
                                 <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">KanColle: Itsuka Ano Umi de 2</h3>
+                                    <a href="A-Channel.html">
+                                        <h3 class="card-title">A-Channel – Todos os Episodios</h3>
                                     </a>
 
-                                    <time datetime="2022">2022</time>
+                                    <time datetime="2011">2011</time>
                                 </div>
 
                                 <div class="card-meta">
@@ -189,7 +1380,7 @@
                                     <div class="rating">
                                         <ion-icon name="star"></ion-icon>
 
-                                        <data>5.9</data>
+                                        <data>6</data>
                                     </div>
 
                                 </div>
@@ -203,13 +1394,507 @@
 
                                 <a href="movie-details.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Fukigen-na-Mononokean-2-Todos-os-Episodios-anitube.jpg" alt="Bleach">
+                                        <img src="https://www.anitube.site/wp-content/uploads/A3-Season-Autumn-Winter-Todos-os-Episódios-AniTube.jpg" alt="Black Cover">
                                     </figure>
                                 </a>
 
                                 <div class="title-wrapper">
                                     <a href="movie-details.html">
-                                        <h3 class="card-title">Fukigen na Mononokean 2</h3>
+                                        <h3 class="card-title">A3! Season Autumn & Winter – Todos os Episódios</h3>
+                                    </a>
+
+                                    <time datetime="2020">2020</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>1.2</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/A3-Season-Spring-Summer-Todos-os-Episódios-AniTube.jpg" alt="chainsaw man ">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">3! Season Spring & Summer – Todos os Episódios</h3>
+                                    </a>
+
+                                    <time datetime="2020">2020</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>1.2</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/303-1.jpg" alt="Death-Note">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Aa! Megami-sama !: Chichaitte Koto wa Benri da ne – Todos os Episódios</h3>
+                                    </a>
+
+                                    <time datetime="2018">2018</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>8.0</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Aa-Megami-sama.jpg" alt="Hunter X Hunter">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Aa! Megami-sama! – Todos os Episodios</h3>
+                                    </a>
+
+                                    <time datetime="2005">2005</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>2.6</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Aa-Megami-sama-1.jpg" alt="Tokyo Ghoul">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">a! Megami-sama! Dublado – Todos os Episodios</h3>
+                                    </a>
+
+                                    <time datetime="2005">2005</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>5.6</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Abarenbou-Kishi-Matsutarou.jpg" alt="SPY x FAMILY">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Abarenbou Kishi!! Matsutarou – Todos os Episodios</h3>
+                                    </a>
+
+                                    <time datetime="2014">2014</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>2.3</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Abenobashi-Mahou-Shoutengai.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Abenobashi Mahou Shoutengai – Todos os Episodios</h3>
+                                    </a>
+
+                                    <time datetime="2002">2002</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>1.3</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Absolute-Duo.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Absolute Duo – Todos os Episodios</h3>
+                                    </a>
+
+                                    <time datetime="2014">2014</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>1.2</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/ACCA.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">ACCA: 13-ku Kansatsu-ka – Todos os Episodios</h3>
+                                    </a>
+
+                                    <time datetime="2017">2017</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>1.5</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Accel-World.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Accel World – Todos os Episodios</h3>
+                                    </a>
+
+                                    <time datetime="2012">2012</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>2.4</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Acchi-Kocchi.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Acchi Kocchi – Todos os Episodios</h3>
+                                    </a>
+
+                                    <time datetime="2012">2012</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>1.7</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Active-Raid-Kidou-Kyoushuushitsu-Dai-Hachi-Gakari-2nd.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Active Raid: Kidou Kyoushuushitsu Dai Hachi Gakari 2nd – Todos os Episodios</h3>
+                                    </a>
+
+                                    <time datetime="2015">2015</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>2.1</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Active-Raid-Kidou-Kyoushuushitsu-Dai-Hakkei-1.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Active Raid: Kidou Kyoushuushitsu Dai Hakkei – Todos os Episodios</h3>
+                                    </a>
+
+                                    <time datetime="2016">2016</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>2.4</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Actors-Songs-Connection-Todos-os-Episodios.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Actors: Songs Connection – Todos os Episódios</h3>
                                     </a>
 
                                     <time datetime="2019">2019</time>
@@ -227,7 +1912,7 @@
                                     <div class="rating">
                                         <ion-icon name="star"></ion-icon>
 
-                                        <data>5</data>
+                                        <data>1.3</data>
                                     </div>
 
                                 </div>
@@ -241,16 +1926,16 @@
 
                                 <a href="movie-details.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Arknights-Reimei-Zensou-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Adachi-to-Shimamura-Todos-os-Episódios-AniTube.jpg" alt="Bleach">
                                     </figure>
                                 </a>
 
                                 <div class="title-wrapper">
                                     <a href="movie-details.html">
-                                        <h3 class="card-title">Arknights: Reimei Zensou</h3>
+                                        <h3 class="card-title"> Adachi to Shimamura – Todos os Episódios</h3>
                                     </a>
 
-                                    <time datetime="2022">2022</time>
+                                    <time datetime="2020">2020</time>
                                 </div>
 
                                 <div class="card-meta">
@@ -265,7 +1950,7 @@
                                     <div class="rating">
                                         <ion-icon name="star"></ion-icon>
 
-                                        <data>7.7</data>
+                                        <data>2.1</data>
                                     </div>
 
                                 </div>
@@ -279,16 +1964,16 @@
 
                                 <a href="movie-details.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Cool-Doji-Danshi-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
+                                        <img src="https://www.anitube.site/wp-content/uploads/B-Project.jpg" alt="Bleach">
                                     </figure>
                                 </a>
 
                                 <div class="title-wrapper">
                                     <a href="movie-details.html">
-                                        <h3 class="card-title">Cool Doji Danshi</h3>
+                                        <h3 class="card-title">B Project – Todos os Episódios</h3>
                                     </a>
 
-                                    <time datetime="2001">2001</time>
+                                    <time datetime="2016">2016</time>
                                 </div>
 
                                 <div class="card-meta">
@@ -303,7 +1988,7 @@
                                     <div class="rating">
                                         <ion-icon name="star"></ion-icon>
 
-                                        <data>2.7</data>
+                                        <data>4.4</data>
                                     </div>
 
                                 </div>
@@ -317,206 +2002,16 @@
 
                                 <a href="movie-details.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Futoku-no-Guild-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
+                                        <img src="https://www.anitube.site/wp-content/uploads/b-project-zecchou-emotion.jpg" alt="Bleach">
                                     </figure>
                                 </a>
 
                                 <div class="title-wrapper">
                                     <a href="movie-details.html">
-                                        <h3 class="card-title">Futoku no Guild</h3>
+                                        <h3 class="card-title">B-Project: Zecchou Emotion</h3> 
                                     </a>
 
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Lian-Qi-Lianle-300-Nian-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Lian Qi Lianle 300 Nian</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>4.9</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Yowamushi-Pedal-Limit-Break-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Yowamushi Pedal: Limit Break</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>6.3</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Bleach-Sennen-Kessen-hen-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Bleach: Sennen Kessen-hen</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>0.1</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Peter-Grill-to-Kenja-no-Jikan-Super-Extra-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Peter Grill to Kenja no Jikan 2</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>5.4</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Berserk-Ougon-Jidai-hen-Memorial-Edition-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Berserk: Ougon Jidai-hen</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
+                                    <time datetime="2019">2019</time>
                                 </div>
 
                                 <div class="card-meta">
@@ -545,393 +2040,13 @@
 
                                 <a href="movie-details.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Blue-Lock-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
+                                        <img src="https://www.anitube.site/wp-content/uploads/B-The-Beginning.jpg" alt="Bleach">
                                     </figure>
                                 </a>
 
                                 <div class="title-wrapper">
                                     <a href="movie-details.html">
-                                        <h3 class="card-title">Blue Lock</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>7.7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Mairimashita-Iruma-kun-3-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Mairimashita! Iruma-kun 3</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>3.7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Seiken-Densetsu-Legend-of-Mana-The-Teardrop-Crystal-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Seiken Densetsu: Legend of Mana</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.2</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Akiba-Maid-Sensou-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Akiba Maid Sensou</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>4</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Muv-Luv-Alternative-2-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Muv-Luv Alternative 2nd Season</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>0</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Kage-no-Jitsuryokusha-ni-Naritakute-Todos-os-Episodios-Anitube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Kage no Jitsuryokusha ni Naritakute!</h3>
-                                    </a>
-
-                                    <time datetime="2022">2022</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>8</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Mairimashita-Iruma-kun-2-Todos-os-Episódios-AniTube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Mairimashita! Iruma-kun 2</h3>
-                                    </a>
-
-                                    <time datetime="2021">2021</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Shakunetsu-Kabaddi-Todos-os-Episódios-AniTube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Shakunetsu Kabaddi</h3>
-                                    </a>
-
-                                    <time datetime="2021">2021</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Majutsushi-Orphen-Hagure-Tabi-Kimluck-hen-Todos-os-Episódios-AniTube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Majutsushi Orphen Hagure Tabi: Kimluck-hen</h3>
-                                    </a>
-
-                                    <time datetime="2021">2021</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/The-God-of-High-School-Todos-os-Episódios-AniTube.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">The God of High School</h3>
-                                    </a>
-
-                                    <time datetime="2020">2020</time>
-                                </div>
-
-                                <div class="card-meta">
-                                    <div class="badge badge-outline">HD</div>
-
-                                    <div class="duration">
-                                        <ion-icon name="time-outline"></ion-icon>
-
-                                        <time datetime="PT137M">NA</time>
-                                    </div>
-
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-
-                                        <data>2.7</data>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="movie-card">
-
-                                <a href="movie-details.html">
-                                    <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Ken-En-Ken-Aoki-Kagayaki-Todos-os-Episódios.jpg" alt="Bleach">
-                                    </figure>
-                                </a>
-
-                                <div class="title-wrapper">
-                                    <a href="movie-details.html">
-                                        <h3 class="card-title">Ken En Ken: Aoki Kagayaki</h3>
+                                        <h3 class="card-title">B: The Beginning – Todos os Episódios</h3>
                                     </a>
 
                                     <time datetime="2018">2018</time>
@@ -949,7 +2064,7 @@
                                     <div class="rating">
                                         <ion-icon name="star"></ion-icon>
 
-                                        <data>2.7</data>
+                                        <data>7.1</data>
                                     </div>
 
                                 </div>
@@ -963,13 +2078,127 @@
 
                                 <a href="movie-details.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Tenka-Hyakken-Meiji-kan-e-Youkoso-Todos-os-Episódios.jpg" alt="Bleach">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Babel-II-Beyond-Infinity.jpg" alt="Bleach">
                                     </figure>
                                 </a>
 
                                 <div class="title-wrapper">
                                     <a href="movie-details.html">
-                                        <h3 class="card-title">Tenka Hyakken: Meiji-kan e Youkoso!</h3>
+                                        <h3 class="card-title">Babel II: Beyond Infinity – Todos os Episódios</h3>
+                                    </a>
+
+                                    <time datetime="2001">2001</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>1.3</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Baby-Steps.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Baby Steps – Todos os Episódios</h3>
+                                    </a>
+
+                                    <time datetime="2014">2014</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>5.0</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Baby-Steps-2.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Baby Steps 2 – Todos os Episódios</h3>
+                                    </a>
+
+                                    <time datetime="2014">2014</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>2.5</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Babylon-Todos-os-Episódios.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Babylon – Todos os Episódios</h3>
                                     </a>
 
                                     <time datetime="2019">2019</time>
@@ -987,7 +2216,7 @@
                                     <div class="rating">
                                         <ion-icon name="star"></ion-icon>
 
-                                        <data>2.7</data>
+                                        <data>1.0</data>
                                     </div>
 
                                 </div>
@@ -1001,16 +2230,16 @@
 
                                 <a href="movie-details.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Ninin-ga-Shinobuden-–-Todos-os-Episódios.jpg" alt="Bleach">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Baccano.jpg" alt="Bleach">
                                     </figure>
                                 </a>
 
                                 <div class="title-wrapper">
                                     <a href="movie-details.html">
-                                        <h3 class="card-title">Ninin ga Shinobuden</h3>
+                                        <h3 class="card-title">Baccano – Todos os Episódios</h3>
                                     </a>
 
-                                    <time datetime="2004">2004</time>
+                                    <time datetime="2007">2007</time>
                                 </div>
 
                                 <div class="card-meta">
@@ -1025,7 +2254,7 @@
                                     <div class="rating">
                                         <ion-icon name="star"></ion-icon>
 
-                                        <data>2.7</data>
+                                        <data>1.3</data>
                                     </div>
 
                                 </div>
@@ -1039,16 +2268,16 @@
 
                                 <a href="movie-details.html">
                                     <figure class="card-banner">
-                                        <img src="https://www.anitube.site/wp-content/uploads/Mugen-no-Juunin-Immortal-Todos-os-Episódios-Online.jpg" alt="Bleach">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Back-Arrow-Todos-os-Episódios-AniTube.jpg" alt="Bleach">
                                     </figure>
                                 </a>
 
                                 <div class="title-wrapper">
                                     <a href="movie-details.html">
-                                        <h3 class="card-title">Mugen no Juunin Immortal</h3>
+                                        <h3 class="card-title">Back Arrow – Todos os Episódios</h3>
                                     </a>
 
-                                    <time datetime="2019">2019</time>
+                                    <time datetime="2021">2021</time>
                                 </div>
 
                                 <div class="card-meta">
@@ -1063,7 +2292,273 @@
                                     <div class="rating">
                                         <ion-icon name="star"></ion-icon>
 
-                                        <data>2.7</data>
+                                        <data>2.4</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Back-Street-Girls-Gokudolls.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Back Street Girls: Gokudolls – Todos os Episódios</h3>
+                                    </a>
+
+                                    <time datetime="2018">2018</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>0.9</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Baka-to-Test-to-Shoukanjuu.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Baka to Test to Shoukanjuu – Todos os Episódios</h3>
+                                    </a>
+
+                                    <time datetime="2010">2010</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>2.3</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Baka-to-Test-to-Shoukanjuu-Ni-2-ff.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Baka to Test to Shoukanjuu Ni – [2° Temporada] – Todos os Episódios</h3>
+                                    </a>
+
+                                    <time datetime="2011">2011</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>1.7</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/bakemonogatari-2470.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Bakemonogatari – Todos os Episódios</h3>
+                                    </a>
+
+                                    <time datetime="2009">2009</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>1.5</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Baki.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Baki (2018) – Todos os Episódios</h3>
+                                    </a>
+
+                                    <time datetime="2018">2018</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>8.6</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Baki-2-Temporada-Todos-os-Episódios-AniTube.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Baki 2 – Todos os Episódios</h3>
+                                    </a>
+
+                                    <time datetime="2020">2020</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">HD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>7.1</data>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="movie-card">
+
+                                <a href="movie-details.html">
+                                    <figure class="card-banner">
+                                        <img src="https://www.anitube.site/wp-content/uploads/Baki-the-Grappler.jpg" alt="Bleach">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="movie-details.html">
+                                        <h3 class="card-title">Baki the Grappler – Todos os Episódios</h3>
+                                    </a>
+
+                                    <time datetime="2001">2001</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">SD</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">NA</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>4.4</data>
                                     </div>
 
                                 </div>
@@ -1074,97 +2569,11 @@
 
                     </ul>
 
-            <section class="service">
-                <div class="container">
-                    <div class="service-banner">
-                        <figure>
-                            <img src="service-banner.jpg" alt="HD 4K Resolução! Apenas R$2.99">
-                        </figure>
-
-                        <a href="service-banner.jpg" download class="service-btn">
-                            <span>download</span>
-
-                            <ion-icon name="download-outline"></ion-icon>
-                        </a>
-
-                    </div>
-
-                    <div class="service-content">
-
-                        <p class="service-subtitle">Outros Serviços</p>
-
-                        <h2 class="h2 service-title">Faça download Para Ver OffLine.</h2>
-
-                        <p class="service-text">
-                            Filmes, séries e muito mais. Sem limites. Assista onde quiser. Cancele quando quiser.
-                        </p>
-
-                        <ul class="service-list">
-
-                            <li>
-                                <div class="service-card">
-
-                                    <div class="card-icon">
-                                        <ion-icon name="TV"></ion-icon>
-                                    </div>
-
-                                    <div class="card-content">
-                                        <h3 class="h3 card-title">Aproveite na TV.</h3>
-
-                                        <p class="card-text">
-                                            Assista em Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, aparelhos de Blu-ray e outros dispositivos.
-                                        </p>
-                                    </div>
-
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="service-card">
-
-                                    <div class="card-icon">
-                                        <ion-icon name="videocam"></ion-icon>
-                                    </div>
-
-                                    <div class="card-content">
-                                        <h3 class="h3 card-title">Baixe Animes para assistir offline.</h3>
-
-                                        <p class="card-text">
-                                            Salve seus títulos favoritos e sempre tenha algo para assistir.
-                                        </p>
-                                    </div>
-
-                                </div>
-                            </li>
-
-                        </ul>
-
-                    </div>
-
                 </div>
             </section>
 
-            <section class="cta">
-                <div class="container">
-
-                    <div class="title-wrapper">
-                        <h2 class="cta-title">Teste Gratis Por 30 Dias</h2>
-
-                        <p class="cta-text">
-                            Entre Com Seu E-mail E Começe Seus Dias De Aventura!
-                        </p>
-                    </div>
-
-                    <form action="" class="cta-form">
-                        <input type="email" name="email" required placeholder="Entre Com Email" class="email-field">
-
-                        <button type="submit" class="cta-form-btn">Pronto</button>
-                    </form>
-
-                </div>
-            </section>
-
-        </article>
+            <button onclick="toggle('conteudo')" id="read_button">Ver mais</button>
+            
     </main>
 
     <footer class="footer">
@@ -1185,7 +2594,7 @@
                     </li>
 
                     <li>
-                        <a href="#" class="footer-link">Animes</a>
+                        <a href="index.html" class="footer-link">Animes</a>
                     </li>
 
                     <li>
@@ -1197,7 +2606,7 @@
                     </li>
 
                     <li>
-                        <a href="#" class="footer-link">Recomendados</a>
+                        <a href="recomendados.html" class="footer-link">Recomendados</a>
                     </li>
 
                 </ul>
@@ -1210,19 +2619,19 @@
                 <ul class="quicklink-list">
 
                     <li>
-                        <a href="#" class="quicklink-link">Faq</a>
+                        <a href="copyright.html" class="quicklink-link">Faq</a>
                     </li>
 
                     <li>
-                        <a href="#" class="quicklink-link">Centro De Ajuda</a>
+                        <a href="copyright.html" class="quicklink-link">Centro De Ajuda</a>
                     </li>
 
                     <li>
-                        <a href="#" class="quicklink-link">Termos De Uso</a>
+                        <a href="copyright.html" class="quicklink-link">Termos De Uso</a>
                     </li>
 
                     <li>
-                        <a href="#" class="quicklink-link">Privacidade</a>
+                        <a href="copyright.html" class="quicklink-link">Privacidade</a>
                     </li>
 
                 </ul>
@@ -1279,8 +2688,35 @@
         </a>
 
     <script src="script.js"></script>
-
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="linguagem.js"></script>
+    <script>
+        function toggle(el) {
+            var display = document.getElementById(el).style.display;
+            if(display == "none"){
+                document.getElementById('conteudo').style.display = 'block'
+                document.getElementById('read_button').style.display = 'none'
+            } else {
+                document.getElementById(el).style.display = 'none';
+                
+            }
+            
+        }
+
+        function toggle2(el) {
+            var display = document.getElementById(el).style.display;
+            if(display == "none"){
+                document.getElementById('conteudo2').style.display = 'none'
+                document.getElementById('conteudo3').style.display = 'none'
+                document.getElementById('conteudo4').style.display = 'none'
+            } else {
+                document.getElementById(el).style.display = 'none';
+            }
+        }
+
+    </script>
+    <script src="mostrarVideos.js" type="module"></script>
+    <script src="buscarVideo.js" type="module"></script>
 </body>
 </html>
