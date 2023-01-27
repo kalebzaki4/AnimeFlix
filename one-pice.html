@@ -821,7 +821,7 @@ body.active { overflow: hidden; }
 }
 
 .movie-detail {
-  background: url("banner-1.jpg") no-repeat;
+  background: url("banner-1.jpg");
   background-size: cover;
   background-position: center;
   padding-top: 160px;
@@ -1095,7 +1095,7 @@ body.active { overflow: hidden; }
   .container { max-width: 960px; }
 
   .movie-detail{
-    background: url("banner-1.jpg") no-repeat;
+    background: url("banner-1.jpg");
   }
 
   .movies-list {grid-template-columns: repeat(3, 1fr); }
@@ -1272,113 +1272,103 @@ body.active { overflow: hidden; }
 </style>
 <body id="#top">
 
-    <header class="header" data-header>
-        <div class="container">
+  <header class="header" data-header>
+    <div class="container">
 
-        <div class="overlay" data-overlay></div>
+    <div class="overlay" data-overlay></div>
 
-        <a href="index.html" class="logo">
-            <img src="logo-animeflix.png" alt="AnimeFlix logo" width="200px">
-        </a>
+    <a href="index.html" class="logo">
+        <img src="logo-animeflix.png" alt="AnimeFlix logo" width="300px">
+    </a>
 
-        <div class="header-actions">
+    <div class="header-actions">
 
-        <button class="search-btn">
-         <ion-icon name="search-outline"></ion-icon>
-        </button>
-
-        <div class="lang-wrapper">
-            <label for="language">
-                <ion-icon name="globe-outline"></ion-icon>
-            </label>
-
-            <select name="language" id="language">
-                <option value="en">EN</option>
-                <option value="au">AU</option>
-                <option value="ar">AR</option>
-                <option value="br">BR</option>
-            </select>
+        <div class="search-box">
+            <input type="text" class="search-txt" placeholder="Não é permitido aqui!" list="historico" data-pesquisa>
+            <button onclick="toggle2('conteudo2')" class="search-button" data-botao-pesquisa>
+            <img src="pesquisa.svg" alt="Lupa" height="20" width="20">
+            </button>
         </div>
 
-        <button class="btn btn-primary">Entrar</button>
+    <a href="login.html"><button class="btn btn-primary">Entrar</button></a>
 
+    </div>
+
+    <button class="menu-open-btn" data-menu-open-btn>
+        <ion-icon name="reorder-two"></ion-icon>
+    </button>
+
+    <nav class="navbar" data-navbar>
+
+        <div class="navbar-top">
+
+            <a href="index.html" class="logo">
+                <img src="logo-animeflix.png" alt="AnimeFlix logo" width="200px">
+            </a>
+
+            <button class="menu-close-btn" data-menu-close-btn>
+                <ion-icon name="close-outline"></ion-icon>
+            </button>
         </div>
 
-        <button class="menu-open-btn" data-menu-open-btn>
-            <ion-icon name="reorder-two"></ion-icon>
-        </button>
+        <ul class="navbar-list">
 
-        <nav class="navbar" data-navbar>
+            <li>
+                <a href="index.html" class="navbar-link">Home</a>
+            </li>
 
-            <div class="navbar-top">
+            <li>
+                <a href="famosos.html" class="navbar-link">Famosos</a>
+            </li>
 
-                <a href="index.html" class="logo">
-                    <img src="logo-animeflix.png" alt="AnimeFlix logo">
+            <li>
+                <a href="recomendados.html" class="navbar-link">Recomendados</a>
+            </li>
+
+            <li>
+                <a href="login.html" class="navbar-link">Entrar</a>
+            </li>
+
+        </ul>
+
+        <ul class="navbar-social-list">
+
+            <li>
+                <a href="#" class="navbar-social-link">
+                    <ion-icon name="logo-twitter"></ion-icon>
                 </a>
+            </li>
 
-                <button class="menu-close-btn" data-menu-close-btn>
-                    <ion-icon name="close-outline"></ion-icon>
-                </button>
-            </div>
+            <li>
+                <a href="#" class="navbar-social-link">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+            </li>
 
-            <ul class="navbar-list">
+            <li>
+                <a href="#" class="navbar-social-link">
+                    <ion-icon name="logo-pinterest"></ion-icon>
+                </a>
+            </li>
 
-                <li>
-                    <a href="index.html" class="navbar-link">Home</a>
-                </li>
+            <li>
+                <a href="#" class="navbar-social-link">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+            </li>
 
-                <li>
-                    <a href="famosos.html" class="navbar-link">Famosos</a>
-                </li>
+            <li>
+                <a href="#" class="navbar-social-link">
+                    <ion-icon name="logo-youtube"></ion-icon>
+                </a>
+            </li>
 
-                <li>
-                    <a href="recomendados.html" class="navbar-link">Recomendados</a>
-                </li>
+        </ul>
 
-                <li>
-                    <a href="minha-lista.html" class="navbar-link">Minha Lista</a>
-                </li>
+    </nav>
 
-            </ul>
-
-            <ul class="navbar-social-list">
-
-                <li>
-                    <a href="#" class="navbar-social-link">
-                        <ion-icon name="logo-twitter"></ion-icon>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#" class="navbar-social-link">
-                        <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#" class="navbar-social-link">
-                        <ion-icon name="logo-pinterest"></ion-icon>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#" class="navbar-social-link">
-                        <ion-icon name="logo-instagram"></ion-icon>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#" class="navbar-social-link">
-                        <ion-icon name="logo-youtube"></ion-icon>
-                    </a>
-                </li>
-
-            </ul>
-
-        </nav>
-
-       </div>
-    </header> 
+   </div>
+</header>
 
     <main>
         <article>
