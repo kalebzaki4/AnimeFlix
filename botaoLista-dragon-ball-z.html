@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Lista de Episodios!</title>
+</head>
+<body>
+
+    <header class="header" data-header>
+        <div class="container">
+
+        <div class="overlay" data-overlay></div>
+
+        <a href="index.html" class="logo">
+            <img src="logo-animeflix.png" alt="AnimeFlix logo" width="300px">
+        </a>
+
+        <div class="header-actions">
+
+            <div class="search-box">
+                <input type="text" class="search-txt" placeholder="Pesquisar" list="historico" data-pesquisa>
+                <button onclick="toggle2('conteudo2')" class="search-button" data-botao-pesquisa>
+                <img src="pesquisa.svg" alt="Lupa" height="20" width="20">
+                </button>
+            </div>
+
+        <a href="login.html"><button class="btn btn-primary">Entrar</button></a>
+
+        </div>
+
+        <button class="menu-open-btn" data-menu-open-btn>
+            <ion-icon name="reorder-two"></ion-icon>
+        </button>
+
+        <nav class="navbar" data-navbar>
+
+            <div class="navbar-top">
+
+                <a href="index.html" class="logo">
+                    <img src="logo-animeflix.png" alt="AnimeFlix logo" width="200px">
+                </a>
+
+                <button class="menu-close-btn" data-menu-close-btn>
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+
+            <ul class="navbar-list">
+
+                <li>
+                    <a href="index.html" class="navbar-link">Home</a>
+                </li>
+
+                <li>
+                    <a href="famosos.html" class="navbar-link">Famosos</a>
+                </li>
+
+                <li>
+                    <a href="recomendados.html" class="navbar-link">Recomendados</a>
+                </li>
+
+                <li>
+                    <a href="login.html" class="navbar-link">Entrar</a>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-social-list">
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-pinterest"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-youtube"></ion-icon>
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+       </div>
+    </header>
+
+    <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
+        <ul class="movies-list">
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 2</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">24:13</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 3</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">24:13</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 4</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">24:13</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 5</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">24:13</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 6</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">24:13</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 7</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">24:13</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 8</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">24:13</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 9 </h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">24:13</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 10</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">24:13</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 11</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">24:13</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 12</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">24:13</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 13</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">NA</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 14</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">24:13</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 15</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">NA</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 16</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">24:13</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="movie-card">
+                    <a href="A-Channel.html">
+                        <figure class="card-banner">
+                            <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                        </figure>
+                    </a>
+                    <div class="title-wrapper">
+                        <a href="A-Channel.html">
+                            <h3 class="card-title">Dragon Ball Z episodio 17</h3>
+                        </a>
+                        <time datetime="1989">1989</time>
+                    </div>
+                    <div class="card-meta">
+                        <div class="badge badge-outline">SD</div>
+                        <div class="duration">
+                            <ion-icon name="time-outline"></ion-icon>
+                            <time datetime="PT137M">24:10</time>
+                        </div>
+                        <div class="rating">
+                            <ion-icon name="star"></ion-icon>
+                            <data>9.3</data>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <button class="abrir" onclick="toggle('conteudo')" id="read_button">Ver mais</button>
+
+    <section id="conteudo" class="top-rated abrir"; style="display: none; background-color: #1b2227; padding-top: 0px;">
+        <div class="container" >
+
+            <ul class="movies-list">
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 18</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 19</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 20</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 21</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 22</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 23</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 24</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 25</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 26</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 27</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 28</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 29</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">NA</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 30</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 31</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">NA</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 32</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 33</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:10</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 34</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 35</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 36</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 37</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 38</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 39</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 40</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 41</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 42</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 43</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 44</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 45</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">NA</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 46</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 47</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">NA</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 48</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:13</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="movie-card">
+                        <a href="A-Channel.html">
+                            <figure class="card-banner">
+                                <img src="https://subanimes.cc/wp-content/uploads/2020/11/dragon-ball-z-online-todos-os-episodios.jpg">
+                            </figure>
+                        </a>
+                        <div class="title-wrapper">
+                            <a href="A-Channel.html">
+                                <h3 class="card-title">Dragon Ball Z episodio 49</h3>
+                            </a>
+                            <time datetime="1989">1989</time>
+                        </div>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">SD</div>
+                            <div class="duration">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT137M">24:10</time>
+                            </div>
+                            <div class="rating">
+                                <ion-icon name="star"></ion-icon>
+                                <data>9.3</data>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="linguagem.js"></script>
+    <script>
+        function toggle(el) {
+            var display = document.getElementById(el).style.display;
+            if(display == "none"){
+                document.getElementById('conteudo').style.display = 'block'
+                document.getElementById('read_button').style.display = 'none'
+            } else {
+                document.getElementById(el).style.display = 'none';
+                
+            }
+            
+        }
+
+        function toggle2(el) {
+            var display = document.getElementById(el).style.display;
+            if(display == "none"){
+                document.getElementById('conteudo2').style.display = 'none'
+                document.getElementById('conteudo3').style.display = 'none'
+                document.getElementById('conteudo4').style.display = 'none'
+            } else {
+                document.getElementById(el).style.display = 'none';
+            }
+        }
+
+    </script>
+    <script src="mostrarVideos.js" type="module"></script>
+    <script src="buscarVideo.js" type="module"></script>
+    <script src="rolagem.js"></script>
+</body>
+</html>
