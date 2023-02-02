@@ -58,7 +58,7 @@ import dbzEp29Lista from "./episodios/dragon-ball-z/ep29-lista"
 import dbzEp30 from "./episodios/dragon-ball-z/ep30"
 import dbzEp30Lista from "./episodios/dragon-ball-z/ep30-lista"
 
-const main = document.querySelector('#root');
+const main = document.querySelector('#root')
 
 const init = () => {
     window.addEventListener("hashchange", () => {
