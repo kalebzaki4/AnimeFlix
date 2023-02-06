@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeFlix - Assista Animes Gratis!</title>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/svg+xml">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+
+</head>
+<style>
+
+.abrir {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(-100%);
+  transition: all 1s;
+
+}
+
+.show {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+}
+
+    .hero {
+  background: url(../banner-1.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 750px;
+  height: 100vh;
+  max-height: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-block: var(--section-padding);
+}
+
+.Btn{
+  color: var(--white);
+  font-weight: var(--fs-11);
+  font-weight: var(--fw-700);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: flex;
+  gap: 10px;
+  padding: 16px 30px;
+  border: 2px solid var(--citrine);
+  border-radius: 50px;
+  transition: var(--transition-1);
+  position: absolute;
+  bottom: 250px;
+}
+
+.Meta-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px 25px;
+  margin-bottom: 50px;
+  position: absolute;
+  bottom: 265px;
+}
+
+@media (min-width: 360px) {
+    .container3 {
+        left: 2px;
+        width: 347px;
+        bottom: 100px;
+    }
+    
+    .read_button {
+        width: 100px;
+        height: 50px;
+    }
+
+    .read_button2 {
+        width: 50px;
+        height: 50px;
+    }
+
+    .read_button3 {
+        width: 100px;
+        height: 50px;
+    }
+
+    .read_button4 {
+        width: 93px;
+        height: 50px;
+        left: 254px;
+        top: 239px;
+        position: absolute;
+    }
+
+    .informacao,
+    .informacao2,
+    .informacao3 {
+        display: none;
+    }
+
+
+}
+
+@media (min-width: 375px) {
+    .container3 {
+        left: 2px;
+        width: 360px;
+        bottom: 200px;
+    }
+    
+    .read_button {
+        width: 85px;
+        height: 50px;
+    }
+
+    .read_button2 {
+        width: 50px;
+        height: 50px;
+    }
+
+    .read_button3 {
+        width: 85px;
+        height: 50px;
+    }
+
+    .read_button4 {
+        width: 135px;
+        height: 50px;
+        left: 224px;
+        top: 240px;
+        position: absolute;
+    }
+
+    .informacao,
+    .informacao2,
+    .informacao3 {
+        display: none;
+    }
+
+    .flecha {
+        position: relative;
+        left: 20px;
+    }
+
+
+}
+
+@media (min-width: 393px) {
+    .container3 {
+        left: 2px;
+        width: 379px;
+        bottom: 200px;
+    }
+    
+    .read_button {
+        width: 85px;
+        height: 50px;
+    }
+
+    .read_button2 {
+        width: 50px;
+        height: 50px;
+    }
+
+    .read_button3 {
+        width: 85px;
+        height: 50px;
+    }
+
+    .read_button4 {
+        width: 155px;
+        height: 50px;
+        left: 224px;
+        top: 257px;
+        position: absolute;
+    }
+
+    .informacao,
+    .informacao2,
+    .informacao3 {
+        display: none;
+    }
+
+    .flecha {
+        position: relative;
+        left: 30px;
+    }
+
+
+}
+
+@media (min-width: 411px) {
+    .container3 {
+        left: -9px;
+        width: 410px;
+        bottom: 200px;
+    }
+    
+    .read_button {
+        width: 100px;
+        height: 50px;
+    }
+
+    .read_button2 {
+        width: 50px;
+        height: 50px;
+    }
+
+    .read_button3 {
+        width: 100px;
+        height: 50px;
+    }
+
+    .read_button4 {
+        width: 154px;
+        height: 50px;
+        left: 254px;
+        top: 275px;
+        position: absolute;
+    }
+
+    .informacao,
+    .informacao2,
+    .informacao3 {
+        display: none;
+    }
+
+    .flecha {
+        position: relative;
+        left: 25px;
+    }
+
+
+}
+
+@media (min-width: 412px) {
+    .container3 {
+        left: -9px;
+        width: 409px;
+        bottom: 200px;
+    }
+    
+    .read_button {
+        width: 100px;
+        height: 50px;
+    }
+
+    .read_button2 {
+        width: 50px;
+        height: 50px;
+    }
+
+    .read_button3 {
+        width: 100px;
+        height: 50px;
+    }
+
+    .read_button4 {
+        width: 154px;
+        height: 50px;
+        left: 254px;
+        top: 274px;
+        position: absolute;
+    }
+
+    .informacao,
+    .informacao2,
+    .informacao3 {
+        display: none;
+    }
+
+    .flecha {
+        position: relative;
+        left: 25px;
+    }
+
+
+}
+
+@media (min-width: 414px) {
+    .container3 {
+        left: 2px;
+        width: 400px;
+        bottom: 300px;
+    }
+    
+    .read_button {
+        width: 100px;
+        height: 50px;
+    }
+
+    .read_button2 {
+        width: 50px;
+        height: 50px;
+    }
+
+    .read_button3 {
+        width: 100px;
+        height: 50px;
+    }
+
+    .read_button4 {
+        width: 145px;
+        height: 50px;
+        left: 254px;
+        top: 269px;
+        position: absolute;
+    }
+
+    .informacao,
+    .informacao2,
+    .informacao3 {
+        display: none;
+    }
+
+    .flecha {
+        position: relative;
+        left: 25px;
+    }
+
+
+}
+
+@media (min-width: 600px) {
+    .container3 {
+        width: 580px;
+        bottom: 270px;
+        left: 5px;
+    }
+    
+    .read_button {
+        width: 190px;
+        height: 60px;
+    }
+
+    .read_button2 {
+        width: 60px;
+        height: 60px;
+        left: -16px;
+    }
+
+    .read_button3 {
+        width: 190px;
+        height: 60px;
+        left: -33px;
+    }
+
+    .read_button4 {
+        width: 130px;
+        height: 60px;
+        left: 450px;
+        top: 376px;
+        position: absolute;
+    }
+
+    .informacao,
+    .informacao2 {
+        display: block;
+    }
+
+    .flecha {
+        position: relative;
+        left: 18px;
+    }
+}
+
+@media (min-width: 688px) {
+    .container3 {
+        width: 650px;
+        bottom: 400px;
+        left: 14px;
+    }
+    
+    .read_button {
+        width: 190px;
+        height: 60px;
+    }
+
+    .read_button2 {
+        width: 60px;
+        height: 60px;
+        left: -16px;
+    }
+
+    .read_button3 {
+        width: 190px;
+        height: 60px;
+        left: -33px;
+    }
+
+    .read_button4 {
+        width: 200px;
+        height: 60px;
+        left: 450px;
+        top: 416px;
+        position: absolute;
+    }
+
+    .informacao,
+    .informacao2{
+        display: block;
+    }
+
+    .flecha {
+        position: relative;
+        left: 53px;
+    }
+
+@media (min-width: 758px) {
+    .container3 {
+        width: 740px;
+        bottom: 270px;
+        left: 10px;
+    }
+    
+    .read_button {
+        width: 190px;
+        height: 60px;
+    }
+
+    .read_button2 {
+        width: 60px;
+        height: 60px;
+        left: -16px;
+    }
+
+    .read_button3 {
+        width: 190px;
+        height: 60px;
+        left: -33px;
+    }
+
+    .read_button4 {
+        width: 290px;
+        height: 60px;
+        left: 450px;
+        top: 466px;
+        position: absolute;
+    }
+
+    .informacao,
+    .informacao2,
+    .informacao3 {
+        display: block;
+    }
+
+    .flecha {
+        position: relative;
+        left: 18px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container3 {
+        width: 700px;
+        bottom: 240px;
+        right: 0px;
+    }
+    
+    .read_button {
+        width: 190px;
+        height: 60px;
+    }
+
+    .read_button2 {
+        width: 60px;
+        height: 60px;
+        left: -16px;
+    }
+
+    .read_button3 {
+        width: 190px;
+        height: 60px;
+        left: -33px;
+    }
+
+    .read_button4 {
+        width: 250px;
+        height: 60px;
+        left: 450px;
+        top: 444px;
+        position: absolute;
+    }
+
+    .informacao,
+    .informacao2,
+    .informacao3 {
+        display: block;
+    }
+
+    .flecha {
+        position: relative;
+        left: 0px;
+    }
+}
+
+}
+
+@media (min-width: 1280px) {
+    .container3 {
+        width: 700px;
+        bottom: 100px;
+        right: 0px;
+    }
+    
+    .read_button {
+        width: 190px;
+        height: 60px;
+    }
+
+    .read_button2 {
+        width: 60px;
+        height: 60px;
+        left: -16px;
+    }
+
+    .read_button3 {
+        width: 190px;
+        height: 60px;
+        left: -33px;
+    }
+
+    .read_button4 {
+        width: 250px;
+        height: 60px;
+        left: 450px;
+        top: 444px;
+        position: absolute;
+    }
+
+    .informacao,
+    .informacao2,
+    .informacao3 {
+        display: block;
+    }
+
+    .flecha {
+        position: relative;
+        left: 0px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .container3 {
+        width: 700px;
+        bottom: 140px;
+        right: 0px;
+    }
+    
+    .read_button {
+        width: 190px;
+        height: 60px;
+    }
+
+    .read_button2 {
+        width: 60px;
+        height: 60px;
+        left: -16px;
+    }
+
+    .read_button3 {
+        width: 190px;
+        height: 60px;
+        left: -33px;
+    }
+
+    .read_button4 {
+        width: 250px;
+        height: 60px;
+        left: 450px;
+        top: 439px;
+        position: absolute;
+    }
+
+    .informacao,
+    .informacao2,
+    .informacao3 {
+        display: block;
+    }
+
+    .flecha {
+        position: relative;
+        left: 0px;
+    }
+
+    .abrir {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(-100%);
+  transition: all 1s;
+
+}
+
+.show {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+}
+}
+
+.home{
+    width: 200px;
+    height: 35px;
+}
+
+</style>
+<body id="#top">
+
+    <header class="header" data-header>
+        <div class="container">
+
+        <div class="overlay" data-overlay></div>
+
+        <a href="../index.html" class="logo">
+            <img src="../logo-animeflix.png" alt="AnimeFlix logo" width="300px">
+        </a>
+
+        <div class="header-actions">
+
+            <div class="search-box">
+                <input type="text" class="search-txt" placeholder="Pesquisar" list="historico" data-pesquisa>
+                <button class="search-button" data-botao-pesquisa>
+                <img src="../pesquisa.svg" alt="Lupa" height="20" width="20">
+                </button>
+            </div>
+
+        </div>
+
+        <button class="menu-open-btn" data-menu-open-btn>
+            <ion-icon name="reorder-two"></ion-icon>
+        </button>
+
+        <nav class="navbar" data-navbar>
+
+            <div class="navbar-top">
+
+                <a href="../index.html" class="logo">
+                    <img src="../img/logo-animeflix.png" alt="AnimeFlix logo" width="200px">
+                </a>
+
+                <button class="menu-close-btn" data-menu-close-btn>
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+
+            <ul class="navbar-list">
+
+                <li>
+                    <a href="../index.html" class="navbar-link">Home</a>
+                </li>
+
+                <li>
+                    <a href="../famosos.html" class="navbar-link">Famosos</a>
+                </li>
+
+                <li>
+                    <a href="../recomendados.html" class="navbar-link">Recomendados</a>
+                </li>
+
+                <li>
+                    <a href="../recomendados.html" class="navbar-link">Lista</a>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-social-list">
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-pinterest"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="navbar-social-link">
+                        <ion-icon name="logo-youtube"></ion-icon>
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+       </div>
+    </header>
+                <article>
+                    <section class="hero">
+                        <div class="hero-content">
+                            <div class="container3">
+                                <a href="https://blog.legacyfun.site/noticia.php?token=68747470733a2f2f786e76742e6f6e6c696e652f702d6f6e2f3f743d4331567a7a777a7269435949626e6748716f65314a6255334e48316a6542356c616b6d66675a4c693848317264587a447172464558486248677436666a4336354f5953463858783658437a6538317241574e4a5633426d6e655936734d463930533855664438585a364f4875336f453535736e4163375572637a616f73367062636f306e63516235447858744965617436717634435a6831312b4d4c747563414a79466a57386b45382f3939654c58544e5263313657306d46504d655736357a474a4d544a4b614632413d3d26713d6864266e756d3d312669643d363634342673657269653d4f6e652b506965636526696d673d68747470733a2f2f696d6167652e746d64622e6f72672f742f702f6f726967696e616c2f6a514673487a594b5144787649705834325071737a59556d706e352e6a70672665703d312b2d2b45752b536f752b4c756666792532312b417175656c652b5175652b5365722543332541312b6f2b5265692b646f732b50697261746173253231266f72696e3d68747470733a2f2f616e696d657375702e62697a2f657069736f64696f732f6f6e652d70696563652d657069736f64696f2d312d6f6e6c696e652d6c6567656e6461646f2d68642f26696d673d68747470733a2f2f696d6167652e746d64622e6f72672f742f702f6f726967696e616c2f6a514673487a594b5144787649705834325071737a59556d706e352e6a7067&orin=https://animesup.biz/episodios/one-piece-episodio-1-online-legendado-hd/" target="_blank">
+                                    <div class="main-video-container">
+                                       <div id="proximo">
+                                           <img src="../clique aqui.png" autoplay controls class="main-video">
+                                           <h3 class="main-vid-title">One-Piece Episodio 1</h3>
+                                       </div>
+                                    </div>
+                                </a>
+                                <a href="#home">
+                                    <button class="read_button">
+                                        <img src="../arrow-back.svg" width="30px" alt="icon flecha">
+                                        <span class="informacao">ANTERIOR</span>
+                                    </button>
+                                </a>
+                                <a href="index.html">
+                                    <button class="read_button2">
+                                    <ion-icon class="home" name="home"></ion-icon>
+                                        <span></span>
+                                    </button>
+                                </a>
+                                    <a href="#ep3">
+                                        <div id="content"></div>
+                                        <button class="read_button3">
+                                            <span class="informacao2">PROXIMO</span>
+                                            <img src="../arrow-forward.svg" width="30px" alt="icon flecha">
+                                        </button>
+                                    </a>
+                                <a href="https://api.whatsapp.com/send?text=https://kalebzaki4.github.io/AnimeFlix/one-piece/ON1.html" target="_blank">
+                                    <button class="read_button4">
+                                        <span class="informacao3">COMAPARTILHAR</span>
+                                        <img class="flecha" src="../compartilhar.svg" width="30px" alt="icon flecha">
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                    </section>
+        </div>
+
+        <section class="top-rated">
+            <div class="container">
+                <p class="section-subtitle">transmissão online</p>
+                <h2 class="h2 section-tilte">Recomendados</h2>
+    
+        <ul class="movies-list" >
+      <li>
+          <div class="movie-card">
+              <a href="#ep2Lista">
+                  <figure class="card-banner">
+                      <img src="https://animeq.xyz/wp-content/uploads/assisitr-one-piece.jpg">
+                  </figure>
+              </a>
+              <div class="title-wrapper">
+                  <a href="#ep2Lista">
+                      <h3 class="card-title">One-Piece episodio 2</h3>
+                  </a>
+                  <time datetime="1989">1989</time>
+              </div>
+              <div class="card-meta">
+                  <div class="badge badge-outline">SD</div>
+                  <div class="duration">
+                      <ion-icon name="time-outline"></ion-icon>
+                      <time datetime="PT137M">24:13</time>
+                  </div>
+                  <div class="rating">
+                      <ion-icon name="star"></ion-icon>
+                      <data>9.3</data>
+                  </div>
+              </div>
+          </div>
+      </li>
+      <li>
+          <div class="movie-card">
+              <a href="#ep3Lista">
+                  <figure class="card-banner">
+                      <img src="https://animeq.xyz/wp-content/uploads/assisitr-one-piece.jpg">
+                  </figure>
+              </a>
+              <div class="title-wrapper">
+                  <a href="#ep3Lista">
+                      <h3 class="card-title">Dragon Ball Z episodio 3</h3>
+                  </a>
+                  <time datetime="1989">1989</time>
+              </div>
+              <div class="card-meta">
+                  <div class="badge badge-outline">SD</div>
+                  <div class="duration">
+                      <ion-icon name="time-outline"></ion-icon>
+                      <time datetime="PT137M">24:13</time>
+                  </div>
+                  <div class="rating">
+                      <ion-icon name="star"></ion-icon>
+                      <data>9.3</data>
+                  </div>
+              </div>
+          </div>
+      </li>
+      
+                        </ul>
+
+
+    <footer class="footer">
+
+        <div class="footer-top">
+            <div class="container">
+
+                <div class="footer-brand-wrapper">
+
+                <a href="../index.html" class="logo">
+                    <img src="../logo-animeflix.png" alt="AnimeFlix logo">
+                </a>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <a href="../index.html" class="footer-link">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="../index.html" class="footer-link">Animes</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Filmes</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Famosos</a>
+                    </li>
+
+                    <li>
+                        <a href="../recomendados.html" class="footer-link">Recomendados</a>
+                    </li>
+
+                </ul>
+            </div>
+
+
+            <div class="divider"></div>
+
+            <div class="quicklink-wrapper">
+
+                <ul class="quicklink-list">
+
+                    <li>
+                        <a href="../copyright.html" class="quicklink-link">Faq</a>
+                    </li>
+
+                    <li>
+                        <a href="copyright.html" class="quicklink-link">Centro De Ajuda</a>
+                    </li>
+
+                    <li>
+                        <a href="copyright.html" class="quicklink-link">Termos De Uso</a>
+                    </li>
+
+                    <li>
+                        <a href="copyright.html" class="quicklink-link">Privacidade</a>
+                    </li>
+
+                </ul>
+
+                
+
+                <ul class="social-list">
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-pinterest"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-linkedin"></ion-icon>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+
+                <p class="copyright">
+                    $copy; 2022 <a href="../copyright.html">Kalebzaki</a>. All Rights Reserved
+                </p>
+
+                <img src="../footer-bottom-img.png" alt="online baking companies logo" class="footer-bottom-img">
+
+            </div>
+        </div>
+
+    </footer>
+    <script src="../script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        function toggle(el) {
+            var display = document.getElementById(el).style.display;
+            if(display == "none"){
+                document.getElementById('proximoEp').style.display = 'block'
+                document.getElementById('proximo').style.display = 'none'
+            } else {
+                document.getElementById(el).style.display = 'none';
+                
+            }
+            
+        }
+
+    </script>
+    <script src="../mostrarVideos.js" type="module"></script>
+    <script src="../buscarVideo.js" type="module"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="../rolagem.js"></script>
+
+</body>
+</html>
