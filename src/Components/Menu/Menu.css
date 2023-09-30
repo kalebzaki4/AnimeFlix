@@ -70,13 +70,19 @@
     transition: var(--transition-short);
 }
 
-.search-btn:is(:hover, :focus-visible) img { opacity: 1; }
+.search-btn:is(:hover, :focus-visible) img {
+    opacity: 1;
+}
 
 .menu-btn.active .menu,
-.menu-btn .close { display: none; }
+.menu-btn .close {
+    display: none;
+}
 
 .menu-btn .menu,
-.menu-btn.active .close { display: block; }
+.menu-btn.active .close {
+    display: block;
+}
 
 .search-box {
     position: absolute;
@@ -92,4 +98,75 @@
     display: none;
 }
 
-.search-box.active { display: flex; }
+.search-box.active {
+    display: flex;
+}
+
+.search-wrapper {
+    position: relative;
+    flex-grow: 1;
+}
+
+.search-wrapper::before {
+    position: absolute;
+    top: 14px;
+    right: 12px;
+    content: "";
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--white);
+    border-radius: var(--radius-24);
+    border-inline-end-color: transparent;
+    animation: loading 500ms linear infinite;
+    display: none;
+}
+
+.search-wrapper.searching::before {
+    display: block;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(1turn);
+    }
+}
+
+.serach-field {
+    background-color: var(--banner-background);
+    height: 48px;
+    line-height: 48px;
+    padding-inline: 44px 16px;
+    outline: none;
+    border-radius: var(--radius-8);
+    transition: var(--transition-short);
+}
+
+.serach-field::placeholder {
+    color: var(--on-surface-variant);
+}
+
+.serach-field:hover {
+    box-shadow: 0 0 0 2px var(--on-surface-variant);
+}
+
+.serach-field:focus {
+    box-shadow: 0 0 0 2px var(--on-surface);
+    padding-inline-start: 16px;
+}
+
+.search-wrapper .leading-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 12px;
+    opacity: 0.5;
+    transition: var(--transition-short);
+}
+
+.search-wrapper:focus-within .leading-icon {
+    opacity: 0;
+}
