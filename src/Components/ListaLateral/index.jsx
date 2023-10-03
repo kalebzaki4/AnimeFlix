@@ -5,7 +5,7 @@ import logo from "../../assets/images/logo-animeflix.png";
 export default function ListaLateral() {
     return (
         <>
-        <nav className="sidebar" sidebar>
+        <nav className="sidebar active" sidebar>
             <div className="sidebar-inner">
 
                 <div className="sidebar-list">
