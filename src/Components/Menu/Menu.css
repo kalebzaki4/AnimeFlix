@@ -55,6 +55,12 @@
         margin-inline-end: auto;
     }
 
+    .title {
+        font-size: var(--fs-title);
+        font-weight: var(--weight-bold);
+        letter-spacing: 0.5px;
+    }
+
     .search-btn,
     .menu-btn {
         padding: 12px;
