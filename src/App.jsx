@@ -1,4 +1,5 @@
 import './App.css'
+import Banner from './Components/Banner'
 import ListaLateral from './Components/ListaLateral'
 import Menu from './Components/Menu'
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <>
       <Menu />
       <ListaLateral />
+      <Banner />
     </>
   )
 }
