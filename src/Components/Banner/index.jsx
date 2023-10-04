@@ -209,32 +209,33 @@ export default function Banner() {
                     <div className="slider-control">
                         <div className="control-inner">
                             <button className="poster-box slider-item active">
-                                <img src={ola} alt="" loading="lazy" draggable="false"/>
+                                <img src="https://cdn.kobo.com/book-images/b19d8fc7-d1a2-400d-bb48-e37e42f37d88/1200/1200/False/naruto-vol-35.jpg" alt="" loading="lazy" draggable="false" className="img-cover"/>
                             </button>
 
-                            <button className="poster-box slider-item active">
-                                <img src={ola} alt="" loading="lazy" draggable="false"/>
+                            <button className="poster-box slider-item">
+                                <img src="https://a-static.mlcdn.com.br/450x450/manga-jujutsu-kaisen-batalha-de-feiticeiros-panini/poupalivros/5471p/db3bb650c9f067ca15249855d4b67d49.jpg" alt="" loading="lazy" draggable="false" className="img-cover"/>
                             </button>
 
-                            <button className="poster-box slider-item active">
-                                <img src={ola} alt="" loading="lazy" draggable="false"/>
+                            <button className="poster-box slider-item">
+                                <img src="https://leitor.kamisama.com.br/wp-content/uploads/2021/10/dragon-ball-super-capa-volume-12.jpg" alt="" loading="lazy" draggable="false" className="img-cover"/>
                             </button>
 
-                            <button className="poster-box slider-item active">
-                                <img src={ola} alt="" loading="lazy" draggable="false"/>
+                            <button className="poster-box slider-item">
+                                <img src="https://cdn.awsli.com.br/2500x2500/770/770210/produto/167630750832c0b3993.jpg" alt="" loading="lazy" draggable="false" className="img-cover"/>
                             </button>
 
-                            <button className="poster-box slider-item active">
-                                <img src={ola} alt="" loading="lazy" draggable="false"/>
+                            <button className="poster-box slider-item">
+                                <img src="https://cdn.kobo.com/book-images/f4ceb0f0-5a51-4099-8903-58ebe65f3c28/1200/1200/False/dr-stone-vol-11.jpg" alt="" loading="lazy" draggable="false" className="img-cover"/>
                             </button>
 
-                            <button className="poster-box slider-item active">
-                                <img src={ola} alt="" loading="lazy" draggable="false"/>
+                            <button className="poster-box slider-item">
+                                <img src="https://m.media-amazon.com/images/I/81XsRW62W5L._AC_UF1000,1000_QL80_.jpg" alt="" loading="lazy" draggable="false" className="img-cover"/>
                             </button>
 
-                            <button className="poster-box slider-item active">
-                                <img src={ola} alt="" loading="lazy" draggable="false"/>
+                            <button className="poster-box slider-item">
+                                <img src="https://m.media-amazon.com/images/I/71bELfIWTDL._SY466_.jpg" alt="" loading="lazy" draggable="false" className="img-cover"/>
                             </button>
+
                         </div>
                     </div>
 
