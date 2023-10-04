@@ -36,7 +36,7 @@ export default function Menu() {
 
                 <div className={`search-box ${searchActive ? 'active' : ''}`}>
                     <div className="search-wrapper">
-                        <input type="text" name="search" placeholder="Procurar Mangás" className="search-field" autoComplete="off" />
+                        <input type="text" name="search" placeholder="Procurar Animes" className="search-field" autoComplete="off" />
                         <img src={logoPesquisa} alt="Pesquisa" className="leading-icon" width={24} height={24} />
                     </div>
 
