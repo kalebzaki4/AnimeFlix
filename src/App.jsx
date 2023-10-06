@@ -7,10 +7,10 @@ function App() {
 
   return (
     <>
-      <Menu />
-      <ListaLateral />
-      <Banner />
-      <ListaDeAnimes />
+        <Menu />
+        <ListaLateral />
+        <Banner />
+        <ListaDeAnimes />
     </>
   )
 }
