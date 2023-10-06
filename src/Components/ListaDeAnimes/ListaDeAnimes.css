@@ -60,9 +60,55 @@
     background-color: var(--banner-background);
 }
 
-.slider-list::-webkit-scrollbar-button { width: 20px; }
+.slider-list::-webkit-scrollbar-button {
+    width: 20px;
+}
 
 .slider-list .slider-inner {
     position: relative;
     display: flex;
+    gap: 16px;
+}
+
+.slider-list .slider-inner::before .slider-list .slider-inner::after {
+    content: "";
+    min-width: 4px;
+}
+
+.movie-list {
+    padding-block-start: 32px;
+}
+
+.movie-card {
+    position: relative;
+    min-width: 200px;
+}
+
+.movie-card .card-banner {
+    min-width: 100%;
+}
+
+.movie-card .title {
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-block: 8px 4px;
+}
+
+.container-inative {
+    position: relative;
+    background-color: var(--surface);
+    padding: 24px 35px;
+    padding-top: 0px;
+    bottom: 40px;
+}
+
+.movie-card .meta-list {
+    justify-content: space-between;
+}
+
+.movie-card .card-btn {
+    position: absolute;
+    inset: 0;
 }
