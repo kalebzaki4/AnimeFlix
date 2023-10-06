@@ -28,7 +28,7 @@ export default function Banner() {
                                     Monkey D. Luffy é um jovem que sempre sonhou com uma vida de liberdade. Ele sai do vilarejo onde vive para uma jornada perigosa em busca do lendário tesouro One Piece
                                 </p>
 
-                                <a href="./detalhes" className="btn">
+                                <a to="/DetalhesAnimes" className="btn">
                                     <img src={play} alt="Botão de Play" width={24} height={24} aria-hidden="true" />
 
                                     <span className="span">Assistir</span>
