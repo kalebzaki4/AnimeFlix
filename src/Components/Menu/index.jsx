@@ -5,6 +5,8 @@ import logoPesquisa from "../../assets/images/search.png";
 import cancelarLogo from "../../assets/images/close.png";
 import menuLateral from "../../assets/images/menu.png";
 import cancelarMenuLateral from "../../assets/images/menu-close.png";
+import { Link } from "react-router-dom";
+
 
 export default function Menu() {
     const [searchActive, setSearchActive] = useState(false);
@@ -30,9 +32,9 @@ export default function Menu() {
     return (
         <>
             <header className="header">
-                <a href="/index" className="logo">
+                <Link to="/" className="logo">
                     <img src={logo} alt="Logo do Animeflix" width={140} height={32} />
-                </a>
+                </Link>
 
                 <div className={`search-box ${searchActive ? 'active' : ''}`}>
                     <div className="search-wrapper">

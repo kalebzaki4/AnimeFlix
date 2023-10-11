@@ -6,7 +6,6 @@ import Menu from "../../Components/Menu";
 export default function Inicio() {
     return (
         <>
-            <Menu />
             <Banner />
             <ListaLateral/>
             <Animes/>

@@ -2,6 +2,7 @@ import AnimeTemporario from "../../assets/images/slider-control.jpg"
 import Estrelas from "../../assets/images/star.png"
 import "./ListaDeAnimes.css"
 import "../Banner/Banner.css"
+import { Link } from "react-router-dom"
 
 export default function Animes() {
     return (
@@ -37,7 +38,7 @@ export default function Animes() {
                                 <div className="card-badge">2022</div>
                             </div>
 
-                            <a href="/detalhes.html" className="card-btn" title="Teste, mas o titulo tbm fica aq"></a>
+                            <Link to="/Detalhes" className="card-btn" title="Teste, mas o titulo tbm fica aq"></Link>
 
                         </div>
 
@@ -62,7 +63,7 @@ export default function Animes() {
                                 <div className="card-badge">2022</div>
                             </div>
 
-                            <a href="/detalhes.html" className="card-btn" title="Teste, mas o titulo tbm fica aq"></a>
+                            <Link to="/Detalhes" className="card-btn" title="Teste, mas o titulo tbm fica aq"></Link>
 
                         </div>
 
