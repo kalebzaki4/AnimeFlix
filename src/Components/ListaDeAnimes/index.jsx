@@ -3,7 +3,7 @@ import Estrelas from "../../assets/images/star.png"
 import "./ListaDeAnimes.css"
 import "../Banner/Banner.css"
 
-export default function ListaDeAnimes() {
+export default function Animes() {
     return (
 
         <article className="container-inative">
