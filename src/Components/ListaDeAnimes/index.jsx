@@ -88,7 +88,7 @@ export default function Animes() {
                                 <div className="card-badge">2022</div>
                             </div>
 
-                            <a href="/detalhes.html" className="card-btn" title="Teste, mas o titulo tbm fica aq"></a>
+                            <Link to="/Detalhes" className="card-btn" title="Teste, mas o titulo tbm fica aq"></Link>
 
                         </div>
 
@@ -113,7 +113,7 @@ export default function Animes() {
                                 <div className="card-badge">2022</div>
                             </div>
 
-                            <a href="/detalhes.html" className="card-btn" title="Teste, mas o titulo tbm fica aq"></a>
+                            <Link to="/detalhes.html" className="card-btn" title="Teste, mas o titulo tbm fica aq"></Link>
 
                         </div>
 
@@ -138,7 +138,7 @@ export default function Animes() {
                                 <div className="card-badge">2022</div>
                             </div>
 
-                            <a href="/detalhes.html" className="card-btn" title="Teste, mas o titulo tbm fica aq"></a>
+                            <Link to="Detalhes" className="card-btn" title="Teste, mas o titulo tbm fica aq"></Link>
 
                         </div>
 
@@ -163,7 +163,7 @@ export default function Animes() {
                                 <div className="card-badge">2022</div>
                             </div>
 
-                            <a href="/detalhes.html" className="card-btn" title="Teste, mas o titulo tbm fica aq"></a>
+                            <Link to="/Detalhes" className="card-btn" title="Teste, mas o titulo tbm fica aq"></Link>
 
                         </div>
 
@@ -188,7 +188,7 @@ export default function Animes() {
                                 <div className="card-badge">2022</div>
                             </div>
 
-                            <a href="/detalhes.html" className="card-btn" title="Teste, mas o titulo tbm fica aq"></a>
+                            <Link to="/Detalhes" className="card-btn" title="Teste, mas o titulo tbm fica aq"></Link>
 
                         </div>
 
