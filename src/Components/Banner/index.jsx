@@ -1,5 +1,6 @@
 import "./Banner.css";
 import play from "../../assets/images/play_circle.png"
+import { Link } from "react-router-dom";
 
 export default function Banner() {
     return (
@@ -28,11 +29,11 @@ export default function Banner() {
                                     Monkey D. Luffy é um jovem que sempre sonhou com uma vida de liberdade. Ele sai do vilarejo onde vive para uma jornada perigosa em busca do lendário tesouro One Piece
                                 </p>
 
-                                <a to="/DetalhesAnimes" className="btn">
+                                <Link to="/Detalhes" className="btn">
                                     <img src={play} alt="Botão de Play" width={24} height={24} aria-hidden="true" />
 
                                     <span className="span">Assistir</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
@@ -56,11 +57,11 @@ export default function Banner() {
                                     Monkey D. Luffy é um jovem que sempre sonhou com uma vida de liberdade. Ele sai do vilarejo onde vive para uma jornada perigosa em busca do lendário tesouro One Piece
                                 </p>
 
-                                <a href="./detalhes" className="btn">
+                                <Link to="/Detalhes" className="btn">
                                     <img src={play} alt="Botão de Play" width={24} height={24} aria-hidden="true" />
 
                                     <span className="span">Assistir</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
@@ -208,7 +209,7 @@ export default function Banner() {
                     <div className="slider-control">
                         <div className="control-inner">
                             <button className="poster-box slider-item active">
-                                <img src="https://cdn.kobo.com/book-images/b19d8fc7-d1a2-400d-bb48-e37e42f37d88/1200/1200/False/naruto-vol-35.jpg" alt="" loading="lazy" draggable="false" className="img-cover" />
+                                <img src="https://johto.legiaodosherois.com.br/wp-content/uploads/2021/08/legiao_4YmvHICdo9Zu.jpg" alt="" loading="lazy" draggable="false" className="img-cover" />
                             </button>
 
                             <button className="poster-box slider-item">
