@@ -1,5 +1,11 @@
 # AnimeFlix 🎬🍿
 
+## AVISO!!!
+
+O Animeflix é um projeto de código aberto, o que significa que você tem total liberdade para replicá-lo e personalizar o site conforme sua preferência. Este projeto foi concebido com o talento de @kalebzaki4, @codewithsadee e @FernandoAndrade83. Inicialmente, @kalebzaki4 pegou o núcleo de @codewithsadee e o transformou em React, e, anteriormente a isso, @FernandoAndrade83 contribuiu de maneira significativa para o código base. É importante frisar que todos os elementos utilizados no Animeflix são de código aberto, ou seja, disponíveis para cópia, sem quaisquer restrições de direitos autorais.
+
+Para fomentar a colaboração e incentivar o envolvimento da comunidade, @kalebzaki4 tornou o seu projeto acessível a todos, permitindo que você o ajuste, contribua e modifique conforme desejar. Se você estiver interessado em participar deste que é o meu projeto mais significativo até o momento, sinta-se à vontade para entrar em contato comigo e expressar seu interesse em auxiliar de alguma forma. Lembre-se de que este código é uma adaptação de trabalho pré-existente para o ambiente React, possibilitando o uso de uma única página (SPA), uma API, um framework e muito mais. Agradeço pelo seu interesse!
+
 Bem-vindo ao AnimeFlix, o paraíso dos amantes de animes! Aqui, o mundo dos animes ganha vida com uma coleção diversificada e emocionante, criada com carinho e dedicação para todos os fãs.
 
 ## Descrição 📜
