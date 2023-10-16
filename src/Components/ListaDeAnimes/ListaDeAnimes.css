@@ -112,3 +112,11 @@
     position: absolute;
     inset: 0;
 }
+
+.container-inative-2{
+    position: relative;
+    background-color: var(--surface);
+    padding: 24px 35px;
+    padding-top: 0px;
+    bottom: 0px;
+}
