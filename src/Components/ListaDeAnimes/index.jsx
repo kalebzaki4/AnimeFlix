@@ -56,40 +56,36 @@ const data = [
 ];
 
 
-export default function Animes() {
+const Animes = () => {
     return (
-
-        <article className="container-inative">
-            <section className="movie-list" aria-label="upcoming movie">
-
-                <div className="title-wrapper">
-                    <h2 className="title-large">Mais Famosos</h2>
-                </div>
-
-                <div className="slider-list">
-                    <div className="slider-inner">
-                        {data.map((anime) => (
-                            <div className="movie-card" key={anime.id}>
-                                <figure className="poster-box card-banner">
-                                    <img src={anime.imagem} alt={anime.titulo} className="img-cover" />
-                                </figure>
-                                <h4 className="title">{anime.titulo}</h4>
-                                <div className="meta-list">
-                                    <div className="meta-item">
-                                        <img src={Estrelas} width={20} height={20} loading="lazy" alt="Avaliacao" />
-                                        <span className="span">{anime.avalicao}</span>
-                                    </div>
-                                    <div className="card-badge">{anime.ano}</div>
-                                </div>
-                                <Link to="/Detalhes" className="card-btn" title="Detalhes"></Link>
-                            </div>
-                        ))}
-
+      <article className="container-inative">
+        <section className="movie-list" aria-label="upcoming movie">
+          <div className="title-wrapper">
+            <h2 className="title-large">Mais Famosos</h2>
+          </div>
+          <div className="slider-list">
+            <div className="slider-inner">
+              {data.map((anime) => (
+                <div className="movie-card" key={anime.id}>
+                  <figure className="poster-box card-banner">
+                    <img src={anime.imagem} alt={anime.titulo} className="img-cover" />
+                  </figure>
+                  <h4 className="title">{anime.titulo}</h4>
+                  <div className="meta-list">
+                    <div className="meta-item">
+                      <img src={Estrelas} width={20} height={20} loading="lazy" alt="Avaliacao" />
+                      <span className="span">{anime.avalicao}</span>
                     </div>
+                    <div className="card-badge">{anime.ano}</div>
+                  </div>
+                  <Link to={`/Detalhes/${anime.id}`} className="card-btn" title="Detalhes"></Link>
                 </div>
-
-            </section>
-        </article>
-
-    )
-} 
+              ))}
+            </div>
+          </div>
+        </section>
+      </article>
+    );
+  }
+  
+  export default Animes;
