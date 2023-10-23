@@ -197,7 +197,7 @@ const PaginaDetalhes = () => {
               </div>
             </div>
             <div className="slider-list">
-              <div className="slider-inner">
+              <div className="slider-inner2">
                 <Animes/>
               </div>
             </div>
