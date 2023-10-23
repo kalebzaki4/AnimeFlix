@@ -45,4 +45,4 @@ Agradecemos por escolher o AnimeFlix como seu destino para a diversão anime. Es
 
 ## Criador 👨‍💻
 
-Este projeto foi criado por kalebzaki4.
+Este projeto foi criado por kalebzaki4!
