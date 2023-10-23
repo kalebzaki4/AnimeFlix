@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Avaliacao from "../../assets/images/star.png";
 import "./PaginaDetalhes.css";
-import ListaDeAnimes from "../../Components/ListaDeAnimes/index";
+import Animes from "../../Components/ListaDeAnimes/index"
 
 const data = [
   {
@@ -186,18 +186,26 @@ const PaginaDetalhes = () => {
               <p className="overview">{anime.sinopse}</p>
             </div>
             <div className="tilte-wrapper">
-              <h3 className="title-large">Todos os Trailers</h3>
+              <h3 className="title-large">Todos os Trailers:</h3>
             </div>
             <div className="slider-list">
               <div className="slider-inner">
                 <div className="video-card"></div>
+                <div className="video-card"></div>
+                <div className="video-card"></div>
+                <div className="video-card"></div>
+              </div>
+            </div>
+            <div className="slider-list">
+              <div className="slider-inner">
+                <Animes/>
               </div>
             </div>
           </div>
         </div>
       </article>
 
-      </>
+    </>
   );
 }
 
