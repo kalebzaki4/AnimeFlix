@@ -52,6 +52,14 @@
     background-size: cover;
     background-position: center;
     z-index: -1;
+    background-color: var(--background);
+}
+
+.backdrop-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(0deg, hsla(250, 13%, 11%, 1), hsla(250, 13%, 11%, 0.9));
 }
 
 .movie-detail .movie-poster {
@@ -63,12 +71,10 @@
     margin-block: 24px 12px;
 }
 
-.movie-detail :is(.meta-list, .genre) {
-    color: var(--text-color);
-}
+.movie-detail :is(.meta-list, .genre) {color: var(--text-colord);}
 
 .movie-detail .genre {
-    margin-block: 12px 16px;
+    margin-block: 12px 16px ;
 }
 
 .detail-list {
@@ -87,7 +93,7 @@
     min-width: 112px;
 }
 
-.separator {
+.separator { 
     width: 4px;
     height: 4px;
     background-color: var(--white-alpha-20);
@@ -95,7 +101,16 @@
 }
 
 .video-card {
-    background-image: url('../../assets/images/video-bg-icon.png');
+    background-image: url(../../assets/images/video-bg-icon.png);
     aspect-ratio: 16 / 9;
     flex-shrink: 0;
+    max-width: 500px;
+    width: calc(100% - 40px);
+    padding: 0;
+    position: relative;
+    left: 4%;
+}
+
+.title-large {
+    padding: 15px 0px 15px 0px;
 }
