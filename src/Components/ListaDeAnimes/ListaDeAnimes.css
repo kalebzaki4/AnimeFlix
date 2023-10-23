@@ -85,7 +85,7 @@
 }
 
 .movie-card .card-banner {
-    min-width: 100%;
+    width: 200px;
 }
 
 .movie-card .title {
