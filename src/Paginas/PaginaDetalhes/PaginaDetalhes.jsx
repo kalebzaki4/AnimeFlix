@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Avaliacao from "../../assets/images/star.png";
 import "./PaginaDetalhes.css";
-import Animes from "../../Components/ListaDeAnimes/index"
+import Animes from "../../Components/ListaDeAnimesHorizontal/index"
 
 const data = [
   {
