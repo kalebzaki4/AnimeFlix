@@ -1,7 +1,6 @@
 import Banner from "../../Components/Banner";
-import Animes from "../../Components/ListaDeAnimes";
+import Animes from "../../Components/ListaDeAnimesHorizontal";
 import ListaLateral from "../../Components/ListaLateral";
-import Menu from "../../Components/Menu";
 
 export default function Inicio() {
     return (
