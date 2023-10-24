@@ -1,0 +1,116 @@
+:root {
+    /* Todos os roots que irei usar */
+
+    --background: hsla(220, 17%, 7%, 1);
+    --banner-background: hsla(250, 6%, 20%, 1);
+    --white-alpha-20: hsla(0, 0%, 100%, 0, 2);
+    --on-background: hsla(220, 100%, 95%, 1);
+    --on-surface: hsla(250, 100%, 95%, 1);
+    --on-surface-variant: hsla(250, 1%, 44%, 1);
+    --primary: hsla(356, 74%, 49%);
+    --primary-variant: rgb(146, 19, 28);
+    --rating-color: hsla(44, 100%, 49%, 1);
+    --surface: hsla(250, 13%, 11%, 1);
+    --text-color: hsla(250, 2%, 59%, 1);
+    --white: hsla(0, 0%, 100%, 1);
+
+    --banner-overlay: 90deg, hsla(220, 17%, 7%) 0%, hsla(220, 17%, 7%, 0, 5) 100%;
+    --bottom-overlay: 180deg, hsla(250, 13%, 11%, 0), hsla(250, 13%, 11%, 1);
+
+    --ff-dm-sans: 'DM Sans', sans-serif;
+
+    --fs-heading: 4rem;
+    --fs-title-lg: 2.6rem;
+    --fs-title: 2rem;
+    --fs-body: 1.8rem;
+    --fs-button: 1.5rem;
+    --fs-label: 1.4rem;
+
+    --weight-bold: 700;
+
+    --shadow-1: 0 1px 4px hsla(0, 0%, 0%, 0.75);
+    --shadow-2: 0 2px 4px hsla(350, 100%, 43%, 0.3);
+
+    --radius-4: 4px;
+    --radius-8: 8px;
+    --radius-16: 16px;
+    --radius-24: 24px;
+    --radius-36: 36px;
+
+    --transition-short: 250ms ease;
+    --transition-long: 500ms ease;
+}
+
+.backdrop-image {
+    background-image: url('../../assets/images/slider-banner.jpg');
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 600px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    background-color: var(--background);
+}
+
+.backdrop-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(0deg, hsla(250, 13%, 11%, 1), hsla(250, 13%, 11%, 0.9));
+}
+
+.movie-detail .movie-poster {
+    max-width: 300px;
+    width: 100%;
+}
+
+.movie-detail .heading {
+    margin-block: 24px 12px;
+}
+
+.movie-detail :is(.meta-list, .genre) {color: var(--text-colord);}
+
+.movie-detail .genre {
+    margin-block: 12px 16px ;
+}
+
+.detail-list {
+    margin-block: 24px 32px;
+}
+
+.movie-detail .list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-block-end: 12px;
+}
+
+.movie-detail .list-name {
+    color: var(--text-color);
+    min-width: 112px;
+}
+
+.separator { 
+    width: 4px;
+    height: 4px;
+    background-color: var(--white-alpha-20);
+    border-radius: var(--radius-8);
+}
+
+.video-card {
+    background-image: url(../../assets/images/video-bg-icon.png);
+    aspect-ratio: 16 / 9;
+    flex-shrink: 0;
+    max-width: 500px;
+    width: calc(100% - 40px);
+    padding: 0;
+    position: relative;
+    left: 4%;
+}
+
+.title-large {
+    padding: 15px 0px 15px 0px;
+}
