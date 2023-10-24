@@ -162,7 +162,7 @@ const AnimesVertical = () => {
 
     return (
     <>
-        
+
     </>
   );
 }
