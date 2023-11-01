@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Avaliacao from "../../assets/images/star.png";
 import "./PaginaDetalhes.css";
 import Animes from "../../Components/ListaDeAnimesHorizontal/index"
+import Erro404 from '../../Components/Erro404';
 
 const data = [
   {
@@ -149,7 +150,7 @@ const PaginaDetalhes = () => {
   };
 
   if (!anime) {
-    return <h1>Anime não encontrado</h1>;
+    return <Erro404/>;
   }
 
   const animeBackgroundStyle = {
@@ -186,11 +187,10 @@ const PaginaDetalhes = () => {
               <p className="overview">{anime.sinopse}</p>
             </div>
             <div className="tilte-wrapper">
-              <h3 className="title-large">Todos os Trailers:</h3>
+              <h3 className="title-large">Todos as imagens:</h3>
             </div>
             <div className="slider-list">
               <div className="slider-inner">
-                <div className="video-card"></div>
                 <div className="video-card"></div>
                 <div className="video-card"></div>
                 <div className="video-card"></div>
