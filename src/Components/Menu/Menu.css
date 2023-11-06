@@ -137,7 +137,13 @@
 
     .load-more {
         background-color: var(--primary-variant);
+        margin-inline: auto;
+        margin-block: 36px 60px;
     }
+
+    .load-more.loading::before { display: block; }
+
+    .load-more:is(:hover, :focus-visible) { --primary-variant: hsla(350, 67%, 39%, 1)}
 
     @keyframes loading {
         0% {
