@@ -140,9 +140,8 @@
 .grid-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  column-gap: 20px;
+  column-gap: 16px;
   row-gap: 20px;
 }
 
 .genre-list :is(.movie-card, .card-banner) { width: 100%;}
-
