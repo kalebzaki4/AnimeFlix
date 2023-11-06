@@ -140,12 +140,13 @@ const data = [
 
 function ListaDeAnimesVertical() {
     return (
-        <article className="container-inative-2">
-            <section className="movie-list" aria-label="upcoming movie">
-                <div className="title-wrapper">
-                    <h2 className="title-large">Todos os Animes</h2>
-                </div>
-                <div className="grid-list">
+        <>
+            <article className="container-inative-2">
+                <section className="movie-list" aria-label="upcoming movie">
+                    <div className="title-wrapper">
+                        <h2 className="title-large">Todos os Animes</h2>
+                    </div>
+                    <div className="grid-list">
                         {data.map((anime) => (
                             <div className="movie-card" key={anime.id}>
                                 <figure className="poster-box card-banner">
@@ -162,11 +163,45 @@ function ListaDeAnimesVertical() {
                                 <Link to={`/Detalhes/${anime.id}`} className="card-btn" title="Detalhes"></Link>
                             </div>
                         ))}
+                    </div>
+
+                    <button className="btn load-more">Ver Mais</button>
+                </section>
+            </article>
+
+            <div className="search-modal">
+
+                <p className="label">
+                    resultados por
+                </p>
+
+                <h1 className="heading">
+                    One Piece
+                </h1>
+
+                <div className="movie-list">
+                    <div className="grid-list">
+                        {data.map((anime) => (
+                            <div className="movie-card" key={anime.id}>
+                                <figure className="poster-box card-banner">
+                                    <img src={anime.imagem} alt={anime.titulo} className="img-cover" />
+                                </figure>
+                                <h4 className="title">{anime.titulo}</h4>
+                                <div className="meta-list">
+                                    <div className="meta-item">
+                                        <img src={Estrelas} width={20} height={20} loading="lazy" alt="Avaliacao" />
+                                        <span className="span">{anime.avalicao}</span>
+                                    </div>
+                                    <div className="card-badge">{anime.ano}</div>
+                                </div>
+                                <Link to={`/Detalhes/${anime.id}`} className="card-btn" title="Detalhes"></Link>
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
-                <button className="btn load-more">Ver Mais</button>
-            </section>
-        </article>
+            </div>
+        </>
     );
 }
 
