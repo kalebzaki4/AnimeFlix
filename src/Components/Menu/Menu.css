@@ -113,10 +113,8 @@
         flex-grow: 1;
     }
 
-    .search-wrapper::before {
-        position: absolute;
-        top: 14px;
-        right: 12px;
+    .search-wrapper::before,
+    .load-more::before {
         content: "";
         width: 20px;
         height: 20px;
@@ -127,8 +125,18 @@
         display: none;
     }
 
+    .search-wrapper::before {
+        position: absolute;
+        top: 14px;
+        right: 12px;
+    }
+
     .search-wrapper.searching::before {
         display: block;
+    }
+
+    .load-more {
+        background-color: var(--primary-variant);
     }
 
     @keyframes loading {
