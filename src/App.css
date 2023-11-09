@@ -142,4 +142,44 @@ body {
     right: auto;
     max-width: 500px;
   }
+
+  .slider-control { left: calc(100% - 400px);}
+
+  .detail-content { max-width: 750px;}
+}
+
+@media (min-width: 768px) {
+  :root {
+    --banner-overlay: 90deg, hsl(220, 17%, 7%) 0%, hsla(220, 17%, 7%, 0) 100%;
+
+    --fs-heading: 5.4rem;
+  }
+
+  .container {
+    padding-inline: 24px;
+  }
+
+  .slider-list {
+      margin-inline: -24px;
+  }
+
+  .search-btn {
+    display: none;
+  }
+
+  .search-box {
+    all: unset;
+    display: block;
+    width: 360px;
+  }
+
+  .banner { height: 500px;}
+
+  .banner-content {
+    bottom: 50%;
+    transform: translateY(50%);
+    left: 50px;
+  }
+
+  
 }
