@@ -3,8 +3,8 @@ import './App.css';
 import Menu from './Components/Menu';
 import Inicio from './Paginas/Inicio';
 import PaginaDetalhes from './Paginas/PaginaDetalhes';
-import ListaAnimes from './Paginas/ListaAnimes/index';
-import Erro404 from './Components/Erro404';
+  import Erro404 from './Components/Erro404';
+import ResultadoAnimes from './Paginas/ResultadoAnimes';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route element={<Inicio />} path='/' />
           <Route element={<PaginaDetalhes />} path='/Detalhes/:id' />
-          <Route element={<ListaAnimes />} path='/a' />
+          <Route element={<ResultadoAnimes />} path='/a' />
           <Route element={<Erro404 />} path='*' />
         </Routes>
       </BrowserRouter>
