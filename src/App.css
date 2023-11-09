@@ -124,7 +124,8 @@ body {
   z-index: 1;
 }
 
-.container::after {
+.container::after,
+.search-modal::after {
   content: "";
   position: fixed;
   bottom: 0;
