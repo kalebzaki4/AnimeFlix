@@ -145,3 +145,9 @@
 }
 
 .genre-list :is(.movie-card, .card-banner) { width: 100%;}
+
+.search-modal {
+  position: fixed;
+  top: 96px;
+  left: 0;
+}
