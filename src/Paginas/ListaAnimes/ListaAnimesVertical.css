@@ -144,10 +144,16 @@
   row-gap: 20px;
 }
 
-.genre-list :is(.movie-card, .card-banner) { width: 100%;}
+:is(.genre-list, .search-modal) :is(.movie-card, .card-banner) { width: 100%;}
 
 .search-modal {
   position: fixed;
   top: 96px;
   left: 0;
+  width: 100%;
+  bottom: 0;
+  background-color: var(--surface);
+  padding: 50px 24px;
+  overflow-y: overlay;
+  z-index: 4;
 }
