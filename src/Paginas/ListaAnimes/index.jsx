@@ -42,7 +42,7 @@ const data = [
         "titulo": "Demon Slayer",
         "avalicao": "7.7",
         "ano": "2016",
-        "imagem": "https://cdn.awsli.com.br/2500x2500/770/770210/produto/167630750832c0b3993.jpg",
+        "imagem": "https://images-americanas.b2w.io/produtos/1760721943/imagens/livro-demon-slayer-kimetsu-no-yaiba-vol-3/1760721943_1_large.jpg",
         "genero": "Anime, Ação, Sobrenatural",
         "sinopse": "Tanjiro Kamado se torna um caçador de demônios para vingar sua família e salvar sua irmã Nezuko, que se transformou em um demônio.",
         "episodios": "26 eps",
