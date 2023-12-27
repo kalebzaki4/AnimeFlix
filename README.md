@@ -28,7 +28,7 @@ Se você é um entusiasta de animes e deseja contribuir para a melhoria do Anime
 1. Faça um fork deste repositório.
 2. Crie um novo branch com uma descrição clara da sua contribuição.
 3. Implemente suas alterações e melhorias no código.
-4. Faça commit das suas alterações e envie um pull request.
+4. Faça commit das suas alterações e envie um pull request
 
 ## Tecnologias Utilizadas 🛠️
 
