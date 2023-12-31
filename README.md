@@ -41,7 +41,7 @@ Se você é um entusiasta de animes e deseja contribuir para a melhoria do Anime
 
 Este projeto é licenciado sob a [MIT License](LICENSE), o que significa que você pode usar, modificar e distribuir o código livremente.
 
-Agradecemos por escolher o AnimeFlix como seu destino para a diversão anime. Esperamos que aproveite cada momento assistindo aos seus animes favoritos. Divirta-se e não se esqueça de compartilhar com seus amigos! 😄
+Agradecemos por escolher o AnimeFlix como seu destino para a diversão anime. Esperamos que aproveite cada momento assistindo aos seus animes favoritos. Divirta-se e não se esqueça de compartilhar com seus amigos! 😄🎉
 
 ## Criador 👨‍💻
 
