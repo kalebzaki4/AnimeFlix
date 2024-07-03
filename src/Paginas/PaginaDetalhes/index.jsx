@@ -1,36 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Avaliacao from "../../assets/images/star.png";
 import "./PaginaDetalhes.css";
-import Animes from "../../Components/ListaDeAnimesHorizontal/index"
+import Animes from "../../Components/ListaDeAnimesHorizontal/index";
 import Erro404 from '../../Components/Erro404';
-
-
+import data from '../../data'; // Certifique-se de que o caminho está correto
 
 const PaginaDetalhes = () => {
-
   const { id } = useParams();
   const anime = data.find((item) => item.id === parseInt(id));
+  const topRef = useRef(null);
 
-  const scrollToTop = () => {
-    topRef.current.scrollIntoView({ behavior: "smooth" });
-  };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   if (!anime) {
-    return <Erro404/>;
+    return <Erro404 />;
   }
 
   const animeBackgroundStyle = {
     backgroundImage: `url(${anime.banner})`,
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [id]);
-
   return (
     <>
-      <article className="container-inative-3">
+      <article className="container-inative-3" ref={topRef}>
         <div className="movie-detail">
           <figure className="poster-box movie-poster">
             <div className="anime-background" style={animeBackgroundStyle}></div>
@@ -42,7 +37,7 @@ const PaginaDetalhes = () => {
               <div className="meta-list">
                 <div className="meta-item">
                   <img src={Avaliacao} alt="avaliação do anime" width={20} height={20} />
-                  <span className="span">{anime.avalicao}</span>
+                  <span className="span">{anime.avaliacao}</span>
                 </div>
                 <div className="separator"></div>
                 <div className="meta-item">{anime.episodios}</div>
@@ -65,13 +60,12 @@ const PaginaDetalhes = () => {
             </div>
             <div className="slider-list">
               <div className="slider-inner2">
-                <Animes/>
+                <Animes />
               </div>
             </div>
           </div>
         </div>
       </article>
-
     </>
   );
 }
