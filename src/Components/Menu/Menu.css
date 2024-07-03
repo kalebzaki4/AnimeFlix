@@ -1,192 +1,281 @@
-    :root {
-        /* Todos os roots que irei usar */
+:root {
+    /* Todas as variáveis CSS customizadas */
+    --background: hsla(220, 17%, 7%, 1);
+    --banner-background: hsla(250, 6%, 20%, 1);
+    --white-alpha-20: hsla(0, 0%, 100%, 0.2);
+    --on-background: hsla(220, 100%, 95%, 1);
+    --on-surface: hsla(250, 100%, 95%, 1);
+    --on-surface-variant: hsla(250, 1%, 44%, 1);
+    --primary: hsla(356, 74%, 49%, 1);
+    --primary-variant: rgb(146, 19, 28);
+    --rating-color: hsla(44, 100%, 49%, 1);
+    --surface: hsla(250, 13%, 11%, 1);
+    --text-color: hsla(250, 2%, 59%, 1);
+    --white: hsla(0, 0%, 100%, 1);
 
-        --background: hsla(220, 17%, 7%, 1);
-        --banner-background: hsla(250, 6%, 20%, 1);
-        --white-alpha-20: hsla(0, 0%, 100%, 0, 2);
-        --on-background: hsla(220, 100%, 95%, 1);
-        --on-surface: hsla(250, 100%, 95%, 1);
-        --on-surface-variant: hsla(250, 1%, 44%, 1);
-        --primary: hsla(356, 74%, 49%);
-        --primary-variant: rgb(146, 19, 28);
-        --rating-color: hsla(44, 100%, 49%, 1);
-        --surface: hsla(250, 13%, 11%, 1);
-        --text-color: hsla(250, 2%, 59%, 1);
-        --white: hsla(0, 0%, 100%, 1);
+    --banner-overlay: 90deg, hsla(220, 17%, 7%) 0%, hsla(220, 17%, 7%, 0.5) 100%;
+    --bottom-overlay: 180deg, hsla(250, 13%, 11%, 0), hsla(250, 13%, 11%, 1);
 
-        --banner-overlay: 90deg, hsla(220, 17%, 7%) 0%, hsla(220, 17%, 7%, 0, 5) 100%;
-        --bottom-overlay: 180deg, hsla(250, 13%, 11%, 0), hsla(250, 13%, 11%, 1);
+    --ff-dm-sans: 'DM Sans', sans-serif;
 
-        --ff-dm-sans: 'DM Sans', sans-serif;
+    --fs-heading: 4rem;
+    --fs-title-lg: 2.6rem;
+    --fs-title: 2rem;
+    --fs-body: 1.8rem;
+    --fs-button: 1.5rem;
+    --fs-label: 1.4rem;
 
-        --fs-heading: 4rem;
-        --fs-title-lg: 2.6rem;
-        --fs-title: 2rem;
-        --fs-body: 1.8rem;
-        --fs-button: 1.5rem;
-        --fs-label: 1.4rem;
+    --weight-bold: 700;
 
-        --weight-bold: 700;
+    --shadow-1: 0 1px 4px hsla(0, 0%, 0%, 0.75);
+    --shadow-2: 0 2px 4px hsla(350, 100%, 43%, 0.3);
 
-        --shadow-1: 0 1px 4px hsla(0, 0%, 0%, 0.75);
-        --shadow-2: 0 2px 4px hsla(350, 100%, 43%, 0.3);
+    --radius-4: 4px;
+    --radius-8: 8px;
+    --radius-16: 16px;
+    --radius-24: 24px;
+    --radius-36: 36px;
 
-        --radius-4: 4px;
-        --radius-8: 8px;
-        --radius-16: 16px;
-        --radius-24: 24px;
-        --radius-36: 36px;
+    --transition-short: 250ms ease;
+    --transition-long: 500ms ease;
+}
 
-        --transition-short: 250ms ease;
-        --transition-long: 500ms ease;
+/* Estilos para o header (cabeçalho) */
+.header {
+    position: relative;
+    padding-block: 24px;
+    padding-inline: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow-1);
+}
+
+.header .logo {
+    margin-inline-end: auto;
+}
+
+/* Estilos para botões de pesquisa e menu */
+.search-btn {
+    padding: 12px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: opacity var(--transition-short);
+}
+
+.search-btn img {
+    opacity: 0.5;
+    transition: opacity var(--transition-short);
+}
+
+.search-btn:is(:hover, :focus-visible) img {
+    opacity: 1;
+}
+
+.menu-btn {
+    padding: 12px;
+    background-color: var(--banner-background);
+    border-radius: var(--radius-8);
+}
+
+.menu-btn img {
+    opacity: 0.5;
+    transition: var(--transition-short);
+}
+
+.menu-btn:is(:hover, :focus-visible) img {
+    opacity: 1;
+}
+
+.menu-btn.active .menu,
+.menu-btn .close {
+    display: none;
+}
+
+.menu-btn .menu,
+.menu-btn.active .close {
+    display: block;
+}
+
+/* Estilos para caixa de pesquisa */
+.search-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background);
+    padding: 24px 16px;
+    align-items: center;
+    gap: 8px;
+    z-index: 1;
+    display: none;
+}
+
+.search-box.active {
+    display: flex;
+}
+
+.search-wrapper {
+    position: relative;
+    flex-grow: 1;
+}
+
+.search-wrapper::before,
+.load-more::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--white);
+    border-radius: var(--radius-24);
+    border-inline-end-color: transparent;
+    animation: loading 500ms linear infinite;
+    display: none;
+}
+
+.search-wrapper::before {
+    position: absolute;
+    top: 14px;
+    right: 12px;
+}
+
+.search-wrapper.searching::before {
+    display: block;
+}
+
+.load-more {
+    background-color: var(--primary-variant);
+    margin-inline: auto;
+    margin-block: 36px 60px;
+}
+
+.load-more.loading::before {
+    display: block;
+}
+
+.load-more:is(:hover, :focus-visible) {
+    --primary-variant: hsla(350, 67%, 39%, 1);
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0);
     }
 
-    .header {
-        position: relative;
-        padding-block: 24px;
-        padding-inline: 16px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px;
+    100% {
+        transform: rotate(1turn);
     }
+}
 
-    .header .logo {
-        margin-inline-end: auto;
-    }
+.search-field {
+    background-color: var(--banner-background);
+    height: 48px;
+    line-height: 48px;
+    padding-inline: 44px 16px;
+    outline: none;
+    border-radius: var(--radius-8);
+    transition: var(--transition-short);
+}
 
-    .title {
-        font-size: var(--fs-title);
-        font-weight: var(--weight-bold);
-        letter-spacing: 0.5px;
-    }
+.search-field::placeholder {
+    color: var(--on-surface-variant);
+}
 
-    .search-btn,
-    .menu-btn {
-        padding: 12px;
-    }
+.search-field:hover {
+    box-shadow: 0 0 0 2px var(--on-surface-variant);
+}
 
-    .search-btn {
-        background-color: var(--banner-background);
-        border-radius: var(--radius-8);
-    }
+.search-field:focus {
+    box-shadow: 0 0 0 2px var(--on-surface);
+    padding-inline-start: 16px;
+}
 
-    .search-btn img {
-        opacity: 0.5;
-        transition: var(--transition-short);
-    }
+.search-wrapper .leading-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 12px;
+    opacity: 0.5;
+    transition: var(--transition-short);
+}
 
-    .search-btn:is(:hover, :focus-visible) img {
-        opacity: 1;
-    }
+.search-wrapper:focus-within .leading-icon {
+    opacity: 0;
+}
 
-    .menu-btn.active .menu,
-    .menu-btn .close {
-        display: none;
-    }
+/* Estilo para o menu lateral (sidebar) */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px; /* Inicia oculto */
+    width: 280px; /* Largura do menu lateral */
+    height: 100%; /* Altura do menu lateral */
+    background-color: var(--surface); /* Cor de fundo do menu */
+    box-shadow: var(--shadow-1); /* Sombra */
+    z-index: 1000; /* Z-index para ficar acima do conteúdo */
+    transition: transform var(--transition-short); /* Transição suave ao abrir/fechar */
 
-    .menu-btn .menu,
-    .menu-btn.active .close {
-        display: block;
-    }
+    /* Alinhamento e espaçamento */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
 
-    .search-box {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--background);
-        padding: 24px 16px;
-        align-items: center;
-        gap: 8px;
-        z-index: 1;
-        display: none;
-    }
+.sidebar.active {
+    transform: translateX(0); /* Abre o menu lateral */
+}
 
-    .search-box.active {
-        display: flex;
-    }
+.sidebar.hidden {
+    transform: translateX(-100%); /* Fecha o menu lateral */
+}
 
-    .search-wrapper {
-        position: relative;
-        flex-grow: 1;
-    }
+/* Título do menu */
+.sidebar .menu-title {
+    font-size: var(--fs-title);
+    color: var(--primary); /* Cor do título */
+    margin-bottom: 20px; /* Espaçamento inferior */
+}
 
-    .search-wrapper::before,
-    .load-more::before {
-        content: "";
-        width: 20px;
-        height: 20px;
-        border: 3px solid var(--white);
-        border-radius: var(--radius-24);
-        border-inline-end-color: transparent;
-        animation: loading 500ms linear infinite;
-        display: none;
-    }
+/* Lista de itens do menu */
+.sidebar ul {
+    list-style-type: none; /* Remove marcadores */
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Largura total */
+}
 
-    .search-wrapper::before {
-        position: absolute;
-        top: 14px;
-        right: 12px;
-    }
+.sidebar ul li {
+    margin-bottom: 10px; /* Espaçamento entre itens */
+    width: 100%; /* Largura total */
+}
 
-    .search-wrapper.searching::before {
-        display: block;
-    }
+.sidebar ul li a {
+    display: block;
+    padding: 10px 20px; /* Espaçamento interno */
+    border-radius: var(--radius-4); /* Borda arredondada */
+    color: var(--text-color); /* Cor do texto */
+    text-decoration: none; /* Remove sublinhado */
+    transition: background-color var(--transition-short), color var(--transition-short); /* Transição suave */
+}
 
-    .load-more {
-        background-color: var(--primary-variant);
-        margin-inline: auto;
-        margin-block: 36px 60px;
-    }
+.sidebar ul li a:hover,
+.sidebar ul li a:focus {
+    background-color: var(--primary); /* Cor de fundo ao passar o mouse */
+    color: var(--white); /* Cor do texto ao passar o mouse */
+}
 
-    .load-more.loading::before { display: block; }
+/* Estilo para item selecionado */
+.sidebar ul li a.selected {
+    background-color: var(--primary); /* Cor de fundo do item selecionado */
+    color: var(--white); /* Cor do texto do item selecionado */
+}
 
-    .load-more:is(:hover, :focus-visible) { --primary-variant: hsla(350, 67%, 39%, 1)}
-
-    @keyframes loading {
-        0% {
-            transform: rotate(0);
-        }
-
-        100% {
-            transform: rotate(1turn);
-        }
-    }
-
-    .search-field {
-        background-color: var(--banner-background);
-        height: 48px;
-        line-height: 48px;
-        padding-inline: 44px 16px;
-        outline: none;
-        border-radius: var(--radius-8);
-        transition: var(--transition-short);
-    }
-
-    .serach-field::placeholder {
-        color: var(--on-surface-variant);
-    }
-
-    .serach-field:hover {
-        box-shadow: 0 0 0 2px var(--on-surface-variant);
-    }
-
-    .serach-field:focus {
-        box-shadow: 0 0 0 2px var(--on-surface);
-        padding-inline-start: 16px;
-    }
-
-    .search-wrapper .leading-icon {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 12px;
-        opacity: 0.5;
-        transition: var(--transition-short);
-    }
-
-    .search-wrapper:focus-within .leading-icon {
-        opacity: 0;
-    }
+/* Botão da página inicial */
+.menu-btn.home {
+    background-color: var(--primary); /* Cor de fundo vermelha */
+    color: var(--white); /* Cor do texto branco */
+}
