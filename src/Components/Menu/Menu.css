@@ -236,7 +236,7 @@
 /* Título do menu */
 .sidebar .menu-title {
     font-size: var(--fs-title);
-    color: var(--white-alpha-20); /* Cor do título */
+    color: var(--primary); /* Cor do título */
     margin-bottom: 20px; /* Espaçamento inferior */
 }
 
