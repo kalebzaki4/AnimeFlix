@@ -1,11 +1,12 @@
+import React from "react";
 import Banner from "../../Components/Banner";
-import Animes from "../../Components/ListaDeAnimesHorizontal";
+import ListaDeAnimesHorizontal from "../../Components/ListaDeAnimesHorizontal";
 
 export default function Inicio() {
     return (
         <>
             <Banner />
-            <Animes/>
+            <ListaDeAnimesHorizontal />
         </>
-    )
+    );
 }
