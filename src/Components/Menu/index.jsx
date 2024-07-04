@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Menu.css"; // Certifique-se de ter o arquivo CSS correto com estilos necessários
+import "./Menu.css";
 import logo from "../../assets/images/logo-animeflix.png";
 import logoPesquisa from "../../assets/images/search.png";
 import cancelarLogo from "../../assets/images/close.png";
@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 
 export default function Menu() {
     const [searchActive, setSearchActive] = useState(false);
-    const [menuActive, setMenuActive] = useState(false); // Estado para controlar visibilidade do menu lateral
-    const [selectedItem, setSelectedItem] = useState("home"); // Estado para controlar o item selecionado no menu
+    const [menuActive, setMenuActive] = useState(false);
+    const [selectedItem, setSelectedItem] = useState("home");
 
     useEffect(() => {
         const searchTogglers = document.querySelectorAll(".search-btn");
@@ -34,15 +34,24 @@ export default function Menu() {
         setMenuActive((prevMenuActive) => !prevMenuActive);
     };
 
+    const closeMenu = () => {
+        setMenuActive(false);
+    };
+
     const handleMenuItemClick = (item) => {
         setSelectedItem(item);
-        setMenuActive(false); // Fechar o menu lateral ao clicar em um item
+        closeMenu(); // Fechar o menu lateral ao clicar em um item de navegação
+    };
+
+    const handleLogoClick = () => {
+        setSelectedItem("home");
+        closeMenu(); // Fechar o menu lateral ao clicar no logo
     };
 
     return (
         <>
             <header className="header">
-                <Link to="/" className={`logo ${selectedItem === 'home' ? 'selected' : ''}`}>
+                <Link to="/" className={`logo ${selectedItem === 'home' ? 'selected' : ''}`} onClick={handleLogoClick}>
                     <img src={logo} alt="Logo do Animeflix" width={140} height={32} />
                 </Link>
 
@@ -51,36 +60,31 @@ export default function Menu() {
                         <input type="text" name="search" placeholder="Procurar Animes" className="search-field" autoComplete="off" />
                         <img src={logoPesquisa} alt="Pesquisa" className="leading-icon" width={24} height={24} />
                     </div>
-
                     <button className="search-btn">
                         <img src={cancelarLogo} alt="Fechar caixa de pesquisa" width={24} height={24} />
                     </button>
                 </div>
 
-                <button className="search-btn">
+                <button className="search-btn" onClick={toggleMenu}>
                     <img src={logoPesquisa} alt="Abrir menu lateral" width={24} height={24} />
                 </button>
 
                 <button className="menu-btn" onClick={toggleMenu}>
-                    <img
-                        src={menuLateral}
-                        alt="Abrir menu"
-                        className={`menu ${menuActive ? 'hidden' : ''}`}
-                        width={24}
-                        height={24}
-                    />
-                    <img
-                        src={cancelarMenuLateral}
-                        alt="Fechar menu"
-                        className={`close ${menuActive ? '' : 'hidden'}`}
-                        width={24}
-                        height={24}
-                    />
+                    {menuActive ? (
+                        <img src={cancelarMenuLateral} alt="Fechar menu" className="close" width={24} height={24} />
+                    ) : (
+                        <img src={menuLateral} alt="Abrir menu" className="menu" width={24} height={24} />
+                    )}
                 </button>
             </header>
 
             <div className={`sidebar ${menuActive ? 'active' : ''}`}>
                 <nav className="side-menu">
+                    <div className="sidebar-logo">
+                        <Link to="/" onClick={handleLogoClick}>
+                            <img src={logo} alt="Logo Animeflix" width={140} height={32} />
+                        </Link>
+                    </div>
                     <ul>
                         <li>
                             <Link
@@ -93,17 +97,65 @@ export default function Menu() {
                         </li>
                         <li>
                             <Link
-                                to="/animes"
-                                className={selectedItem === 'animes' ? 'selected' : ''}
-                                onClick={() => handleMenuItemClick('animes')}
+                                to="/Animes"
+                                className={selectedItem === 'Animes' ? 'selected' : ''}
+                                onClick={() => handleMenuItemClick('Animes')}
                             >
-                                Todos os Animes
+                                Animes
                             </Link>
                         </li>
-                        {/* Adicione mais links conforme necessário */}
+                        <li>
+                            <Link
+                                to="/Filmes"
+                                className={selectedItem === 'Filmes' ? 'selected' : ''}
+                                onClick={() => handleMenuItemClick('Filmes')}
+                            >
+                                Filmes
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/Sobre"
+                                className={selectedItem === 'Sobre' ? 'selected' : ''}
+                                onClick={() => handleMenuItemClick('Sobre')}
+                            >
+                                Sobre
+                            </Link>
+                        </li>
+                        <li>
+                            <span className="menu-title">Navegar</span>
+                            <ul>
+                                <li><Link to="/Populares">Populares</Link></li>
+                                <li><Link to="/Novidades">Novidades</Link></li>
+                                <li><Link to="/A-Z">A-Z</Link></li>
+                                <li><Link to="/Simulcasts">Simulcasts da Temporada</Link></li>
+                                <li><Link to="/Calendario">Calendário de Lançamentos</Link></li>
+                                <li><Link to="/Videoclipes">Videoclipes & Shows</Link></li>
+                                {/* Adicione mais itens conforme necessário */}
+                            </ul>
+                        </li>
+                        <li>
+                            <Link
+                                to="/Jogos"
+                                className={selectedItem === 'Jogos' ? 'selected' : ''}
+                                onClick={() => handleMenuItemClick('Jogos')}
+                            >
+                                Jogos
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/Noticias"
+                                className={selectedItem === 'Noticias' ? 'selected' : ''}
+                                onClick={() => handleMenuItemClick('Noticias')}
+                            >
+                                Notícias
+                            </Link>
+                        </li>
                     </ul>
                 </nav>
             </div>
+            <div className={`overlay ${menuActive ? 'active' : ''}`} onClick={toggleMenu}></div>
         </>
     );
 }
