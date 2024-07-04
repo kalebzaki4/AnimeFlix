@@ -10,6 +10,7 @@ const ListaDeAnimesHorizontal = () => {
       <section className="movie-list" aria-label="upcoming movie">
         <div className="title-wrapper">
           <h2 className="title-large">Mais Famosos</h2>
+          <h5 className='descricao-famosos'>Fique por dentro de todos os lançamentos</h5>
         </div>
         <div className="slider-list">
           <div className="slider-inner">
