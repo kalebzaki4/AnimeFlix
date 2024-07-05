@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Menu.css"; // Certifique-se de ter o arquivo CSS correto com estilos necessários
+import "./Menu.css";
 import logo from "../../assets/images/logo-animeflix.png";
 import logoPesquisa from "../../assets/images/search.png";
 import cancelarLogo from "../../assets/images/close.png";
@@ -9,41 +9,25 @@ import { Link } from "react-router-dom";
 
 export default function Menu() {
     const [searchActive, setSearchActive] = useState(false);
-    const [menuActive, setMenuActive] = useState(false); // Estado para controlar visibilidade do menu lateral
-    const [selectedItem, setSelectedItem] = useState("home"); // Estado para controlar o item selecionado no menu
+    const [menuActive, setMenuActive] = useState(false);
+    const [selectedItem, setSelectedItem] = useState("home");
 
-    useEffect(() => {
-        const searchTogglers = document.querySelectorAll(".search-btn");
-
-        const toggleSearch = () => {
-            setSearchActive((prevSearchActive) => !prevSearchActive);
-        };
-
-        searchTogglers.forEach((searchToggler) => {
-            searchToggler.addEventListener("click", toggleSearch);
-        });
-
-        return () => {
-            searchTogglers.forEach((searchToggler) => {
-                searchToggler.removeEventListener("click", toggleSearch);
-            });
-        };
-    }, []);
+    const toggleSearch = () => {
+        setSearchActive(prevSearchActive => !prevSearchActive);
+    };
 
     const toggleMenu = () => {
-        setMenuActive((prevMenuActive) => !prevMenuActive);
+        setMenuActive(prevMenuActive => !prevMenuActive);
     };
 
     const handleMenuItemClick = (item) => {
         setSelectedItem(item);
-        setMenuActive(false); // Fechar o menu lateral ao clicar em um item
+        setMenuActive(false);
     };
 
     const handleLogoClick = () => {
-        if (menuActive) {
-            setMenuActive(false); // Fechar o menu lateral ao clicar no logotipo
-        }
         setSelectedItem("home");
+        setMenuActive(false);
     };
 
     return (
@@ -59,13 +43,13 @@ export default function Menu() {
                         <img src={logoPesquisa} alt="Pesquisa" className="leading-icon" width={24} height={24} />
                     </div>
 
-                    <button className="search-btn">
+                    <button className="search-btn" onClick={toggleSearch}>
                         <img src={cancelarLogo} alt="Fechar caixa de pesquisa" width={24} height={24} />
                     </button>
                 </div>
 
-                <button className="search-btn">
-                    <img src={logoPesquisa} alt="Abrir menu lateral" width={24} height={24} />
+                <button className="search-btn" onClick={toggleSearch}>
+                    <img src={logoPesquisa} alt="Abrir caixa de pesquisa" width={24} height={24} />
                 </button>
 
                 <button className="menu-btn" onClick={toggleMenu}>
@@ -86,7 +70,7 @@ export default function Menu() {
                 </button>
             </header>
 
-            <div className={`sidebar ${menuActive ? 'active' : ''}`}>
+            <div className={`sidebar ${menuActive ? 'active' : 'hidden'}`}>
                 <nav className="side-menu">
                     <div className="sidebar-logo">
                         <img src={logo} alt="Logo Animeflix" width={140} height={32} />
