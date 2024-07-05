@@ -47,6 +47,13 @@
     margin-inline-end: auto;
 }
 
+.navegar-text {
+    color: var(--on-surface);
+    font-size: var(--fs-body);
+    font-weight: var(--weight-bold);
+    margin-left: 16px;
+}
+
 .search-btn {
     padding: 12px;
     background-color: transparent;
@@ -145,7 +152,7 @@
 }
 
 .search-field:is(:focus, :valid) {
-    box-shadow: var(--shadow-2);
+    box-shadow: var(--shadow-1);
 }
 
 .leading-icon {
@@ -208,6 +215,37 @@
 
 .side-menu a:hover {
     color: var(--primary-variant);
+}
+
+.mini-category {
+    margin-top: 16px;
+}
+
+.mini-category > span {
+    color: var(--text-color);
+    font-size: var(--fs-label);
+    font-weight: var(--weight-bold);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.sub-menu {
+    list-style: none;
+    padding-left: 16px;
+}
+
+.sub-menu li {
+    margin-bottom: 8px;
+}
+
+.sub-menu a {
+    color: var(--on-surface-variant);
+    text-decoration: none;
+    transition: color var(--transition-short);
+}
+
+.sub-menu a:hover {
+    color: var(--on-surface);
 }
 
 .overlay {
