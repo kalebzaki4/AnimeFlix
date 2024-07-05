@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Menu.css";
 import logo from "../../assets/images/logo-animeflix.png";
 import logoPesquisa from "../../assets/images/search.png";
@@ -36,22 +36,18 @@ export default function Menu() {
                 <Link to="/" className={`logo ${selectedItem === 'home' ? 'selected' : ''}`} onClick={handleLogoClick}>
                     <img src={logo} alt="Logo do Animeflix" width={140} height={32} />
                 </Link>
-
                 <div className={`search-box ${searchActive ? 'active' : ''}`}>
                     <div className="search-wrapper">
                         <input type="text" name="search" placeholder="Procurar Animes" className="search-field" autoComplete="off" />
                         <img src={logoPesquisa} alt="Pesquisa" className="leading-icon" width={24} height={24} />
                     </div>
-
                     <button className="search-btn" onClick={toggleSearch}>
                         <img src={cancelarLogo} alt="Fechar caixa de pesquisa" width={24} height={24} />
                     </button>
                 </div>
-
                 <button className="search-btn" onClick={toggleSearch}>
                     <img src={logoPesquisa} alt="Abrir caixa de pesquisa" width={24} height={24} />
                 </button>
-
                 <button className="menu-btn" onClick={toggleMenu}>
                     <img
                         src={menuLateral}
@@ -69,11 +65,12 @@ export default function Menu() {
                     />
                 </button>
             </header>
-
             <div className={`sidebar ${menuActive ? 'active' : 'hidden'}`}>
                 <nav className="side-menu">
                     <div className="sidebar-logo">
-                        <img src={logo} alt="Logo Animeflix" width={140} height={32} />
+                        <Link to="/" className={selectedItem === 'home' ? 'selected' : ''} onClick={() => handleLogoClick('home')}>
+                            <img src={logo} alt="Logo Animeflix" width={140} height={32} />
+                        </Link>
                     </div>
                     <ul>
                         <li>
@@ -111,6 +108,36 @@ export default function Menu() {
                             >
                                 Sobre
                             </Link>
+                        </li>
+                        <li className="mini-category">
+                            <span>Gêneros</span>
+                            <ul className="sub-menu">
+                                <li>
+                                    <Link
+                                        to="/generos/acao"
+                                        onClick={() => handleMenuItemClick('acao')}
+                                    >
+                                        Ação
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        to="/generos/drama"
+                                        onClick={() => handleMenuItemClick('drama')}
+                                    >
+                                        Drama
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        to="/generos/comedia"
+                                        onClick={() => handleMenuItemClick('comedia')}
+                                    >
+                                        Comédia
+                                    </Link>
+                                </li>
+                                {/* Adicione mais gêneros conforme necessário */}
+                            </ul>
                         </li>
                     </ul>
                 </nav>
