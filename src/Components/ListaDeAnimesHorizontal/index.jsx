@@ -1,7 +1,7 @@
 import React from 'react';
-import Estrelas from './Estrelas'; // Importe corretamente o componente Estrelas
+import Estrelas from './Estrelas';
 import { Link } from 'react-router-dom';
-import './ListaDeAnimes.css'; // Se necessário, importe estilos adicionais
+import './ListaDeAnimes.css'; 
 import data from '../../data';
 
 const ListaDeAnimesHorizontal = () => {
@@ -10,7 +10,7 @@ const ListaDeAnimesHorizontal = () => {
       <section className="movie-list" aria-label="upcoming movie">
         <div className="title-wrapper">
           <h2 className="title-large">Mais Famosos</h2>
-          <h5 className='descricao-famosos'>Fique por dentro de todos os lançamentos</h5>
+          <h6 className="descricao-famosos">Fique por dentro de todos os lançamentos</h6>
         </div>
         <div className="slider-list">
           <div className="slider-inner">
@@ -22,7 +22,7 @@ const ListaDeAnimesHorizontal = () => {
                 <h4 className="title">{anime.titulo}</h4>
                 <div className="meta-list">
                   <div className="meta-item">
-                    <Estrelas avaliacao={anime.avaliacao} /> {/* Passando avaliação como prop */}
+                    <Estrelas avaliacao={anime.avaliacao} />
                     <span className="span">{anime.avaliacao}</span>
                   </div>
                   <div className="card-badge">{anime.ano}</div>
