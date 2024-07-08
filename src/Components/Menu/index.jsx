@@ -73,6 +73,7 @@ export default function Menu() {
                         </Link>
                     </div>
                     <ul>
+                    <span className="navegar-span">Navegar</span>
                         <li>
                             <Link
                                 to="/"
