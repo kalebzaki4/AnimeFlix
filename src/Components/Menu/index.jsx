@@ -73,7 +73,7 @@ export default function Menu() {
                         </Link>
                     </div>
                     <ul>
-                    <span className="navegar-span">Navegar</span>
+                        <span className="navegar-span">Navegar</span>
                         <li>
                             <Link
                                 to="/"
@@ -103,47 +103,16 @@ export default function Menu() {
                         </li>
                         <li>
                             <Link
-                                to="/Sobre"
-                                className={selectedItem === 'Sobre' ? 'selected' : ''}
-                                onClick={() => handleMenuItemClick('Sobre')}
+                                to="/Series"
+                                className={selectedItem === 'Series' ? 'selected' : ''}
+                                onClick={() => handleMenuItemClick('Series')}
                             >
-                                Sobre
+                                Séries
                             </Link>
-                        </li>
-                        <li className="mini-category">
-                            <span>Gêneros</span>
-                            <ul className="sub-menu">
-                                <li>
-                                    <Link
-                                        to="/generos/acao"
-                                        onClick={() => handleMenuItemClick('acao')}
-                                    >
-                                        Ação
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        to="/generos/drama"
-                                        onClick={() => handleMenuItemClick('drama')}
-                                    >
-                                        Drama
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        to="/generos/comedia"
-                                        onClick={() => handleMenuItemClick('comedia')}
-                                    >
-                                        Comédia
-                                    </Link>
-                                </li>
-                                {/* Adicione mais gêneros conforme necessário */}
-                            </ul>
                         </li>
                     </ul>
                 </nav>
             </div>
-            <div className={`overlay ${menuActive ? 'active' : ''}`} onClick={toggleMenu}></div>
         </>
     );
 }
