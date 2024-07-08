@@ -189,7 +189,7 @@
 }
 
 .side-menu {
-    padding: 16px;
+    padding: 18px;
 }
 
 .side-menu ul {
@@ -264,4 +264,12 @@
 .overlay.active {
     opacity: 1;
     visibility: visible;
+}
+
+.navegar-span {
+    color: var(--text-color);
+    font-size: var(--fs-label);
+    font-weight: var(--weight-bold);
+    display: block;
+    margin-bottom: 8px;
 }
