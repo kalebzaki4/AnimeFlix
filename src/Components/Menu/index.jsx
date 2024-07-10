@@ -112,6 +112,7 @@ export default function Menu() {
                         </li>
                     </ul>
                 </nav>
+                <div className={`overlay ${menuActive ? 'active' : ''}`} onClick={toggleMenu}></div>
             </div>
         </>
     );
