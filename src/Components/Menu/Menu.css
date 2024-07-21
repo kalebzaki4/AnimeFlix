@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'); /* Importa a fonte do Google Fonts */
+
 :root {
   --background: hsla(220, 17%, 7%, 1);
   --banner-background: hsla(250, 6%, 20%, 1);
@@ -14,6 +16,7 @@
   --banner-overlay: 90deg, hsla(220, 17%, 7%) 0%, hsla(220, 17%, 7%, 0.5) 100%;
   --bottom-overlay: 180deg, hsla(250, 13%, 11%, 0), hsla(250, 13%, 11%, 1);
   --ff-dm-sans: "DM Sans", sans-serif;
+  --ff-roboto: 'Roboto', sans-serif; /* Fonte personalizada */
   --fs-heading: 4rem;
   --fs-title-lg: 2.6rem;
   --fs-title: 2rem;
@@ -224,6 +227,7 @@
   opacity: 0;
   transition: opacity var(--transition-long) ease-in-out;
   z-index: 8;
+  font-family: var(--ff-roboto); /* Aplica a fonte personalizada */
 }
 
 .menu-overlay.active {
