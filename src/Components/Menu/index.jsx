@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Menu.css";
 import logo from "../../assets/images/logo-animeflix.png";
 import logoPesquisa from "../../assets/images/search.png";
@@ -11,6 +11,7 @@ export default function Menu() {
   const [searchActive, setSearchActive] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
   const [selectedItem, setSelectedItem] = useState("home");
+  const overlayRef = useRef(null);
 
   const toggleSearch = () => {
     setSearchActive((prevSearchActive) => !prevSearchActive);
@@ -18,6 +19,10 @@ export default function Menu() {
 
   const toggleMenu = () => {
     setMenuActive((prevMenuActive) => !prevMenuActive);
+  };
+
+  const closeOverlay = () => {
+    setMenuActive(false);
   };
 
   const handleMenuItemClick = (item) => {
@@ -30,14 +35,16 @@ export default function Menu() {
     setMenuActive(false);
   };
 
-  // Effect to lock scrolling when the menu is active
   useEffect(() => {
-    if (menuActive) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [menuActive]);
+    const handleClickOutside = (event) => {
+      if (overlayRef.current && !overlayRef.current.contains(event.target)) {
+        closeOverlay();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <>
@@ -103,51 +110,22 @@ export default function Menu() {
 
       <div
         className={`overlay ${menuActive ? "active" : ""}`}
-        onClick={toggleMenu}
-      ></div>
-
-      <div className={`sidebar ${menuActive ? "active" : "hidden"}`}>
-        <nav className="side-menu">
-          <ul>
-            <span className="navegar-span">Navegar</span>
-            <li>
-              <Link
-                to="/"
-                className={selectedItem === "home" ? "selected" : ""}
-                onClick={() => handleMenuItemClick("home")}
-              >
-                Página Inicial
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/Animes"
-                className={selectedItem === "Animes" ? "selected" : ""}
-                onClick={() => handleMenuItemClick("Animes")}
-              >
-                Animes
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/Filmes"
-                className={selectedItem === "Filmes" ? "selected" : ""}
-                onClick={() => handleMenuItemClick("Filmes")}
-              >
-                Filmes
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/Series"
-                className={selectedItem === "Series" ? "selected" : ""}
-                onClick={() => handleMenuItemClick("Series")}
-              >
-                Séries
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        ref={overlayRef}
+      >
+        <button className="overlay-close" onClick={closeOverlay}>
+          &times;
+        </button>
+        <div className={`menu-overlay ${menuActive ? "active" : ""}`}>
+          <Link to="/" className="menu-item" onClick={() => handleMenuItemClick("home")}>
+            Navegar
+          </Link>
+          <Link to="/about" className="menu-item" onClick={() => handleMenuItemClick("about")}>
+            About
+          </Link>
+          <Link to="/contact" className="menu-item" onClick={() => handleMenuItemClick("contact")}>
+            Contact
+          </Link>
+        </div>
       </div>
     </>
   );
