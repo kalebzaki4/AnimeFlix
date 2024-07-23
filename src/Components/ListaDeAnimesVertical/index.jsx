@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Estrelas from '../../assets/images/star.png';
-import '../../Paginas/ResultadoAnimes/ListaAnimesVetical.css';
 import data from '../../data';
 
 function useQuery() {
