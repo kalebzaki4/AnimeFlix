@@ -9,7 +9,7 @@ import ResultadoAnimes from './Paginas/ResultadoAnimes';
 function App() {
   return (
     <BrowserRouter>
-      <Menu />
+      <Menu/>
       <Routes>
         <Route path='/' element={<Inicio />} />
         <Route path='/Detalhes/:id' element={<PaginaDetalhes />} />
