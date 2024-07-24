@@ -16,7 +16,7 @@
   --banner-overlay: 90deg, hsla(220, 17%, 7%) 0%, hsla(220, 17%, 7%, 0.5) 100%;
   --bottom-overlay: 180deg, hsla(250, 13%, 11%, 0), hsla(250, 13%, 11%, 1);
   --ff-dm-sans: "DM Sans", sans-serif;
-  --ff-roboto: 'Roboto', sans-serif; /* Fonte personalizada */
+  --ff-roboto: "Roboto", sans-serif; /* Fonte personalizada */
   --fs-heading: 4rem;
   --fs-title-lg: 2.6rem;
   --fs-title: 2rem;
@@ -47,7 +47,12 @@
 }
 
 .header .logo {
-  margin-inline-end: auto;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  flex-grow: 1;
+  text-align: center;
 }
 
 .navegar-text {
@@ -78,6 +83,7 @@
   padding: 12px;
   background-color: var(--banner-background);
   border-radius: var(--radius-8);
+  margin-right: auto; /* Move para a esquerda */
 }
 
 .menu-btn img {
@@ -174,11 +180,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgb(0,0,0);
-  background: -moz-linear-gradient(180deg, rgba(0,0,0,0.5368522408963585) 0%, rgba(113,0,0,1) 100%);
-  background: -webkit-linear-gradient(180deg, rgba(0,0,0,0.5368522408963585) 0%, rgba(113,0,0,1) 100%);
-  background: linear-gradient(180deg, rgba(0,0,0,0.5368522408963585) 0%, rgba(113,0,0,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#710000",GradientType=1);
+  background: var(--background);
   opacity: 0;
   visibility: hidden;
   transition: opacity var(--transition-short), visibility var(--transition-short);
@@ -227,7 +229,7 @@
   opacity: 0;
   transition: opacity var(--transition-long) ease-in-out;
   z-index: 8;
-  font-family: var(--ff-roboto); /* Aplica a fonte personalizada */
+  font-family: var(--ff-roboto);
 }
 
 .menu-overlay.active {
@@ -254,4 +256,24 @@
   font-weight: var(--weight-bold);
   display: block;
   margin-bottom: 10px;
+}
+
+.user-btn {
+  /* Estilo para o botão de usuário */
+  padding: 12px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity var(--transition-short);
+  display: flex;
+  align-items: center;
+}
+
+.user-btn img {
+  opacity: 0.5;
+  transition: opacity var(--transition-short);
+}
+
+.user-btn:is(:hover, :focus-visible) img {
+  opacity: 1;
 }
