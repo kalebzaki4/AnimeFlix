@@ -1,18 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom"; // Importar useNavigate
 import "./Menu.css";
 import logo from "../../assets/images/logo-animeflix.png";
 import logoPesquisa from "../../assets/images/search.png";
 import cancelarLogo from "../../assets/images/close.png";
 import menuLateral from "../../assets/images/menu.png";
 import cancelarMenuLateral from "../../assets/images/menu-close.png";
-import userIcon from "../../assets/images/user.png";
-import { Link } from "react-router-dom";
+import userIcon from "../../assets/images/user.svg";
 
 export default function Menu() {
   const [searchActive, setSearchActive] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
   const [selectedItem, setSelectedItem] = useState("home");
+  const [genresOpen, setGenresOpen] = useState(false); // Novo estado para controlar a lista sanfonada
   const overlayRef = useRef(null);
+  const navigate = useNavigate(); // Usar useNavigate para navegação programática
 
   const toggleSearch = () => {
     setSearchActive((prevSearchActive) => !prevSearchActive);
@@ -34,12 +36,15 @@ export default function Menu() {
   const handleLogoClick = () => {
     setSelectedItem("home");
     setMenuActive(false);
+    navigate("/"); // Navegar para a página inicial
   };
 
-  // Novo handler para o clique no botão de usuário
   const handleUserClick = () => {
-    // Lógica para lidar com o login, redirecionamento ou modal de login
     console.log("User button clicked");
+  };
+
+  const toggleGenres = () => {
+    setGenresOpen((prev) => !prev);
   };
 
   useEffect(() => {
@@ -51,13 +56,11 @@ export default function Menu() {
 
     document.addEventListener("mousedown", handleClickOutside);
 
-    // Limpa o event listener quando o componente desmonta
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
-  // UseEffect para desativar a rolagem
   useEffect(() => {
     if (menuActive) {
       document.body.style.overflow = "hidden";
@@ -89,15 +92,13 @@ export default function Menu() {
             height={24}
           />
         </button>
-        <Link
-          to="/"
+        <button
           className={`logo ${selectedItem === "home" ? "selected" : ""}`}
           onClick={handleLogoClick}
         >
           <img src={logo} alt="Logo do Animeflix" width={140} height={32} />
-        </Link>
+        </button>
 
-        {/* Botão de Pesquisa - Alterado de posição */}
         <button className="search-btn" onClick={toggleSearch}>
           <img
             src={logoPesquisa}
@@ -107,7 +108,6 @@ export default function Menu() {
           />
         </button>
 
-        {/* Caixa de Pesquisa - Alterado de posição */}
         <div className={`search-box ${searchActive ? "active" : ""}`}>
           <div className="search-wrapper">
             <input
@@ -135,7 +135,6 @@ export default function Menu() {
           </button>
         </div>
 
-        {/* Botão de Usuário - Alterado de posição */}
         <button className="user-btn" onClick={handleUserClick}>
           <img src={userIcon} alt="User Login" width={24} height={24} />
         </button>
@@ -148,35 +147,113 @@ export default function Menu() {
         <button className="overlay-close" onClick={closeOverlay}>
           &times;
         </button>
+        <Link to="/">
+          <img className="menu-overlay-logo" src={logo} alt="Logo do Animeflix" width={200} />
+        </Link>
         <div className={`menu-overlay ${menuActive ? "active" : ""}`}>
-          <Link
-            to="/"
-            className="menu-item"
-            onClick={() => handleMenuItemClick("home")}
-          >
-            Populares
-          </Link>
-          <Link
-            to="/about"
-            className="menu-item"
-            onClick={() => handleMenuItemClick("about")}
-          >
-            Novidades
-          </Link>
-          <Link
-            to="/about"
-            className="menu-item"
-            onClick={() => handleMenuItemClick("about")}
-          >
-            A-Z
-          </Link>
-          <Link
-            to="/contact"
-            className="menu-item"
-            onClick={() => handleMenuItemClick("contact")}
-          >
-            Contato
-          </Link>
+          <div className="menu-section">
+            <span className="navegar-span">NAVEGAR</span>
+            <Link
+              to="/popular"
+              className="menu-item"
+              onClick={() => handleMenuItemClick("popular")}
+            >
+              Populares
+            </Link>
+            <Link
+              to="/novidades"
+              className="menu-item"
+              onClick={() => handleMenuItemClick("novidades")}
+            >
+              Novidades
+            </Link>
+            <Link
+              to="/az"
+              className="menu-item"
+              onClick={() => handleMenuItemClick("az")}
+            >
+              A-Z
+            </Link>
+            <Link
+              to="/simulcasts"
+              className="menu-item"
+              onClick={() => handleMenuItemClick("simulcasts")}
+            >
+              Simulcasts da Temporada
+            </Link>
+            <Link
+              to="/calendario"
+              className="menu-item"
+              onClick={() => handleMenuItemClick("calendario")}
+            >
+              Calendário de Lançamentos
+            </Link>
+            <Link
+              to="/videoclipes"
+              className="menu-item"
+              onClick={() => handleMenuItemClick("videoclipes")}
+            >
+              Videoclipes & Shows
+            </Link>
+            <div className="menu-item">
+              <button className="dropdown-toggle" onClick={toggleGenres}>
+                Gêneros
+              </button>
+              <div className={`dropdown-content ${genresOpen ? "active" : ""}`}>
+                <Link
+                  to="/acao"
+                  className="dropdown-item"
+                  onClick={() => handleMenuItemClick("acao")}
+                >
+                  Ação
+                </Link>
+                <Link
+                  to="/comedia"
+                  className="dropdown-item"
+                  onClick={() => handleMenuItemClick("comedia")}
+                >
+                  Comédia
+                </Link>
+                <Link
+                  to="/drama"
+                  className="dropdown-item"
+                  onClick={() => handleMenuItemClick("drama")}
+                >
+                  Drama
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="menu-section">
+            <Link
+              to="/jogos"
+              className="menu-item"
+              onClick={() => handleMenuItemClick("jogos")}
+            >
+              Jogos
+            </Link>
+            <div className="menu-item">
+              <button className="dropdown-toggle">
+                Notícias
+              </button>
+              <div className="dropdown-content">
+                <Link
+                  to="/ultimas"
+                  className="dropdown-item"
+                  onClick={() => handleMenuItemClick("ultimas")}
+                >
+                  Últimas Notícias
+                </Link>
+                <Link
+                  to="/mais-lidas"
+                  className="dropdown-item"
+                  onClick={() => handleMenuItemClick("mais-lidas")}
+                >
+                  Mais Lidas
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
