@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'); /* Importa a fonte do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+/* Importa a fonte do Google Fonts */
 
 :root {
   --background: hsla(220, 17%, 7%, 1);
-  --banner-background: hsla(250, 6%, 20%, 1);
+  --banner-background: #313036;
   --white-alpha-20: hsla(0, 0%, 100%, 0.2);
   --on-background: hsla(220, 100%, 95%, 1);
   --on-surface: hsla(250, 100%, 95%, 1);
@@ -16,7 +17,8 @@
   --banner-overlay: 90deg, hsla(220, 17%, 7%) 0%, hsla(220, 17%, 7%, 0.5) 100%;
   --bottom-overlay: 180deg, hsla(250, 13%, 11%, 0), hsla(250, 13%, 11%, 1);
   --ff-dm-sans: "DM Sans", sans-serif;
-  --ff-roboto: "Roboto", sans-serif; /* Fonte personalizada */
+  --ff-roboto: "Roboto", sans-serif;
+  /* Fonte personalizada */
   --fs-heading: 4rem;
   --fs-title-lg: 2.6rem;
   --fs-title: 2rem;
@@ -83,7 +85,8 @@
   padding: 12px;
   background-color: var(--banner-background);
   border-radius: var(--radius-8);
-  margin-right: auto; /* Move para a esquerda */
+  margin-right: auto;
+  /* Move para a esquerda */
 }
 
 .menu-btn img {
@@ -220,7 +223,7 @@
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px; 
+  width: 400px;
   height: 400px;
   padding: 0px 80px 20px 20px;
   display: flex;
@@ -259,6 +262,11 @@
   color: var(--primary);
 }
 
+.menu-section {
+  -webkit-box-shadow: 0px 2px 0px 0px rgb(60, 60, 60);
+  padding: 20px;
+}
+
 .dropdown {
   position: relative;
   cursor: pointer;
@@ -275,7 +283,7 @@
   padding: 8px;
   z-index: 1002;
   flex-direction: column;
-  width: max-content; 
+  width: max-content;
 }
 
 .dropdown:hover .dropdown-content {
@@ -329,6 +337,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
