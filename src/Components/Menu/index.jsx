@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Importar useNavigate
+import { Link, useNavigate } from "react-router-dom";
 import "./Menu.css";
 import logo from "../../assets/images/logo-animeflix.png";
 import logoPesquisa from "../../assets/images/search.png";
@@ -12,9 +12,9 @@ export default function Menu() {
   const [searchActive, setSearchActive] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
   const [selectedItem, setSelectedItem] = useState("home");
-  const [genresOpen, setGenresOpen] = useState(false); // Novo estado para controlar a lista sanfonada
+  const [genresOpen, setGenresOpen] = useState(false);
   const overlayRef = useRef(null);
-  const navigate = useNavigate(); // Usar useNavigate para navegação programática
+  const navigate = useNavigate(); 
 
   const toggleSearch = () => {
     setSearchActive((prevSearchActive) => !prevSearchActive);
@@ -36,7 +36,7 @@ export default function Menu() {
   const handleLogoClick = () => {
     setSelectedItem("home");
     setMenuActive(false);
-    navigate("/"); // Navegar para a página inicial
+    navigate("/");
   };
 
   const handleUserClick = () => {
