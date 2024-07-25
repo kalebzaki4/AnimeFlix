@@ -14,7 +14,7 @@ export default function Menu() {
   const [selectedItem, setSelectedItem] = useState("home");
   const [genresOpen, setGenresOpen] = useState(false);
   const overlayRef = useRef(null);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const toggleSearch = () => {
     setSearchActive((prevSearchActive) => !prevSearchActive);
