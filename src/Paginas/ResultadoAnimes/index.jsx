@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Estrelas from '../../assets/images/star.png';
 import './ListaAnimesVertical.css';
-import data from "../../data"; // Importe a lista de dados
+import data from "../../data"; 
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -12,7 +12,6 @@ function ResultadoAnimes() {
     const query = useQuery();
     const searchTerm = query.get('q');
 
-    // Filtrar os animes com base no searchTerm
     const filteredData = data.filter(anime =>
         anime.titulo.toLowerCase().includes(searchTerm.toLowerCase())
     );
