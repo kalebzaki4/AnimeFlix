@@ -342,9 +342,3 @@
     transform: rotate(360deg);
   }
 }
-
-@media (max-width: 375px) {
-  .menu-section {
-    padding: 5px; 
-  }
-}
