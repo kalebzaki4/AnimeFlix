@@ -342,3 +342,16 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 375px) {
+  .menu-section {
+    padding: 0px 0px 0px 10px;
+  }
+  .menu-item {
+    margin: 20px 0px;
+  }
+  .menu-overlay-logo {
+    left: 75px;
+    top: 30px;
+  }
+}
