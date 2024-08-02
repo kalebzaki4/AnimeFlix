@@ -355,3 +355,16 @@
     top: 30px;
   }
 }
+
+@media (max-width: 352px) {
+  .menu-section {
+    padding: 0px 0px 0px 15px;
+  }
+  .menu-item {
+    margin: 20px 0px;
+  }
+  .menu-overlay-logo {
+    left: 75px;
+    top: 30px;
+  }
+} 
