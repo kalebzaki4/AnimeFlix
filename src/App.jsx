@@ -5,6 +5,7 @@ import Inicio from './Paginas/Inicio';
 import PaginaDetalhes from './Paginas/PaginaDetalhes';
 import Erro404 from './Components/Erro404';
 import ResultadoAnimes from './Paginas/ResultadoAnimes';
+import Footer from './Components/Footer';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/a' element={<ResultadoAnimes />} />
         <Route path='*' element={<Erro404 />} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }
