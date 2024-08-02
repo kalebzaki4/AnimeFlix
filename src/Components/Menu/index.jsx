@@ -140,15 +140,23 @@ export default function Menu() {
         </button>
       </header>
 
-      <div
-        className={`overlay ${menuActive ? "active" : ""}`}
-        ref={overlayRef}
-      >
+      <div className={`overlay ${menuActive ? "active" : ""}`} ref={overlayRef}>
         <button className="overlay-close" onClick={closeOverlay}>
           &times;
         </button>
-        <Link to="/">
-          <img className="menu-overlay-logo" src={logo} alt="Logo do Animeflix" width={200} />
+        <Link
+          to="/"
+          onClick={() => {
+            handleMenuItemClick("home");
+            closeOverlay(); // Fechar a lista lateral quando o logo for clicado
+          }}
+        >
+          <img
+            className="menu-overlay-logo"
+            src={logo}
+            alt="Logo do Animeflix"
+            width={200}
+          />
         </Link>
         <div className={`menu-overlay ${menuActive ? "active" : ""}`}>
           <div className="menu-section">
@@ -233,9 +241,7 @@ export default function Menu() {
               Jogos
             </Link>
             <div className="menu-item">
-              <button className="dropdown-toggle">
-                Notícias
-              </button>
+              <button className="dropdown-toggle">Notícias</button>
               <div className="dropdown-content">
                 <Link
                   to="/ultimas"
