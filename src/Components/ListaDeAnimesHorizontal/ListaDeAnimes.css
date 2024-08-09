@@ -118,7 +118,7 @@
   background-color: var(--surface);
   padding: 24px 35px;
   padding-top: 0;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
 }
 
 .meta-list {
