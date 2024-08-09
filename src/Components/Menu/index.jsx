@@ -11,9 +11,11 @@ import userIcon from "../../assets/images/user.svg";
 export default function Menu() {
   const [searchActive, setSearchActive] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
+  const [userMenuActive, setUserMenuActive] = useState(false);
   const [selectedItem, setSelectedItem] = useState("home");
   const [genresOpen, setGenresOpen] = useState(false);
   const overlayRef = useRef(null);
+  const userOverlayRef = useRef(null);
   const navigate = useNavigate();
 
   const toggleSearch = () => {
@@ -24,8 +26,16 @@ export default function Menu() {
     setMenuActive((prevMenuActive) => !prevMenuActive);
   };
 
+  const toggleUserMenu = () => {
+    setUserMenuActive((prevUserMenuActive) => !prevUserMenuActive);
+  };
+
   const closeOverlay = () => {
     setMenuActive(false);
+  };
+
+  const closeUserOverlay = () => {
+    setUserMenuActive(false);
   };
 
   const handleMenuItemClick = (item) => {
@@ -33,14 +43,16 @@ export default function Menu() {
     setMenuActive(false);
   };
 
+  const handleUserMenuItemClick = (item) => {
+    setSelectedItem(item);
+    setUserMenuActive(false);
+  };
+
   const handleLogoClick = () => {
     setSelectedItem("home");
     setMenuActive(false);
+    setUserMenuActive(false);
     navigate("/");
-  };
-
-  const handleUserClick = () => {
-    console.log("User button clicked");
   };
 
   const toggleGenres = () => {
@@ -49,8 +61,14 @@ export default function Menu() {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (overlayRef.current && !overlayRef.current.contains(event.target)) {
+      if (
+        overlayRef.current &&
+        !overlayRef.current.contains(event.target) &&
+        userOverlayRef.current &&
+        !userOverlayRef.current.contains(event.target)
+      ) {
         closeOverlay();
+        closeUserOverlay();
       }
     };
 
@@ -62,7 +80,7 @@ export default function Menu() {
   }, []);
 
   useEffect(() => {
-    if (menuActive) {
+    if (menuActive || userMenuActive) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -71,7 +89,7 @@ export default function Menu() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [menuActive]);
+  }, [menuActive, userMenuActive]);
 
   return (
     <>
@@ -135,7 +153,7 @@ export default function Menu() {
           </button>
         </div>
 
-        <button className="user-btn" onClick={handleUserClick}>
+        <button className="user-btn" onClick={toggleUserMenu}>
           <img src={userIcon} alt="User Login" width={24} height={24} />
         </button>
       </header>
@@ -148,7 +166,7 @@ export default function Menu() {
           to="/"
           onClick={() => {
             handleMenuItemClick("home");
-            closeOverlay(); // Fechar a lista lateral quando o logo for clicado
+            closeOverlay(); 
           }}
         >
           <img
@@ -259,6 +277,55 @@ export default function Menu() {
                 </Link>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={`overlay ${userMenuActive ? "active" : ""}`}
+        ref={userOverlayRef}
+      >
+        <button className="overlay-close" onClick={closeUserOverlay}>
+          &times;
+        </button>
+        <div className={`menu-overlay ${userMenuActive ? "active" : ""}`}>
+          <div className="menu-section">
+            <span className="navegar-span">USUÁRIO</span>
+            <Link
+              to="/perfil"
+              className="menu-item"
+              onClick={() => handleUserMenuItemClick("perfil")}
+            >
+              Perfil
+            </Link>
+            <Link
+              to="/favoritos"
+              className="menu-item"
+              onClick={() => handleUserMenuItemClick("favoritos")}
+            >
+              Favoritos
+            </Link>
+            <Link
+              to="/historico"
+              className="menu-item"
+              onClick={() => handleUserMenuItemClick("historico")}
+            >
+              Histórico
+            </Link>
+            <Link
+              to="/configuracoes"
+              className="menu-item"
+              onClick={() => handleUserMenuItemClick("configuracoes")}
+            >
+              Configurações
+            </Link>
+            <Link
+              to="/logout"
+              className="menu-item"
+              onClick={() => handleUserMenuItemClick("logout")}
+            >
+              Sair
+            </Link>
           </div>
         </div>
       </div>
