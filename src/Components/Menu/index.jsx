@@ -290,6 +290,12 @@ export default function Menu() {
         </button>
         <div className={`menu-overlay ${userMenuActive ? "active" : ""}`}>
           <div className="menu-section">
+            <img
+              className="menu-overlay-logo"
+              src={logo}
+              alt="Logo do Animeflix"
+              width={200}
+            />
             <span className="navegar-span">USUÁRIO</span>
             <Link
               to="/perfil"
@@ -318,13 +324,6 @@ export default function Menu() {
               onClick={() => handleUserMenuItemClick("configuracoes")}
             >
               Configurações
-            </Link>
-            <Link
-              to="/logout"
-              className="menu-item"
-              onClick={() => handleUserMenuItemClick("logout")}
-            >
-              Sair
             </Link>
           </div>
         </div>
