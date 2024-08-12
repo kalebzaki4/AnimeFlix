@@ -225,7 +225,7 @@
   transform: translate(-50%, -50%);
   width: 400px;
   height: 400px;
-  padding: 0px 80px 20px 20px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -237,11 +237,9 @@
 }
 
 .menu-overlay-logo {
-  position: relative;
-  padding: 0;
-  margin: 0;
-  top: 3.9vh;
-  left: 9vh;
+  position: absolute;
+  top: 16px; /* Ajuste a posição vertical do logotipo */
+  left: 16px; /* Ajuste a posição horizontal do logotipo */
 }
 
 .menu-overlay.active {
@@ -367,4 +365,4 @@
     left: 75px;
     top: 30px;
   }
-} 
+}
