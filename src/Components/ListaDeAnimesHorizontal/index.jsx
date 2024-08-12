@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import './ListaDeAnimes.css'; 
 import data from '../../data';
 
-const ListaDeAnimesHorizontal = () => {
+const ListaDeAnimesHorizontal = ({ title, description }) => {
   return (
     <article className="container-inative">
-      <section className="movie-list" aria-label="upcoming movie">
+      <section className="movie-list" aria-label={title}>
         <div className="title-wrapper">
-          <h2 className="title-large">Mais Famosos</h2>
-          <h6 className="descricao-famosos">Fique por dentro de todos os lançamentos</h6>
+          <h2 className="title-large">{title}</h2>
+          <h6 className="descricao-famosos">{description}</h6>
         </div>
         <div className="slider-list">
           <div className="slider-inner">
