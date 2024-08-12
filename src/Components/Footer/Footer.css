@@ -1,338 +1,139 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "./Menu.css";
-import logo from "../../assets/images/logo-animeflix.png";
-import logoPesquisa from "../../assets/images/search.png";
-import cancelarLogo from "../../assets/images/close.png";
-import menuLateral from "../../assets/images/menu.png";
-import cancelarMenuLateral from "../../assets/images/menu-close.png";
-import userIcon from "../../assets/images/user.svg";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-export default function Menu() {
-  const [searchActive, setSearchActive] = useState(false);
-  const [menuActive, setMenuActive] = useState(false);
-  const [userMenuActive, setUserMenuActive] = useState(false);
-  const [selectedItem, setSelectedItem] = useState("home");
-  const [genresOpen, setGenresOpen] = useState(false);
-  const overlayRef = useRef(null);
-  const userOverlayRef = useRef(null); // Referência para o menu de usuário
-  const navigate = useNavigate();
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
 
-  const toggleSearch = () => {
-    setSearchActive((prevSearchActive) => !prevSearchActive);
-  };
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 40px 20px;
+  background-color: #98171f;
+  color: white;
+}
 
-  const toggleMenu = () => {
-    setMenuActive((prevMenuActive) => !prevMenuActive);
-  };
+.footer__addr {
+  flex: 1 100%;
+  margin-bottom: 2em;
+}
 
-  const toggleUserMenu = () => {
-    setUserMenuActive((prevUserMenuActive) => !prevUserMenuActive);
-  };
+.footer__logo {
+  font-family: 'Pacifico', cursive;
+  font-weight: 400;
+  font-size: 1.5rem;
+  text-transform: lowercase;
+}
 
-  const closeOverlay = () => {
-    setMenuActive(false);
-  };
+.footer__addr h2 {
+  margin-top: 1.3em;
+  font-size: 15px;
+  font-weight: 400;
+}
 
-  const closeUserOverlay = () => {
-    setUserMenuActive(false);
-  };
+.footer address {
+  font-style: normal;
+  color: #f0f0f0;
+}
 
-  const handleMenuItemClick = (item) => {
-    setSelectedItem(item);
-    setMenuActive(false);
-  };
+.footer__btn {
+  display: inline-block;
+  margin-top: 1em;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #98171f;
+  border-radius: 5px;
+  text-decoration: none;
+}
 
-  const handleUserMenuItemClick = (item) => {
-    setSelectedItem(item);
-    setUserMenuActive(false);
-  };
+.footer__btn:hover {
+  background-color: #f0f0f0;
+  color: #98171f;
+}
 
-  const handleLogoClick = () => {
-    setSelectedItem("home");
-    setMenuActive(false);
-    setUserMenuActive(false);
-    navigate("/");
-  };
+.footer__nav {
+  display: flex;
+  flex: 2 100%;
+  margin-bottom: 2em;
+}
 
-  const handleUserClick = () => {
-    toggleUserMenu();
-  };
+.nav__item {
+  flex: 1;
+  margin-right: 20px;
+}
 
-  const toggleGenres = () => {
-    setGenresOpen((prev) => !prev);
-  };
+.nav__title {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        overlayRef.current &&
-        !overlayRef.current.contains(event.target) &&
-        userOverlayRef.current &&
-        !userOverlayRef.current.contains(event.target)
-      ) {
-        closeOverlay();
-        closeUserOverlay();
-      }
-    };
+.nav__ul {
+  list-style: none;
+}
 
-    document.addEventListener("mousedown", handleClickOutside);
+.nav__ul li {
+  margin-bottom: 10px;
+}
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+.nav__ul a {
+  color: #f0f0f0;
+  text-decoration: none;
+}
 
-  useEffect(() => {
-    if (menuActive || userMenuActive) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+.nav__ul a:hover {
+  text-decoration: underline;
+}
 
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [menuActive, userMenuActive]);
+.legal {
+  flex: 1 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #f0f0f0;
+  border-top: 1px solid #e5e5e5;
+  padding-top: 20px;
+}
 
-  return (
-    <>
-      <header className="header">
-        <button className="menu-btn" onClick={toggleMenu}>
-          <img
-            src={menuLateral}
-            alt="Abrir menu"
-            className={`menu ${menuActive ? "hidden" : ""}`}
-            width={24}
-            height={24}
-          />
-          <img
-            src={cancelarMenuLateral}
-            alt="Fechar menu"
-            className={`close ${menuActive ? "" : "hidden"}`}
-            width={24}
-            height={24}
-          />
-        </button>
-        <button
-          className={`logo ${selectedItem === "home" ? "selected" : ""}`}
-          onClick={handleLogoClick}
-        >
-          <img src={logo} alt="Logo do Animeflix" width={140} height={32} />
-        </button>
+.legal__links {
+  display: flex;
+  align-items: center;
+}
 
-        <button className="search-btn" onClick={toggleSearch}>
-          <img
-            src={logoPesquisa}
-            alt="Abrir caixa de pesquisa"
-            width={24}
-            height={24}
-          />
-        </button>
+.heart {
+  color: #f0f0f0;
+  margin-left: 5px;
+}
 
-        <div className={`search-box ${searchActive ? "active" : ""}`}>
-          <div className="search-wrapper">
-            <input
-              type="text"
-              name="search"
-              placeholder="Procurar Animes"
-              className="search-field"
-              autoComplete="off"
-            />
-            <img
-              src={logoPesquisa}
-              alt="Pesquisa"
-              className="leading-icon"
-              width={24}
-              height={24}
-            />
-          </div>
-          <button className="search-btn" onClick={toggleSearch}>
-            <img
-              src={cancelarLogo}
-              alt="Fechar caixa de pesquisa"
-              width={24}
-              height={24}
-            />
-          </button>
-        </div>
+.social-icon {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
-        <button className="user-btn" onClick={handleUserClick}>
-          <img src={userIcon} alt="User Login" width={24} height={24} />
-        </button>
-      </header>
+.social-icon__item {
+  list-style: none;
+}
 
-      <div className={`overlay ${menuActive ? "active" : ""}`} ref={overlayRef}>
-        <button className="overlay-close" onClick={closeOverlay}>
-          &times;
-        </button>
-        <Link
-          to="/"
-          onClick={() => {
-            handleMenuItemClick("home");
-            closeOverlay(); // Fechar a lista lateral quando o logo for clicado
-          }}
-        >
-          <img
-            className="menu-overlay-logo"
-            src={logo}
-            alt="Logo do Animeflix"
-            width={200}
-          />
-        </Link>
-        <div className={`menu-overlay ${menuActive ? "active" : ""}`}>
-          <div className="menu-section">
-            <span className="navegar-span">NAVEGAR</span>
-            <Link
-              to="/popular"
-              className="menu-item"
-              onClick={() => handleMenuItemClick("popular")}
-            >
-              Populares
-            </Link>
-            <Link
-              to="/novidades"
-              className="menu-item"
-              onClick={() => handleMenuItemClick("novidades")}
-            >
-              Novidades
-            </Link>
-            <Link
-              to="/az"
-              className="menu-item"
-              onClick={() => handleMenuItemClick("az")}
-            >
-              A-Z
-            </Link>
-            <Link
-              to="/simulcasts"
-              className="menu-item"
-              onClick={() => handleMenuItemClick("simulcasts")}
-            >
-              Simulcasts da Temporada
-            </Link>
-            <Link
-              to="/calendario"
-              className="menu-item"
-              onClick={() => handleMenuItemClick("calendario")}
-            >
-              Calendário de Lançamentos
-            </Link>
-            <Link
-              to="/videoclipes"
-              className="menu-item"
-              onClick={() => handleMenuItemClick("videoclipes")}
-            >
-              Videoclipes & Shows
-            </Link>
-            <div className="menu-item">
-              <button className="dropdown-toggle" onClick={toggleGenres}>
-                Gêneros
-              </button>
-              <div className={`dropdown-content ${genresOpen ? "active" : ""}`}>
-                <Link
-                  to="/acao"
-                  className="dropdown-item"
-                  onClick={() => handleMenuItemClick("acao")}
-                >
-                  Ação
-                </Link>
-                <Link
-                  to="/comedia"
-                  className="dropdown-item"
-                  onClick={() => handleMenuItemClick("comedia")}
-                >
-                  Comédia
-                </Link>
-                <Link
-                  to="/drama"
-                  className="dropdown-item"
-                  onClick={() => handleMenuItemClick("drama")}
-                >
-                  Drama
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="menu-section">
-            <Link
-              to="/jogos"
-              className="menu-item"
-              onClick={() => handleMenuItemClick("jogos")}
-            >
-              Jogos
-            </Link>
-            <div className="menu-item">
-              <button className="dropdown-toggle">Notícias</button>
-              <div className="dropdown-content">
-                <Link
-                  to="/ultimas"
-                  className="dropdown-item"
-                  onClick={() => handleMenuItemClick("ultimas")}
-                >
-                  Últimas Notícias
-                </Link>
-                <Link
-                  to="/mais-lidas"
-                  className="dropdown-item"
-                  onClick={() => handleMenuItemClick("mais-lidas")}
-                >
-                  Mais Lidas
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+.social-icon__link {
+  color: white;
+  font-size: 24px;
+  margin: 0 15px;
+  transition: transform 0.3s ease-in-out;
+}
 
-      <div
-        className={`overlay ${userMenuActive ? "active" : ""}`}
-        ref={userOverlayRef}
-      >
-        <button className="overlay-close" onClick={closeUserOverlay}>
-          &times;
-        </button>
-        <div className={`menu-overlay ${userMenuActive ? "active" : ""}`}>
-          <div className="menu-section">
-            <span className="navegar-span">USUÁRIO</span>
-            <Link
-              to="/perfil"
-              className="menu-item"
-              onClick={() => handleUserMenuItemClick("perfil")}
-            >
-              Perfil
-            </Link>
-            <Link
-              to="/favoritos"
-              className="menu-item"
-              onClick={() => handleUserMenuItemClick("favoritos")}
-            >
-              Favoritos
-            </Link>
-            <Link
-              to="/historico"
-              className="menu-item"
-              onClick={() => handleUserMenuItemClick("historico")}
-            >
-              Histórico
-            </Link>
-            <Link
-              to="/configuracoes"
-              className="menu-item"
-              onClick={() => handleUserMenuItemClick("configuracoes")}
-            >
-              Configurações
-            </Link>
-            <Link
-              to="/logout"
-              className="menu-item"
-              onClick={() => handleUserMenuItemClick("logout")}
-            >
-              Sair
-            </Link>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+.social-icon__link:hover {
+  transform: translateY(-10px);
+}
+
+@media screen and (min-width: 600px) {
+  .footer__nav {
+    flex: 2;
+    justify-content: space-between;
+  }
+
+  .legal__links {
+    margin-left: auto;
+  }
 }
