@@ -291,7 +291,7 @@ export default function Menu() {
         <div className={`menu-overlay ${userMenuActive ? "active" : ""}`}>
           <div className="menu-section">
             <img
-              className="menu-overlay-logo"
+              className="menu-overlay-logo-2"
               src={logo}
               alt="Logo do Animeflix"
               width={200}
@@ -310,13 +310,6 @@ export default function Menu() {
               onClick={() => handleUserMenuItemClick("favoritos")}
             >
               Favoritos
-            </Link>
-            <Link
-              to="/historico"
-              className="menu-item"
-              onClick={() => handleUserMenuItemClick("historico")}
-            >
-              Histórico
             </Link>
             <Link
               to="/configuracoes"
