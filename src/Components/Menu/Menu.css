@@ -356,13 +356,15 @@
 
 @media (max-width: 370px) {
   .menu-section {
-    padding: 0px 0px 0px 20px;
+    padding: 0px 20px 0px 20px;
+    position: relative;
+    bottom: -40px;
   }
   .menu-item {
-    margin: 20px 0px;
+    margin: 10px 0px 15px 0px;
   }
   .menu-overlay-logo {
-    left: 75px;
+    left: 75px; 
     top: 30px;
   }
 }
