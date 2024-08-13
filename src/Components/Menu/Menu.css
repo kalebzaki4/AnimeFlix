@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-/* Importa a fonte do Google Fonts */
 
 :root {
   --background: hsla(220, 17%, 7%, 1);
@@ -366,5 +365,11 @@
   .menu-overlay-logo {
     left: 75px; 
     top: 30px;
+  }
+  .menu-overlay-logo-2 {
+    position: relative;
+    left: 50px;
+    bottom: 190px;
+    color: #313036;
   }
 }
