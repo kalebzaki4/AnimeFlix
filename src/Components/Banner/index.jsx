@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Banner.css";
 import play from "../../assets/images/play_circle.png";
 import { Link } from "react-router-dom";
-import data from "../../data"; // Importe a lista de dados
+import data from "../../data"; 
 
 export default function Banner() {
   const [activeIndex, setActiveIndex] = useState(0);
