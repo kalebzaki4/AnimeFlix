@@ -325,7 +325,7 @@ const data = [
       banner: "/path/to/promisedneverland-banner.jpg",
       avaliacao: 4.7,
       episodios: 23,
-      ano: 2019,
+      ano: 2019,  
       genero: "Mistério, Horror, Suspense",
       sinopse: "Crianças de um orfanato descobrem a verdade sinistra sobre seu destino e planejam uma fuga desesperada."
     }
