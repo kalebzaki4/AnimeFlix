@@ -1,72 +1,32 @@
-:root {
-    /* Todos os roots que irei usar */
+@import url('../../variables.css');
 
-    --background: hsla(220, 17%, 7%, 1);
-    --banner-background: hsla(250, 6%, 20%, 1);
-    --white-alpha-20: hsla(0, 0%, 100%, 0, 2);
-    --on-background: hsla(220, 100%, 95%, 1);
-    --on-surface: hsla(250, 100%, 95%, 1);
-    --on-surface-variant: hsla(250, 1%, 44%, 1);
-    --primary: hsla(356, 74%, 49%);
-    --primary-variant: rgb(146, 19, 28);
-    --rating-color: hsla(44, 100%, 49%, 1);
-    --surface: hsla(250, 13%, 11%, 1);
-    --text-color: hsla(250, 2%, 59%, 1);
-    --white: hsla(0, 0%, 100%, 1);
-
-    --banner-overlay: 90deg, hsla(220, 17%, 7%) 0%, hsla(220, 17%, 7%, 0, 5) 100%;
-    --bottom-overlay: 180deg, hsla(250, 13%, 11%, 0), hsla(250, 13%, 11%, 1);
-
-    --ff-dm-sans: 'DM Sans', sans-serif;
-
-    --fs-heading: 4rem;
-    --fs-title-lg: 2.6rem;
-    --fs-title: 2rem;
-    --fs-body: 1.8rem;
-    --fs-button: 1.5rem;
-    --fs-label: 1.4rem;
-
-    --weight-bold: 700;
-
-    --shadow-1: 0 1px 4px hsla(0, 0%, 0%, 0.75);
-    --shadow-2: 0 2px 4px hsla(350, 100%, 43%, 0.3);
-
-    --radius-4: 4px;
-    --radius-8: 8px;
-    --radius-16: 16px;
-    --radius-24: 24px;
-    --radius-36: 36px;
-
-    --transition-short: 250ms ease;
-    --transition-long: 500ms ease;
-}
+/* Agora você pode usar as variáveis definidas em variables.css */
 
 .title,
 .heading,
 .title-large {
-    font-weight: var(--weight-bold) ;
+    font-weight: var(--peso-negrito);
     letter-spacing: 0.5px;
 }
 
 .title {
-    font-size: var(--fs-title);
+    font-size: var(--fs-titulo);
 }
 
 .heading {
-    color: var(--white);
-    font-size: var(--fs-heading);
+    color: var(--branco);
+    font-size: var(--fs-cabecalho);
     line-height: 1.2;
 }
 
-.tittle-large {
-    font-size: var(--fs-title-lg);
+.title-large {
+    font-size: var(--fs-titulo-grande);
 }
 
 .img-cover {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
 }
 
 .meta-item {
@@ -76,23 +36,23 @@
 }
 
 .btn {
-    color: var(--white);
-    font-size: var(--fs-button);
-    font-weight: var(--weight-bold);
+    color: var(--branco);
+    font-size: var(--fs-botao);
+    font-weight: var(--peso-negrito);
     max-width: max-content;
     display: flex;
     align-items: center;
     gap: 12px;
     padding-block: 12px;
     padding-inline: 20px 24px;
-    border-radius: var(--radius-8);
-    transition: var(--transition-short);
+    border-radius: var(--raio-8);
+    transition: var(--transicao-curta);
 }
 
 .banner {
     position: relative;
     height: 700px;
-    border-radius: var(--radius-24);
+    border-radius: var(--raio-24);
     overflow: hidden;
 }
 
@@ -102,17 +62,17 @@
     left: 120%;
     width: 100%;
     height: 100%;
-    background-color: var(--banner-background);
+    background-color: var(--fundo-banner);
     opacity: 0;
     visibility: hidden;
-    transition: opacity var(--transition-long);
+    transition: opacity var(--transicao-longa);
 }
 
 .banner-slider .slider-item::before {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(var(--banner-overlay));
+    background-image: linear-gradient(var(--sobreposicao-banner));
 }
 
 .banner-slider .active {
@@ -127,14 +87,14 @@
     right: 24px;
     bottom: 206px;
     z-index: 1;
-    color: var(--text-color);
+    color: var(--cor-texto);
 }
 
 .banner :is(.heading, .banner-text) {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    color: var(--white);
+    color: var(--branco);
 }
 
 .banner .heading {
@@ -150,7 +110,7 @@
     gap: 12px;
 }
 
-.banner .genre { margin-block: 12px; color: var(--white);}
+.banner .genre { margin-block: 12px; color: var(--branco);}
 
 .banner-text {
     -webkit-line-clamp: 2;
@@ -158,18 +118,18 @@
 }
 
 .banner .btn {
-    background-color: var(--primary);
+    background-color: var(--primaria);
 }
 
-.banner .btn:is(:hover, :focus-visible) { box-shadow: var(--shadow-2);}
+.banner .btn:is(:hover, :focus-visible) { box-shadow: var(--sombra-2);}
 
 .card-badge {
-    background-color: var(--banner-background);
-    color: var(--white);
-    font-size: var(--fs-label);
-    font-weight: var(--weight-bold);
+    background-color: var(--fundo-banner);
+    color: var(--branco);
+    font-size: var(--fs-rotulo);
+    font-weight: var(--peso-negrito);
     padding-inline: 6px;
-    border-radius: var(--radius-4);
+    border-radius: var(--raio-4);
 }
 
 .slider-control {
@@ -177,7 +137,7 @@
     bottom: 20px;
     left: 20px;
     right: 0;
-    border-radius: var(--radius-16) 0 0 var(--radius-16);
+    border-radius: var(--raio-16) 0 0 var(--raio-16);
     user-select: none;
     padding: 4px 0 4px 4px;
     overflow-x: auto;
@@ -197,7 +157,7 @@
 
 .slider-control .slider-item {
     width: 100px;
-    border-radius: var(--radius-8);
+    border-radius: var(--raio-8);
     flex-shrink: 0;
     float: inherit;
     filter: brightness(0.4);
@@ -205,7 +165,7 @@
 
 .slider-control .active {
     filter: brightness(1);
-    box-shadow: var(--shadow-1);
+    box-shadow: var(--sombra-1);
 }
 
 .poster-box {
@@ -218,8 +178,7 @@
     background-repeat: no-repeat;
     background-size: 50px;
     background-position: center;
-    background-color: var(--banner-background);
-    border-radius: var(--radius-16);
+    background-color: var(--fundo-banner);
+    border-radius: var(--raio-16);
     overflow: hidden;
 }
-
