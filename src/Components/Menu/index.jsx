@@ -98,14 +98,14 @@ export default function Menu() {
           <img
             src={menuLateral}
             alt="Abrir menu"
-            className={`menu ${menuActive ? "hidden" : ""}`}
+            className={menuActive ? "hidden" : ""}
             width={24}
             height={24}
           />
           <img
             src={cancelarMenuLateral}
             alt="Fechar menu"
-            className={`close ${menuActive ? "" : "hidden"}`}
+            className={menuActive ? "" : "hidden"}
             width={24}
             height={24}
           />
@@ -166,7 +166,7 @@ export default function Menu() {
           to="/"
           onClick={() => {
             handleMenuItemClick("home");
-            closeOverlay(); 
+            closeOverlay();
           }}
         >
           <img
@@ -289,36 +289,87 @@ export default function Menu() {
           &times;
         </button>
         <div className={`menu-overlay ${userMenuActive ? "active" : ""}`}>
-          <div className="menu-section">
+          <div className="menu-section-2">
             <img
               className="menu-overlay-logo-2"
               src={logo}
               alt="Logo do Animeflix"
               width={200}
             />
-            <span className="navegar-span">USUÁRIO</span>
+            <span className="navegar-span">OPÇÕES</span>
             <Link
               to="/perfil"
-              className="menu-item"
+              className="menu-item-2"
               onClick={() => handleUserMenuItemClick("perfil")}
             >
-              Perfil
+              Criar Conta
             </Link>
             <Link
               to="/favoritos"
-              className="menu-item"
+              className="menu-item-2"
               onClick={() => handleUserMenuItemClick("favoritos")}
             >
-              Favoritos
+              Login
             </Link>
             <Link
               to="/configuracoes"
-              className="menu-item"
+              className="menu-item-2"
+              onClick={() => handleUserMenuItemClick("configuracoes")}
+            >
+              Cartão de Presente
+            </Link>
+            <Link
+              to="/configuracoes"
+              className="menu-item-2"
               onClick={() => handleUserMenuItemClick("configuracoes")}
             >
               Configurações
             </Link>
+            <button className="menu-item-button" onClick={() => handleUserMenuItemClick("configuracoes")}>
+              Teste Gratuito por 7 dias!
+            </button>
           </div>
+          <div className="menu-section-2">
+            <img
+              className="menu-overlay-logo-2"
+              src={logo}
+              alt="Logo do Animeflix"
+              width={200}
+            />
+            <span className="navegar-span">OPÇÕES</span>
+            <Link
+              to="/perfil"
+              className="menu-item-2"
+              onClick={() => handleUserMenuItemClick("perfil")}
+            >
+              Criar Conta
+            </Link>
+            <Link
+              to="/favoritos"
+              className="menu-item-2"
+              onClick={() => handleUserMenuItemClick("favoritos")}
+            >
+              Login
+            </Link>
+            <Link
+              to="/configuracoes"
+              className="menu-item-2"
+              onClick={() => handleUserMenuItemClick("configuracoes")}
+            >
+              Cartão de Presente
+            </Link>
+            <Link
+              to="/configuracoes"
+              className="menu-item-2"
+              onClick={() => handleUserMenuItemClick("configuracoes")}
+            >
+              Configurações
+            </Link>
+            <button className="menu-item-button" onClick={() => handleUserMenuItemClick("configuracoes")}>
+              Teste Gratuito por 7 dias!
+            </button>
+          </div>
+
         </div>
       </div>
     </>
