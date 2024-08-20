@@ -2,8 +2,8 @@ const data = [
     {
       id: 1,
       titulo: "Naruto",
-      imagem: "/path/to/naruto.jpg",
-      banner: "/path/to/naruto-banner.jpg",
+      imagem: "",
+      banner: "",
       avaliacao: 4.7,
       episodios: 220,
       ano: 2002,
@@ -13,7 +13,7 @@ const data = [
     {
       id: 2,
       titulo: "Attack on Titan",
-      imagem: "/path/to/aot.jpg",
+      imagem: "",
       banner: "/path/to/aot-banner.jpg",
       avaliacao: 4.8,
       episodios: 75,

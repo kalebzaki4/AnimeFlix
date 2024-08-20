@@ -297,79 +297,74 @@ export default function Menu() {
               width={200}
             />
             <span className="navegar-span">OPÇÕES</span>
-            <Link
-              to="/perfil"
-              className="menu-item-2"
-              onClick={() => handleUserMenuItemClick("perfil")}
-            >
-              Criar Conta
-            </Link>
-            <Link
-              to="/favoritos"
-              className="menu-item-2"
-              onClick={() => handleUserMenuItemClick("favoritos")}
-            >
-              Login
-            </Link>
-            <Link
-              to="/configuracoes"
-              className="menu-item-2"
-              onClick={() => handleUserMenuItemClick("configuracoes")}
-            >
-              Cartão de Presente
-            </Link>
-            <Link
-              to="/configuracoes"
-              className="menu-item-2"
-              onClick={() => handleUserMenuItemClick("configuracoes")}
-            >
-              Configurações
-            </Link>
+            <button>
+              <Link
+                to="/perfil"
+                className="menu-item-2"
+                onClick={() => handleUserMenuItemClick("perfil")}
+              >
+                Criar Conta
+              </Link>
+              <Link
+                to="/perfil"
+                className="menu-item-3"
+                onClick={() => handleUserMenuItemClick("perfil")}
+              >
+                Criando uma conta você tera beneficios!
+              </Link>
+            </button>
+            <button>
+              <Link
+                to="/favoritos"
+                className="menu-item-2"
+                onClick={() => handleUserMenuItemClick("favoritos")}
+              >
+                Login
+              </Link>
+              <Link
+                to="/perfil"
+                className="menu-item-3"
+                onClick={() => handleUserMenuItemClick("perfil")}
+              >
+                Criando uma conta você tera beneficios!
+              </Link>
+            </button>
+            <button>
+              <Link
+                to="/configuracoes"
+                className="menu-item-2"
+                onClick={() => handleUserMenuItemClick("configuracoes")}
+              >
+                Cartão de Presente
+              </Link>
+              <Link
+                to="/perfil"
+                className="menu-item-3"
+                onClick={() => handleUserMenuItemClick("perfil")}
+              >
+                Já é menbro? Entre Aqui!
+              </Link>
+            </button>
+            <button>
+              <Link
+                to="/configuracoes"
+                className="menu-item-2"
+                onClick={() => handleUserMenuItemClick("configuracoes")}
+              >
+                Configurações
+              </Link>
+              <Link
+                to="/perfil"
+                className="menu-item-3"
+                onClick={() => handleUserMenuItemClick("perfil")}
+              >
+                Tem um cartão de Presente? Resgate Aqui!
+              </Link>
+            </button>
             <button className="menu-item-button" onClick={() => handleUserMenuItemClick("configuracoes")}>
               Teste Gratuito por 7 dias!
             </button>
           </div>
-          <div className="menu-section-2">
-            <img
-              className="menu-overlay-logo-2"
-              src={logo}
-              alt="Logo do Animeflix"
-              width={200}
-            />
-            <span className="navegar-span">OPÇÕES</span>
-            <Link
-              to="/perfil"
-              className="menu-item-2"
-              onClick={() => handleUserMenuItemClick("perfil")}
-            >
-              Criar Conta
-            </Link>
-            <Link
-              to="/favoritos"
-              className="menu-item-2"
-              onClick={() => handleUserMenuItemClick("favoritos")}
-            >
-              Login
-            </Link>
-            <Link
-              to="/configuracoes"
-              className="menu-item-2"
-              onClick={() => handleUserMenuItemClick("configuracoes")}
-            >
-              Cartão de Presente
-            </Link>
-            <Link
-              to="/configuracoes"
-              className="menu-item-2"
-              onClick={() => handleUserMenuItemClick("configuracoes")}
-            >
-              Configurações
-            </Link>
-            <button className="menu-item-button" onClick={() => handleUserMenuItemClick("configuracoes")}>
-              Teste Gratuito por 7 dias!
-            </button>
-          </div>
-
         </div>
       </div>
     </>
