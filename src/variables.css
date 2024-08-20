@@ -1,0 +1,42 @@
+:root {
+  /* Todos os roots que irei usar */
+
+  --fundo: hsla(220, 17%, 7%, 1);
+  --fundo-banner: hsla(250, 6%, 20%, 1);
+  --branco-alpha-20: hsla(0, 0%, 100%, 0.2);
+  --cor-principal: hsla(220, 100%, 95%, 1);
+  --cor-sobre-superficie: hsla(250, 100%, 95%, 1);
+  --cor-sobre-superficie-variacao: hsla(250, 1%, 44%, 1);
+  --primaria: hsla(356, 74%, 49%);
+  --primaria-variacao: rgb(146, 19, 28);
+  --cor-avaliacao: hsla(44, 100%, 49%, 1);
+  --superficie: hsla(250, 13%, 11%, 1);
+  --cor-texto: hsla(250, 2%, 59%, 1);
+  --branco: hsla(0, 0%, 100%, 1);
+
+  --sobreposicao-banner: 90deg, hsla(220, 17%, 7%) 0%, hsla(220, 17%, 7%, 0.5) 100%;
+  --sobreposicao-inferior: 180deg, hsla(250, 13%, 11%, 0), hsla(250, 13%, 11%, 1);
+
+  --ff-dm-sans: 'DM Sans', sans-serif;
+
+  --fs-cabecalho: 4rem;
+  --fs-titulo-grande: 2.6rem;
+  --fs-titulo: 2rem;
+  --fs-corpo: 1.8rem;
+  --fs-botao: 1.5rem;
+  --fs-rotulo: 1.4rem;
+
+  --peso-negrito: 700;
+
+  --sombra-1: 0 1px 4px hsla(0, 0%, 0%, 0.75);
+  --sombra-2: 0 2px 4px hsla(350, 100%, 43%, 0.3);
+
+  --raio-4: 4px;
+  --raio-8: 8px;
+  --raio-16: 16px;
+  --raio-24: 24px;
+  --raio-36: 36px;
+
+  --transicao-curta: 250ms ease;
+  --transicao-longa: 500ms ease;
+}
