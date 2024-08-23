@@ -1,6 +1,6 @@
 @import url('../../variables.css');
 
-.loading-screen {
+.tela-carregamento {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,16 +13,16 @@
   z-index: 1000;
 }
 
-.spinner {
+.carregando {
   border: 8px solid var(--primaria); 
   border-top: 8px solid var(--fundo); 
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  animation: spin 1s linear infinite;
+  animation: girar 1s linear infinite;
 }
 
-@keyframes spin {
+@keyframes girar {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
