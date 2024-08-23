@@ -1,8 +1,7 @@
-// Inicio.js
 import React, { useState, useEffect } from "react";
 import Banner from "../../Components/Banner/index";
 import ListaDeAnimesHorizontal from "../../Components/ListaDeAnimesHorizontal/index";
-import LoadingScreen from "../../Components/TelaCarregamento"; // Certifique-se de ajustar o caminho
+import TelaCarregamento from "../../Components/TelaCarregamento"; // Certifique-se de ajustar o caminho
 import '../../message.css'; // Certifique-se de que o CSS do componente está sendo importado
 
 export default function Inicio() {
@@ -12,14 +11,14 @@ export default function Inicio() {
     // Simula o carregamento de dados
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000); // O tempo do carregamento pode ser ajustado
+    }, 500); // Tempo de carregamento reduzido para 500ms
 
     // Limpeza do timer quando o componente for desmontado
     return () => clearTimeout(timer);
   }, []);
 
   if (loading) {
-    return <LoadingScreen />;
+    return <TelaCarregamento />;
   }
 
   return (
