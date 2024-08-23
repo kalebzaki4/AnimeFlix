@@ -1,6 +1,5 @@
-// LoadingScreen.js
 import React from 'react';
-import './TelaCarregamento.css'; // Certifique-se de criar este arquivo CSS
+import './TelaCarregamento.css';
 
 export default function LoadingScreen() {
   return (
