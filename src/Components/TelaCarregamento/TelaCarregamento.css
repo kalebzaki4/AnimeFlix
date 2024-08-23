@@ -1,4 +1,3 @@
-/* LoadingScreen.css */
 @import url('../../variables.css'); /* Ajuste o caminho se necessário */
 
 .loading-screen {
@@ -10,13 +9,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--fundo); /* Usando a variável de fundo */
+  background-color: var(--fundo); 
   z-index: 1000;
 }
 
 .spinner {
-  border: 8px solid var(--primaria); /* Cor de fundo do spinner */
-  border-top: 8px solid var(--fundo); /* Cor da borda superior do spinner */
+  border: 8px solid var(--primaria); 
+  border-top: 8px solid var(--fundo); 
   border-radius: 50%;
   width: 50px;
   height: 50px;
