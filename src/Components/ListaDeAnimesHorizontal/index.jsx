@@ -2,9 +2,8 @@ import React from 'react';
 import Estrelas from './Estrelas';
 import { Link } from 'react-router-dom';
 import './ListaDeAnimes.css'; 
-import data from '../../data';
 
-const ListaDeAnimesHorizontal = ({ title, description }) => {
+const ListaDeAnimesHorizontal = ({ title, description, animes }) => {
   return (
     <article className="container-inative">
       <section className="movie-list" aria-label={title}>
@@ -14,20 +13,20 @@ const ListaDeAnimesHorizontal = ({ title, description }) => {
         </div>
         <div className="slider-list">
           <div className="slider-inner">
-            {data.map((anime) => (
-              <div className="movie-card" key={anime.id}>
+            {animes.map((anime) => (
+              <div className="movie-card" key={anime.mal_id}>
                 <figure className="poster-box card-banner">
-                  <img src={anime.imagem} alt={anime.titulo} className="img-cover" />
+                  <img src={anime.images.jpg.image_url} alt={anime.title} className="img-cover" />
                 </figure>
-                <h4 className="title">{anime.titulo}</h4>
+                <h4 className="title">{anime.title}</h4>
                 <div className="meta-list">
                   <div className="meta-item">
-                    <Estrelas avaliacao={anime.avaliacao} />
-                    <span className="span">{anime.avaliacao}</span>
+                    <Estrelas avaliacao={anime.score} />
+                    <span className="span">{anime.score}</span>
                   </div>
-                  <div className="card-badge">{anime.ano}</div>
+                  <div className="card-badge">{anime.year}</div>
                 </div>
-                <Link to={`/Detalhes/${anime.id}`} className="card-btn" title="Detalhes"></Link>
+                <Link to={`/Detalhes/${anime.mal_id}`} className="card-btn" title="Detalhes"></Link>
               </div>
             ))}
           </div>

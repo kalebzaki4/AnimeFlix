@@ -7,7 +7,7 @@ export default function TelaCarregamento() {
   useEffect(() => {
     const temporizador = setTimeout(() => {
       setMostrarCarregamento(false);
-    }, 500); // Tempo de exibição reduzido para 500ms
+    }, 3000); // Tempo de exibição aumentado para 1000ms (1 segundo)
 
     return () => clearTimeout(temporizador); // Limpa o temporizador quando o componente é desmontado
   }, []);
