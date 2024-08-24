@@ -77,7 +77,7 @@
   background-color: var(--superficie);
   padding: 24px 35px;
   padding-top: 0;
-  margin-bottom: 0px;
+  margin-bottom: -40px;
 }
 
 .meta-list {
