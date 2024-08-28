@@ -29,7 +29,7 @@ export default function Inicio() {
 
   return (
     <>
-      <Banner animes={animes} />  
+      <Banner animes={animes} />
       <ListaDeAnimesHorizontal 
         title="Mais Famosos" 
         description="Fique por dentro de todos os lançamentos"
