@@ -3,11 +3,18 @@
 }
 
 .estrela {
-  width: 16px; /* Ajuste o tamanho conforme necessário */
-  height: 16px; /* Ajuste o tamanho conforme necessário */
-  margin-right: 4px; /* Espaçamento entre as estrelas */
+  width: 16px; 
+  height: 16px; 
+  margin-right: 4px; 
 }
 
+/* Estilização para a estrela fracionada */
 .fracionada {
   clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+  object-fit: cover;
+}
+
+/* Estilização para estrelas vazias (opcional) */
+.empty {
+  opacity: 0.3; /* Ajuste a opacidade para dar um efeito de estrela vazia */
 }
