@@ -203,9 +203,7 @@
   .menu-overlay-logo {
     position: absolute;
     top: var(--raio-16);
-    /* Ajuste a posição vertical do logotipo */
     left: var(--raio-16);
-    /* Ajuste a posição horizontal do logotipo */
   }
 
   .menu-overlay.active {
