@@ -1,5 +1,3 @@
----
-
 # AnimeFlix 🎬🍿
 
 ## 🚨 ATENÇÃO! PROJETO INCOMPLETO 🚨
