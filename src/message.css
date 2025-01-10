@@ -10,10 +10,10 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     opacity: 0; /* Inicialmente invisível */
-    transition: opacity 0.5s ease-in-out; /* Transição suave para opacidade */
+    transition: opacity 0.5s ease-in-out;
   }
   
   .message.show {
-    opacity: 1; /* Visível quando a classe "show" é adicionada */
+    opacity: 1;
   }
   
