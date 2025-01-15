@@ -25,12 +25,15 @@
   --fs-corpo: 1.8rem;
   --fs-botao: 1.5rem;
   --fs-rotulo: 1.4rem;
+  --fs-rotulo-pequeno: 1.2rem; /* Nova variável */
 
   --peso-negrito: 700;
 
   --sombra-1: 0 1px 4px hsla(0, 0%, 0%, 0.75);
   --sombra-2: 0 2px 4px hsla(350, 100%, 43%, 0.3);
 
+  --raio-1: 1px; /* Nova variável */
+  --raio-2: 2px; /* Nova variável */
   --raio-4: 4px;
   --raio-8: 8px;
   --raio-16: 16px;
