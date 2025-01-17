@@ -290,7 +290,7 @@
 }
 
 .user-btn {
-  padding: 4px; /* Padding reduzido para 4px */
+  padding: 4px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -397,6 +397,38 @@
   background-color: var(--primaria);
   border: none;
   cursor: pointer;
+}
+
+/* Estilos para a lista de recomendações */
+.recommendations {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--fundo-banner);
+  border-radius: var(--raio-8);
+  box-shadow: var(--sombra-1);
+  z-index: 10;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.recommendation-item {
+  display: flex;
+  align-items: center;
+  padding: var(--raio-8);
+  gap: var(--raio-8);
+  color: var(--branco);
+  text-decoration: none;
+  transition: background-color var(--transicao-curta);
+}
+
+.recommendation-item:hover {
+  background-color: var(--fundo-banner);
+}
+
+.recommendation-item img {
+  border-radius: var(--raio-4);
 }
 
 @keyframes loading {

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Menu.css";
 import logo from "../../assets/images/logo-animeflix.png";
 import logoPesquisa from "../../assets/images/search.png";
@@ -14,40 +15,78 @@ export default function Menu() {
   const [userMenuActive, setUserMenuActive] = useState(false);
   const [selectedItem, setSelectedItem] = useState("home");
   const [genresOpen, setGenresOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [recommendedAnimes, setRecommendedAnimes] = useState([]);
   const overlayRef = useRef(null);
   const userOverlayRef = useRef(null);
   const navigate = useNavigate();
 
-  const toggleSearch = () => {
-    setSearchActive((prevSearchActive) => !prevSearchActive);
+  // Função para buscar animes com base no termo de pesquisa
+  const handleSearchChange = async (event) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+
+    if (term.length > 2) {
+      try {
+        const response = await axios.get(`https://api.jikan.moe/v4/anime?q=${term}`);
+        setRecommendedAnimes(response.data.data);
+      } catch (error) {
+        console.error("Error fetching anime data:", error);
+      }
+    } else {
+      setRecommendedAnimes([]);
+    }
   };
 
+  // Função para submeter a pesquisa
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    if (searchTerm) {
+      navigate(`/search?q=${searchTerm}`);
+      setSearchActive(false);
+    }
+  };
+
+  // Função para alternar a visibilidade da caixa de pesquisa
+  const toggleSearch = () => {
+    setSearchActive((prevSearchActive) => !prevSearchActive);
+    setSearchTerm("");
+    setRecommendedAnimes([]);
+  };
+
+  // Função para alternar o menu lateral
   const toggleMenu = () => {
     setMenuActive((prevMenuActive) => !prevMenuActive);
   };
 
+  // Função para alternar o menu do usuário
   const toggleUserMenu = () => {
     setUserMenuActive((prevUserMenuActive) => !prevUserMenuActive);
   };
 
+  // Função para fechar o overlay do menu lateral
   const closeOverlay = () => {
     setMenuActive(false);
   };
 
+  // Função para fechar o overlay do menu do usuário
   const closeUserOverlay = () => {
     setUserMenuActive(false);
   };
 
+  // Função para lidar com o clique em um item do menu
   const handleMenuItemClick = (item) => {
     setSelectedItem(item);
     setMenuActive(false);
   };
 
+  // Função para lidar com o clique em um item do menu do usuário
   const handleUserMenuItemClick = (item) => {
     setSelectedItem(item);
     setUserMenuActive(false);
   };
 
+  // Função para lidar com o clique no logo
   const handleLogoClick = () => {
     setSelectedItem("home");
     setMenuActive(false);
@@ -55,10 +94,12 @@ export default function Menu() {
     navigate("/");
   };
 
+  // Função para alternar a visibilidade dos gêneros
   const toggleGenres = () => {
     setGenresOpen((prev) => !prev);
   };
 
+  // Efeito para fechar o overlay ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -79,6 +120,7 @@ export default function Menu() {
     };
   }, []);
 
+  // Efeito para desabilitar o scroll do body quando o menu está aberto
   useEffect(() => {
     if (menuActive || userMenuActive) {
       document.body.style.overflow = "hidden";
@@ -94,6 +136,7 @@ export default function Menu() {
   return (
       <>
         <header className="header">
+          {/* Botão do menu lateral */}
           <button className="menu-btn" onClick={toggleMenu}>
             <img
                 src={menuLateral}
@@ -110,6 +153,8 @@ export default function Menu() {
                 height={24}
             />
           </button>
+
+          {/* Logo */}
           <button
               className={`logo ${selectedItem === "home" ? "selected" : ""}`}
               onClick={handleLogoClick}
@@ -117,6 +162,7 @@ export default function Menu() {
             <img src={logo} alt="Logo do Animeflix" width={140} height={32} />
           </button>
 
+          {/* Botão de pesquisa */}
           <button className="search-btn" onClick={toggleSearch}>
             <img
                 src={logoPesquisa}
@@ -126,14 +172,17 @@ export default function Menu() {
             />
           </button>
 
+          {/* Caixa de pesquisa */}
           <div className={`search-box ${searchActive ? "active" : ""}`}>
-            <div className="search-wrapper">
+            <form onSubmit={handleSearchSubmit} className="search-wrapper">
               <input
                   type="text"
                   name="search"
                   placeholder="Procurar Animes"
                   className="search-field"
                   autoComplete="off"
+                  value={searchTerm}
+                  onChange={handleSearchChange}
               />
               <img
                   src={logoPesquisa}
@@ -142,7 +191,7 @@ export default function Menu() {
                   width={24}
                   height={24}
               />
-            </div>
+            </form>
             <button className="search-btn" onClick={toggleSearch}>
               <img
                   src={cancelarLogo}
@@ -151,8 +200,29 @@ export default function Menu() {
                   height={24}
               />
             </button>
+            {/* Lista de recomendações */}
+            {recommendedAnimes.length > 0 && (
+                <div className="recommendations">
+                  {recommendedAnimes.map((anime) => (
+                      <Link
+                          key={anime.mal_id}
+                          to={`/Detalhes/${anime.mal_id}`}
+                          className="recommendation-item"
+                      >
+                        <img
+                            src={anime.images.jpg.image_url}
+                            alt={anime.title}
+                            width={50}
+                            height={70}
+                        />
+                        <span>{anime.title}</span>
+                      </Link>
+                  ))}
+                </div>
+            )}
           </div>
 
+          {/* Botão do menu do usuário */}
           <button className="user-btn" onClick={toggleUserMenu}>
             <img
                 src={userIcon}
@@ -171,6 +241,7 @@ export default function Menu() {
           </button>
         </header>
 
+        {/* Overlay do menu lateral */}
         <div className={`overlay ${menuActive ? "active" : ""}`} ref={overlayRef}>
           <button className="overlay-close" onClick={closeOverlay}>
             ×
@@ -294,6 +365,7 @@ export default function Menu() {
           </div>
         </div>
 
+        {/* Overlay do menu do usuário */}
         <div
             className={`overlay ${userMenuActive ? "active" : ""}`}
             ref={userOverlayRef}
