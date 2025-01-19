@@ -92,7 +92,7 @@
   padding: var(--raio-24) var(--raio-16);
   align-items: center;
   gap: var(--raio-8);
-  z-index: 1;
+  z-index: 1001; /* Aumente o z-index para garantir que fique na frente do banner */
   display: none;
 }
 
@@ -408,9 +408,10 @@
   background-color: var(--fundo-banner);
   border-radius: var(--raio-8);
   box-shadow: var(--sombra-1);
-  z-index: 10;
+  z-index: 1000; /* Aumente o z-index para garantir que fique na frente do banner */
   max-height: 300px;
   overflow-y: auto;
+  margin-top: 8px;
 }
 
 .recommendation-item {
