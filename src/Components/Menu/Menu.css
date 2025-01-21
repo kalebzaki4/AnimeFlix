@@ -331,18 +331,16 @@
   background-color: var(--superficie);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-.menu-overlay-logo-2 {
-  position: absolute;
-  top: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 180px;
-  height: auto;
-  z-index: 9;
-  margin-bottom: var(--raio-16);
-}
-
+  .menu-overlay-logo-2 {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: auto;
+    z-index: 9;
+    margin-bottom: var(--raio-16);
+  }
 .menu-overlay-2.active {
   opacity: 1;
 }
@@ -501,5 +499,45 @@
   .navegar-span {
     margin-top: var(--raio-16);
     margin-bottom: var(--raio-8);
+  }
+}
+
+@media (max-height: 711px) {
+  .menu-overlay-logo {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-overlay-logo-2 {
+    width: 180px;
+    top: 40px;
+  }
+}
+
+@media (max-width: 375px) {
+  .menu-overlay-logo-2 {
+    width: 140px;
+    top: 20px;
+  }
+}
+
+@media (max-width: 384px) and (max-height: 744px) {
+  .menu-overlay-logo-2 {
+    width: 150px;
+    top: var(--raio-16);
+  }
+}
+
+@media (max-width: 384px) and (min-height: 744px) {
+  .menu-overlay-logo-2 {
+    width: 150px;
+    top: var(--raio-16);
+  }
+}
+
+@media (max-height: 711px) {
+  .menu-overlay-logo-2 {
+    display: none;
   }
 }
