@@ -58,7 +58,7 @@ export default function Banner({ animes }) {
                     />
                     <span className="span">Assistir</span>
                   </Link>
-                </div>
+                </div>  
               </div>
             ))}
           </div>

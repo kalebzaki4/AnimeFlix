@@ -1,6 +1,5 @@
 :root {
-  /* Todos os roots que irei usar */
-
+  /* Variáveis fornecidas */
   --fundo: hsla(220, 17%, 7%, 1);
   --fundo-banner: hsla(250, 6%, 20%, 1);
   --branco-alpha-20: hsla(0, 0%, 100%, 0.2);
@@ -25,15 +24,15 @@
   --fs-corpo: 1.8rem;
   --fs-botao: 1.5rem;
   --fs-rotulo: 1.4rem;
-  --fs-rotulo-pequeno: 1.2rem; /* Nova variável */
+  --fs-rotulo-pequeno: 1.2rem;
 
   --peso-negrito: 700;
 
   --sombra-1: 0 1px 4px hsla(0, 0%, 0%, 0.75);
   --sombra-2: 0 2px 4px hsla(350, 100%, 43%, 0.3);
 
-  --raio-1: 1px; /* Nova variável */
-  --raio-2: 2px; /* Nova variável */
+  --raio-1: 1px;
+  --raio-2: 2px;
   --raio-4: 4px;
   --raio-8: 8px;
   --raio-16: 16px;
@@ -42,4 +41,147 @@
 
   --transicao-curta: 250ms ease;
   --transicao-longa: 500ms ease;
+}
+
+/* Estilo base */
+body {
+  margin: 0;
+  font-family: var(--ff-dm-sans);
+  background-color: var(--fundo);
+  color: var(--branco);
+}
+
+.detalhes {
+  padding: 20px;
+}
+
+/* Banner */
+.detalhes-cabecalho {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--fundo-banner);
+  border-radius: var(--raio-16);
+  padding: 20px;
+  box-shadow: var(--sombra-1);
+}
+
+.anime-imagem {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: var(--raio-16);
+  box-shadow: var(--sombra-1);
+  margin-bottom: 20px;
+}
+
+/* Informações do anime */
+.anime-informacoes h1 {
+  font-size: var(--fs-titulo);
+  color: var(--cor-principal);
+}
+
+.anime-informacoes p {
+  font-size: var(--fs-rotulo);
+  color: var(--cor-texto);
+  margin: 5px 0;
+}
+
+/* Botões de interação */
+.icones {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.icones button {
+  background: none;
+  border: none;
+  color: var(--cor-principal);
+  font-size: var(--fs-botao);
+  cursor: pointer;
+  transition: color var(--transicao-curta);
+}
+
+.icones button:hover {
+  color: var(--primaria);
+}
+
+/* Sinopse */
+.detalhes-sinopse h2 {
+  font-size: var(--fs-titulo);
+  color: var(--cor-sobre-superficie);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.detalhes-sinopse p {
+  font-size: var(--fs-rotulo);
+  color: var(--cor-texto);
+  line-height: 1.5;
+}
+
+/* Trailer */
+.detalhes-trailer iframe {
+  width: 100%;
+  max-width: 600px;
+  height: 200px;
+  border-radius: var(--raio-16);
+  box-shadow: var(--sombra-1);
+}
+
+/* Proximidade visual para listas de episódios */
+.proximo-episodio {
+  margin-top: 30px;
+}
+
+.proximo-episodio h2 {
+  font-size: var(--fs-titulo-grande);
+  color: var(--cor-principal);
+  margin-bottom: 15px;
+}
+
+.episodio-item {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.episodio-item img {
+  width: 100px;
+  height: auto;
+  border-radius: var(--raio-8);
+}
+
+.episodio-item div {
+  flex: 1;
+}
+
+.episodio-item h3 {
+  font-size: var(--fs-titulo);
+  color: var(--cor-sobre-superficie);
+}
+
+.episodio-item p {
+  font-size: var(--fs-rotulo);
+  color: var(--cor-texto);
+}
+
+/* Responsividade */
+@media (min-width: 768px) {
+  .detalhes-cabecalho {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 30px;
+  }
+
+  .anime-imagem {
+    margin-right: 20px;
+  }
+
+  .detalhes-trailer iframe {
+    height: 400px;
+  }
 }

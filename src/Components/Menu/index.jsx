@@ -17,11 +17,21 @@ export default function Menu() {
   const [genresOpen, setGenresOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [recommendedAnimes, setRecommendedAnimes] = useState([]);
+  const [selectedRecommendationIndex, setSelectedRecommendationIndex] = useState(0); // Novo estado para selecionar a recomendação
   const overlayRef = useRef(null);
   const userOverlayRef = useRef(null);
   const navigate = useNavigate();
 
-  // Função para buscar animes com base no termo de pesquisa
+  const menuItems = [
+    { name: "home", label: "Home" },
+    { name: "popular", label: "Populares" },
+    { name: "novidades", label: "Novidades" },
+    { name: "az", label: "A-Z" },
+    { name: "simulcasts", label: "Simulcasts" },
+    { name: "calendario", label: "Calendário de Lançamentos" },
+    { name: "videoclipes", label: "Videoclipes & Shows" }
+  ];
+
   const handleSearchChange = async (event) => {
     const term = event.target.value;
     setSearchTerm(term);
@@ -38,7 +48,10 @@ export default function Menu() {
     }
   };
 
-  // Função para submeter a pesquisa
+  const handleRecommendationClick = () => {
+    setRecommendedAnimes([]); // Limpa as recomendações
+  };
+
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     if (searchTerm) {
@@ -47,46 +60,38 @@ export default function Menu() {
     }
   };
 
-  // Função para alternar a visibilidade da caixa de pesquisa
   const toggleSearch = () => {
     setSearchActive((prevSearchActive) => !prevSearchActive);
     setSearchTerm("");
     setRecommendedAnimes([]);
   };
 
-  // Função para alternar o menu lateral
   const toggleMenu = () => {
     setMenuActive((prevMenuActive) => !prevMenuActive);
   };
 
-  // Função para alternar o menu do usuário
   const toggleUserMenu = () => {
     setUserMenuActive((prevUserMenuActive) => !prevUserMenuActive);
   };
 
-  // Função para fechar o overlay do menu lateral
   const closeOverlay = () => {
     setMenuActive(false);
   };
 
-  // Função para fechar o overlay do menu do usuário
   const closeUserOverlay = () => {
     setUserMenuActive(false);
   };
 
-  // Função para lidar com o clique em um item do menu
   const handleMenuItemClick = (item) => {
     setSelectedItem(item);
     setMenuActive(false);
   };
 
-  // Função para lidar com o clique em um item do menu do usuário
   const handleUserMenuItemClick = (item) => {
     setSelectedItem(item);
     setUserMenuActive(false);
   };
 
-  // Função para lidar com o clique no logo
   const handleLogoClick = () => {
     setSelectedItem("home");
     setMenuActive(false);
@@ -94,19 +99,17 @@ export default function Menu() {
     navigate("/");
   };
 
-  // Função para alternar a visibilidade dos gêneros
   const toggleGenres = () => {
     setGenresOpen((prev) => !prev);
   };
 
-  // Efeito para fechar o overlay ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-          overlayRef.current &&
-          !overlayRef.current.contains(event.target) &&
-          userOverlayRef.current &&
-          !userOverlayRef.current.contains(event.target)
+        overlayRef.current &&
+        !overlayRef.current.contains(event.target) &&
+        userOverlayRef.current &&
+        !userOverlayRef.current.contains(event.target)
       ) {
         closeOverlay();
         closeUserOverlay();
@@ -120,7 +123,6 @@ export default function Menu() {
     };
   }, []);
 
-  // Efeito para desabilitar o scroll do body quando o menu está aberto
   useEffect(() => {
     if (menuActive || userMenuActive) {
       document.body.style.overflow = "hidden";
@@ -133,325 +135,261 @@ export default function Menu() {
     };
   }, [menuActive, userMenuActive]);
 
+  // Função para navegação com as setas do teclado
+  const handleKeyDown = (event) => {
+    if (event.key === "ArrowDown") {
+      setSelectedRecommendationIndex((prevIndex) =>
+        Math.min(prevIndex + 1, recommendedAnimes.length - 1)
+      );
+    } else if (event.key === "ArrowUp") {
+      setSelectedRecommendationIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    } else if (event.key === "Enter") {
+      const selectedAnime = recommendedAnimes[selectedRecommendationIndex];
+      if (selectedAnime) {
+        navigate(`/Detalhes/${selectedAnime.mal_id}`);
+        setRecommendedAnimes([]); // Limpar as recomendações após a navegação
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Adiciona o ouvinte de teclado
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      // Remove o ouvinte de teclado quando o componente for desmontado
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [recommendedAnimes, selectedRecommendationIndex]);
+
   return (
-      <>
-        <header className="header">
-          {/* Botão do menu lateral */}
-          <button className="menu-btn" onClick={toggleMenu}>
-            <img
-                src={menuLateral}
-                alt="Abrir menu"
-                className={menuActive ? "hidden" : ""}
-                width={24}
-                height={24}
+    <>
+      <header className="header">
+        <button className="menu-btn" onClick={toggleMenu}>
+          <img
+            src={menuLateral}
+            alt="Abrir menu"
+            className={menuActive ? "hidden" : ""}
+            width={24}
+            height={24}
+          />
+          <img
+            src={cancelarMenuLateral}
+            alt="Fechar menu"
+            className={menuActive ? "" : "hidden"}
+            width={24}
+            height={24}
+          />
+        </button>
+
+        <button
+          className={`logo ${selectedItem === "home" ? "selected" : ""}`}
+          onClick={handleLogoClick}
+        >
+          <img src={logo} alt="Logo do Animeflix" width={140} height={32} />
+        </button>
+
+        <button className="search-btn" onClick={toggleSearch}>
+          <img
+            src={logoPesquisa}
+            alt="Abrir caixa de pesquisa"
+            width={24}
+            height={24}
+          />
+        </button>
+
+        <div className={`search-box ${searchActive ? "active" : ""}`}>
+          <form onSubmit={handleSearchSubmit} className="search-wrapper">
+            <input
+              type="text"
+              name="search"
+              placeholder="Procurar Animes"
+              className="search-field"
+              autoComplete="off"
+              value={searchTerm}
+              onChange={handleSearchChange}
             />
             <img
-                src={cancelarMenuLateral}
-                alt="Fechar menu"
-                className={menuActive ? "" : "hidden"}
-                width={24}
-                height={24}
+              src={logoPesquisa}
+              alt="Pesquisa"
+              className="leading-icon"
+              width={24}
+              height={24}
             />
-          </button>
-
-          {/* Logo */}
-          <button
-              className={`logo ${selectedItem === "home" ? "selected" : ""}`}
-              onClick={handleLogoClick}
-          >
-            <img src={logo} alt="Logo do Animeflix" width={140} height={32} />
-          </button>
-
-          {/* Botão de pesquisa */}
+          </form>
           <button className="search-btn" onClick={toggleSearch}>
             <img
-                src={logoPesquisa}
-                alt="Abrir caixa de pesquisa"
-                width={24}
-                height={24}
+              src={cancelarLogo}
+              alt="Fechar caixa de pesquisa"
+              width={24}
+              height={24}
             />
           </button>
-
-          {/* Caixa de pesquisa */}
-          <div className={`search-box ${searchActive ? "active" : ""}`}>
-            <form onSubmit={handleSearchSubmit} className="search-wrapper">
-              <input
-                  type="text"
-                  name="search"
-                  placeholder="Procurar Animes"
-                  className="search-field"
-                  autoComplete="off"
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-              />
-              <img
-                  src={logoPesquisa}
-                  alt="Pesquisa"
-                  className="leading-icon"
-                  width={24}
-                  height={24}
-              />
-            </form>
-            <button className="search-btn" onClick={toggleSearch}>
-              <img
-                  src={cancelarLogo}
-                  alt="Fechar caixa de pesquisa"
-                  width={24}
-                  height={24}
-              />
-            </button>
-            {/* Lista de recomendações */}
-            {recommendedAnimes.length > 0 && (
-                <div className="recommendations">
-                  {recommendedAnimes.map((anime) => (
-                      <Link
-                          key={anime.mal_id}
-                          to={`/Detalhes/${anime.mal_id}`}
-                          className="recommendation-item"
-                      >
-                        <img
-                            src={anime.images.jpg.image_url}
-                            alt={anime.title}
-                            width={50}
-                            height={70}
-                        />
-                        <span>{anime.title}</span>
-                      </Link>
-                  ))}
-                </div>
-            )}
-          </div>
-
-          {/* Botão do menu do usuário */}
-          <button className="user-btn" onClick={toggleUserMenu}>
-            <img
-                src={userIcon}
-                alt="User Login"
-                className={userMenuActive ? "hidden" : ""}
-                width={24}
-                height={24}
-            />
-            <img
-                src={cancelarMenuLateral}
-                alt="Fechar menu"
-                className={userMenuActive ? "" : "hidden"}
-                width={24}
-                height={24}
-            />
-          </button>
-        </header>
-
-        {/* Overlay do menu lateral */}
-        <div className={`overlay ${menuActive ? "active" : ""}`} ref={overlayRef}>
-          <button className="overlay-close" onClick={closeOverlay}>
-            ×
-          </button>
-          <Link
-              to="/"
-              onClick={() => {
-                handleMenuItemClick("home");
-                closeOverlay();
-              }}
-          >
-            <img
-                className="menu-overlay-logo"
-                src={logo}
-                alt="Logo do Animeflix"
-                width={200}
-            />
-          </Link>
-          <div className={`menu-overlay ${menuActive ? "active" : ""}`}>
-            <div className="menu-section">
-              <span className="navegar-span">NAVEGAR</span>
-              <Link
-                  to="/popular"
-                  className="menu-item"
-                  onClick={() => handleMenuItemClick("popular")}
-              >
-                Populares
-              </Link>
-              <Link
-                  to="/novidades"
-                  className="menu-item"
-                  onClick={() => handleMenuItemClick("novidades")}
-              >
-                Novidades
-              </Link>
-              <Link
-                  to="/az"
-                  className="menu-item"
-                  onClick={() => handleMenuItemClick("az")}
-              >
-                A-Z
-              </Link>
-              <Link
-                  to="/simulcasts"
-                  className="menu-item"
-                  onClick={() => handleMenuItemClick("simulcasts")}
-              >
-                Simulcasts da Temporada
-              </Link>
-              <Link
-                  to="/calendario"
-                  className="menu-item"
-                  onClick={() => handleMenuItemClick("calendario")}
-              >
-                Calendário de Lançamentos
-              </Link>
-              <Link
-                  to="/videoclipes"
-                  className="menu-item"
-                  onClick={() => handleMenuItemClick("videoclipes")}
-              >
-                Videoclipes & Shows
-              </Link>
-              <div className="menu-item">
-                <button className="dropdown-toggle" onClick={toggleGenres}>
-                  Gêneros
-                </button>
-                <div className={`dropdown-content ${genresOpen ? "active" : ""}`}>
-                  <Link
-                      to="/acao"
-                      className="dropdown-item"
-                      onClick={() => handleMenuItemClick("acao")}
-                  >
-                    Ação
-                  </Link>
-                  <Link
-                      to="/comedia"
-                      className="dropdown-item"
-                      onClick={() => handleMenuItemClick("comedia")}
-                  >
-                    Comédia
-                  </Link>
-                  <Link
-                      to="/drama"
-                      className="dropdown-item"
-                      onClick={() => handleMenuItemClick("drama")}
-                  >
-                    Drama
-                  </Link>
-                </div>
-              </div>
+          {recommendedAnimes.length > 0 && (
+            <div className="recommendations">
+              {recommendedAnimes.map((anime, index) => (
+                <Link
+                  key={anime.mal_id}
+                  to={`/Detalhes/${anime.mal_id}`}
+                  className={`recommendation-item ${
+                    index === selectedRecommendationIndex ? "selected" : ""
+                  }`}
+                  onClick={handleRecommendationClick}
+                >
+                  <img
+                    src={anime.images.jpg.image_url}
+                    alt={anime.title}
+                    width={50}
+                    height={70}
+                  />
+                  <span>{anime.title}</span>
+                </Link>
+              ))}
             </div>
-            <div className="menu-section">
-              <Link
-                  to="/jogos"
-                  className="menu-item"
-                  onClick={() => handleMenuItemClick("jogos")}
-              >
-                Jogos
-              </Link>
-              <div className="menu-item">
-                <button className="dropdown-toggle">Notícias</button>
-                <div className="dropdown-content">
-                  <Link
-                      to="/ultimas"
-                      className="dropdown-item"
-                      onClick={() => handleMenuItemClick("ultimas")}
-                  >
-                    Últimas Notícias
-                  </Link>
-                  <Link
-                      to="/mais-lidas"
-                      className="dropdown-item"
-                      onClick={() => handleMenuItemClick("mais-lidas")}
-                  >
-                    Mais Lidas
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
 
-        {/* Overlay do menu do usuário */}
-        <div
-            className={`overlay ${userMenuActive ? "active" : ""}`}
-            ref={userOverlayRef}
+        <button className="user-btn" onClick={toggleUserMenu}>
+          <img
+            src={userIcon}
+            alt="User Login"
+            className={userMenuActive ? "hidden" : ""}
+            width={24}
+            height={24}
+          />
+          <img
+            src={cancelarMenuLateral}
+            alt="Fechar menu"
+            className={userMenuActive ? "" : "hidden"}
+            width={24}
+            height={24}
+          />
+        </button>
+      </header>
+
+      <div className={`overlay ${menuActive ? "active" : ""}`} ref={overlayRef}>
+        <button className="overlay-close" onClick={closeOverlay}>
+          ×
+        </button>
+        <Link
+          to="/"
+          onClick={() => {
+            handleMenuItemClick("home");
+            closeOverlay();
+          }}
         >
-          <button className="overlay-close" onClick={closeUserOverlay}>
-            ×
-          </button>
-          <div className={`menu-overlay-2 ${userMenuActive ? "active" : ""}`}>
-            <div className="menu-section-2">
-              <img
-                  className="menu-overlay-logo-2"
-                  src={logo}
-                  alt="Logo do Animeflix"
-                  width={200}
-              />
-              <span className="navegar-span">OPÇÕES</span>
-              <button>
-                <Link
-                    to="/perfil"
-                    className="menu-item-2"
-                    onClick={() => handleUserMenuItemClick("perfil")}
-                >
-                  Criar Conta
-                </Link>
-                <Link
-                    to="/perfil"
-                    className="menu-item-3"
-                    onClick={() => handleUserMenuItemClick("perfil")}
-                >
-                  Criando uma conta você terá benefícios!
-                </Link>
-              </button>
-              <button>
-                <Link
-                    to="/favoritos"
-                    className="menu-item-2"
-                    onClick={() => handleUserMenuItemClick("favoritos")}
-                >
-                  Login
-                </Link>
-                <Link
-                    to="/perfil"
-                    className="menu-item-3"
-                    onClick={() => handleUserMenuItemClick("perfil")}
-                >
-                  Criando uma conta você terá benefícios!
-                </Link>
-              </button>
-              <button>
-                <Link
-                    to="/configuracoes"
-                    className="menu-item-2"
-                    onClick={() => handleUserMenuItemClick("configuracoes")}
-                >
-                  Cartão de Presente
-                </Link>
-                <Link
-                    to="/perfil"
-                    className="menu-item-3"
-                    onClick={() => handleUserMenuItemClick("perfil")}
-                >
-                  Já é membro? Entre Aqui!
-                </Link>
-              </button>
-              <button>
-                <Link
-                    to="/configuracoes"
-                    className="menu-item-2"
-                    onClick={() => handleUserMenuItemClick("configuracoes")}
-                >
-                  Configurações
-                </Link>
-                <Link
-                    to="/perfil"
-                    className="menu-item-3"
-                    onClick={() => handleUserMenuItemClick("perfil")}
-                >
-                  Tem um cartão de Presente? Resgate Aqui!
-                </Link>
-              </button>
-              <button className="menu-item-button" onClick={() => handleUserMenuItemClick("configuracoes")}>
-                Teste Gratuito por 7 dias!
-              </button>
-            </div>
+          <img
+            className="menu-overlay-logo"
+            src={logo}
+            alt="Logo do Animeflix"
+            width={200}
+          />
+        </Link>
+        <div className={`menu-overlay ${menuActive ? "active" : ""}`}>
+          <div className="menu-section">
+            <span className="navegar-span">NAVEGAR</span>
+            {menuItems.map((item) => (
+              <Link
+                key={item.name}
+                to={`/${item.name}`}
+                className={`menu-item ${
+                  selectedItem === item.name ? "selected" : ""
+                }`}
+                onClick={() => handleMenuItemClick(item.name)}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
-      </>
+      </div>
+
+      <div
+        className={`overlay ${userMenuActive ? "active" : ""}`}
+        ref={userOverlayRef}
+      >
+        <button className="overlay-close" onClick={closeUserOverlay}>
+          ×
+        </button>
+        <div className={`menu-overlay-2 ${userMenuActive ? "active" : ""}`}>
+          <div className="menu-section-2">
+            <img
+              className="menu-overlay-logo-2"
+              src={logo}
+              alt="Logo do Animeflix"
+              width={200}
+            />
+            <span className="navegar-span">OPÇÕES</span>
+            <button>
+              <Link
+                to="/perfil"
+                className="menu-item-2"
+                onClick={() => handleUserMenuItemClick("perfil")}
+              >
+                Criar Conta
+              </Link>
+              <Link
+                to="/perfil"
+                className="menu-item-3"
+                onClick={() => handleUserMenuItemClick("perfil")}
+              >
+                Criando uma conta você terá benefícios!
+              </Link>
+            </button>
+            <button>
+              <Link
+                to="/favoritos"
+                className="menu-item-2"
+                onClick={() => handleUserMenuItemClick("favoritos")}
+              >
+                Login
+              </Link>
+              <Link
+                to="/perfil"
+                className="menu-item-3"
+                onClick={() => handleUserMenuItemClick("perfil")}
+              >
+                Criando uma conta você terá benefícios!
+              </Link>
+            </button>
+            <button>
+              <Link
+                to="/configuracoes"
+                className="menu-item-2"
+                onClick={() => handleUserMenuItemClick("configuracoes")}
+              >
+                Cartão de Presente
+              </Link>
+              <Link
+                to="/perfil"
+                className="menu-item-3"
+                onClick={() => handleUserMenuItemClick("perfil")}
+              >
+                Já é membro? Entre Aqui!
+              </Link>
+            </button>
+            <button>
+              <Link
+                to="/configuracoes"
+                className="menu-item-2"
+                onClick={() => handleUserMenuItemClick("configuracoes")}
+              >
+                Configurações
+              </Link>
+              <Link
+                to="/perfil"
+                className="menu-item-3"
+                onClick={() => handleUserMenuItemClick("perfil")}
+              >
+                Tem um cartão de Presente? Resgate Aqui!
+              </Link>
+            </button>
+            <button className="menu-item-button" onClick={() => handleUserMenuItemClick("configuracoes")}>
+              Teste Gratuito por 7 dias!
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

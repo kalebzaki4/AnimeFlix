@@ -14,7 +14,7 @@
 .descricao-famosos {
   color: var(--cor-texto);
   font-size: small;
-  margin-top: 0;
+  margin-top: 12px;
 }
 
 .slider-list {
@@ -27,7 +27,7 @@
   background-color: transparent;
 }
 
-.slider-list:hover::-webkit-scrollbar-thumb, 
+.slider-list:hover::-webkit-scrollbar-thumb,
 .slider-list:focus-within::-webkit-scrollbar-thumb {
   background-color: var(--fundo-banner);
 }
@@ -41,7 +41,7 @@
   gap: 16px;
 }
 
-.slider-inner::before, 
+.slider-inner::before,
 .slider-inner::after {
   content: "";
   min-width: 4px;
@@ -95,11 +95,22 @@
 }
 
 .estrela {
-  width: 16px; 
-  height: 16px; 
-  margin-right: 4px; 
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
 }
 
 .fracionada {
   clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+}
+
+.movie-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
 }

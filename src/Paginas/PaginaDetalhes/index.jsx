@@ -1,91 +1,81 @@
-// src/Pages/PaginaDetalhes/index.js
-import React, { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import Avaliacao from "../../assets/images/star.png";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Bookmark, BookmarkPlus } from "lucide-react"; // Import dos ícones
 import "./PaginaDetalhes.css";
-import Animes from "../../Components/ListaDeAnimesHorizontal/index";
-import Erro404 from '../../Components/Erro404';
+import TelaCarregamento from "../../Components/TelaCarregamento";
 
 const PaginaDetalhes = () => {
-  const { id } = useParams();
-  const [anime, setAnime] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const topRef = useRef(null);
+  const { animeId } = useParams();
+  const [animeDetails, setAnimeDetails] = useState(null);
+  const [isFullSynopsis, setIsFullSynopsis] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
-    const fetchAnimeDetails = async () => {
-      try {
-        const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}`);
-        setAnime(response.data.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching anime details:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchAnimeDetails();
     window.scrollTo(0, 0);
-  }, [id]);
+    fetchAnimeDetails(animeId);
+  }, [animeId]);
 
-  if (loading) {
-    return <div>Loading...</div>; // Pode substituir por um componente de carregamento
-  }
-
-  if (!anime) {
-    return <Erro404 />;
-  }
-
-  const animeBackgroundStyle = {
-    backgroundImage: `url(${anime.images.jpg.large_image_url || ''})`,
+  const fetchAnimeDetails = async (id) => {
+    const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
+    const data = await response.json();
+    setAnimeDetails(data.data);
   };
 
+  const toggleSynopsis = () => {
+    setIsFullSynopsis(!isFullSynopsis);
+  };
+
+  const handleSaveAnime = () => {
+    setIsSaved(!isSaved);
+    alert(isSaved ? "Anime removido dos favoritos!" : "Anime salvo para mais tarde!");
+  };
+
+  if (!animeDetails) {
+    return <TelaCarregamento />;
+  }
+
+  const shortSynopsis = animeDetails.synopsis
+    ? animeDetails.synopsis.slice(0, 300) + "..."
+    : "";
+
   return (
-    <>
-      <article className="container-inative-3" ref={topRef}>
-        <div className="movie-detail">
-          <figure className="poster-box movie-poster">
-            <div className="anime-background" style={animeBackgroundStyle}></div>
-            <img src={anime.images.jpg.large_image_url} alt={`Detalhes de ${anime.title}`} className="img-cover" />
-          </figure>
-          <div className="detail-box">
-            <div className="detail-content">
-              <h1 className="heading">{anime.title}</h1>
-              <div className="meta-list">
-                <div className="meta-item">
-                  <img src={Avaliacao} alt="avaliação do anime" width={20} height={20} />
-                  <span className="span">{anime.score}</span>
-                </div>
-                <div className="separator"></div>
-                <div className="meta-item">{anime.episodes || 'N/A'}</div>
-                <div className="separator"></div>
-                <div className="meta-item">{anime.year || 'N/A'}</div>
-                <div className="meta-item card-badge">{anime.rating || 'N/A'}</div>
-              </div>
-              <p className="genre">{anime.genres.map(genre => genre.name).join(', ')}</p>
-              <p className="overview">{anime.synopsis}</p>
-            </div>
-            <div className="tilte-wrapper">
-              <h3 className="title-large">Todos as imagens:</h3>
-            </div>
-            <div className="slider-list">
-              <div className="slider-inner">
-                {/* Substitua com as imagens reais se disponíveis */}
-                <div className="video-card"></div>
-                <div className="video-card"></div>
-                <div className="video-card"></div>
-              </div>
-            </div>
-            <div className="slider-list">
-              <div className="slider-inner2">
-                <Animes />
-              </div>
-            </div>
-          </div>
+    <div className="detalhes">
+      {animeDetails.trailer?.embed_url ? (
+        <div className="detalhes-trailer">
+          <iframe
+            src={animeDetails.trailer.embed_url}
+            title="Trailer"
+            allowFullScreen
+          />
         </div>
-      </article>
-    </>
+      ) : (
+        <div className="detalhes-trailer-placeholder">
+          <p>Trailer não disponível</p>
+        </div>
+      )}
+
+      <div className="detalhes-titulo">
+        <h1 className="Title">{animeDetails.title}</h1>
+        <button className="save-button" onClick={handleSaveAnime}>
+          {isSaved ? <Bookmark /> : <BookmarkPlus />}
+        </button>
+      </div>
+
+      <p className="P-status">
+        <strong>Status:</strong> {animeDetails.status || "Informação não disponível"}
+      </p>
+
+      <div className="detalhes-sinopse">
+        <p>{isFullSynopsis ? animeDetails.synopsis : shortSynopsis}</p>
+        <button className="ler-mais" onClick={toggleSynopsis}>
+          {isFullSynopsis ? "Ler menos" : "Ler mais"}
+        </button>
+      </div>
+
+      <div className="proximo-episodio">
+        <h2>EPISÓDIOS:</h2>
+      </div>
+    </div>
   );
 };
 

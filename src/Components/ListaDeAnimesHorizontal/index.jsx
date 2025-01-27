@@ -1,7 +1,7 @@
 import React from 'react';
 import Estrelas from './Estrelas';
 import { Link } from 'react-router-dom';
-import './ListaDeAnimes.css'; 
+import './ListaDeAnimes.css';
 
 const ListaDeAnimesHorizontal = ({ title, description, animes }) => {
   return (
@@ -14,7 +14,7 @@ const ListaDeAnimesHorizontal = ({ title, description, animes }) => {
         <div className="slider-list">
           <div className="slider-inner">
             {animes.map((anime) => (
-              <div className="movie-card" key={anime.mal_id}>
+              <Link to={`/Detalhes/${anime.mal_id}`} className="movie-card">
                 <figure className="poster-box card-banner">
                   <img src={anime.images.jpg.image_url} alt={anime.title} className="img-cover" />
                 </figure>
@@ -26,8 +26,7 @@ const ListaDeAnimesHorizontal = ({ title, description, animes }) => {
                   </div>
                   <div className="card-badge">{anime.year}</div>
                 </div>
-                <Link to={`/Detalhes/${anime.mal_id}`} className="card-btn" title="Detalhes"></Link>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

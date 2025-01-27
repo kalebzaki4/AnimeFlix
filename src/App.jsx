@@ -10,14 +10,14 @@ import Footer from './Components/Footer';
 function App() {
   return (
     <BrowserRouter>
-      <Menu/>
+      <Menu />
       <Routes>
         <Route path='/' element={<Inicio />} />
-        <Route path='/Detalhes/:id' element={<PaginaDetalhes />} />
-        <Route path='/a' element={<ResultadoAnimes />} />
+        <Route path='/Detalhes/:animeId' element={<PaginaDetalhes />} />
+        <Route path='/resultados' element={<ResultadoAnimes />} />
         <Route path='*' element={<Erro404 />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 }
