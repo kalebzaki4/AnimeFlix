@@ -1,14 +1,35 @@
-## ⚠️ Política de Uso e Segurança
+# ⚠️ Política de Uso e Segurança  
 
-Embora este projeto seja open source, sua reprodução, redistribuição ou reutilização para fins comerciais ou pessoais sem autorização expressa do criador **não é permitida**. O código está disponível para fins educacionais e de aprendizado, mas **não deve ser usado para criar cópias idênticas do site AnimeFlix**.
+## Direitos de Uso 🚫  
 
-## Supported Versions
+Este projeto é open source, mas **não pode ser copiado, redistribuído ou reutilizado para fins comerciais ou pessoais sem autorização expressa do criador**. O código está disponível exclusivamente para aprendizado e contribuição da comunidade, mas **não deve ser usado para criar cópias idênticas, forks comerciais ou réplicas do site AnimeFlix**.  
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.x.x   | :white_check_mark: |
-| < 1.0   | :x:                |
+### 🚨 Restrições de Uso:  
+✔️ Uso para aprendizado e contribuição no repositório oficial.  
+❌ Criação de clones ou sites derivados sem permissão.  
+❌ Uso do código para fins comerciais ou monetização de qualquer forma.  
+❌ Redistribuição não autorizada do código-fonte.  
 
-## Reporting a Vulnerability
+Se deseja utilizar partes do projeto para outro propósito, entre em contato para obter permissão.  
 
-Caso encontre uma vulnerabilidade no projeto, por favor, entre em contato abrindo uma issue no repositório ou enviando um e-mail para [kalebzaki4@gmail.com](kalebzaki4@gmail.com). Relatórios de vulnerabilidades são bem-vindos e serão tratados com prioridade.
+## 📌 Versões Suportadas  
+
+| Versão  | Suporte            |  
+| ------- | ------------------ |  
+| 0.0.15  | ✅ Suportada       |  
+| < 0.0.15 | ❌ Não suportada  |  
+
+Apenas a versão **0.0.15** do AnimeFlix recebe atualizações e suporte. Versões anteriores não são mais mantidas.  
+
+## 🛡️ Relatar uma Vulnerabilidade  
+
+Caso encontre uma vulnerabilidade ou problema de segurança no projeto, entre em contato através de:  
+
+- 📩 E-mail: [kalebzaki4@gmail.com](mailto:kalebzaki4@gmail.com)  
+- 🐛 Abrindo uma issue no repositório  
+
+Todas as vulnerabilidades serão analisadas com prioridade para garantir a segurança do projeto.  
+
+---  
+
+Respeite os direitos de uso e ajude a manter o AnimeFlix um projeto aberto e seguro para todos! 🚀  
