@@ -7,18 +7,62 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Diretórios de Build
+node_modules/
+dist/
+dist-ssr/
+build/
+coverage/
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Arquivos de ambiente
+.env
+.env.local
+.env.*.local
+
+# Diretórios de caches
+.cache/
+.pnp/
+.vscode/
+
+# Arquivos do sistema operacional
 .DS_Store
+Thumbs.db
+
+# Arquivos temporários do editor
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.vscode/*
+
+# Arquivos de dependências de ferramentas (ex: yarn.lock, package-lock.json)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Arquivos específicos do editor/IDE
+.vscode/extensions.json
+
+# Arquivos de testes
+*.tgz
+*.test.js
+*.spec.js
+
+# Arquivos específicos do Docker (caso use)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Arquivos de bancos de dados locais (caso use)
+*.sqlite
+*.db
+
+# Arquivos de log do terminal
+*.log.*
+
+# Diretórios de backups
+*.bak
+*.swp
+*.swo
