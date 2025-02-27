@@ -45,7 +45,13 @@ Se você é um entusiasta de animes e deseja contribuir para a melhoria do Anime
 
 ## Licença 📄
 
-Este projeto é licenciado sob a [MIT License](LICENSE), o que significa que você pode usar, modificar e distribuir o código livremente.
+Este projeto é licenciado sob a [Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional (CC BY-NC-SA 4.0)](LICENSE), o que significa que você pode copiar, modificar e distribuir o código, desde que seja para fins não comerciais e respeite as mesmas condições de compartilhamento.
+
+Caso queira saber mais sobre a licença ou tenha dúvidas sobre o uso do projeto, consulte o arquivo [LICENSE](LICENSE).
+
+## Segurança 🔒
+
+Este projeto também inclui informações importantes sobre segurança. Para mais detalhes sobre como relatar vulnerabilidades ou questões de segurança, consulte o arquivo [SECURITY.md](SECURITY.md).
 
 Agradecemos por escolher o AnimeFlix como seu destino para a diversão anime. Esperamos que aproveite cada momento assistindo aos seus animes favoritos. Divirta-se e não se esqueça de compartilhar com seus amigos! 😄🎉
 
