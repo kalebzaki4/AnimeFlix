@@ -153,11 +153,9 @@ export default function Menu() {
   };
 
   useEffect(() => {
-    // Adiciona o ouvinte de teclado
     document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      // Remove o ouvinte de teclado quando o componente for desmontado
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [recommendedAnimes, selectedRecommendationIndex]);
@@ -231,9 +229,8 @@ export default function Menu() {
                 <Link
                   key={anime.mal_id}
                   to={`/Detalhes/${anime.mal_id}`}
-                  className={`recommendation-item ${
-                    index === selectedRecommendationIndex ? "selected" : ""
-                  }`}
+                  className={`recommendation-item ${index === selectedRecommendationIndex ? "selected" : ""
+                    }`}
                   onClick={handleRecommendationClick}
                 >
                   <img
@@ -292,9 +289,8 @@ export default function Menu() {
               <Link
                 key={item.name}
                 to={`/${item.name}`}
-                className={`menu-item ${
-                  selectedItem === item.name ? "selected" : ""
-                }`}
+                className={`menu-item ${selectedItem === item.name ? "selected" : ""
+                  }`}
                 onClick={() => handleMenuItemClick(item.name)}
               >
                 {item.label}
