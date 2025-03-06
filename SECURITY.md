@@ -16,7 +16,7 @@ Se deseja utilizar partes do projeto para outro propósito, entre em contato par
 
 | Versão  | Suporte            |  
 | ------- | ------------------ |  
-| 0.0.15  | ✅ Suportada       |  
+| 0.0.16  | ✅ Suportada       |  
 | < 0.0.15 | ❌ Não suportada  |  
 
 Apenas a versão **0.0.15** do AnimeFlix recebe atualizações e suporte. Versões anteriores não são mais mantidas.  
