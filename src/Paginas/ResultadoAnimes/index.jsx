@@ -10,15 +10,24 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
+function debounce(func, wait) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+}
+
 function ResultadoAnimes() {
   const query = useQuery();
   const searchTerm = query.get('q') || '';
   const [animes, setAnimes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchPerformed, setSearchPerformed] = useState(false);
 
   useEffect(() => {
-    const fetchAnimes = async () => {
+    const fetchAnimes = debounce(async () => {
       try {
         console.log(`Fetching animes with search term: ${searchTerm}`);
         const response = await axios.get(`https://api.jikan.moe/v4/anime?q=${searchTerm}&limit=10`);
@@ -29,19 +38,24 @@ function ResultadoAnimes() {
           setAnimes([]);
         }
         setLoading(false);
+        setSearchPerformed(true);
       } catch (error) {
         console.error("Error fetching anime data:", error);
         setError("Erro ao buscar dados dos animes. Por favor, tente novamente mais tarde.");
         setAnimes([]);
         setLoading(false);
+        setSearchPerformed(true);
       }
-    };
+    }, 500); // 500ms debounce time
 
     if (searchTerm) {
+      setLoading(true);
+      setSearchPerformed(false);
       fetchAnimes();
     } else {
       setAnimes([]);
       setLoading(false);
+      setSearchPerformed(true);
     }
   }, [searchTerm]);
 
@@ -64,7 +78,7 @@ function ResultadoAnimes() {
 
   const filteredData = searchTerm ? fuse.search(searchTerm).map(result => result.item) : animes;
 
-  if (!filteredData.length) {
+  if (searchPerformed && !filteredData.length) {
     return <p>Nenhum anime encontrado.</p>;
   }
 
@@ -78,7 +92,12 @@ function ResultadoAnimes() {
           {filteredData.map((anime) => (
             <div className="movie-card" key={anime.mal_id}>
               <figure className="poster-box card-banner">
-                <img src={anime.images.jpg.image_url} alt={anime.title} className="img-cover" />
+                <img 
+                  src={anime.images.jpg.image_url} 
+                  alt={anime.title} 
+                  className="img-cover" 
+                  onError={(e) => e.target.src = 'fallback-image-url.jpg'} 
+                />
               </figure>
               <h4 className="title">{anime.title}</h4>
               <div className="meta-list">
