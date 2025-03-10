@@ -13,16 +13,26 @@ export default function Inicio() {
   useEffect(() => {
     const fetchAnimes = async () => {
       try {
-        const [famososResponse, lancamentosResponse] = await Promise.all([
-          axios.get(`${import.meta.env.VITE_API_BASE_URL}/top/anime?filter=bypopularity&limit=25`),
-          axios.get(`${import.meta.env.VITE_API_BASE_URL}/seasons/now?limit=25`)
-        ]);
+        const famososResponse = await axios.get("https://api.jikan.moe/v4/top/anime", {
+          params: {
+            type: "tv",
+            limit: 25, 
+            sort: "bypopularity" 
+          }
+        });
+
+        // Usando a API Jikan para buscar lançamentos atuais
+        const lancamentosResponse = await axios.get("https://api.jikan.moe/v4/seasons/now", {
+          params: {
+            limit: 25
+          }
+        });
 
         setAnimesFamosos(famososResponse.data.data);
         setLancamentos(lancamentosResponse.data.data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching anime data:", error);
+        console.error("Erro ao buscar dados de animes:", error);
         setLoading(false);
       }
     };

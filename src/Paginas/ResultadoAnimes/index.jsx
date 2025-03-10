@@ -6,8 +6,8 @@ import Estrelas from '../../assets/images/star.png';
 import './ListaAnimesVertical.css';
 import './Spinner.css';
 
-// Usar a variável de ambiente do Vite corretamente
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+// Usar a URL da Jikan API
+const API_BASE_URL = 'https://api.jikan.moe/v4';
 
 console.log("API Base URL:", API_BASE_URL); // Debug para verificar a URL da API
 
@@ -46,7 +46,12 @@ function ResultadoAnimes() {
     const fetchAnimes = debounce(async () => {
       try {
         console.log(`Buscando animes para: ${searchTerm}`);
-        const response = await axios.get(`${API_BASE_URL}/anime?q=${searchTerm}&limit=10`);
+        const response = await axios.get(`${API_BASE_URL}/anime`, {
+          params: {
+            q: searchTerm,
+            limit: 10
+          }
+        });
         console.log('Resposta da API:', response.data);
 
         if (response.data?.data) {

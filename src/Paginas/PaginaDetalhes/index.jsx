@@ -2,46 +2,42 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Bookmark, BookmarkPlus } from "lucide-react"; // Ícones
 import "./PaginaDetalhes.css";
-import TelaCarregamento from "../../Components/TelaCarregamento"; 
+import TelaCarregamento from "../../Components/TelaCarregamento";
+import axios from "axios";
 
 const PaginaDetalhes = () => {
-  const { animeId } = useParams(); 
+  const { animeId } = useParams();
   const [animeDetails, setAnimeDetails] = useState(null);
   const [isFullSynopsis, setIsFullSynopsis] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchAnimeDetails(animeId); 
+    fetchAnimeDetails(animeId);
   }, [animeId]); // Executa quando o animeId mudar
 
-  
   const fetchAnimeDetails = async (id) => {
     try {
-      const baseUrl = import.meta.env.VITE_API_BASE_URL;
-      if (!baseUrl) {
-        throw new Error("A URL da API não está configurada.");
-      }
-
-      const response = await fetch(`${baseUrl}/anime/${id}`);
-      if (!response.ok) {
+      const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}`);
+      
+      if (response.status !== 200) {
         throw new Error('Anime não encontrado!');
       }
-      const data = await response.json();
-      setAnimeDetails(data.data);
+
+      const data = response.data.data;
+      setAnimeDetails(data);
     } catch (error) {
       console.error("Erro ao carregar os detalhes do anime:", error);
       setError("Ocorreu um erro ao carregar os detalhes do anime. Tente novamente mais tarde.");
-      setAnimeDetails(null); 
+      setAnimeDetails(null);
     }
   };
 
-  
   const toggleSynopsis = () => {
     if (isFullSynopsis) {
-      window.scrollTo(0, 0); 
+      window.scrollTo(0, 0);
     }
-    setIsFullSynopsis(!isFullSynopsis); 
+    setIsFullSynopsis(!isFullSynopsis);
   };
 
   const handleSaveAnime = () => {
@@ -64,10 +60,14 @@ const PaginaDetalhes = () => {
 
   return (
     <div className="detalhes">
-      {animeDetails.trailer?.embed_url ? (
+      {animeDetails.trailer?.url ? (
         <div className="detalhes-trailer">
+          {/* Se o trailer estiver disponível, tenta embutir o iframe */}
           <iframe
-            src={animeDetails.trailer.embed_url}
+            src={animeDetails.trailer.url.includes("youtube.com") 
+              ? `https://www.youtube.com/embed/${animeDetails.trailer.url.split("v=")[1]}`
+              : animeDetails.trailer.url
+            }
             title="Trailer"
             allowFullScreen
             className="anime-trailer"
@@ -76,6 +76,12 @@ const PaginaDetalhes = () => {
       ) : (
         <div className="detalhes-trailer-placeholder">
           <p>Trailer não disponível</p>
+          {/* Alternativa de link para abrir o trailer em uma nova aba */}
+          {animeDetails.trailer?.url && (
+            <a href={animeDetails.trailer.url} target="_blank" rel="noopener noreferrer">
+              <button className="assistir-trailer">Assistir ao Trailer</button>
+            </a>
+          )}
         </div>
       )}
 
