@@ -14,8 +14,8 @@ export default function Inicio() {
     const fetchAnimes = async () => {
       try {
         const [famososResponse, lancamentosResponse] = await Promise.all([
-          axios.get("https://api.jikan.moe/v4/top/anime?filter=bypopularity&limit=25"),
-          axios.get("https://api.jikan.moe/v4/seasons/now?limit=25")
+          axios.get(`${import.meta.env.VITE_API_BASE_URL}/top/anime?filter=bypopularity&limit=25`),
+          axios.get(`${import.meta.env.VITE_API_BASE_URL}/seasons/now?limit=25`)
         ]);
 
         setAnimesFamosos(famososResponse.data.data);

@@ -2,22 +2,28 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Bookmark, BookmarkPlus } from "lucide-react"; // Ícones
 import "./PaginaDetalhes.css";
-import TelaCarregamento from "../../Components/TelaCarregamento"; // Componente de loading
+import TelaCarregamento from "../../Components/TelaCarregamento"; 
 
 const PaginaDetalhes = () => {
-  const { animeId } = useParams(); // Obtém o ID do anime da URL
+  const { animeId } = useParams(); 
   const [animeDetails, setAnimeDetails] = useState(null);
   const [isFullSynopsis, setIsFullSynopsis] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchAnimeDetails(animeId); // Chama a API para obter os detalhes
+    fetchAnimeDetails(animeId); 
   }, [animeId]); // Executa quando o animeId mudar
 
-  // Função que chama a API para buscar detalhes do anime
+  
   const fetchAnimeDetails = async (id) => {
     try {
-      const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
+      const baseUrl = import.meta.env.VITE_API_BASE_URL;
+      if (!baseUrl) {
+        throw new Error("A URL da API não está configurada.");
+      }
+
+      const response = await fetch(`${baseUrl}/anime/${id}`);
       if (!response.ok) {
         throw new Error('Anime não encontrado!');
       }
@@ -25,38 +31,39 @@ const PaginaDetalhes = () => {
       setAnimeDetails(data.data);
     } catch (error) {
       console.error("Erro ao carregar os detalhes do anime:", error);
-      setAnimeDetails(null); // Caso haja erro, o estado fica null
+      setError("Ocorreu um erro ao carregar os detalhes do anime. Tente novamente mais tarde.");
+      setAnimeDetails(null); 
     }
   };
 
-  // Função para alternar a exibição da sinopse
+  
   const toggleSynopsis = () => {
     if (isFullSynopsis) {
-      // Quando o "Ler menos" for clicado, rola para o topo
-      window.scrollTo(0, 0); // Rola para o topo da página
+      window.scrollTo(0, 0); 
     }
-    setIsFullSynopsis(!isFullSynopsis); // Alterna entre mostrar ou não a sinopse completa
+    setIsFullSynopsis(!isFullSynopsis); 
   };
 
-  // Função para salvar o anime nos favoritos
   const handleSaveAnime = () => {
     setIsSaved(!isSaved);
     alert(isSaved ? "Anime removido dos favoritos!" : "Anime salvo para mais tarde!");
   };
 
-  // Exibe a tela de carregamento enquanto os detalhes não são carregados
-  if (!animeDetails) {
+  if (!animeDetails && !error) {
     return <TelaCarregamento />;
   }
 
-  // Exibe uma versão resumida da sinopse
+  // Exibe mensagem de erro
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
+
   const shortSynopsis = animeDetails.synopsis
     ? animeDetails.synopsis.slice(0, 300) + "..."
     : "";
 
   return (
     <div className="detalhes">
-      {/* Se houver trailer, exibe o iframe com o vídeo */}
       {animeDetails.trailer?.embed_url ? (
         <div className="detalhes-trailer">
           <iframe
@@ -80,12 +87,10 @@ const PaginaDetalhes = () => {
         </button>
       </div>
 
-      {/* Status do anime */}
       <p className="P-status">
         <strong>Status:</strong> {animeDetails.status || "Informação não disponível"}
       </p>
 
-      {/* Exibição da sinopse */}
       <div className="detalhes-sinopse">
         <p>{isFullSynopsis ? animeDetails.synopsis : shortSynopsis}</p>
         <button className="ler-mais" onClick={toggleSynopsis}>
@@ -93,7 +98,6 @@ const PaginaDetalhes = () => {
         </button>
       </div>
 
-      {/* Exibição dos episódios, caso existam */}
       <div className="proximo-episodio">
         <h2>EPISÓDIOS:</h2>
         {animeDetails.episodes && animeDetails.episodes.length > 0 ? (

@@ -38,7 +38,8 @@ export default function Menu() {
 
     if (term.length > 2) {
       try {
-        const response = await axios.get(`https://api.jikan.moe/v4/anime?q=${term}`);
+        // Usando a variável de ambiente VITE_API_BASE_URL para a URL da API
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/anime?q=${term}`);
         setRecommendedAnimes(response.data.data);
       } catch (error) {
         console.error("Error fetching anime data:", error);
