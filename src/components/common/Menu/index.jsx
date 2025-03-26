@@ -2,12 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Menu.css";
-import logo from "../../assets/images/logo-animeflix.png";
-import logoPesquisa from "../../assets/images/search.png";
-import cancelarLogo from "../../assets/images/close.png";
-import menuLateral from "../../assets/images/menu.png";
-import cancelarMenuLateral from "../../assets/images/menu-close.png";
-import userIcon from "../../assets/images/user.svg";
+import logo from "../../../assets/images/logo-animeflix.png";
+import logoPesquisa from "../../../assets/images/search.png";
+import cancelarLogo from "../../../assets/images/close.png";
+import menuLateral from "../../../assets/images/menu.png";
+import cancelarMenuLateral from "../../../assets/images/menu-close.png";
+import userIcon from "../../../assets/images/user.svg";
 
 export default function Menu() {
   const [searchActive, setSearchActive] = useState(false);

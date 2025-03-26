@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Erro404.css"
-import ImgErro from "../../assets/images/Erro.png"
+import ImgErro from "../../../assets/images/Erro.png";
 
 const Erro404 = () => {
     return (

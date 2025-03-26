@@ -2,8 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Bookmark, BookmarkPlus } from "lucide-react"; // Ícones
 import "./PaginaDetalhes.css";
-import TelaCarregamento from "../../Components/TelaCarregamento";
+import TelaCarregamento from "../../components/common/TelaCarregamento";
 import axios from "axios";
+
+const statusTraduzidos = {
+  "Finished Airing": "Finalizado",
+  "Currently Airing": "Em exibição",
+  "Not yet aired": "Ainda não exibido",
+  "Hiatus": "Em hiato",
+};
 
 const PaginaDetalhes = () => {
   const { animeId } = useParams();
@@ -14,17 +21,16 @@ const PaginaDetalhes = () => {
 
   useEffect(() => {
     fetchAnimeDetails(animeId);
-  }, [animeId]); // Executa quando o animeId mudar
+  }, [animeId]);
 
   const fetchAnimeDetails = async (id) => {
     try {
       const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}`);
-      
       if (response.status !== 200) {
-        throw new Error('Anime não encontrado!');
+        throw new Error("Anime não encontrado!");
       }
-
       const data = response.data.data;
+      data.status = statusTraduzidos[data.status] || data.status;
       setAnimeDetails(data);
     } catch (error) {
       console.error("Erro ao carregar os detalhes do anime:", error);
@@ -49,7 +55,6 @@ const PaginaDetalhes = () => {
     return <TelaCarregamento />;
   }
 
-  // Exibe mensagem de erro
   if (error) {
     return <div className="error-message">{error}</div>;
   }
@@ -62,12 +67,10 @@ const PaginaDetalhes = () => {
     <div className="detalhes">
       {animeDetails.trailer?.url ? (
         <div className="detalhes-trailer">
-          {/* Se o trailer estiver disponível, tenta embutir o iframe */}
           <iframe
-            src={animeDetails.trailer.url.includes("youtube.com") 
+            src={animeDetails.trailer.url.includes("youtube.com")
               ? `https://www.youtube.com/embed/${animeDetails.trailer.url.split("v=")[1]}`
-              : animeDetails.trailer.url
-            }
+              : animeDetails.trailer.url}
             title="Trailer"
             allowFullScreen
             className="anime-trailer"
@@ -76,7 +79,6 @@ const PaginaDetalhes = () => {
       ) : (
         <div className="detalhes-trailer-placeholder">
           <p>Trailer não disponível</p>
-          {/* Alternativa de link para abrir o trailer em uma nova aba */}
           {animeDetails.trailer?.url && (
             <a href={animeDetails.trailer.url} target="_blank" rel="noopener noreferrer">
               <button className="assistir-trailer">Assistir ao Trailer</button>
@@ -85,7 +87,6 @@ const PaginaDetalhes = () => {
         </div>
       )}
 
-      {/* Título e botão de salvar */}
       <div className="detalhes-titulo">
         <h1 className="Title">{animeDetails.title}</h1>
         <button className="save-button" onClick={handleSaveAnime}>

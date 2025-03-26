@@ -1,5 +1,5 @@
 import React from 'react';
-import EstrelasImg from '../../assets/images/star.png';
+import EstrelasImg from '../../../assets/images/star.png';
 import './Estrelas.css';
 
 const Estrelas = ({ avaliacao }) => {

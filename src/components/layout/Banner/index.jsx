@@ -1,14 +1,14 @@
-// src/Components/Banner/index.js
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Banner.css";
-import play from "../../assets/images/play_circle.png";
+import play from "../../../assets/images/play_circle.png";
 
 export default function Banner({ animes }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Função para alternar entre os animes
+  // Função para alternar entre os animes e rolar para o topo
   const handlePosterClick = (index) => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setActiveIndex(index);
   };
 
@@ -39,7 +39,11 @@ export default function Banner({ animes }) {
           {anime.genres.map((genre) => genre.name).join(", ")}
         </p>
         <p className="banner-text">{anime.synopsis}</p>
-        <Link to={`/Detalhes/${anime.mal_id}`} className="btn">
+        <Link 
+          to={`/Detalhes/${anime.mal_id}`} 
+          className="btn" 
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
           <img
             src={play}
             alt="Botão de Play"

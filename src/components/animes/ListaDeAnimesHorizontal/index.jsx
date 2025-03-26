@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Estrelas from './Estrelas';
+import Estrelas from '../Estrelas/Estrelas';
 import { Link } from 'react-router-dom';
 import './ListaDeAnimes.css';
 
