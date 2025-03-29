@@ -1,2 +1,14 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Define que todos os arquivos de texto terão fim de linha LF
+* text=auto eol=lf
+
+# Trate arquivos binários corretamente para evitar quebras
+*.png binary
+*.jpg binary
+*.gif binary
+*.mp4 binary
+*.mp3 binary
+
+# Evita que arquivos específicos sejam exportados em releases
+.gitattributes export-ignore
+.gitignore export-ignore
+README.md export-ignore
