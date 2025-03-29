@@ -1,5 +1,7 @@
-# Logs
-logs
+# ==========================
+# 🔹 LOGS
+# ==========================
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,62 +9,92 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Diretórios de Build
+# ==========================
+# 🔹 DIRETÓRIOS DE BUILD & DEPENDÊNCIAS
+# ==========================
 node_modules/
 dist/
 dist-ssr/
 build/
 coverage/
 
-# Arquivos de ambiente
+# ==========================
+# 🔹 ARQUIVOS DE AMBIENTE
+# ==========================
 .env
 .env.local
 .env.*.local
 
-# Diretórios de caches
+# ==========================
+# 🔹 CACHES & CONFIGURAÇÕES INTERNAS
+# ==========================
 .cache/
 .pnp/
+.pnp.js
+.pnpm/
 .vscode/
+.yarn/
 
-# Arquivos do sistema operacional
+# ==========================
+# 🔹 ARQUIVOS DO SISTEMA OPERACIONAL
+# ==========================
 .DS_Store
 Thumbs.db
 
-# Arquivos temporários do editor
+# ==========================
+# 🔹 CONFIGURAÇÕES DE EDITORES & IDEs
+# ==========================
 .idea/
+.vscode/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-*.vscode/*
+.vscode/extensions.json
 
-# Arquivos de dependências de ferramentas (ex: yarn.lock, package-lock.json)
+# ==========================
+# 🔹 ARQUIVOS DE LOCK DE DEPENDÊNCIAS
+# ==========================
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
-# Arquivos específicos do editor/IDE
-.vscode/extensions.json
-
-# Arquivos de testes
+# ==========================
+# 🔹 ARQUIVOS DE TESTES & PACOTES TEMPORÁRIOS
+# ==========================
 *.tgz
 *.test.js
+*.test.ts
 *.spec.js
+*.spec.ts
+coverage/
 
-# Arquivos específicos do Docker (caso use)
+# ==========================
+# 🔹 ARQUIVOS DO DOCKER (CASO USE)
+# ==========================
 Dockerfile
 docker-compose.yml
 .dockerignore
 
-# Arquivos de bancos de dados locais (caso use)
+# ==========================
+# 🔹 BANCOS DE DADOS LOCAIS (CASO USE)
+# ==========================
 *.sqlite
 *.db
+*.db-wal
+*.db-shm
 
-# Arquivos de log do terminal
-*.log.*
-
-# Diretórios de backups
+# ==========================
+# 🔹 BACKUPS & ARQUIVOS TEMPORÁRIOS
+# ==========================
 *.bak
 *.swp
 *.swo
+*.tmp
+*.cache
+
+# ==========================
+# 🔹 LOGS DE EXECUÇÃO
+# ==========================
+*.log.*
