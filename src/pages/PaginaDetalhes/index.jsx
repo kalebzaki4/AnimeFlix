@@ -9,7 +9,7 @@ const statusTraduzidos = {
   "Finished Airing": "Finalizado",
   "Currently Airing": "Em exibição",
   "Not yet aired": "Ainda não exibido",
-  "Hiatus": "Em hiato",
+  Hiatus: "Em hiato",
 };
 
 const PaginaDetalhes = () => {
@@ -34,21 +34,29 @@ const PaginaDetalhes = () => {
       setAnimeDetails(data);
     } catch (error) {
       console.error("Erro ao carregar os detalhes do anime:", error);
-      setError("Ocorreu um erro ao carregar os detalhes do anime. Tente novamente mais tarde.");
+      setError(
+        "Ocorreu um erro ao carregar os detalhes do anime. Tente novamente mais tarde."
+      );
       setAnimeDetails(null);
     }
   };
 
   const toggleSynopsis = () => {
-    if (isFullSynopsis) {
-      window.scrollTo(0, 0);
-    }
     setIsFullSynopsis(!isFullSynopsis);
   };
 
+  // Forçar rolar para o topo sempre que a sinopse for expandida
+  useEffect(() => {
+    if (isFullSynopsis) {
+      window.scrollTo(0, 0); // Garantir que a página role para o topo
+    }
+  }, [isFullSynopsis]);
+
   const handleSaveAnime = () => {
     setIsSaved(!isSaved);
-    alert(isSaved ? "Anime removido dos favoritos!" : "Anime salvo para mais tarde!");
+    alert(
+      isSaved ? "Anime removido dos favoritos!" : "Anime salvo para mais tarde!"
+    );
   };
 
   if (!animeDetails && !error) {
@@ -68,9 +76,11 @@ const PaginaDetalhes = () => {
       {animeDetails.trailer?.url ? (
         <div className="detalhes-trailer">
           <iframe
-            src={animeDetails.trailer.url.includes("youtube.com")
-              ? `https://www.youtube.com/embed/${animeDetails.trailer.url.split("v=")[1]}`
-              : animeDetails.trailer.url}
+            src={
+              animeDetails.trailer.url.includes("youtube.com")
+                ? `https://www.youtube.com/embed/${animeDetails.trailer.url.split("v=")[1]}`
+                : animeDetails.trailer.url
+            }
             title="Trailer"
             allowFullScreen
             className="anime-trailer"
@@ -80,7 +90,11 @@ const PaginaDetalhes = () => {
         <div className="detalhes-trailer-placeholder">
           <p>Trailer não disponível</p>
           {animeDetails.trailer?.url && (
-            <a href={animeDetails.trailer.url} target="_blank" rel="noopener noreferrer">
+            <a
+              href={animeDetails.trailer.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <button className="assistir-trailer">Assistir ao Trailer</button>
             </a>
           )}
@@ -118,7 +132,11 @@ const PaginaDetalhes = () => {
                 />
                 <div className="episodio-info">
                   <h3>{episodio.title}</h3>
-                  <p>{episodio.synopsis ? episodio.synopsis.slice(0, 100) + "..." : "Sem sinopse disponível"}</p>
+                  <p>
+                    {episodio.synopsis
+                      ? episodio.synopsis.slice(0, 100) + "..."
+                      : "Sem sinopse disponível"}
+                  </p>
                 </div>
               </div>
             ))}

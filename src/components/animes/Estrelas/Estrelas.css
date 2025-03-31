@@ -6,15 +6,17 @@
   width: 16px; 
   height: 16px; 
   margin-right: 4px; 
+  object-fit: contain; 
 }
 
-/* Estilização para a estrela fracionada */
 .fracionada {
-  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+  width: 8px; 
+  height: 16px;
   object-fit: cover;
+  opacity: 0.7; 
 }
 
-/* Estilização para estrelas vazias (opcional) */
+
 .empty {
-  opacity: 0.3; /* Ajuste a opacidade para dar um efeito de estrela vazia */
+  opacity: 0.3;  
 }

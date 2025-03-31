@@ -49,6 +49,7 @@
   color: #888;
 }
 
+/* Estilo para a sinopse */
 .detalhes-sinopse {
   margin-top: 20px;
 }
@@ -97,6 +98,7 @@
   margin-top: 10px;
 }
 
+/* Estilo responsivo */
 @media (max-width: 768px) {
   .anime-imagem {
     max-width: 90%;

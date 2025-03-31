@@ -3,40 +3,65 @@ import axios from "axios";
 import Banner from "../../components/layout/Banner";
 import ListaDeAnimesHorizontal from "../../components/animes/ListaDeAnimesHorizontal";
 import TelaCarregamento from "../../components/common/TelaCarregamento";
-import '../../styles/message.css';
+import "../../styles/message.css";
 
 export default function Inicio() {
   const [loading, setLoading] = useState(true);
-  const [animesFamosos, setAnimesFamosos] = useState([]);
-  const [lancamentos, setLancamentos] = useState([]);
+  const [animesFamosos, setAnimesFamosos] = useState(() => {
+    const cachedFamosos = sessionStorage.getItem("animesFamosos");
+    return cachedFamosos ? JSON.parse(cachedFamosos) : [];
+  });
+  const [lancamentos, setLancamentos] = useState(() => {
+    const cachedLancamentos = sessionStorage.getItem("lancamentos");
+    return cachedLancamentos ? JSON.parse(cachedLancamentos) : [];
+  });
 
-  useEffect(() => {
-    const fetchAnimes = async () => {
-      try {
-        const famososResponse = await axios.get("https://api.jikan.moe/v4/top/anime", {
+  const fetchAnimes = async () => {
+    setLoading(true);
+    try {
+      const famososResponse = await axios.get(
+        "https://api.jikan.moe/v4/top/anime",
+        {
           params: {
             type: "tv",
-            limit: 25, 
-            sort: "bypopularity" 
-          }
-        });
+            limit: 25,
+            sort: "bypopularity",
+          },
+        }
+      );
 
-        const lancamentosResponse = await axios.get("https://api.jikan.moe/v4/seasons/now", {
+      const lancamentosResponse = await axios.get(
+        "https://api.jikan.moe/v4/seasons/now",
+        {
           params: {
-            limit: 25
-          }
-        });
+            limit: 25,
+          },
+        }
+      );
 
-        setAnimesFamosos(famososResponse.data.data);
-        setLancamentos(lancamentosResponse.data.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Erro ao buscar dados de animes:", error);
-        setLoading(false);
-      }
-    };
+      const famososData = famososResponse.data.data;
+      const lancamentosData = lancamentosResponse.data.data;
 
-    fetchAnimes();
+      setAnimesFamosos(famososData);
+      setLancamentos(lancamentosData);
+
+      // Cache the data in sessionStorage
+      sessionStorage.setItem("animesFamosos", JSON.stringify(famososData));
+      sessionStorage.setItem("lancamentos", JSON.stringify(lancamentosData));
+
+      setLoading(false);
+    } catch (error) {
+      console.error("Erro ao buscar dados de animes:", error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (animesFamosos.length === 0 || lancamentos.length === 0) {
+      fetchAnimes(); // Fetch data only if not cached
+    } else {
+      setLoading(false); // Skip loading if data is already cached
+    }
   }, []);
 
   const handleClick = () => {

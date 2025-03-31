@@ -1,5 +1,6 @@
 import React from 'react';
-import EstrelasImg from '../../../assets/images/star.png';
+import PropTypes from 'prop-types';  // Importando PropTypes
+import EstrelasImg from '../../../assets/images/star.png';  // Verifique se o caminho da imagem está correto
 import './Estrelas.css';
 
 const Estrelas = ({ avaliacao }) => {
@@ -35,6 +36,10 @@ const Estrelas = ({ avaliacao }) => {
       {renderEstrelas()}
     </div>
   );
+};
+
+Estrelas.propTypes = {
+  avaliacao: PropTypes.number.isRequired,  // A propriedade `avaliacao` deve ser um número e é obrigatória
 };
 
 export default Estrelas;

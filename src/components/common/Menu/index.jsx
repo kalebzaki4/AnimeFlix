@@ -14,10 +14,10 @@ export default function Menu() {
   const [menuActive, setMenuActive] = useState(false);
   const [userMenuActive, setUserMenuActive] = useState(false);
   const [selectedItem, setSelectedItem] = useState("home");
-  const [genresOpen, setGenresOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [recommendedAnimes, setRecommendedAnimes] = useState([]);
-  const [selectedRecommendationIndex, setSelectedRecommendationIndex] = useState(0); // Novo estado para selecionar a recomendação
+  const [selectedRecommendationIndex, setSelectedRecommendationIndex] =
+    useState(0);
   const overlayRef = useRef(null);
   const userOverlayRef = useRef(null);
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export default function Menu() {
     { name: "az", label: "A-Z" },
     { name: "simulcasts", label: "Simulcasts" },
     { name: "calendario", label: "Calendário de Lançamentos" },
-    { name: "videoclipes", label: "Videoclipes & Shows" }
+    { name: "videoclipes", label: "Videoclipes & Shows" },
   ];
 
   const handleSearchChange = async (event) => {
@@ -38,8 +38,9 @@ export default function Menu() {
 
     if (term.length > 2) {
       try {
-        // URL da API diretamente no código
-        const response = await axios.get(`https://api.jikan.moe/v4/anime?q=${term}`);
+        const response = await axios.get(
+          `https://api.jikan.moe/v4/anime?q=${term}`
+        );
         setRecommendedAnimes(response.data.data);
       } catch (error) {
         console.error("Erro ao buscar dados de animes:", error);
@@ -50,7 +51,7 @@ export default function Menu() {
   };
 
   const handleRecommendationClick = () => {
-    setRecommendedAnimes([]); // Limpa as recomendações
+    setRecommendedAnimes([]);
   };
 
   const handleSearchSubmit = (event) => {
@@ -100,10 +101,6 @@ export default function Menu() {
     navigate("/");
   };
 
-  const toggleGenres = () => {
-    setGenresOpen((prev) => !prev);
-  };
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -136,7 +133,6 @@ export default function Menu() {
     };
   }, [menuActive, userMenuActive]);
 
-  // Função para navegação com as setas do teclado
   const handleKeyDown = (event) => {
     if (event.key === "ArrowDown") {
       setSelectedRecommendationIndex((prevIndex) =>
@@ -148,7 +144,7 @@ export default function Menu() {
       const selectedAnime = recommendedAnimes[selectedRecommendationIndex];
       if (selectedAnime) {
         navigate(`/Detalhes/${selectedAnime.mal_id}`);
-        setRecommendedAnimes([]); // Limpar as recomendações após a navegação
+        setRecommendedAnimes([]);
       }
     }
   };
@@ -230,8 +226,9 @@ export default function Menu() {
                 <Link
                   key={anime.mal_id}
                   to={`/Detalhes/${anime.mal_id}`}
-                  className={`recommendation-item ${index === selectedRecommendationIndex ? "selected" : ""
-                    }`}
+                  className={`recommendation-item ${
+                    index === selectedRecommendationIndex ? "selected" : ""
+                  }`}
                   onClick={handleRecommendationClick}
                 >
                   <img
@@ -290,8 +287,9 @@ export default function Menu() {
               <Link
                 key={item.name}
                 to={`/${item.name}`}
-                className={`menu-item ${selectedItem === item.name ? "selected" : ""
-                  }`}
+                className={`menu-item ${
+                  selectedItem === item.name ? "selected" : ""
+                }`}
                 onClick={() => handleMenuItemClick(item.name)}
               >
                 {item.label}
@@ -381,7 +379,10 @@ export default function Menu() {
                 Tem um cartão de Presente? Resgate Aqui!
               </Link>
             </button>
-            <button className="menu-item-button" onClick={() => handleUserMenuItemClick("configuracoes")}>
+            <button
+              className="menu-item-button"
+              onClick={() => handleUserMenuItemClick("configuracoes")}
+            >
               Teste Gratuito por 7 dias!
             </button>
           </div>
