@@ -1,4 +1,4 @@
-# AnimeFlix 🎬🍿
+# AnimeFlix 🎮🍿
 
 ## 🚨 ATENÇÃO! PROJETO INCOMPLETO 🚨
 
@@ -8,13 +8,15 @@
 
 ## AVISO!!
 
-O AnimeFlix é um projeto de código aberto, o que significa que você tem total liberdade para replicá-lo e personalizar o site conforme sua preferência. Este projeto foi concebido com o talento de @kalebzaki4, @codewithsadee e @FernandoAndrade83. Inicialmente, @kalebzaki4 pegou o núcleo de @codewithsadee e o transformou em React, e, anteriormente a isso, @FernandoAndrade83 contribuiu de maneira significativa para o código base. É importante frisar que todos os elementos utilizados no AnimeFlix são de código aberto, ou seja, disponíveis para cópia, sem quaisquer restrições de direitos autorais.
+O AnimeFlix é um projeto de código aberto, o que significa que você tem total liberdade para replicá-lo e personalizar o site conforme sua preferência.
 
-Para fomentar a colaboração e incentivar o envolvimento da comunidade, @kalebzaki4 tornou o seu projeto acessível a todos, permitindo que você o ajuste, contribua e modifique conforme desejar. Se você estiver interessado em participar deste que é o meu projeto mais significativo até o momento, sinta-se à vontade para entrar em contato comigo e expressar seu interesse em auxiliar de alguma forma. Lembre-se de que este código é uma adaptação de trabalho pré-existente para o ambiente React, possibilitando o uso de uma única página (SPA), uma API, um framework e muito mais. Agradeço pelo seu interesse!
+Este projeto foi criado inteiramente por mim, @kalebzaki4. Desde o conceito inicial até as modificações mais recentes, cada linha de código foi escrita e aprimorada com dedicação para oferecer a melhor experiência possível para os fãs de animes. Todos os elementos utilizados no AnimeFlix são de código aberto, garantindo que qualquer pessoa possa estudá-lo, modificá-lo e expandi-lo sem restrições.
+
+Se você estiver interessado em contribuir, melhorar o projeto ou simplesmente entender melhor como ele funciona, fique à vontade para entrar em contato comigo. O AnimeFlix foi desenvolvido para ser uma plataforma interativa e de fácil navegação, permitindo que os usuários encontrem e assistam a seus animes favoritos com simplicidade e qualidade.
 
 Bem-vindo ao AnimeFlix, o paraíso dos amantes de animes! Aqui, o mundo dos animes ganha vida com uma coleção diversificada e emocionante, criada com carinho e dedicação para todos os fãs.
 
-## Descrição 📜
+## Descrição 🌜
 
 AnimeFlix é um projeto apaixonado, criado com a missão de proporcionar uma experiência incrível para os aficionados por animes. Neste site, você terá acesso a uma vasta coleção de animes de diversos gêneros e épocas, prontos para serem assistidos e desfrutados.
 
@@ -39,11 +41,11 @@ Se você é um entusiasta de animes e deseja contribuir para a melhoria do Anime
 ## Tecnologias Utilizadas 🛠️
 
 - HTML5, CSS3 e JavaScript para a estrutura e interatividade do site.
-- Frameworks e bibliotecas como React, Angular ou Vue.js para o desenvolvimento front-end.
+- Frameworks e bibliotecas como React para o desenvolvimento front-end.
 - Backend com tecnologias como Node.js, Express e bancos de dados como MongoDB ou MySQL.
 - Integração de APIs de terceiros para obter informações detalhadas sobre os animes.
 
-## Licença 📄
+## Licença 📝
 
 Este projeto é licenciado sob a [Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional (CC BY-NC-SA 4.0)](LICENSE), o que significa que você pode copiar, modificar e distribuir o código, desde que seja para fins não comerciais e respeite as mesmas condições de compartilhamento.
 
@@ -53,10 +55,11 @@ Caso queira saber mais sobre a licença ou tenha dúvidas sobre o uso do projeto
 
 Este projeto também inclui informações importantes sobre segurança. Para mais detalhes sobre como relatar vulnerabilidades ou questões de segurança, consulte o arquivo [SECURITY.md](SECURITY.md).
 
-Agradecemos por escolher o AnimeFlix como seu destino para a diversão anime. Esperamos que aproveite cada momento assistindo aos seus animes favoritos. Divirta-se e não se esqueça de compartilhar com seus amigos! 😄🎉
+Agradeço por escolher o AnimeFlix como seu destino para a diversão anime. Espero que aproveite cada momento assistindo aos seus animes favoritos. Divirta-se e não se esqueça de compartilhar com seus amigos! 😄🎉
 
 ## Criador 👨‍💻
 
-Este projeto foi criado por kalebzaki4!
+Este projeto foi criado e desenvolvido por @kalebzaki4!
 
 ---
+
