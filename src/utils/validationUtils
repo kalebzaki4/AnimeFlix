@@ -1,0 +1,19 @@
+export const validateEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+export const validatePassword = (password) => {
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasLowerCase = /[a-z]/.test(password);
+  const hasNumber = /\d/.test(password);
+  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+  const isLongEnough = password.length >= 8;
+
+  if (!isLongEnough) return "A senha deve ter pelo menos 8 caracteres.";
+  if (!hasUpperCase) return "A senha deve conter pelo menos uma letra maiúscula.";
+  if (!hasLowerCase) return "A senha deve conter pelo menos uma letra minúscula.";
+  if (!hasNumber) return "A senha deve conter pelo menos um número.";
+  if (!hasSpecialChar) return "A senha deve conter pelo menos um caractere especial.";
+  return "";
+};

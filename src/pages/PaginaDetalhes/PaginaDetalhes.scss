@@ -1,10 +1,10 @@
-/* Estilo principal para a página de detalhes */
+
 .detalhes {
   padding: 20px;
   font-family: Arial, sans-serif;
 }
 
-/* Estilo para o cabeçalho (título e botão de salvar) */
+
 .detalhes-titulo {
   display: flex;
   align-items: center;
@@ -21,7 +21,9 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+  position: relative;
   font-size: 1.5rem;
+  height: 10px;
   color: #444;
   transition: color 0.3s ease;
 }

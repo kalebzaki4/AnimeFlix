@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import Estrelas from '../Estrelas/Estrelas';
 import { Link } from 'react-router-dom';
-import './ListaDeAnimes.css';
+import './ListaDeAnimes.scss';
 
 const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes }) => {
   const [loading, setLoading] = useState(false);
@@ -65,6 +66,25 @@ const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes })
       </section>
     </article>
   );
+};
+
+ListaDeAnimesHorizontal.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  animes: PropTypes.arrayOf(
+    PropTypes.shape({
+      mal_id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      images: PropTypes.shape({
+        jpg: PropTypes.shape({
+          image_url: PropTypes.string.isRequired,
+        }).isRequired,
+      }).isRequired,
+      score: PropTypes.number.isRequired,
+      year: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+  loadMoreAnimes: PropTypes.func.isRequired,
 };
 
 export default ListaDeAnimesHorizontal;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './TelaCarregamento.css';
+import './TelaCarregamento.scss';
 
 export default function TelaCarregamento() {
   const [mostrarCarregamento, setMostrarCarregamento] = useState(true);

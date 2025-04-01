@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import Estrelas from "../../assets/images/star.png";
-import "./ListaAnimesVertical.css";
-import "./Spinner.css";
+import "./ListaAnimesVertical.scss";
+import "./Spinner.scss";
 
 const API_BASE_URL = "https://api.jikan.moe/v4";
 

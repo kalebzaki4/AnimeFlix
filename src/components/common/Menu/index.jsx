@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./Menu.css";
+import "./Menu.scss";
 import logo from "../../../assets/images/logo-animeflix.png";
 import logoPesquisa from "../../../assets/images/search.png";
 import cancelarLogo from "../../../assets/images/close.png";
@@ -21,6 +21,8 @@ export default function Menu() {
   const overlayRef = useRef(null);
   const userOverlayRef = useRef(null);
   const navigate = useNavigate();
+  const headerRef = useRef(null);
+  const [isFixed, setIsFixed] = useState(false);
 
   const menuItems = [
     { name: "home", label: "Home" },
@@ -157,9 +159,28 @@ export default function Menu() {
     };
   }, [recommendedAnimes, selectedRecommendationIndex]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50 && !isFixed) {
+        setIsFixed(true);
+      } else if (window.scrollY <= 50 && isFixed) {
+        setIsFixed(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isFixed]);
+
   return (
     <>
-      <header className="header">
+      <header
+        className={`header ${isFixed ? "fixed slide-down" : ""}`}
+        ref={headerRef}
+      >
         <button className="menu-btn" onClick={toggleMenu}>
           <img
             src={menuLateral}
@@ -286,7 +307,7 @@ export default function Menu() {
             {menuItems.map((item) => (
               <Link
                 key={item.name}
-                to={`/${item.name}`}
+                to={item.name === "home" ? "/" : `/${item.name}`}
                 className={`menu-item ${
                   selectedItem === item.name ? "selected" : ""
                 }`}
@@ -317,14 +338,14 @@ export default function Menu() {
             <span className="navegar-span">OPÇÕES</span>
             <button>
               <Link
-                to="/perfil"
+                to="/signup"
                 className="menu-item-2"
                 onClick={() => handleUserMenuItemClick("perfil")}
               >
                 Criar Conta
               </Link>
               <Link
-                to="/perfil"
+                to="/signup"
                 className="menu-item-3"
                 onClick={() => handleUserMenuItemClick("perfil")}
               >
@@ -333,14 +354,14 @@ export default function Menu() {
             </button>
             <button>
               <Link
-                to="/favoritos"
+                to="/login"
                 className="menu-item-2"
                 onClick={() => handleUserMenuItemClick("favoritos")}
               >
                 Login
               </Link>
               <Link
-                to="/perfil"
+                to="/login"
                 className="menu-item-3"
                 onClick={() => handleUserMenuItemClick("perfil")}
               >

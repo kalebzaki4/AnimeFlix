@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Erro404.css"
+import "./Erro404.scss"
 import ImgErro from "../../../assets/images/Erro.png";
 
 const Erro404 = () => {

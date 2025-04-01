@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // Importar useNavigate
 import { Bookmark, BookmarkPlus } from "lucide-react"; // Ícones
-import "./PaginaDetalhes.css";
+import "./PaginaDetalhes.scss";
 import TelaCarregamento from "../../components/common/TelaCarregamento";
 import axios from "axios";
 
@@ -14,6 +14,7 @@ const statusTraduzidos = {
 
 const PaginaDetalhes = () => {
   const { animeId } = useParams();
+  const navigate = useNavigate(); // Inicializar o hook useNavigate
   const [animeDetails, setAnimeDetails] = useState(null);
   const [isFullSynopsis, setIsFullSynopsis] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
@@ -53,10 +54,12 @@ const PaginaDetalhes = () => {
   }, [isFullSynopsis]);
 
   const handleSaveAnime = () => {
-    setIsSaved(!isSaved);
-    alert(
-      isSaved ? "Anime removido dos favoritos!" : "Anime salvo para mais tarde!"
-    );
+    if (!isSaved) {
+      navigate("/login"); // Redirecionar para a tela de login
+    } else {
+      setIsSaved(false);
+      alert("Anime removido dos favoritos!");
+    }
   };
 
   if (!animeDetails && !error) {

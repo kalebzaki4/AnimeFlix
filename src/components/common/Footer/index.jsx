@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Footer.css";
+import "./Footer.scss";
 
 export default function Footer() {
-  // Função para rolar para o topo
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // Para um efeito suave de rolagem
+      behavior: "smooth", 
     });
   };
 
@@ -30,7 +30,6 @@ export default function Footer() {
           <h2 className="nav__title">Explorar</h2>
 
           <ul className="nav__ul">
-            {/* Adicionando a função scrollToTop no clique */}
             <li>
               <Link to="/" onClick={scrollToTop}>
                 Home

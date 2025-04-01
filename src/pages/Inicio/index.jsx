@@ -3,7 +3,7 @@ import axios from "axios";
 import Banner from "../../components/layout/Banner";
 import ListaDeAnimesHorizontal from "../../components/animes/ListaDeAnimesHorizontal";
 import TelaCarregamento from "../../components/common/TelaCarregamento";
-import "../../styles/message.css";
+import "../../styles/message.scss";
 
 export default function Inicio() {
   const [loading, setLoading] = useState(true);

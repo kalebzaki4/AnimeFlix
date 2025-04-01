@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import "./Banner.css";
+import "./Banner.scss";
 import play from "../../../assets/images/play_circle.png";
 
 export default function Banner({ animes }) {
@@ -100,3 +101,27 @@ export default function Banner({ animes }) {
     </article>
   );
 }
+
+Banner.propTypes = {
+  animes: PropTypes.arrayOf(
+    PropTypes.shape({
+      mal_id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      year: PropTypes.number,
+      score: PropTypes.number,
+      episodes: PropTypes.number,
+      synopsis: PropTypes.string,
+      genres: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string.isRequired,
+        })
+      ).isRequired,
+      images: PropTypes.shape({
+        jpg: PropTypes.shape({
+          large_image_url: PropTypes.string.isRequired,
+          image_url: PropTypes.string.isRequired,
+        }).isRequired,
+      }).isRequired,
+    })
+  ).isRequired,
+};

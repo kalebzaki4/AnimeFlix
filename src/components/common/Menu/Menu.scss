@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-@import '../../../variables.css';
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import "../../../variables.css";
 
 :root {
   --raio-48: 48px;
-  --ff-roboto: 'Roboto', sans-serif;
+  --ff-roboto: "Roboto", sans-serif;
 }
 
 .header {
@@ -154,7 +154,9 @@
   background: var(--superficie);
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transicao-curta), visibility var(--transicao-curta);
+  transition:
+    opacity var(--transicao-curta),
+    visibility var(--transicao-curta);
   z-index: 7;
 }
 
@@ -229,7 +231,9 @@
   text-decoration: none;
   margin: var(--raio-24) 0;
   padding: var(--raio-8) var(--raio-16);
-  transition: color var(--transicao-curta), background-color var(--transicao-curta);
+  transition:
+    color var(--transicao-curta),
+    background-color var(--transicao-curta);
   border-radius: var(--raio-4);
 }
 
@@ -330,16 +334,16 @@
   background-color: var(--superficie);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-  .menu-overlay-logo-2 {
-    position: absolute;
-    top: -60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 180px;
-    height: auto;
-    z-index: 9;
-    margin-bottom: var(--raio-16);
-  }
+.menu-overlay-logo-2 {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: auto;
+  z-index: 9;
+  margin-bottom: var(--raio-16);
+}
 .menu-overlay-2.active {
   opacity: 1;
 }
@@ -349,7 +353,9 @@
   font-size: var(--fs-corpo);
   font-weight: var(--peso-negrito);
   text-decoration: none;
-  transition: color var(--transicao-curta), background-color var(--transicao-curta);
+  transition:
+    color var(--transicao-curta),
+    background-color var(--transicao-curta);
   border-radius: var(--raio-4);
 }
 
@@ -366,7 +372,9 @@
   text-decoration: none;
   margin: var(--raio-4) 0;
   padding: var(--raio-8) var(--raio-4);
-  transition: color var(--transicao-curta), background-color var(--transicao-curta);
+  transition:
+    color var(--transicao-curta),
+    background-color var(--transicao-curta);
   border-radius: var(--raio-4);
 }
 
@@ -389,7 +397,9 @@
   text-decoration: none;
   margin: var(--raio-24) 0;
   padding: var(--raio-8) var(--raio-16);
-  transition: color var(--transicao-curta), background-color var(--transicao-curta);
+  transition:
+    color var(--transicao-curta),
+    background-color var(--transicao-curta);
   border-radius: var(--raio-4);
   background-color: var(--primaria);
   border: none;
