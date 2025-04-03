@@ -174,7 +174,7 @@ export default function Login() {
         )}
       </form>
       <p className="signup-link">
-        Não tem uma conta? <Link to="/criar-conta">Criar conta</Link>
+        Não tem uma conta? <Link to="/signup">Criar conta</Link>
       </p>
     </div>
   );
