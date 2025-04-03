@@ -74,16 +74,17 @@
 }
 
 .toggle-password:hover {
-  color: #e50914;
+  color: #98171f;
 }
 
 .login-button {
-  background-color: #e50914;
+  background-color: #98171f;
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: bolder;
   cursor: pointer;
   width: 100%;
   transition: background-color 0.3s ease;
@@ -91,12 +92,12 @@
 }
 
 .login-button:hover {
-  background-color: #c40812;
+  background-color: #99080f;
 }
 
 .signup-link {
   margin-top: 30px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: #b3b3b3;
   text-align: center;
 }
