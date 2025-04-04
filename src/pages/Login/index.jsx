@@ -120,7 +120,7 @@ export default function Login() {
         setLoginAttempts(attempts);
         if (attempts >= 3) {
           setIsBlocked(true);
-          setBlockTime(30); // 30 segundos de bloqueio
+          setBlockTime(30); 
           setTimeout(() => setIsBlocked(false), 30000);
         }
         setErrors({ email: "", password: ERROR_MESSAGES.passwordInvalid });

@@ -8,8 +8,10 @@ import cancelarLogo from "../../../assets/images/close.png";
 import menuLateral from "../../../assets/images/menu.png";
 import cancelarMenuLateral from "../../../assets/images/menu-close.png";
 import userIcon from "../../../assets/images/user.svg";
+import { useAuth } from "../../../context/AuthContext"; 
 
 export default function Menu() {
+  const { isAuthenticated } = useAuth(); 
   const [searchActive, setSearchActive] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
   const [userMenuActive, setUserMenuActive] = useState(false);
@@ -336,38 +338,42 @@ export default function Menu() {
               width={200}
             />
             <span className="navegar-span">OPÇÕES</span>
-            <button>
-              <Link
-                to="/signup"
-                className="menu-item-2"
-                onClick={() => handleUserMenuItemClick("perfil")}
-              >
-                Criar Conta
-              </Link>
-              <Link
-                to="/signup"
-                className="menu-item-3"
-                onClick={() => handleUserMenuItemClick("perfil")}
-              >
-                Criando uma conta você terá benefícios!
-              </Link>
-            </button>
-            <button>
-              <Link
-                to="/login"
-                className="menu-item-2"
-                onClick={() => handleUserMenuItemClick("favoritos")}
-              >
-                Login
-              </Link>
-              <Link
-                to="/login"
-                className="menu-item-3"
-                onClick={() => handleUserMenuItemClick("perfil")}
-              >
-                Criando uma conta você terá benefícios!
-              </Link>
-            </button>
+            {!isAuthenticated && (
+              <>
+                <button>
+                  <Link
+                    to="/signup"
+                    className="menu-item-2"
+                    onClick={() => handleUserMenuItemClick("perfil")}
+                  >
+                    Criar Conta
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="menu-item-3"
+                    onClick={() => handleUserMenuItemClick("perfil")}
+                  >
+                    Criando uma conta você terá benefícios!
+                  </Link>
+                </button>
+                <button>
+                  <Link
+                    to="/login"
+                    className="menu-item-2"
+                    onClick={() => handleUserMenuItemClick("favoritos")}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/login"
+                    className="menu-item-3"
+                    onClick={() => handleUserMenuItemClick("perfil")}
+                  >
+                    Criando uma conta você terá benefícios!
+                  </Link>
+                </button>
+              </>
+            )}
             <button>
               <Link
                 to="/configuracoes"

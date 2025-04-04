@@ -18,7 +18,7 @@ function App() {
         <Route path='/' element={<Inicio />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} /> 
-        <Route path='/Detalhes/:animeId' element={<PaginaDetalhes />} />
+        <Route path='/Detalhes/:animeId' element={<PaginaDetalhes />} /> {/* Rota correta */}
         <Route path='/search' element={<ResultadoAnimes />} />
         <Route path='*' element={<Erro404 />} />
       </Routes>

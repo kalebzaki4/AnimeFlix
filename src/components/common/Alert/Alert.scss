@@ -1,0 +1,82 @@
+@import url('../../../variables.css');
+
+.alert {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 300px;
+  max-width: 90%;
+  padding: 16px;
+  border-radius: var(--raio-8);
+  box-shadow: var(--sombra-2);
+  font-size: var(--fs-corpo);
+  font-weight: var(--peso-negrito);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  animation: slideInUp 0.5s ease-in-out; /* Nova animação */
+
+  &-message {
+    flex: 1;
+    color: var(--branco);
+    word-wrap: break-word; /* Quebra de linha para textos longos */
+  }
+
+  &-close {
+    background: none;
+    border: none;
+    color: var(--branco);
+    font-size: var(--fs-titulo);
+    cursor: pointer;
+    margin-left: 16px;
+    transition: color var(--transicao-curta);
+
+    &:hover {
+      color: var(--primaria);
+    }
+  }
+
+  &-success {
+    background-color: var(--primaria); /* Cor principal do site */
+  }
+
+  &-error {
+    background-color: #ff0000; /* Vermelho para erros */
+  }
+
+  &-info {
+    background-color: var(--fundo-banner); /* Fundo do banner */
+  }
+
+  &-warning {
+    background-color: #ffcc00; /* Amarelo para avisos */
+  }
+}
+
+@media (max-width: 480px) {
+  .alert {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    transform: none; /* Remove o deslocamento horizontal */
+    max-width: calc(100% - 20px); /* Garante que o alerta não ultrapasse as bordas */
+    font-size: var(--fs-rotulo); /* Reduz o tamanho da fonte para telas menores */
+  }
+
+  .alert-close {
+    font-size: var(--fs-corpo); /* Ajusta o tamanho do botão de fechar */
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

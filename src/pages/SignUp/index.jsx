@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { validateEmail, validatePassword } from "../../utils/validationUtils";
+import { useAuth } from "../../context/AuthContext";
+import Alert from "../../components/common/Alert"; // Import Alert
 import "./SignUp.scss";
 
 export default function SignUp() {
@@ -11,6 +13,9 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({ email: "", password: "", confirmPassword: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [alert, setAlert] = useState(null); // State for alert
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const ERROR_MESSAGES = {
     emailInvalid: "Email inválido.",
@@ -32,12 +37,13 @@ export default function SignUp() {
 
     setIsSubmitting(true);
     setTimeout(() => {
-      console.log("Conta criada com sucesso:", { email, password });
       setIsSubmitting(false);
       setEmail("");
       setPassword("");
       setConfirmPassword("");
-      alert("Conta criada com sucesso!");
+      setAlert({ message: "Conta criada com sucesso!", type: "success" }); // Show success alert
+      login();
+      navigate("/");
     }, 2000);
   };
 
@@ -47,10 +53,16 @@ export default function SignUp() {
 
   return (
     <div className="signup-container">
+      {alert && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          onClose={() => setAlert(null)}
+        />
+      )}
       <h1 className="signup-title">Criar Conta</h1>
       <form onSubmit={handleSubmit} className="signup-form">
-        {[
-          { label: "Email", type: "email", value: email, setter: setEmail, error: errors.email, id: "email" },
+        {[{ label: "Email", type: "email", value: email, setter: setEmail, error: errors.email, id: "email" },
           { label: "Senha", type: passwordVisible ? "text" : "password", value: password, setter: setPassword, error: errors.password, id: "password" },
           { label: "Confirmar Senha", type: "password", value: confirmPassword, setter: setConfirmPassword, error: errors.confirmPassword, id: "confirmPassword" }
         ].map(({ label, type, value, setter, error, id }) => (

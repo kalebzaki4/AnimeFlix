@@ -3,6 +3,7 @@ import axios from "axios";
 import Banner from "../../components/layout/Banner";
 import ListaDeAnimesHorizontal from "../../components/animes/ListaDeAnimesHorizontal";
 import TelaCarregamento from "../../components/common/TelaCarregamento";
+import { useAuth } from "../../context/AuthContext"; // Importa o contexto de autenticação
 import "../../styles/message.scss";
 
 export default function Inicio() {
@@ -15,6 +16,8 @@ export default function Inicio() {
     const cachedLancamentos = sessionStorage.getItem("lancamentos");
     return cachedLancamentos ? JSON.parse(cachedLancamentos) : [];
   });
+
+  const { isAuthenticated, savedAnimes } = useAuth(); // Obtém o estado de login e os animes salvos
 
   const fetchAnimes = async () => {
     setLoading(true);
@@ -80,13 +83,24 @@ export default function Inicio() {
         description="Os animes mais populares do momento"
         animes={animesFamosos}
         onClick={handleClick}
+        disableLoadingIndicator={true} 
       />
       <ListaDeAnimesHorizontal
         title="Lançamentos"
         description="Os animes mais recentes da temporada"
         animes={lancamentos}
         onClick={handleClick}
+        disableLoadingIndicator={true} 
       />
+      {isAuthenticated && savedAnimes.length > 0 && (
+        <ListaDeAnimesHorizontal
+          title="Animes Salvos"
+          description="Seus animes favoritos salvos"
+          animes={savedAnimes}
+          onClick={handleClick}
+          disableLoadingIndicator={true} 
+        />
+      )}
     </>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Estrelas from '../Estrelas/Estrelas';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 import './ListaDeAnimes.scss';
 
 const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes }) => {
@@ -42,7 +42,11 @@ const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes })
         <div className="slider-list" ref={sliderListRef}>
           <div className="slider-inner">
             {animes.map((anime) => (
-              <Link to={`/Detalhes/${anime.mal_id}`} className="movie-card" key={anime.mal_id}>
+              <Link
+                to={`/Detalhes/${anime.mal_id}`}
+                className="movie-card"
+                key={anime.mal_id}
+              >
                 <figure className="poster-box card-banner">
                   <img src={anime.images.jpg.image_url} alt={anime.title} className="img-cover" />
                 </figure>

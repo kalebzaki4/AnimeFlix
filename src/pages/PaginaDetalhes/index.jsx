@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Importar useNavigate
-import { Bookmark, BookmarkPlus } from "lucide-react"; // Ícones
+import { useParams, useNavigate } from "react-router-dom";
+import { BookmarkPlus, BookmarkMinus } from "lucide-react";
 import "./PaginaDetalhes.scss";
 import TelaCarregamento from "../../components/common/TelaCarregamento";
+import Alert from "../../components/common/Alert";
 import axios from "axios";
+import { useAuth } from "../../context/AuthContext";
 
 const statusTraduzidos = {
   "Finished Airing": "Finalizado",
@@ -14,14 +16,16 @@ const statusTraduzidos = {
 
 const PaginaDetalhes = () => {
   const { animeId } = useParams();
-  const navigate = useNavigate(); // Inicializar o hook useNavigate
+  const navigate = useNavigate();
+  const { isAuthenticated, saveAnime, removeAnime, savedAnimes } = useAuth();
   const [animeDetails, setAnimeDetails] = useState(null);
   const [isFullSynopsis, setIsFullSynopsis] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
   const [error, setError] = useState(null);
+  const [alert, setAlert] = useState(null);
 
   useEffect(() => {
     fetchAnimeDetails(animeId);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [animeId]);
 
   const fetchAnimeDetails = async (id) => {
@@ -34,7 +38,6 @@ const PaginaDetalhes = () => {
       data.status = statusTraduzidos[data.status] || data.status;
       setAnimeDetails(data);
     } catch (error) {
-      console.error("Erro ao carregar os detalhes do anime:", error);
       setError(
         "Ocorreu um erro ao carregar os detalhes do anime. Tente novamente mais tarde."
       );
@@ -42,24 +45,23 @@ const PaginaDetalhes = () => {
     }
   };
 
-  const toggleSynopsis = () => {
-    setIsFullSynopsis(!isFullSynopsis);
+  const toggleSynopsis = (event) => {
+    event.preventDefault();
+    setIsFullSynopsis((prev) => !prev);
   };
 
-  // Forçar rolar para o topo sempre que a sinopse for expandida
-  useEffect(() => {
-    if (isFullSynopsis) {
-      window.scrollTo(0, 0); // Garantir que a página role para o topo
-    }
-  }, [isFullSynopsis]);
-
   const handleSaveAnime = () => {
-    if (!isSaved) {
-      navigate("/login"); // Redirecionar para a tela de login
+    if (!isAuthenticated) {
+      navigate("/login");
     } else {
-      setIsSaved(false);
-      alert("Anime removido dos favoritos!");
+      saveAnime(animeDetails);
+      setAlert({ message: "Anime salvo nos favoritos!", type: "success" });
     }
+  };
+
+  const handleRemoveAnime = () => {
+    removeAnime(animeDetails.mal_id);
+    setAlert({ message: "Anime removido dos favoritos!", type: "info" });
   };
 
   if (!animeDetails && !error) {
@@ -74,8 +76,19 @@ const PaginaDetalhes = () => {
     ? animeDetails.synopsis.slice(0, 300) + "..."
     : "";
 
+  const isFavorite = savedAnimes.some(
+    (anime) => anime.mal_id === animeDetails.mal_id
+  );
+
   return (
     <div className="detalhes">
+      {alert && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          onClose={() => setAlert(null)}
+        />
+      )}
       {animeDetails.trailer?.url ? (
         <div className="detalhes-trailer">
           <iframe
@@ -106,13 +119,20 @@ const PaginaDetalhes = () => {
 
       <div className="detalhes-titulo">
         <h1 className="Title">{animeDetails.title}</h1>
-        <button className="save-button" onClick={handleSaveAnime}>
-          {isSaved ? <Bookmark /> : <BookmarkPlus />}
-        </button>
+        {isFavorite ? (
+          <button className="save-button" onClick={handleRemoveAnime}>
+            <BookmarkMinus />
+          </button>
+        ) : (
+          <button className="save-button" onClick={handleSaveAnime}>
+            <BookmarkPlus />
+          </button>
+        )}
       </div>
 
       <p className="P-status">
-        <strong>Status:</strong> {animeDetails.status || "Informação não disponível"}
+        <strong>Status:</strong>{" "}
+        {animeDetails.status || "Informação não disponível"}
       </p>
 
       <div className="detalhes-sinopse">
