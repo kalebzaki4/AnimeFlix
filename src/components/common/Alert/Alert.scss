@@ -16,12 +16,13 @@
   align-items: center;
   justify-content: space-between;
   z-index: 1000;
-  animation: slideInUp 0.5s ease-in-out; /* Nova animação */
+  background-color: var(--superficie); /* Fundo sólido */
+  color: var(--branco); /* Cor do texto */
+  animation: slideInUp 0.5s ease-in-out;
 
   &-message {
     flex: 1;
-    color: var(--branco);
-    word-wrap: break-word; /* Quebra de linha para textos longos */
+    word-wrap: break-word;
   }
 
   &-close {
@@ -39,15 +40,15 @@
   }
 
   &-success {
-    background-color: var(--primaria); /* Cor principal do site */
+    background-color: var(--primaria); /* Cor para sucesso */
+  }
+
+  &-info {
+    background-color: var(--fundo-banner); /* Cor para informações */
   }
 
   &-error {
     background-color: #ff0000; /* Vermelho para erros */
-  }
-
-  &-info {
-    background-color: var(--fundo-banner); /* Fundo do banner */
   }
 
   &-warning {
@@ -60,13 +61,13 @@
     bottom: 10px;
     left: 10px;
     right: 10px;
-    transform: none; /* Remove o deslocamento horizontal */
-    max-width: calc(100% - 20px); /* Garante que o alerta não ultrapasse as bordas */
-    font-size: var(--fs-rotulo); /* Reduz o tamanho da fonte para telas menores */
+    transform: none;
+    max-width: calc(100% - 20px);
+    font-size: var(--fs-rotulo);
   }
 
   .alert-close {
-    font-size: var(--fs-corpo); /* Ajusta o tamanho do botão de fechar */
+    font-size: var(--fs-corpo);
   }
 }
 
