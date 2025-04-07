@@ -55,13 +55,13 @@ const PaginaDetalhes = () => {
       navigate("/login");
     } else {
       saveAnime(animeDetails);
-      setAlert({ message: "Anime salvo nos favoritos!", type: "success" });
+      setAlert({ message: "Anime adicionado aos favoritos", type: "success" });
     }
   };
 
   const handleRemoveAnime = () => {
     removeAnime(animeDetails.mal_id);
-    setAlert({ message: "Anime removido dos favoritos!", type: "info" });
+    setAlert({ message: "Anime removido dos favoritos", type: "info" });
   };
 
   if (!animeDetails && !error) {
