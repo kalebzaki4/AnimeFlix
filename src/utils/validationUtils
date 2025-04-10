@@ -1,9 +1,11 @@
 export const validateEmail = (email) => {
+  if (!email) return false;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
 
 export const validatePassword = (password) => {
+  if (!password) return "Senha não pode estar vazia.";
   const hasUpperCase = /[A-Z]/.test(password);
   const hasLowerCase = /[a-z]/.test(password);
   const hasNumber = /\d/.test(password);
@@ -16,4 +18,12 @@ export const validatePassword = (password) => {
   if (!hasNumber) return "A senha deve conter pelo menos um número.";
   if (!hasSpecialChar) return "A senha deve conter pelo menos um caractere especial.";
   return "";
+};
+
+export const sanitizeInput = (input) => {
+  if (typeof input !== "string") return input;
+  return input
+    .replace(/[<>]/g, "") // Remove tags HTML
+    .replace(/['"]/g, "") // Remove aspas simples e duplas
+    .trim(); // Remove espaços extras no início e no final
 };
