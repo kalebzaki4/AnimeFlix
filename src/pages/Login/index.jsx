@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types"; // Importação do PropTypes
 import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { validateEmail, validatePassword } from "../../utils/validationUtils";
+import { validateEmail, validatePassword, sanitizeInput } from "../../utils/validationUtils"; // Adicionado sanitizeInput
 import "./Login.scss";
 
 const ErrorMessage = ({ message }) => (
@@ -100,18 +100,21 @@ export default function Login() {
       return;
     }
 
-    const emailError = validateEmail(email) ? "" : ERROR_MESSAGES.emailInvalid;
-    const passwordError = validatePassword(password);
+    const sanitizedEmail = sanitizeInput(email);
+    const sanitizedPassword = sanitizeInput(password);
+
+    const emailError = validateEmail(sanitizedEmail) ? "" : ERROR_MESSAGES.emailInvalid;
+    const passwordError = validatePassword(sanitizedPassword);
 
     setErrors({ email: emailError, password: passwordError });
 
     if (!emailError && !passwordError) {
       setIsLoading(true);
-      const isAuthenticated = await fakeApiLogin(email, password);
+      const isAuthenticated = await fakeApiLogin(sanitizedEmail, sanitizedPassword);
       setIsLoading(false);
 
       if (isAuthenticated) {
-        console.log("Login bem-sucedido:", { email, password });
+        console.log("Login bem-sucedido:", { email: sanitizedEmail, password: sanitizedPassword });
         setLoginAttempts(0);
         setEmail("");
         setPassword("");
