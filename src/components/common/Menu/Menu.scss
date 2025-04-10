@@ -550,3 +550,19 @@
     display: none;
   }
 }
+
+@media (min-width: 1080px) {
+  .menu-btn {
+    display: none;
+  }
+
+  .header {
+    padding-block: 10px;
+  }
+
+  .logo {
+    position: relative;
+    left: -87.5%;
+  }
+
+}
