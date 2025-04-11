@@ -3,70 +3,110 @@ import PropTypes from "prop-types";
 
 const AuthContext = createContext();
 
+const localStorageUtil = {
+  get: (key, defaultValue) => {
+    try {
+      return JSON.parse(localStorage.getItem(key)) || defaultValue;
+    } catch {
+      console.warn(`Erro ao acessar ${key} no localStorage.`);
+      return defaultValue;
+    }
+  },
+  set: (key, value) => {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      console.error(`Erro ao salvar ${key} no localStorage:`, error.message);
+    }
+  },
+};
+
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return JSON.parse(localStorage.getItem("isAuthenticated")) || false;
-  });
-  const [savedAnimes, setSavedAnimes] = useState(() => {
-    return JSON.parse(localStorage.getItem("savedAnimes")) || [];
-  });
+  const [isAuthenticated, setIsAuthenticated] = useState(() =>
+    localStorageUtil.get("isAuthenticated", false)
+  );
+  const [savedAnimes, setSavedAnimes] = useState(() =>
+    localStorageUtil.get("savedAnimes", [])
+  );
+  const [alert, setAlert] = useState(null); // Add alert state
 
   useEffect(() => {
-    localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated));
+    localStorageUtil.set("isAuthenticated", isAuthenticated);
   }, [isAuthenticated]);
 
   useEffect(() => {
-    localStorage.setItem("savedAnimes", JSON.stringify(savedAnimes));
+    localStorageUtil.set("savedAnimes", savedAnimes);
   }, [savedAnimes]);
 
-  const login = (credentials) => {
-    try {
-      if (!credentials || !credentials.email || !credentials.password) {
-        throw new Error("Credenciais inválidas.");
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === "isAuthenticated" && event.newValue === "false") {
+        setIsAuthenticated(false);
       }
-      setIsAuthenticated(true);
-    } catch (error) {
-      console.error("Erro ao fazer login:", error.message);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  const login = (credentials) => {
+    if (!credentials?.email || !credentials?.password) {
+      console.error("Credenciais inválidas.");
+      return;
     }
+    setIsAuthenticated(true);
   };
 
   const logout = () => {
-    try {
-      setIsAuthenticated(false);
-      setSavedAnimes([]);
-    } catch (error) {
-      console.error("Erro ao fazer logout:", error.message);
-    }
+    setIsAuthenticated(false);
+    setSavedAnimes([]);
   };
 
   const saveAnime = (anime) => {
-    try {
-      if (!isAuthenticated) {
-        throw new Error("Você precisa estar logado para salvar animes.");
-      }
-      if (!anime || !anime.mal_id) {
-        throw new Error("Anime inválido.");
-      }
-      setSavedAnimes((prev) => [...prev, anime]);
-    } catch (error) {
-      console.error("Erro ao salvar anime:", error.message);
+    if (!isAuthenticated) {
+      console.error("Você precisa estar logado para salvar animes.");
+      return;
     }
+    if (!anime?.mal_id) {
+      console.error("Anime inválido.");
+      return;
+    }
+    if (isAnimeSaved(anime.mal_id)) {
+      console.warn("Anime já está salvo.");
+      return;
+    }
+    setSavedAnimes((prev) => [...prev, anime]);
+    setAlert({ message: "Anime salvo com sucesso!", type: "success" }); // Trigger popup alert
+    setTimeout(() => setAlert(null), 3000); // Auto-hide after 3 seconds
   };
 
   const removeAnime = (animeId) => {
-    try {
-      if (!animeId) {
-        throw new Error("ID do anime inválido.");
-      }
-      setSavedAnimes((prev) => prev.filter((anime) => anime.mal_id !== animeId));
-    } catch (error) {
-      console.error("Erro ao remover anime:", error.message);
+    if (!animeId) {
+      console.error("ID do anime inválido.");
+      return;
     }
+    setSavedAnimes((prev) => prev.filter((anime) => anime.mal_id !== animeId));
+    setAlert({ message: "Anime removido com sucesso!", type: "info" }); // Trigger popup alert
+    setTimeout(() => setAlert(null), 3000); // Auto-hide after 3 seconds
   };
+
+  const isAnimeSaved = (animeId) => savedAnimes.some((anime) => anime.mal_id === animeId);
+
+  const clearAlert = () => setAlert(null); // Function to clear alert
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, login, logout, savedAnimes, saveAnime, removeAnime }}
+      value={{
+        isAuthenticated,
+        login,
+        logout,
+        savedAnimes,
+        saveAnime,
+        removeAnime,
+        isAnimeSaved,
+        alert, // Expose alert state
+        clearAlert, // Expose clearAlert function
+      }}
     >
       {children}
     </AuthContext.Provider>
@@ -77,10 +117,4 @@ AuthProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
-};
+export const useAuth = () => useContext(AuthContext);

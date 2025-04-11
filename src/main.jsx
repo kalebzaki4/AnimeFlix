@@ -20,16 +20,12 @@ const ErrorBoundary = ({ children }) => {
   }
 };
 
-export default function Main() {
-  return (
-    <React.StrictMode>
-      <ErrorBoundary>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </ErrorBoundary>
-    </React.StrictMode>
-  );
-}
-
-ReactDOM.createRoot(document.getElementById("root")).render(<Main />);
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <ErrorBoundary>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </ErrorBoundary>
+  </React.StrictMode>
+);

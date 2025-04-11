@@ -11,7 +11,7 @@ import userIcon from "../../../assets/images/user.svg";
 import { useAuth } from "../../../context/AuthContext"; 
 
 export default function Menu() {
-  const { isAuthenticated } = useAuth(); 
+  const { isAuthenticated, logout } = useAuth(); // Adicionei logout
   const [searchActive, setSearchActive] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
   const [userMenuActive, setUserMenuActive] = useState(false);
@@ -286,9 +286,6 @@ export default function Menu() {
       </header>
 
       <div className={`overlay ${menuActive ? "active" : ""}`} ref={overlayRef}>
-        <button className="overlay-close" onClick={closeOverlay}>
-          ×
-        </button>
         <Link
           to="/"
           onClick={() => {
@@ -326,9 +323,6 @@ export default function Menu() {
         className={`overlay ${userMenuActive ? "active" : ""}`}
         ref={userOverlayRef}
       >
-        <button className="overlay-close" onClick={closeUserOverlay}>
-          ×
-        </button>
         <div className={`menu-overlay-2 ${userMenuActive ? "active" : ""}`}>
           <div className="menu-section-2">
             <img
@@ -373,6 +367,17 @@ export default function Menu() {
                   </Link>
                 </button>
               </>
+            )}
+            {isAuthenticated && (
+              <button
+                className="menu-item-2"
+                onClick={() => {
+                  logout(); // Chama a função de logout
+                  closeUserOverlay(); // Fecha o menu
+                }}
+              >
+                Sair da Conta
+              </button>
             )}
             <button>
               <Link

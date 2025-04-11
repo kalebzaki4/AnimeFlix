@@ -1,9 +1,7 @@
-
 .detalhes {
   padding: 20px;
   font-family: Arial, sans-serif;
 }
-
 
 .detalhes-titulo {
   display: flex;
@@ -21,9 +19,6 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  position: relative;
-  font-size: 1.5rem;
-  height: 10px;
   color: #444;
   transition: color 0.3s ease;
 }
@@ -72,37 +67,118 @@
   position: absolute;
 }
 
+.ver-mais {
+  background-color: #99080f;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ver-mais:hover {
+  background-color: #c40812;
+  transform: scale(1.05);
+}
+
+.ver-mais:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 /* Estilo para os episódios */
 .proximo-episodio {
   margin-top: 50px;
 }
 
 .episodios-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Reduzi o espaçamento entre os cartões */
 }
 
 .episodio-card {
-  background-color: #f5f5f5;
-  padding: 10px;
-  border-radius: 10px;
+  display: flex;
+  align-items: center; /* Centraliza verticalmente */
+  background-color: #ffffff;
+  padding: 10px; /* Reduzi o padding */
+  border-radius: 8px; /* Reduzi o raio */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduzi a sombra */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.episodio-card:hover {
+  transform: translateY(-3px); /* Reduzi o deslocamento no hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ajustei a sombra no hover */
 }
 
 .episodio-imagem {
-  width: 100%;
-  height: 120px;
+  width: 80px; /* Reduzi a largura */
+  height: 60px; /* Reduzi a altura */
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 6px; /* Reduzi o raio */
+  margin-right: 10px; /* Reduzi o espaçamento lateral */
+  background-color: #f0f0f0; /* Cor de fundo para imagens de fallback */
+}
+
+.episodio-card:hover .episodio-imagem {
+  transform: scale(1.05);
 }
 
 .episodio-info {
-  margin-top: 10px;
+  flex: 1;
+}
+
+.episodio-info h3 {
+  font-size: 1rem; /* Reduzi o tamanho da fonte */
+  margin-bottom: 4px; /* Reduzi o espaçamento inferior */
+  color: #333;
+  font-weight: bold;
+}
+
+.episodio-info p {
+  font-size: 0.85rem; /* Reduzi o tamanho da fonte */
+  color: #666;
+  line-height: 1.2; /* Ajustei o espaçamento entre linhas */
 }
 
 /* Estilo responsivo */
 @media (max-width: 768px) {
   .anime-imagem {
     max-width: 90%;
+  }
+
+  .ver-mais {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 14px;
+  }
+
+  .episodio-card {
+    flex-direction: row; /* Mantém os itens em linha no mobile */
+    align-items: center;
+    padding: 10px;
+  }
+
+  .episodio-imagem {
+    width: 70px; /* Ajustei para telas menores */
+    height: 50px;
+  }
+
+  .episodio-info {
+    text-align: center;
+  }
+
+  .episodio-info h3 {
+    font-size: 0.9rem; /* Ajustei o tamanho da fonte */
+  }
+
+  .episodio-info p {
+    font-size: 0.8rem; /* Ajustei o tamanho da fonte */
   }
 }

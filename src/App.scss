@@ -96,3 +96,47 @@ body {
   pointer-events: none;
 }
 
+.popup-alert {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: var(--branco);
+  font-size: 1.4rem;
+  z-index: 1000;
+  animation: fadeInOut 3s ease-in-out;
+
+  &.popup-success {
+    background-color: var(--primaria); /* Success color */
+  }
+
+  &.popup-error {
+    background-color: #dc3545; /* Error color */
+  }
+
+  &.popup-info {
+    background-color: var(--cor-texto); /* Info color */
+  }
+
+  &.popup-warning {
+    background-color: #ffc107; /* Warning color */
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  10%, 90% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+}
+

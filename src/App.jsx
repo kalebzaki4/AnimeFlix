@@ -8,12 +8,20 @@ import Erro404 from './components/errors/Erro404';
 import ResultadoAnimes from './pages/ResultadoAnimes';
 import Footer from './components/common/Footer';
 import Login from './pages/Login';
-import SignUp from './pages/SignUp'; 
+import SignUp from './pages/SignUp';
+import { useAuth } from './context/AuthContext'; // Import AuthContext
 
 function App() {
+  const { alert } = useAuth(); // Removed clearAlert
+
   return (
     <BrowserRouter>
       <Menu />
+      {alert && (
+        <div className={`popup-alert popup-${alert.type}`}>
+          {alert.message}
+        </div>
+      )}
       <Routes>
         <Route path='/' element={<Inicio />} />
         <Route path='/login' element={<Login />} />

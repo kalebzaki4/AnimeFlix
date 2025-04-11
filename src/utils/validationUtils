@@ -6,24 +6,40 @@ export const validateEmail = (email) => {
 
 export const validatePassword = (password) => {
   if (!password) return "Senha não pode estar vazia.";
-  const hasUpperCase = /[A-Z]/.test(password);
-  const hasLowerCase = /[a-z]/.test(password);
-  const hasNumber = /\d/.test(password);
-  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-  const isLongEnough = password.length >= 8;
+  const rules = [
+    { regex: /.{8,}/, message: "A senha deve ter pelo menos 8 caracteres." },
+    { regex: /[A-Z]/, message: "A senha deve conter pelo menos uma letra maiúscula." },
+    { regex: /[a-z]/, message: "A senha deve conter pelo menos uma letra minúscula." },
+    { regex: /\d/, message: "A senha deve conter pelo menos um número." },
+    { regex: /[!@#$%^&*(),.?":{}|<>]/, message: "A senha deve conter pelo menos um caractere especial." },
+  ];
 
-  if (!isLongEnough) return "A senha deve ter pelo menos 8 caracteres.";
-  if (!hasUpperCase) return "A senha deve conter pelo menos uma letra maiúscula.";
-  if (!hasLowerCase) return "A senha deve conter pelo menos uma letra minúscula.";
-  if (!hasNumber) return "A senha deve conter pelo menos um número.";
-  if (!hasSpecialChar) return "A senha deve conter pelo menos um caractere especial.";
+  for (const rule of rules) {
+    if (!rule.regex.test(password)) return rule.message;
+  }
   return "";
 };
 
 export const sanitizeInput = (input) => {
-  if (typeof input !== "string") return input;
-  return input
-    .replace(/[<>]/g, "") // Remove tags HTML
-    .replace(/['"]/g, "") // Remove aspas simples e duplas
-    .trim(); // Remove espaços extras no início e no final
+  if (typeof input !== "string") {
+    console.warn("sanitizeInput: Input não é uma string.");
+    return input;
+  }
+  return input.replace(/[<>]/g, "").replace(/['"]/g, "").trim();
+};
+
+export const validateUsername = (username) => {
+  if (!username) return "O nome de usuário não pode estar vazio.";
+  const usernameRegex = /^[a-zA-Z0-9_]{3,15}$/;
+  return usernameRegex.test(username)
+    ? ""
+    : "O nome de usuário deve ter entre 3 e 15 caracteres e conter apenas letras, números e underscores.";
+};
+
+export const isEmptyString = (input) => {
+  if (typeof input !== "string") {
+    console.warn("isEmptyString: Input não é uma string.");
+    return true;
+  }
+  return input.trim().length === 0;
 };

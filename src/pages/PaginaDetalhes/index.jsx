@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { BookmarkPlus, BookmarkMinus } from "lucide-react";
 import "./PaginaDetalhes.scss";
 import TelaCarregamento from "../../components/common/TelaCarregamento";
 import Alert from "../../components/common/Alert";
@@ -19,12 +18,15 @@ const PaginaDetalhes = () => {
   const navigate = useNavigate();
   const { isAuthenticated, saveAnime, removeAnime, savedAnimes } = useAuth();
   const [animeDetails, setAnimeDetails] = useState(null);
+  const [episodes, setEpisodes] = useState([]); // State for episodes
   const [isFullSynopsis, setIsFullSynopsis] = useState(false);
   const [error, setError] = useState(null);
   const [alert, setAlert] = useState(null);
+  const [visibleEpisodes, setVisibleEpisodes] = useState(10); // Limit to 10 episodes initially
 
   useEffect(() => {
     fetchAnimeDetails(animeId);
+    fetchEpisodes(animeId); // Fetch episodes
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [animeId]);
 
@@ -35,13 +37,54 @@ const PaginaDetalhes = () => {
         throw new Error("Anime não encontrado!");
       }
       const data = response.data.data;
-      data.status = statusTraduzidos[data.status] || data.status;
-      setAnimeDetails(data);
+      setAnimeDetails({
+        title: data.title,
+        synopsis: data.synopsis,
+        status: statusTraduzidos[data.status] || data.status,
+        trailer: { url: data.trailer?.url || null },
+      });
     } catch (error) {
       setError(
         "Ocorreu um erro ao carregar os detalhes do anime. Tente novamente mais tarde."
       );
       setAnimeDetails(null);
+    }
+  };
+
+  const fetchEpisodes = async (id) => {
+    try {
+      const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}/episodes`);
+      const episodesData = response.data.data || [];
+      const updatedEpisodes = episodesData.map((episode) => ({
+        title: episode.title,
+        synopsis: episode.synopsis,
+        images: {
+          jpg: {
+            image_url: episode.images?.jpg?.image_url || `https://via.placeholder.com/150?text=${encodeURIComponent(episode.title || "Sem Imagem")}`,
+          },
+        },
+      }));
+      setEpisodes(updatedEpisodes);
+    } catch (error) {
+      console.error("Erro ao buscar episódios na API principal:", error.message);
+      // Tentar API alternativa
+      try {
+        const altResponse = await axios.get(`https://kitsu.io/api/edge/anime/${id}/episodes`);
+        const altEpisodesData = altResponse.data.data || [];
+        const updatedAltEpisodes = altEpisodesData.map((episode) => ({
+          title: episode.attributes.canonicalTitle,
+          synopsis: episode.attributes.synopsis || "Sinopse não disponível",
+          images: {
+            jpg: {
+              image_url: episode.attributes.thumbnail?.original || `https://via.placeholder.com/150?text=${encodeURIComponent(episode.attributes.canonicalTitle || "Sem Imagem")}`,
+            },
+          },
+        }));
+        setEpisodes(updatedAltEpisodes);
+      } catch (altError) {
+        console.error("Erro ao buscar episódios na API alternativa:", altError.message);
+        setEpisodes([]); // Garante que o estado seja atualizado mesmo em caso de erro
+      }
     }
   };
 
@@ -62,6 +105,10 @@ const PaginaDetalhes = () => {
   const handleRemoveAnime = () => {
     removeAnime(animeDetails.mal_id);
     setAlert({ message: "Anime removido dos favoritos", type: "info" });
+  };
+
+  const handleLoadMoreEpisodes = () => {
+    setVisibleEpisodes((prev) => prev + 10); // Load 10 more episodes
   };
 
   if (!animeDetails && !error) {
@@ -121,11 +168,11 @@ const PaginaDetalhes = () => {
         <h1 className="Title">{animeDetails.title}</h1>
         {isFavorite ? (
           <button className="save-button" onClick={handleRemoveAnime}>
-            <BookmarkMinus />
+            Remover dos Favoritos
           </button>
         ) : (
           <button className="save-button" onClick={handleSaveAnime}>
-            <BookmarkPlus />
+            Adicionar aos Favoritos
           </button>
         )}
       </div>
@@ -144,12 +191,12 @@ const PaginaDetalhes = () => {
 
       <div className="proximo-episodio">
         <h2>EPISÓDIOS:</h2>
-        {animeDetails.episodes && animeDetails.episodes.length > 0 ? (
+        {episodes.length > 0 ? (
           <div className="episodios-container">
-            {animeDetails.episodes.map((episodio) => (
+            {episodes.slice(0, visibleEpisodes).map((episodio) => (
               <div key={episodio.mal_id} className="episodio-card">
                 <img
-                  src={episodio.image_url || "https://via.placeholder.com/150"}
+                  src={episodio.images?.jpg?.image_url || "https://via.placeholder.com/150"}
                   alt={episodio.title}
                   className="episodio-imagem"
                 />
@@ -163,6 +210,11 @@ const PaginaDetalhes = () => {
                 </div>
               </div>
             ))}
+            {visibleEpisodes < episodes.length && (
+              <button className="ver-mais" onClick={handleLoadMoreEpisodes}>
+                Ver Mais
+              </button>
+            )}
           </div>
         ) : (
           <p>Não há episódios disponíveis.</p>

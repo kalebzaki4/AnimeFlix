@@ -28,25 +28,22 @@ const ResultadoAnimes = () => {
 
   const fetchAnimes = async (pageNumber) => {
     setLoading(true);
+    setError(null); // Reset error state before fetching
     try {
       const response = await axios.get(`${API_BASE_URL}/anime`, {
         params: {
           q: searchTerm,
-          limit: 10, // Fetch 10 results per page
+          limit: 10,
           page: pageNumber,
         },
       });
 
       if (response.data?.data) {
-        const newResults = [...animes, ...response.data.data];
+        const newResults = pageNumber === 1 ? response.data.data : [...animes, ...response.data.data];
         setAnimes(newResults);
-        setHasMore(response.data.pagination.has_next_page); // Check if more pages are available
+        setHasMore(response.data.pagination.has_next_page);
 
-        // Cache the results in sessionStorage
-        sessionStorage.setItem(
-          `search_${searchTerm}`,
-          JSON.stringify(newResults)
-        );
+        sessionStorage.setItem(`search_${searchTerm}`, JSON.stringify(newResults));
       } else {
         setHasMore(false);
       }
@@ -67,9 +64,10 @@ const ResultadoAnimes = () => {
         setAnimes([]); // Clear previous results
         setPage(1); // Reset to the first page
         setHasMore(true); // Reset pagination
-        fetchAnimes(1); // Fetch the first page
+        fetchAnimes(1); // Fetch without debounce for initial load
       } else {
-        setSearchPerformed(true); // Skip fetching if cached results exist
+        setAnimes(JSON.parse(cachedResults)); // Load cached results
+        setSearchPerformed(true);
       }
     }
   }, [searchTerm]);

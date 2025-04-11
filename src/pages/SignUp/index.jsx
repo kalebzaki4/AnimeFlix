@@ -42,7 +42,7 @@ export default function SignUp() {
       setPassword("");
       setConfirmPassword("");
       setAlert({ message: "Conta criada com sucesso!", type: "success" }); // Show success alert
-      login();
+      login({ email, password }); // Automatically log in the user
       navigate("/");
     }, 2000);
   };

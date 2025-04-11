@@ -357,6 +357,7 @@
     color var(--transicao-curta),
     background-color var(--transicao-curta);
   border-radius: var(--raio-4);
+  cursor: pointer;
 }
 
 .menu-item-2:hover,
@@ -368,7 +369,7 @@
 .menu-item-3 {
   color: var(--cor-texto);
   font-size: var(--fs-rotulo);
-  font-weight: var(--peso-negrito);
+  font-weight: var (--peso-negrito);
   text-decoration: none;
   margin: var(--raio-4) 0;
   padding: var(--raio-8) var(--raio-4);
@@ -380,7 +381,7 @@
 
 .menu-item-3:hover,
 .menu-item-3:focus {
-  color: var(--primaria);
+  color: var (--primaria);
   background-color: var(--fundo-banner);
 }
 
