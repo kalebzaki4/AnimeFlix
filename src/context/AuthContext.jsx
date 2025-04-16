@@ -63,21 +63,29 @@ export const AuthProvider = ({ children }) => {
   };
 
   const saveAnime = (anime) => {
+    console.debug("Tentando salvar o anime:", anime); // Debug log
     if (!isAuthenticated) {
       console.error("Você precisa estar logado para salvar animes.");
       return;
     }
-    if (!anime?.mal_id) {
-      console.error("Anime inválido.");
+    if (!anime || !anime.mal_id || typeof anime.mal_id !== "number") {
+      console.error("Anime inválido. Certifique-se de que o objeto contém um 'mal_id' válido.");
       return;
     }
     if (isAnimeSaved(anime.mal_id)) {
       console.warn("Anime já está salvo.");
       return;
     }
-    setSavedAnimes((prev) => [...prev, anime]);
-    setAlert({ message: "Anime salvo com sucesso!", type: "success" }); // Trigger popup alert
-    setTimeout(() => setAlert(null), 3000); // Auto-hide after 3 seconds
+    const animeToSave = {
+      mal_id: anime.mal_id,
+      title: anime.title,
+      images: anime.images || { jpg: { image_url: "/fallback-image.jpg" } },
+      score: anime.score || "N/A",
+      year: anime.year || "Desconhecido",
+    };
+    setSavedAnimes((prev) => [...prev, animeToSave]); // Adiciona o anime ao estado global
+    setAlert({ message: "Anime salvo com sucesso!", type: "success" });
+    setTimeout(() => setAlert(null), 3000);
   };
 
   const removeAnime = (animeId) => {

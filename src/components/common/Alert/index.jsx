@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
-export default function Alerta({ mensagem, tipo, aoFechar }) {
+export default function Alerta({ mensagem = "Mensagem não especificada", tipo = "info", aoFechar = () => {} }) {
   useEffect(() => {
     const temporizador = setTimeout(() => {
       aoFechar();
@@ -10,7 +10,7 @@ export default function Alerta({ mensagem, tipo, aoFechar }) {
     return () => clearTimeout(temporizador);
   }, [aoFechar]);
 
-  if (!tipo) {
+  if (!mensagem || !tipo) {
     return null; 
   }
 
@@ -34,9 +34,9 @@ export default function Alerta({ mensagem, tipo, aoFechar }) {
 }
 
 Alerta.propTypes = {
-  mensagem: PropTypes.string.isRequired,
-  tipo: PropTypes.oneOf(["success", "error", "info", "warning"]).isRequired,
-  aoFechar: PropTypes.func.isRequired,
+  mensagem: PropTypes.string,
+  tipo: PropTypes.oneOf(["success", "error", "info", "warning"]),
+  aoFechar: PropTypes.func,
 };
 
 function AlertManager({ alerts, removeAlert }) {

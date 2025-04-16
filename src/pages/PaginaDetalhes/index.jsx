@@ -60,7 +60,7 @@ const PaginaDetalhes = () => {
         synopsis: episode.synopsis,
         images: {
           jpg: {
-            image_url: episode.images?.jpg?.image_url || `https://via.placeholder.com/150?text=${encodeURIComponent(episode.title || "Sem Imagem")}`,
+            image_url: episode.images?.jpg?.image_url || "/fallback-image.jpg",
           },
         },
       }));
@@ -95,9 +95,14 @@ const PaginaDetalhes = () => {
 
   const handleSaveAnime = () => {
     if (!isAuthenticated) {
-      navigate("/login");
+      navigate("/login"); // Redireciona para login se não autenticado
     } else {
-      saveAnime(animeDetails);
+      if (!animeDetails || !animeId) {
+        console.error("Detalhes do anime ou ID inválido:", animeDetails, animeId);
+        setAlert({ message: "Erro ao salvar o anime. Tente novamente.", type: "error" });
+        return;
+      }
+      saveAnime({ ...animeDetails, mal_id: parseInt(animeId, 10) }); // Certifique-se de passar o mal_id como número
       setAlert({ message: "Anime adicionado aos favoritos", type: "success" });
     }
   };
@@ -193,8 +198,8 @@ const PaginaDetalhes = () => {
         <h2>EPISÓDIOS:</h2>
         {episodes.length > 0 ? (
           <div className="episodios-container">
-            {episodes.slice(0, visibleEpisodes).map((episodio) => (
-              <div key={episodio.mal_id} className="episodio-card">
+            {episodes.slice(0, visibleEpisodes).map((episodio, index) => (
+              <div key={`${episodio.title}-${index}`} className="episodio-card">
                 <img
                   src={episodio.images?.jpg?.image_url || "https://via.placeholder.com/150"}
                   alt={episodio.title}

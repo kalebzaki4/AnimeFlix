@@ -3,7 +3,7 @@ import axios from "axios";
 import Banner from "../../components/layout/Banner";
 import ListaDeAnimesHorizontal from "../../components/animes/ListaDeAnimesHorizontal";
 import TelaCarregamento from "../../components/common/TelaCarregamento";
-import { useAuth } from "../../context/AuthContext"; // Importa o contexto de autenticação
+import { useAuth } from "../../context/AuthContext";
 import "../../styles/message.scss";
 
 export default function Inicio() {
@@ -17,7 +17,7 @@ export default function Inicio() {
     return cachedLancamentos ? JSON.parse(cachedLancamentos) : [];
   });
 
-  const { isAuthenticated, savedAnimes } = useAuth(); // Obtém o estado de login e os animes salvos
+  const { isAuthenticated, savedAnimes } = useAuth();
 
   const fetchAnimes = async () => {
     setLoading(true);
@@ -42,13 +42,19 @@ export default function Inicio() {
         }
       );
 
-      const famososData = famososResponse.data.data;
-      const lancamentosData = lancamentosResponse.data.data;
+      const famososData = famososResponse.data.data.filter(anime => anime.images?.jpg?.image_url).map(anime => ({
+        ...anime,
+        score: parseFloat(anime.score) || 0,
+      }));
+
+      const lancamentosData = lancamentosResponse.data.data.filter(anime => anime.images?.jpg?.image_url).map(anime => ({
+        ...anime,
+        score: parseFloat(anime.score) || 0,
+      }));
 
       setAnimesFamosos(famososData);
       setLancamentos(lancamentosData);
 
-      // Cache the data in sessionStorage
       sessionStorage.setItem("animesFamosos", JSON.stringify(famososData));
       sessionStorage.setItem("lancamentos", JSON.stringify(lancamentosData));
 
@@ -61,9 +67,9 @@ export default function Inicio() {
 
   useEffect(() => {
     if (animesFamosos.length === 0 || lancamentos.length === 0) {
-      fetchAnimes(); // Fetch data only if not cached
+      fetchAnimes();
     } else {
-      setLoading(false); // Skip loading if data is already cached
+      setLoading(false);
     }
   }, []);
 
@@ -83,14 +89,16 @@ export default function Inicio() {
         description="Os animes mais populares do momento"
         animes={animesFamosos}
         onClick={handleClick}
-        disableLoadingIndicator={true} 
+        disableLoadingIndicator={true}
+        loadMoreAnimes={() => {}}
       />
       <ListaDeAnimesHorizontal
         title="Lançamentos"
         description="Os animes mais recentes da temporada"
         animes={lancamentos}
         onClick={handleClick}
-        disableLoadingIndicator={true} 
+        disableLoadingIndicator={true}
+        loadMoreAnimes={() => {}}
       />
       {isAuthenticated && savedAnimes.length > 0 && (
         <ListaDeAnimesHorizontal
@@ -98,7 +106,8 @@ export default function Inicio() {
           description="Seus animes favoritos salvos"
           animes={savedAnimes}
           onClick={handleClick}
-          disableLoadingIndicator={true} 
+          disableLoadingIndicator={true}
+          loadMoreAnimes={() => {}}
         />
       )}
     </>

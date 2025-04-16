@@ -1,0 +1,24 @@
+.populares-container {
+  padding: 20px;
+  background-color: var(--fundo);
+  color: var(--branco);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.populares-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: var(--cor-sobre-superficie);
+  text-align: center;
+}
+
+.populares-empty {
+  font-size: 1.5rem;
+  color: var(--cor-texto);
+  margin-top: 20px;
+  text-align: center;
+}

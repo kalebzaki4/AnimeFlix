@@ -10,12 +10,13 @@ import Footer from './components/common/Footer';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import { useAuth } from './context/AuthContext'; // Import AuthContext
+import Populares from './pages/Populares';
 
 function App() {
   const { alert } = useAuth(); // Removed clearAlert
 
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Menu />
       {alert && (
         <div className={`popup-alert popup-${alert.type}`}>
@@ -28,6 +29,7 @@ function App() {
         <Route path='/signup' element={<SignUp />} /> 
         <Route path='/Detalhes/:animeId' element={<PaginaDetalhes />} /> {/* Rota correta */}
         <Route path='/search' element={<ResultadoAnimes />} />
+        <Route path='/popular' element={<Populares />} /> {/* Ensure this route is correct */}
         <Route path='*' element={<Erro404 />} />
       </Routes>
       <Footer />

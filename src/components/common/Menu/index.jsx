@@ -28,7 +28,7 @@ export default function Menu() {
 
   const menuItems = [
     { name: "home", label: "Home" },
-    { name: "popular", label: "Populares" },
+    { name: "popular", label: "Populares" }, // Ensure this links to the Populares page
     { name: "novidades", label: "Novidades" },
     { name: "az", label: "A-Z" },
     { name: "simulcasts", label: "Simulcasts" },
