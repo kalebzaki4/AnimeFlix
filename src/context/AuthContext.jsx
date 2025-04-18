@@ -1,12 +1,15 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 
+// Contexto global de autenticação
 const AuthContext = createContext();
 
+// Utilitário seguro para localStorage
 const localStorageUtil = {
   get: (key, defaultValue) => {
     try {
-      return JSON.parse(localStorage.getItem(key)) || defaultValue;
+      const value = localStorage.getItem(key);
+      return value !== null ? JSON.parse(value) : defaultValue;
     } catch {
       console.warn(`Erro ao acessar ${key} no localStorage.`);
       return defaultValue;
@@ -21,6 +24,8 @@ const localStorageUtil = {
   },
 };
 
+const ALERT_TIMEOUT = 2000;
+
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(() =>
     localStorageUtil.get("isAuthenticated", false)
@@ -28,8 +33,9 @@ export const AuthProvider = ({ children }) => {
   const [savedAnimes, setSavedAnimes] = useState(() =>
     localStorageUtil.get("savedAnimes", [])
   );
-  const [alert, setAlert] = useState(null); // Add alert state
+  const [alert, setAlert] = useState(null);
 
+  // Sincroniza autenticação e animes salvos com localStorage
   useEffect(() => {
     localStorageUtil.set("isAuthenticated", isAuthenticated);
   }, [isAuthenticated]);
@@ -38,69 +44,69 @@ export const AuthProvider = ({ children }) => {
     localStorageUtil.set("savedAnimes", savedAnimes);
   }, [savedAnimes]);
 
+  // Sincroniza logout entre abas
   useEffect(() => {
     const handleStorageChange = (event) => {
       if (event.key === "isAuthenticated" && event.newValue === "false") {
         setIsAuthenticated(false);
       }
     };
-
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
-  const login = (credentials) => {
-    if (!credentials?.email || !credentials?.password) {
-      console.error("Credenciais inválidas.");
+  // Login fake (pode ser adaptado para backend)
+  const login = ({ email, password }) => {
+    if (!email || !password) {
+      showAlert("Credenciais inválidas.", "error", 3000);
       return;
     }
     setIsAuthenticated(true);
+    showAlert("Login realizado com sucesso!", "success");
   };
 
+  // Logout
   const logout = () => {
     setIsAuthenticated(false);
     setSavedAnimes([]);
+    showAlert("Logout realizado.", "info");
   };
 
+  // Salva anime, evitando duplicatas
   const saveAnime = (anime) => {
-    console.debug("Tentando salvar o anime:", anime); // Debug log
-    if (!isAuthenticated) {
-      console.error("Você precisa estar logado para salvar animes.");
+    if (!anime || !anime.mal_id) {
+      showAlert("Anime inválido.", "error", 3000);
       return;
     }
-    if (!anime || !anime.mal_id || typeof anime.mal_id !== "number") {
-      console.error("Anime inválido. Certifique-se de que o objeto contém um 'mal_id' válido.");
+    if (savedAnimes.some((a) => a.mal_id === anime.mal_id)) {
+      showAlert("Anime já salvo.", "info");
       return;
     }
-    if (isAnimeSaved(anime.mal_id)) {
-      console.warn("Anime já está salvo.");
-      return;
-    }
-    const animeToSave = {
-      mal_id: anime.mal_id,
-      title: anime.title,
-      images: anime.images || { jpg: { image_url: "/fallback-image.jpg" } },
-      score: anime.score || "N/A",
-      year: anime.year || "Desconhecido",
-    };
-    setSavedAnimes((prev) => [...prev, animeToSave]); // Adiciona o anime ao estado global
-    setAlert({ message: "Anime salvo com sucesso!", type: "success" });
-    setTimeout(() => setAlert(null), 3000);
+    setSavedAnimes((prev) => [...prev, anime]);
+    showAlert("Anime salvo!", "success");
   };
 
+  // Remove anime salvo
   const removeAnime = (animeId) => {
     if (!animeId) {
-      console.error("ID do anime inválido.");
+      showAlert("ID do anime inválido.", "error", 3000);
       return;
     }
     setSavedAnimes((prev) => prev.filter((anime) => anime.mal_id !== animeId));
-    setAlert({ message: "Anime removido com sucesso!", type: "info" }); // Trigger popup alert
-    setTimeout(() => setAlert(null), 3000); // Auto-hide after 3 seconds
+    showAlert("Anime removido com sucesso!", "info");
   };
 
+  // Verifica se anime está salvo
   const isAnimeSaved = (animeId) => savedAnimes.some((anime) => anime.mal_id === animeId);
 
-  const clearAlert = () => setAlert(null); // Function to clear alert
+  // Exibe alertas temporários
+  const showAlert = (message, type, timeout = ALERT_TIMEOUT) => {
+    setAlert({ message, type });
+    setTimeout(() => setAlert(null), timeout);
+  };
+
+  // Limpa alerta manualmente
+  const clearAlert = () => setAlert(null);
 
   return (
     <AuthContext.Provider
@@ -112,8 +118,8 @@ export const AuthProvider = ({ children }) => {
         saveAnime,
         removeAnime,
         isAnimeSaved,
-        alert, // Expose alert state
-        clearAlert, // Expose clearAlert function
+        alert,
+        clearAlert,
       }}
     >
       {children}
