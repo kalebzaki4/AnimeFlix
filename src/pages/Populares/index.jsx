@@ -19,7 +19,7 @@ const Populares = () => {
     setLoading(true);
     try {
       const response = await axios.get("https://api.jikan.moe/v4/top/anime", {
-        params: { type: "tv", limit: 50, sort: "bypopularity" },
+        params: { type: "tv", limit: 24, sort: "bypopularity" },
       });
       const data = response.data.data || [];
       setPopularAnimes(data);
