@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { validateEmail, validatePassword } from "../../utils/validationUtils";
 import { useAuth } from "../../context/AuthContext";
-import Alert from "../../components/common/Alert"; // Import Alert
+import Alert from "../../components/common/Alert";
 import "./SignUp.scss";
 
 export default function SignUp() {
@@ -13,7 +13,7 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({ email: "", password: "", confirmPassword: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [alert, setAlert] = useState(null); // State for alert
+  const [alert, setAlert] = useState(null);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -23,6 +23,7 @@ export default function SignUp() {
     passwordsNotMatch: "As senhas não coincidem."
   };
 
+  // Validação do formulário
   const validateForm = () => {
     const emailError = validateEmail(email) ? "" : ERROR_MESSAGES.emailInvalid;
     const passwordError = validatePassword(password);
@@ -41,14 +42,43 @@ export default function SignUp() {
       setEmail("");
       setPassword("");
       setConfirmPassword("");
-      setAlert({ message: "Conta criada com sucesso!", type: "success" }); // Show success alert
-      login({ email, password }); // Automatically log in the user
+      setAlert({ message: "Conta criada com sucesso!", type: "success" });
+      login({ email, password });
       navigate("/");
-    }, 2000);
+    }, 1500);
   };
 
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
+  const togglePasswordVisibility = () => setPasswordVisible((v) => !v);
+
+  // Dica de senha para mobile
+  const PasswordHint = () => (
+    <div style={{
+      fontSize: "0.85rem",
+      color: "#888",
+      marginBottom: 8,
+      marginTop: -8,
+      textAlign: "left"
+    }}>
+      Dica: Use letras maiúsculas, minúsculas, números e símbolos.
+    </div>
+  );
+
+  // Limpa todos os campos rapidamente
+  const handleClear = () => {
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setErrors({ email: "", password: "", confirmPassword: "" });
+    setAlert(null);
+  };
+
+  // Animação de entrada para o formulário
+  const formAnimation = {
+    animation: "fadeInDown 0.7s",
+    '@keyframes fadeInDown': {
+      from: { opacity: 0, transform: "translateY(-30px)" },
+      to: { opacity: 1, transform: "translateY(0)" }
+    }
   };
 
   return (
@@ -61,39 +91,74 @@ export default function SignUp() {
         />
       )}
       <h1 className="signup-title">Criar Conta</h1>
-      <form onSubmit={handleSubmit} className="signup-form">
-        {[{ label: "Email", type: "email", value: email, setter: setEmail, error: errors.email, id: "email" },
-          { label: "Senha", type: passwordVisible ? "text" : "password", value: password, setter: setPassword, error: errors.password, id: "password" },
-          { label: "Confirmar Senha", type: "password", value: confirmPassword, setter: setConfirmPassword, error: errors.confirmPassword, id: "confirmPassword" }
-        ].map(({ label, type, value, setter, error, id }) => (
-          <div className="form-group" key={id}>
-            <label htmlFor={id}>{label}:</label>
-            <div className={id === "password" ? "password-container" : ""}>
-              <input
-                type={type}
-                id={id}
-                name={id}
-                value={value}
-                onChange={(e) => setter(e.target.value)}
-                required
-              />
-              {id === "password" && (
-                <button
-                  type="button"
-                  className="toggle-password"
-                  onClick={togglePasswordVisibility}
-                  aria-label={passwordVisible ? "Esconder senha" : "Mostrar senha"}
-                >
-                  {passwordVisible ? <FaEyeSlash /> : <FaEye />}
-                </button>
-              )}
-            </div>
-            {error && <p className="error-message">{error}</p>}
+      <form onSubmit={handleSubmit} className="signup-form" autoComplete="off" style={formAnimation}>
+        <div className="form-group mobile-full-width">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+            autoFocus
+            inputMode="email"
+            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+          />
+          {errors.email && <p className="error-message">{errors.email}</p>}
+        </div>
+        <div className="form-group mobile-full-width">
+          <label htmlFor="password">Senha:</label>
+          <PasswordHint />
+          <div className="password-container">
+            <input
+              type={passwordVisible ? "text" : "password"}
+              id="password"
+              name="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+              autoComplete="new-password"
+            />
+            <button
+              type="button"
+              className="toggle-password"
+              onClick={togglePasswordVisibility}
+              aria-label={passwordVisible ? "Esconder senha" : "Mostrar senha"}
+              tabIndex={-1}
+            >
+              {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+            </button>
           </div>
-        ))}
-        <button type="submit" className="signup-button" disabled={isSubmitting}>
-          {isSubmitting ? <span className="spinner"></span> : "Criar Conta"}
-        </button>
+          {errors.password && <p className="error-message">{errors.password}</p>}
+        </div>
+        <div className="form-group mobile-full-width">
+          <label htmlFor="confirmPassword">Confirmar Senha:</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            value={confirmPassword}
+            onChange={e => setConfirmPassword(e.target.value)}
+            required
+            autoComplete="new-password"
+          />
+          {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
+        </div>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button type="submit" className="signup-button mobile-full-width" disabled={isSubmitting}>
+            {isSubmitting ? <span className="spinner"></span> : "Criar Conta"}
+          </button>
+          <button
+            type="button"
+            className="signup-button mobile-full-width"
+            style={{ background: "#888" }}
+            onClick={handleClear}
+            disabled={isSubmitting}
+          >
+            Limpar
+          </button>
+        </div>
       </form>
       <p className="login-link">
         Já tem uma conta? <Link to="/login">Entrar</Link>
