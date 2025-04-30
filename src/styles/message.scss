@@ -16,4 +16,33 @@
   .message.show {
     opacity: 1;
   }
-  
+
+.cookie-popup {
+  animation: slideUpCookie 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.cookie-popup.fade-out {
+  animation: fadeOutCookie 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes slideUpCookie {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutCookie {
+  from {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
