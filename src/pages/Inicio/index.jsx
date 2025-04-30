@@ -6,7 +6,6 @@ import TelaCarregamento from "../../components/common/TelaCarregamento";
 import { useAuth } from "../../context/AuthContext";
 import "../../styles/message.scss";
 
-// Hook para detectar mobile
 function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= breakpoint);
   useEffect(() => {
@@ -31,20 +30,35 @@ export default function Inicio() {
   const { isAuthenticated, savedAnimes } = useAuth();
   const isMobile = useIsMobile();
 
-  // Estado para consentimento de cookies
+  // Mostrar popup só se ainda não aceitou cookies
   const [showCookiePopup, setShowCookiePopup] = useState(() => {
-    return !localStorage.getItem("animeflix_cookie_consent");
+    return !localStorage.getItem("cookiesAccepted");
   });
+  const [cookieFadeOut, setCookieFadeOut] = useState(false);
+
+  // Bloquear rolagem enquanto o popup estiver aberto
+  useEffect(() => {
+    if (showCookiePopup) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showCookiePopup]);
 
   const handleAcceptCookies = () => {
-    localStorage.setItem("animeflix_cookie_consent", "accepted");
-    setShowCookiePopup(false);
+    setCookieFadeOut(true);
+    setTimeout(() => {
+      setShowCookiePopup(false);
+      setCookieFadeOut(false);
+      localStorage.setItem("cookiesAccepted", "true"); // Marca como aceito
+    }, 500); // tempo igual ao da animação fadeOut
   };
 
-  // Limita a quantidade de animes exibidos no mobile para melhor UX
   const maxAnimes = isMobile ? 8 : 25;
 
-  // Animação de fade-in para listas
   const fadeInStyle = {
     animation: "fadeIn 0.7s",
     '@keyframes fadeIn': {
@@ -53,7 +67,6 @@ export default function Inicio() {
     }
   };
 
-  // Busca animes populares e lançamentos
   const fetchAnimes = useCallback(async () => {
     setLoading(true);
     try {
@@ -98,61 +111,73 @@ export default function Inicio() {
     } else {
       setLoading(false);
     }
-    // eslint-disable-next-line
   }, []);
 
   const handleClick = useCallback(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  // Botão para atualizar manualmente os animes
-  // const handleRefresh = () => {
-  //   sessionStorage.removeItem("animesFamosos");
-  //   sessionStorage.removeItem("lancamentos");
-  //   fetchAnimes();
-  // };
-
   if (loading) return <TelaCarregamento />;
 
   return (
     <>
       {showCookiePopup && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: 0,
-            left: 0,
-            width: "100vw",
-            background: "#222",
-            color: "#fff",
-            padding: "18px 12px 12px 12px",
-            zIndex: 9999,
-            textAlign: "center",
-            boxShadow: "0 -2px 16px #0005",
-            fontSize: "1rem"
-          }}
-        >
-          Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa{" "}
-          <a href="/politica-de-privacidade" style={{ color: "#e50914", textDecoration: "underline" }}>Política de Privacidade</a>.
-          <br />
-          <button
-            onClick={handleAcceptCookies}
+        <>
+          {/* Overlay bloqueando toda a interação */}
+          <div
             style={{
-              marginTop: 10,
-              background: "#e50914",
-              color: "#fff",
-              border: "none",
-              borderRadius: 20,
-              padding: "8px 24px",
-              fontWeight: "bold",
-              cursor: "pointer",
-              fontSize: "1rem",
-              boxShadow: "0 2px 8px #0002"
+              position: "fixed",
+              inset: 0,
+              background: "rgba(0,0,0,0.7)",
+              zIndex: 9998,
+              pointerEvents: "auto",
             }}
+            tabIndex={-1}
+            aria-hidden="true"
+          />
+          <div
+            className={`cookie-popup${cookieFadeOut ? " fade-out" : " slide-up"}`}
+            style={{
+              position: "fixed",
+              bottom: 0,
+              left: 0,
+              width: "100vw",
+              background: "#222",
+              color: "#fff",
+              padding: "18px 12px 12px 12px",
+              zIndex: 9999,
+              textAlign: "center",
+              boxShadow: "0 -2px 16px #0005",
+              fontSize: "1rem"
+            }}
+            role="dialog"
+            aria-modal="true"
           >
-            Aceitar e continuar
-          </button>
-        </div>
+            Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa{" "}
+            <a href="/politica-de-privacidade" style={{ color: "#e50914", textDecoration: "underline" }}>Política de Privacidade</a>.
+            <br />
+            <button
+              onClick={handleAcceptCookies}
+              style={{
+                marginTop: 10,
+                background: "#e50914",
+                color: "#fff",
+                border: "none",
+                borderRadius: 20,
+                padding: "8px 24px",
+                fontWeight: "bold",
+                cursor: "pointer",
+                fontSize: "1rem",
+                boxShadow: "0 2px 8px #0002",
+                position: "relative",
+                left: "30%",
+              }}
+              autoFocus
+            >
+              Aceitar e continuar
+            </button>
+          </div>
+        </>
       )}
       <div style={fadeInStyle}>
         <Banner animes={animesFamosos.slice(0, maxAnimes)} onClick={handleClick} />
