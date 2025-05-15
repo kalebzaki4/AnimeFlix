@@ -1,4 +1,4 @@
-.populares-container {
+.calendario-container {
   padding: 32px 16px 48px 16px;
   background: var(--fundo);
   color: var(--branco);
@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.populares-title {
+.calendario-title {
   font-size: 2.5rem;
   font-weight: bold;
   color: var(--primaria);
@@ -16,14 +16,34 @@
   text-align: center;
 }
 
-.populares-desc {
-  color: var(--cor-texto);
-  font-size: 1.2rem;
+.calendario-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-bottom: 24px;
-  text-align: center;
+  justify-content: center;
 }
 
-.populares-grid {
+.calendario-tab {
+  background: var(--superficie);
+  color: var(--primaria);
+  border: 2px solid var(--primaria);
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 6px 18px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.calendario-tab.selected,
+.calendario-tab:disabled {
+  background: var(--primaria);
+  color: #fff;
+  cursor: default;
+}
+
+.calendario-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 24px;
@@ -31,7 +51,7 @@
   max-width: 1200px;
 }
 
-.populares-card {
+.calendario-card {
   background: var(--superficie);
   border-radius: var(--raio-16);
   box-shadow: 0 2px 8px #0003;
@@ -44,16 +64,16 @@
   outline: none;
 }
 
-.populares-card:hover {
+.calendario-card:hover {
   transform: translateY(-6px) scale(1.03);
   box-shadow: 0 6px 24px #0005;
 }
 
-.populares-card:focus {
+.calendario-card:focus {
   box-shadow: 0 0 0 3px var(--primaria-variacao);
 }
 
-.populares-img {
+.calendario-img {
   width: 100%;
   height: 320px;
   object-fit: cover;
@@ -61,14 +81,14 @@
   border-bottom: 1px solid #333;
 }
 
-.populares-info {
+.calendario-info {
   padding: 16px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.populares-anime-title {
+.calendario-anime-title {
   font-size: 1.2rem;
   font-weight: bold;
   color: var(--cor-sobre-superficie);
@@ -76,20 +96,20 @@
   min-height: 48px;
 }
 
-.populares-meta {
+.calendario-meta {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 8px;
 }
 
-.populares-score {
+.calendario-score {
   color: var(--cor-avaliacao);
   font-weight: bold;
   font-size: 1rem;
 }
 
-.populares-year {
+.calendario-year {
   background: var(--primaria);
   color: #fff;
   border-radius: 8px;
@@ -98,14 +118,14 @@
   margin-left: auto;
 }
 
-.populares-synopsis {
+.calendario-synopsis {
   color: var(--cor-texto);
   font-size: 0.95rem;
   margin-bottom: 12px;
   min-height: 48px;
 }
 
-.populares-btn {
+.calendario-btn {
   background: var(--primaria);
   color: #fff;
   border: none;
@@ -119,46 +139,44 @@
   margin-top: auto;
 }
 
-.populares-btn:hover {
+.calendario-btn:hover {
   background: var(--primaria-variacao);
 }
 
-.populares-vermais {
-  margin: 32px auto 0 auto;
-  background: var(--primaria);
-  color: #fff;
-  border: none;
-  border-radius: 24px;
-  padding: 12px 36px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s;
-  box-shadow: 0 2px 8px #0002;
-}
-
-.populares-vermais:hover {
-  background: var(--primaria-variacao);
-}
-
-.populares-empty {
-  color: var(--cor-texto);
-  font-size: 1.3rem;
-  margin-top: 32px;
-}
-
-.populares-loading {
+.calendario-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
   color: var(--primaria);
   font-size: 1.2rem;
-  margin: 32px 0 0 0;
+}
+
+.calendario-spinner {
+  border: 8px solid rgba(0,0,0,0.1);
+  border-left-color: var(--primaria);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: calendario-spin 1s linear infinite;
+}
+
+@keyframes calendario-spin {
+  to { transform: rotate(360deg); }
+}
+
+.calendario-empty {
+  color: var(--cor-texto);
+  font-size: 1.15rem;
+  margin-top: 32px;
   text-align: center;
 }
 
 @media (max-width: 600px) {
-  .populares-img {
+  .calendario-img {
     height: 180px;
   }
-  .populares-card {
+  .calendario-card {
     min-height: 320px;
   }
 }

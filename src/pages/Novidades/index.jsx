@@ -1,18 +1,16 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
-import "./Populares.scss";
+import "./Novidades.scss";
 import { Link, useNavigate } from "react-router-dom";
 import Estrelas from "../../components/animes/Estrelas/Estrelas";
 
 const LIMIT = 12;
 
-const getHighQualityImage = (anime) => {
-  return (
-    anime.images?.jpg?.large_image_url ||
-    anime.images?.jpg?.image_url ||
-    "/fallback-image.jpg"
-  );
-};
+const getHighQualityImage = (anime) => (
+  anime.images?.jpg?.large_image_url ||
+  anime.images?.jpg?.image_url ||
+  "/fallback-image.jpg"
+);
 
 const fetchKitsuImage = async (malId) => {
   try {
@@ -31,7 +29,7 @@ const fetchKitsuImage = async (malId) => {
   }
 };
 
-const Populares = () => {
+const Novidades = () => {
   const [animes, setAnimes] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -40,13 +38,13 @@ const Populares = () => {
   const [altImages, setAltImages] = useState({});
   const loaderRef = useRef(null);
 
-  const fetchPopulares = useCallback(async (pageNum = 1) => {
+  const fetchNovidades = useCallback(async (pageNum = 1) => {
     if (isFetching.current) return;
     isFetching.current = true;
     setLoading(true);
     try {
-      const response = await axios.get("https://api.jikan.moe/v4/top/anime", {
-        params: { type: "tv", limit: LIMIT, page: pageNum, sort: "bypopularity" },
+      const response = await axios.get("https://api.jikan.moe/v4/seasons/now", {
+        params: { limit: LIMIT, page: pageNum },
       });
       const data = response.data.data || [];
       setAnimes((prev) => (pageNum === 1 ? data : [...prev, ...data]));
@@ -79,7 +77,7 @@ const Populares = () => {
   }, []);
 
   useEffect(() => {
-    fetchPopulares(1);
+    fetchNovidades(1);
     // eslint-disable-next-line
   }, []);
 
@@ -91,7 +89,7 @@ const Populares = () => {
       (entries) => {
         if (entries[0].isIntersecting && hasMore && !loading) {
           currentPage += 1;
-          fetchPopulares(currentPage);
+          fetchNovidades(currentPage);
         }
       },
       { threshold: 1 }
@@ -100,24 +98,24 @@ const Populares = () => {
     return () => {
       if (loaderRef.current) observer.unobserve(loaderRef.current);
     };
-  }, [hasMore, loading, fetchPopulares]);
+  }, [hasMore, loading, fetchNovidades]);
 
   const handleCardClick = useCallback((mal_id) => {
     navigate(`/Detalhes/${mal_id}`);
   }, [navigate]);
 
   return (
-    <div className="populares-container">
-      <h1 className="populares-title">Mais Populares</h1>
-      <p className="populares-desc">Os animes mais famosos de todos os tempos!</p>
-      <div className="populares-grid">
+    <div className="novidades-container">
+      <h1 className="novidades-title">Novidades</h1>
+      <p className="novidades-desc">Confira os animes lançados recentemente!</p>
+      <div className="novidades-grid">
         {animes.map((anime) => {
           const imgSrc =
             altImages[anime.mal_id] ||
             getHighQualityImage(anime);
           return (
             <div
-              className="populares-card"
+              className="novidade-card"
               key={anime.mal_id}
               tabIndex={0}
               role="button"
@@ -128,22 +126,22 @@ const Populares = () => {
               <img
                 src={imgSrc}
                 alt={anime.title}
-                className="populares-img"
+                className="novidade-img"
                 loading="lazy"
               />
-              <div className="populares-info">
-                <h3 className="populares-anime-title">{anime.title}</h3>
-                <div className="populares-meta">
+              <div className="novidade-info">
+                <h3 className="novidade-title">{anime.title}</h3>
+                <div className="novidade-meta">
                   <Estrelas avaliacao={Number(anime.score) || 0} />
-                  <span className="populares-score">{anime.score ?? "N/A"}</span>
-                  <span className="populares-year">{anime.year ?? "?"}</span>
+                  <span className="novidade-score">{anime.score ?? "N/A"}</span>
+                  <span className="novidade-year">{anime.year ?? "?"}</span>
                 </div>
-                <p className="populares-synopsis">
+                <p className="novidade-synopsis">
                   {anime.synopsis ? anime.synopsis.slice(0, 90) + "..." : "Sem sinopse disponível"}
                 </p>
                 <Link
                   to={`/Detalhes/${anime.mal_id}`}
-                  className="populares-btn"
+                  className="novidade-btn"
                   tabIndex={-1}
                   onClick={e => e.stopPropagation()}
                 >
@@ -156,13 +154,13 @@ const Populares = () => {
       </div>
       <div ref={loaderRef} style={{ height: 1 }} />
       {loading && (
-        <div className="populares-loading">Carregando...</div>
+        <div className="novidade-loading">Carregando...</div>
       )}
       {!loading && animes.length === 0 && (
-        <p className="populares-empty">Nenhum anime popular encontrado.</p>
+        <p className="novidades-empty">Nenhum anime recente encontrado.</p>
       )}
     </div>
   );
 };
 
-export default Populares;
+export default Novidades;

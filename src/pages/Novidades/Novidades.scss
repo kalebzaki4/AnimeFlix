@@ -1,4 +1,4 @@
-.populares-container {
+.novidades-container {
   padding: 32px 16px 48px 16px;
   background: var(--fundo);
   color: var(--branco);
@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.populares-title {
+.novidades-title {
   font-size: 2.5rem;
   font-weight: bold;
   color: var(--primaria);
@@ -16,14 +16,14 @@
   text-align: center;
 }
 
-.populares-desc {
+.novidades-desc {
   color: var(--cor-texto);
   font-size: 1.2rem;
   margin-bottom: 24px;
   text-align: center;
 }
 
-.populares-grid {
+.novidades-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 24px;
@@ -31,7 +31,7 @@
   max-width: 1200px;
 }
 
-.populares-card {
+.novidade-card {
   background: var(--superficie);
   border-radius: var(--raio-16);
   box-shadow: 0 2px 8px #0003;
@@ -44,16 +44,16 @@
   outline: none;
 }
 
-.populares-card:hover {
+.novidade-card:hover {
   transform: translateY(-6px) scale(1.03);
   box-shadow: 0 6px 24px #0005;
 }
 
-.populares-card:focus {
+.novidade-card:focus {
   box-shadow: 0 0 0 3px var(--primaria-variacao);
 }
 
-.populares-img {
+.novidade-img {
   width: 100%;
   height: 320px;
   object-fit: cover;
@@ -61,14 +61,14 @@
   border-bottom: 1px solid #333;
 }
 
-.populares-info {
+.novidade-info {
   padding: 16px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.populares-anime-title {
+.novidade-title {
   font-size: 1.2rem;
   font-weight: bold;
   color: var(--cor-sobre-superficie);
@@ -76,20 +76,20 @@
   min-height: 48px;
 }
 
-.populares-meta {
+.novidade-meta {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 8px;
 }
 
-.populares-score {
+.novidade-score {
   color: var(--cor-avaliacao);
   font-weight: bold;
   font-size: 1rem;
 }
 
-.populares-year {
+.novidade-year {
   background: var(--primaria);
   color: #fff;
   border-radius: 8px;
@@ -98,14 +98,14 @@
   margin-left: auto;
 }
 
-.populares-synopsis {
+.novidade-synopsis {
   color: var(--cor-texto);
   font-size: 0.95rem;
   margin-bottom: 12px;
   min-height: 48px;
 }
 
-.populares-btn {
+.novidade-btn {
   background: var(--primaria);
   color: #fff;
   border: none;
@@ -119,11 +119,11 @@
   margin-top: auto;
 }
 
-.populares-btn:hover {
+.novidade-btn:hover {
   background: var(--primaria-variacao);
 }
 
-.populares-vermais {
+.novidade-vermais {
   margin: 32px auto 0 auto;
   background: var(--primaria);
   color: #fff;
@@ -137,28 +137,28 @@
   box-shadow: 0 2px 8px #0002;
 }
 
-.populares-vermais:hover {
+.novidade-vermais:hover {
   background: var(--primaria-variacao);
 }
 
-.populares-empty {
-  color: var(--cor-texto);
-  font-size: 1.3rem;
-  margin-top: 32px;
-}
-
-.populares-loading {
+.novidade-loading {
   color: var(--primaria);
   font-size: 1.2rem;
   margin: 32px 0 0 0;
   text-align: center;
 }
 
+.novidades-empty {
+  color: var(--cor-texto);
+  font-size: 1.3rem;
+  margin-top: 32px;
+}
+
 @media (max-width: 600px) {
-  .populares-img {
+  .novidade-img {
     height: 180px;
   }
-  .populares-card {
+  .novidade-card {
     min-height: 320px;
   }
 }

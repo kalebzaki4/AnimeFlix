@@ -11,6 +11,10 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import { useAuth } from './context/AuthContext';
 import Populares from './pages/Populares';
+import Novidades from './pages/Novidades';
+import AZ from './pages/AZ';
+import Simulcasts from './pages/Simulcasts';
+import Calendario from './pages/Calendario';
 
 // App principal com rotas e alertas globais
 function App() {
@@ -31,6 +35,10 @@ function App() {
         <Route path='/Detalhes/:animeId' element={<PaginaDetalhes />} />
         <Route path='/search' element={<ResultadoAnimes />} />
         <Route path='/popular' element={<Populares />} />
+        <Route path='/novidades' element={<Novidades />} />
+        <Route path='/az' element={<AZ />} />
+        <Route path='/simulcasts' element={<Simulcasts />} />
+        <Route path='/calendario' element={<Calendario />} />
         <Route path='*' element={<Erro404 />} />
       </Routes>
       <Footer />
