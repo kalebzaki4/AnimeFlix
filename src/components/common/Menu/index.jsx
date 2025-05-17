@@ -286,21 +286,28 @@ export default function Menu() {
       </header>
 
       <div className={`overlay ${menuActive ? "active" : ""}`} ref={overlayRef}>
-        <Link
-          to="/"
-          onClick={() => {
-            handleMenuItemClick("home");
-            closeOverlay();
-          }}
-        >
-          <img
-            className="menu-overlay-logo"
-            src={logo}
-            alt="Logo do Animeflix"
-            width={200}
-          />
-        </Link>
-        <div className={`menu-overlay ${menuActive ? "active" : ""}`}>
+        <div className={`menu-overlay${menuActive ? " active" : ""}`}>
+          <button
+            className="overlay-close"
+            aria-label="Fechar menu"
+            onClick={closeOverlay}
+          >
+            ×
+          </button>
+          <Link
+            to="/"
+            onClick={() => {
+              handleMenuItemClick("home");
+              closeOverlay();
+            }}
+          >
+            <img
+              className="menu-overlay-logo"
+              src={logo}
+              alt="Logo do Animeflix"
+              width={200}
+            />
+          </Link>
           <div className="menu-section">
             <span className="navegar-span">NAVEGAR</span>
             {menuItems.map((item) => (
@@ -323,6 +330,14 @@ export default function Menu() {
         className={`overlay ${userMenuActive ? "active" : ""}`}
         ref={userOverlayRef}
       >
+        {/* Botão X para fechar o menu do usuário */}
+        <button
+          className="overlay-close"
+          aria-label="Fechar menu do usuário"
+          onClick={closeUserOverlay}
+        >
+          ×
+        </button>
         <div className={`menu-overlay-2 ${userMenuActive ? "active" : ""}`}>
           <div className="menu-section-2">
             <img
