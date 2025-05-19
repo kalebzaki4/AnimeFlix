@@ -33,13 +33,10 @@ export default function Inicio() {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
 
-  // Mostrar popup só se ainda não aceitou cookies
-  const [showCookiePopup, setShowCookiePopup] = useState(() => {
+  const [showCookiePopup] = useState(() => {
     return !localStorage.getItem("cookiesAccepted");
   });
-  const [cookieFadeOut, setCookieFadeOut] = useState(false);
 
-  // Bloquear rolagem enquanto o popup estiver aberto
   useEffect(() => {
     if (showCookiePopup) {
       document.body.style.overflow = "hidden";
@@ -50,15 +47,6 @@ export default function Inicio() {
       document.body.style.overflow = "";
     };
   }, [showCookiePopup]);
-
-  const handleAcceptCookies = () => {
-    setCookieFadeOut(true);
-    setTimeout(() => {
-      setShowCookiePopup(false);
-      setCookieFadeOut(false);
-      localStorage.setItem("cookiesAccepted", "true"); // Marca como aceito
-    }, 500); // tempo igual ao da animação fadeOut
-  };
 
   const maxAnimes = isMobile ? 8 : 25;
 
@@ -124,14 +112,19 @@ export default function Inicio() {
     return null;
   }, [lancamentos]);
 
-  // Estado para curiosidade aleatória
-  const [curioIndex, setCurioIndex] = useState(() => Math.floor(Math.random() * 4));
   const curiosidades = [
     "O anime mais longo é Sazae-san, com mais de 7500 episódios.",
     "One Piece já vendeu mais de 500 milhões de cópias de mangá.",
     "O termo 'otaku' no Japão tem um significado diferente do ocidente.",
     "O Studio Ghibli ganhou um Oscar com 'A Viagem de Chihiro'.",
+    "Naruto foi inspirado em Dragon Ball.",
+    "O criador de Death Note também criou Bakuman.",
+    "Pokémon já teve mais de 1200 episódios.",
+    "O mangá mais vendido da história é One Piece.",
+    "O termo 'anime' no Japão significa qualquer animação.",
+    "O primeiro anime colorido foi Hakujaden (1958)."
   ];
+  const [curioIndex, setCurioIndex] = useState(() => Math.floor(Math.random() * curiosidades.length));
   const handleNovaCuriosidade = () => {
     let novo;
     do {
@@ -140,7 +133,6 @@ export default function Inicio() {
     setCurioIndex(novo);
   };
 
-  // Ranking de gêneros (mock)
   const rankingGeneros = [
     { genero: "Ação", count: 120 },
     { genero: "Comédia", count: 95 },
@@ -150,282 +142,523 @@ export default function Inicio() {
   ];
   const maxGenero = Math.max(...rankingGeneros.map(g => g.count));
 
-  // Notícias recentes (mock)
-  const noticiasRecentes = [
-    {
-      titulo: "Novo filme de Demon Slayer anunciado!",
-      data: "2024-06-10",
-      link: "#",
-      img: "https://cdn.myanimelist.net/images/anime/1704/128897.jpg",
-    },
-    {
-      titulo: "Attack on Titan ganha spin-off em mangá",
-      data: "2024-06-08",
-      link: "#",
-      img: "https://cdn.myanimelist.net/images/anime/10/47347.jpg",
-    },
-    {
-      titulo: "My Hero Academia terá 7ª temporada",
-      data: "2024-06-05",
-      link: "#",
-      img: "https://cdn.myanimelist.net/images/anime/10/78745.jpg",
-    },
-  ];
+  const [noticiasRecentes, setNoticiasRecentes] = useState([]);
+  const [noticiasLoading, setNoticiasLoading] = useState(true);
+  const [noticiaIndex, setNoticiaIndex] = useState(0);
+
+  const handleNextNoticia = useCallback(() => {
+    setNoticiaIndex((prev) => (prev + 1) % noticiasRecentes.length);
+  }, [noticiasRecentes.length]);
+
+  const handlePrevNoticia = useCallback(() => {
+    setNoticiaIndex((prev) => (prev - 1 + noticiasRecentes.length) % noticiasRecentes.length);
+  }, [noticiasRecentes.length]);
+
+  useEffect(() => {
+    async function fetchNoticias() {
+      setNoticiasLoading(true);
+      try {
+        const resp = await axios.get("https://api.jikan.moe/v4/anime/1/news", {
+          params: { limit: 5 }
+        });
+        const noticias = resp.data.data.map(n => ({
+          titulo: n.title,
+          data: n.date?.slice(0, 10) || "",
+          link: n.url,
+          img: n.images?.jpg?.image_url || "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png"
+        }));
+        setNoticiasRecentes(noticias);
+      } catch {
+        // Fallback local se a API falhar
+        setNoticiasRecentes([
+          {
+            titulo: "Novo filme de Demon Slayer anunciado!",
+            data: "2024-06-10",
+            link: "#",
+            img: "https://cdn.myanimelist.net/images/anime/1704/128897.jpg",
+          },
+          {
+            titulo: "Attack on Titan ganha spin-off em mangá",
+            data: "2024-06-08",
+            link: "#",
+            img: "https://cdn.myanimelist.net/images/anime/10/47347.jpg",
+          },
+          {
+            titulo: "My Hero Academia terá 7ª temporada",
+            data: "2024-06-05",
+            link: "#",
+            img: "https://cdn.myanimelist.net/images/anime/10/78745.jpg",
+          },
+        ]);
+      } finally {
+        setNoticiasLoading(false);
+      }
+    }
+    fetchNoticias();
+  }, []);
 
   if (loading) return <TelaCarregamento />;
 
   return (
-    <>
-      {showCookiePopup && (
-        <>
-          {/* Overlay bloqueando toda a interação */}
-          <div
-            style={{
-              position: "fixed",
-              inset: 0,
-              background: "rgba(0,0,0,0.7)",
-              zIndex: 9998,
-              pointerEvents: "auto",
-            }}
-            tabIndex={-1}
-            aria-hidden="true"
-          />
-          <div
-            className={`cookie-popup${cookieFadeOut ? " fade-out" : " slide-up"}`}
-            style={{
-              position: "fixed",
-              bottom: 0,
-              left: 0,
-              width: "100vw",
-              background: "#222",
-              color: "#fff",
-              padding: "18px 12px 12px 12px",
-              zIndex: 9999,
-              textAlign: "center",
-              boxShadow: "0 -2px 16px #0005",
-              fontSize: "1rem"
-            }}
-            role="dialog"
-            aria-modal="true"
-          >
-            Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa{" "}
-            <a href="/politica-de-privacidade" style={{ color: "#e50914", textDecoration: "underline" }}>Política de Privacidade</a>.
-            <br />
-            <button
-              onClick={handleAcceptCookies}
-              style={{
-                marginTop: 10,
-                background: "#e50914",
-                color: "#fff",
-                border: "none",
-                borderRadius: 20,
-                padding: "8px 24px",
-                fontWeight: "bold",
-                cursor: "pointer",
-                fontSize: "1rem",
-                boxShadow: "0 2px 8px #0002",
-                position: "relative",
-                left: "30%",
-              }}
-              autoFocus
-            >
-              Aceitar e continuar
-            </button>
-          </div>
-        </>
-      )}
+    <div>
       <div style={fadeInStyle}>
         <Banner animes={animesFamosos.slice(0, maxAnimes)} onClick={handleClick} />
-        <ListaDeAnimesHorizontal
-          title="Mais Famosos"
-          description="Os animes mais populares do momento"
-          animes={animesFamosos.slice(0, maxAnimes)}
-          onClick={handleClick}
-          disableLoadingIndicator
-          loadMoreAnimes={() => {}}
-        />
-        <ListaDeAnimesHorizontal
-          title="Lançamentos"
-          description="Os animes mais recentes da temporada"
-          animes={lancamentos.slice(0, maxAnimes)}
-          onClick={handleClick}
-          disableLoadingIndicator
-          loadMoreAnimes={() => {}}
-        />
-        {isAuthenticated && savedAnimes.length > 0 && (
-          <ListaDeAnimesHorizontal
-            title="Animes Salvos"
-            description="Seus animes favoritos salvos"
-            animes={savedAnimes.slice(0, maxAnimes)}
-            onClick={handleClick}
-            disableLoadingIndicator
-            loadMoreAnimes={() => {}}
-          />
-        )}
-        {/* Anime do Dia */}
-        {animeDoDia && (
-          <section style={{
-            margin: "1.2rem 0",
-            background: "linear-gradient(90deg, #23272f 80%, #ffb30022 100%)",
-            borderRadius: 18,
-            padding: 18,
-            boxShadow: "0 2px 16px #0005",
-            display: "flex",
-            flexDirection: "column",
-            gap: 10
-          }}>
-            <h2 style={{ color: "#ffb300", marginBottom: 6, letterSpacing: 1.2, fontWeight: 700, fontSize: 22 }}>Anime do Dia</h2>
-            <div style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap" }}>
-              <img src={animeDoDia.images?.jpg?.image_url} alt={animeDoDia.title}
-                style={{ width: 100, borderRadius: 12, boxShadow: "0 2px 8px #0007" }} />
-              <div style={{ flex: 1 }}>
-                <h3 style={{ margin: 0, color: "#fff", fontWeight: 600, fontSize: 20 }}>{animeDoDia.title}</h3>
-                <Estrelas avaliacao={animeDoDia.score} />
-                <p style={{ fontSize: 15, color: "#ccc", margin: "8px 0", lineHeight: 1.4 }}>
-                  {animeDoDia.synopsis?.slice(0, 140)}...
-                </p>
-                <button
-                  onClick={() => navigate(`/Detalhes/${animeDoDia.mal_id}`)}
-                  style={{
-                    background: "#ffb300",
-                    color: "#181818",
-                    border: "none",
-                    borderRadius: 20,
-                    padding: "7px 22px",
-                    fontWeight: "bold",
-                    cursor: "pointer",
-                    fontSize: "1rem",
-                    marginTop: 4,
-                    boxShadow: "0 2px 8px #0002",
-                    transition: "background 0.2s"
-                  }}
-                >
-                  Ver detalhes
-                </button>
-              </div>
-            </div>
-          </section>
-        )}
-        {/* Curiosidades */}
-        <section style={{
-          margin: "1.2rem 0",
+      </div>
+
+      <ListaDeAnimesHorizontal
+        title="Mais Famosos"
+        description="Os animes mais populares do momento"
+        animes={animesFamosos.slice(0, maxAnimes)}
+        onClick={handleClick}
+        disableLoadingIndicator
+        loadMoreAnimes={() => {}}
+      />
+
+      <div style={{ height: isMobile ? 10 : 18 }} />
+
+      <section
+        style={{
+          margin: isMobile ? "0 0 40px 0" : "0 0 18px 0",
           background: "linear-gradient(90deg, #23272f 80%, #e5091422 100%)",
-          borderRadius: 18,
-          padding: 18,
-          boxShadow: "0 2px 16px #0004",
+          borderRadius: 14,
+          padding: isMobile ? 11 : 18,
+          boxShadow: "0 2px 12px #0003",
           display: "flex",
           flexDirection: "column",
-          gap: 10
+          gap: 8,
+        }}
+      >
+        <h2 style={{
+          color: "#e50914",
+          marginBottom: 4,
+          letterSpacing: 1.1,
+          fontWeight: 700,
+          fontSize: isMobile ? 17 : 22
         }}>
-          <h2 style={{ color: "#e50914", marginBottom: 6, letterSpacing: 1.2, fontWeight: 700, fontSize: 22 }}>Curiosidade do Mundo dos Animes</h2>
-          <div style={{
+          Curiosidade do Mundo dos Animes
+        </h2>
+        <div
+          style={{
             color: "#fff",
-            fontSize: 16,
-            fontWeight: 500,
-            marginBottom: 10,
-            background: "#181818",
-            borderRadius: 8,
-            padding: "12px 16px",
-            boxShadow: "0 1px 6px #0002",
-            borderLeft: "4px solid #e50914",
-            transition: "background 0.2s"
-          }}>
-            {curiosidades[curioIndex]}
-          </div>
-          <button
-            onClick={handleNovaCuriosidade}
-            style={{
-              background: "#e50914",
-              color: "#fff",
-              border: "none",
-              borderRadius: 20,
-              padding: "6px 18px",
-              fontWeight: "bold",
-              cursor: "pointer",
-              fontSize: "0.95rem",
-              boxShadow: "0 2px 8px #0002",
-              alignSelf: "flex-start",
-              transition: "background 0.2s"
-            }}
-          >
-            Outra curiosidade
-          </button>
-        </section>
-        {/* Ranking de Gêneros */}
-        <section style={{
-          margin: "1.2rem 0",
-          background: "#23272f",
-          borderRadius: 18,
-          padding: 18,
-          boxShadow: "0 2px 16px #0004"
-        }}>
-          <h2 style={{ color: "#ffb300", marginBottom: 6, letterSpacing: 1.2, fontWeight: 700, fontSize: 22 }}>Ranking de Gêneros</h2>
-          <ol style={{ margin: 0, paddingLeft: 20 }}>
-            {rankingGeneros.map((g) => (
-              <li key={g.genero} style={{
-                color: "#eee",
-                marginBottom: 10,
-                fontWeight: 500,
-                display: "flex",
-                alignItems: "center"
-              }}>
-                <span style={{ minWidth: 90, display: "inline-block" }}>{g.genero}</span>
-                <span style={{
-                  display: "inline-block",
-                  verticalAlign: "middle",
-                  marginLeft: 10,
-                  background: "linear-gradient(90deg, #ffb300 60%, #fffbe0 100%)",
-                  borderRadius: 8,
-                  height: 12,
-                  width: `${Math.round((g.count / maxGenero) * 160)}px`,
-                  maxWidth: 160,
-                  minWidth: 30,
-                  transition: "width 0.3s"
-                }} />
-                <span style={{ color: "#ffb300", marginLeft: 10, fontSize: 13 }}>
-                  ({g.count} animes)
-                </span>
-              </li>
-            ))}
-          </ol>
-        </section>
-        {/* Notícias Recentes */}
-        <section style={{
-          margin: "1.2rem 0",
-          background: "#23272f",
-          borderRadius: 18,
-          padding: 18,
-          boxShadow: "0 2px 16px #0004"
-        }}>
-          <h2 style={{ color: "#ffb300", marginBottom: 6, letterSpacing: 1.2, fontWeight: 700, fontSize: 22 }}>Notícias Recentes</h2>
-          <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none" }}>
-            {noticiasRecentes.map((noticia) => (
-              <li key={noticia.titulo} style={{
-                color: "#eee",
-                marginBottom: 10,
+            fontSize: isMobile ? 14 : 16,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            background: isMobile ? "linear-gradient(90deg, #23272f 60%, #e5091440 100%)" : "none",
+            borderRadius: isMobile ? 12 : 0,
+            boxShadow: isMobile ? "0 2px 8px #0002" : "none",
+            padding: isMobile ? "10px 8px" : 0,
+            position: "relative",
+            minHeight: isMobile ? 56 : undefined,
+            transition: "background 0.3s"
+          }}
+        >
+          {isMobile && (
+            <span
+              style={{
+                fontSize: 22,
+                marginRight: 8,
+                color: "#ffb300",
+                flexShrink: 0,
                 display: "flex",
                 alignItems: "center",
-                gap: 12,
-                background: "#181818",
+                animation: "curioFadeIn 0.7s"
+              }}
+              aria-hidden="true"
+            >
+              <span role="img" aria-label="lâmpada">💡</span>
+            </span>
+          )}
+          <span
+            key={curioIndex}
+            style={{
+              fontWeight: 500,
+              color: "#fff",
+              flex: 1,
+              textAlign: isMobile ? "left" : "initial",
+              animation: "curioFadeIn 0.7s"
+            }}
+          >
+            {curiosidades[curioIndex]}
+          </span>
+          <button
+            style={{
+              background: isMobile ? "linear-gradient(90deg, #ffb300 70%, #fffbe0 100%)" : "#e50914",
+              color: isMobile ? "#181818" : "#fff",
+              border: "none",
+              borderRadius: 8,
+              padding: isMobile ? "4px 12px" : "6px 18px",
+              fontWeight: "bold",
+              cursor: "pointer",
+              marginLeft: 12,
+              fontSize: isMobile ? 13 : 15,
+              boxShadow: isMobile ? "0 2px 8px #0002" : "none",
+              transition: "background 0.2s, color 0.2s"
+            }}
+            onClick={handleNovaCuriosidade}
+            aria-label="Nova curiosidade"
+          >
+            {isMobile ? (
+              <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                <span role="img" aria-label="trocar">🔄</span>
+                Nova
+              </span>
+            ) : "Nova Curiosidade"}
+          </button>
+          <style>
+            {`
+              @keyframes curioFadeIn {
+                from { opacity: 0; transform: translateY(10px);}
+                to { opacity: 1; transform: translateY(0);}
+              }
+            `}
+          </style>
+        </div>
+      </section>
+
+      <div style={{ height: isMobile ? 10 : 18 }} />
+
+      <ListaDeAnimesHorizontal
+        title="Lançamentos"
+        description="Os animes mais recentes da temporada"
+        animes={lancamentos.slice(0, maxAnimes)}
+        onClick={handleClick}
+        disableLoadingIndicator
+        loadMoreAnimes={() => {}}
+      />
+      
+      <section style={{
+        margin: isMobile ? "12px 0" : "1.2rem 0",
+        background: "linear-gradient(90deg, #181818 80%, #ffb30022 100%)",
+        borderRadius: 14,
+        padding: isMobile ? 10 : 18,
+        boxShadow: "0 2px 12px #0002"
+      }}>
+        <h2 style={{
+          color: "#ffb300",
+          marginBottom: 4,
+          letterSpacing: 1.1,
+          fontWeight: 700,
+          fontSize: isMobile ? 17 : 22
+        }}>Ranking de Gêneros</h2>
+        <ol style={{ color: "#fff", fontSize: isMobile ? 13 : 16, paddingLeft: 18 }}>
+          {rankingGeneros.map((g, i) => (
+            <li key={g.genero} style={{ marginBottom: 6, display: "flex", alignItems: "center" }}>
+              <span style={{ fontWeight: 600, minWidth: 70 }}>{i + 1}. {g.genero}</span>
+              <div style={{
+                marginLeft: 8,
+                background: "linear-gradient(90deg, #ffb300 60%, #fffbe0 100%)",
                 borderRadius: 8,
-                padding: "7px 10px",
-                boxShadow: "0 1px 4px #0003"
+                height: 10,
+                width: `${Math.round((g.count / maxGenero) * (isMobile ? 90 : 160))}px`,
+                maxWidth: isMobile ? 90 : 160,
+                minWidth: 20,
+                transition: "width 0.3s"
+              }} />
+              <span style={{ color: "#ffb300", marginLeft: 8, fontSize: isMobile ? 11 : 13 }}>
+                ({g.count} animes)
+              </span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {isAuthenticated && savedAnimes.length > 0 && (
+        <ListaDeAnimesHorizontal
+          title="Animes Salvos"
+          description="Seus animes favoritos salvos"
+          animes={savedAnimes.slice(0, maxAnimes)}
+          onClick={handleClick}
+          disableLoadingIndicator
+          loadMoreAnimes={() => {}}
+        />
+      )}
+
+      {animeDoDia && (
+        <section style={{
+          margin: isMobile ? "12px 0" : "1.2rem 0",
+          background: "linear-gradient(90deg, #23272f 80%, #ffb30022 100%)",
+          borderRadius: 14,
+          padding: isMobile ? 10 : 18,
+          boxShadow: "0 2px 12px #0004",
+          display: "flex",
+          flexDirection: "column",
+          gap: 8
+        }}>
+          <h2 style={{
+            color: "#ffb300",
+            marginBottom: 4,
+            letterSpacing: 1.1,
+            fontWeight: 700,
+            fontSize: isMobile ? 17 : 22
+          }}>Anime do Dia</h2>
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            gap: isMobile ? 10 : 18,
+            flexWrap: "wrap"
+          }}>
+            <img src={animeDoDia.images?.jpg?.image_url} alt={animeDoDia.title}
+              style={{ width: isMobile ? 70 : 100, borderRadius: 10, boxShadow: "0 2px 8px #0007" }} />
+            <div style={{ flex: 1 }}>
+              <h3 style={{
+                margin: 0,
+                color: "#fff",
+                fontWeight: 600,
+                fontSize: isMobile ? 15 : 20
+              }}>{animeDoDia.title}</h3>
+              <Estrelas avaliacao={animeDoDia.score} />
+              <p style={{
+                fontSize: isMobile ? 12 : 15,
+                color: "#ccc",
+                margin: "8px 0",
+                lineHeight: 1.4
               }}>
-                <img src={noticia.img} alt="thumb" style={{
-                  width: 44, height: 44, borderRadius: 6, objectFit: "cover", boxShadow: "0 1px 4px #0004"
-                }} />
-                <div style={{ flex: 1 }}>
-                  <a href={noticia.link} target="_blank" rel="noopener noreferrer"
-                    style={{ color: "#ffb300", textDecoration: "underline", fontWeight: 500, fontSize: 15 }}>
-                    {noticia.titulo}
-                  </a>
-                  <div style={{ fontSize: 12, color: "#aaa", marginTop: 2 }}>{noticia.data}</div>
-                </div>
-              </li>
-            ))}
-          </ul>
+                {animeDoDia.synopsis?.slice(0, 140)}...
+              </p>
+              <button
+                onClick={() => navigate(`/Detalhes/${animeDoDia.mal_id}`)}
+                style={{
+                  background: "#ffb300",
+                  color: "#181818",
+                  border: "none",
+                  borderRadius: 16,
+                  padding: isMobile ? "5px 14px" : "7px 22px",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                  fontSize: isMobile ? "0.95rem" : "1rem",
+                  marginTop: 4,
+                  boxShadow: "0 2px 8px #0002",
+                  transition: "background 0.2s"
+                }}
+              >
+                Ver detalhes
+              </button>
+            </div>
+          </div>
         </section>
-      </div>
-    </>
+      )}
+
+      <section
+        style={{
+          margin: isMobile ? "12px 0" : "1.2rem 0",
+          background: "#23272f",
+          borderRadius: 14,
+          padding: isMobile ? 10 : 18,
+          boxShadow: "0 2px 12px #0003"
+        }}
+      >
+        <h2 style={{
+          color: "#e50914",
+          marginBottom: 4,
+          letterSpacing: 1.1,
+          fontWeight: 700,
+          fontSize: isMobile ? 17 : 22
+        }}>Notícias Recentes</h2>
+        {noticiasLoading ? (
+          <div style={{ color: "#fff", fontSize: isMobile ? 13 : 16 }}>Carregando notícias...</div>
+        ) : noticiasRecentes.length > 0 ? (
+          <div className="noticia-carousel">
+            <button
+              onClick={handlePrevNoticia}
+              aria-label="Notícia anterior"
+              className="noticia-carousel-btn"
+              disabled={noticiasRecentes.length <= 1}
+              tabIndex={0}
+              type="button"
+            >
+              <span className="noticia-carousel-btn-icon">
+                {/* SVG seta esquerda */}
+                <svg width={isMobile ? 22 : 28} height={isMobile ? 22 : 28} viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="12" fill="#181818" opacity="0.7"/>
+                  <path d="M14.5 7L10 12L14.5 17" stroke="#ffb300" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            {(() => {
+              const noticia = noticiasRecentes[noticiaIndex];
+              const isDisabled = noticia.link === "#";
+              return (
+                <a
+                  key={noticiaIndex}
+                  href={isDisabled ? undefined : noticia.link}
+                  target={isDisabled ? undefined : "_blank"}
+                  rel={isDisabled ? undefined : "noopener noreferrer"}
+                  className={`noticia-carousel-card${isDisabled ? " noticia-carousel-card-disabled" : ""}`}
+                  tabIndex={0}
+                  style={isDisabled ? { cursor: "not-allowed", pointerEvents: "none", opacity: 0.7 } : {}}
+                  aria-disabled={isDisabled}
+                >
+                  <img
+                    src={noticia.img}
+                    alt={noticia.titulo}
+                    className="noticia-carousel-img"
+                  />
+                  <div className="noticia-carousel-info">
+                    <div className="noticia-carousel-title">
+                      {noticia.titulo}
+                    </div>
+                    <div className="noticia-carousel-date">
+                      <span role="img" aria-label="calendário" className="noticia-carousel-date-icon">🗓️</span>
+                      <span>{noticia.data}</span>
+                    </div>
+                  </div>
+                  <span className="noticia-carousel-arrow" aria-hidden="true">
+                    <svg width={isMobile ? 18 : 22} height={isMobile ? 18 : 22} viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="12" fill="#ffb300" opacity="0.15"/>
+                      <path d="M10 7L14.5 12L10 17" stroke="#ffb300" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                </a>
+              );
+            })()}
+            <button
+              onClick={handleNextNoticia}
+              aria-label="Próxima notícia"
+              className="noticia-carousel-btn"
+              disabled={noticiasRecentes.length <= 1}
+              tabIndex={0}
+              type="button"
+            >
+              <span className="noticia-carousel-btn-icon">
+                {/* SVG seta direita */}
+                <svg width={isMobile ? 22 : 28} height={isMobile ? 22 : 28} viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="12" fill="#181818" opacity="0.7"/>
+                  <path d="M10 7L14.5 12L10 17" stroke="#ffb300" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <style>{`
+              @keyframes noticiaFadeIn {
+                from { opacity: 0; transform: translateY(10px);}
+                to { opacity: 1; transform: translateY(0);}
+              }
+              .noticia-carousel {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: ${isMobile ? 110 : 120}px;
+                position: relative;
+                gap: ${isMobile ? 6 : 18}px;
+              }
+              .noticia-carousel-btn {
+                background: none;
+                border: none;
+                border-radius: 50%;
+                padding: 0;
+                margin: 0 2px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: box-shadow 0.2s, background 0.2s, opacity 0.2s;
+                box-shadow: 0 2px 8px #0002;
+                outline: none;
+              }
+              .noticia-carousel-btn:active,
+              .noticia-carousel-btn:focus-visible {
+                box-shadow: 0 0 0 2px #ffb30099;
+                background: #181818;
+              }
+              .noticia-carousel-btn:disabled {
+                opacity: 0.3;
+                cursor: default;
+                box-shadow: none;
+              }
+              .noticia-carousel-btn-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+              .noticia-carousel-card {
+                background: linear-gradient(120deg, #181818 80%, #e5091422 100%);
+                border-radius: 14px;
+                box-shadow: 0 2px 16px #0005;
+                color: #fff;
+                text-decoration: none;
+                display: flex;
+                flex-direction: ${isMobile ? "column" : "row"};
+                align-items: ${isMobile ? "flex-start" : "center"};
+                gap: ${isMobile ? 8 : 12}px;
+                padding: ${isMobile ? 12 : 18}px;
+                min-width: ${isMobile ? 170 : 260}px;
+                max-width: ${isMobile ? 220 : 360}px;
+                flex: 1;
+                position: relative;
+                overflow: hidden;
+                transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+                animation: noticiaFadeIn 0.7s;
+                margin: 0 2px;
+              }
+              .noticia-carousel-card:active {
+                transform: scale(0.97);
+              }
+              .noticia-carousel-card:focus-visible,
+              .noticia-carousel-card:hover {
+                box-shadow: 0 4px 18px #e5091455, 0 2px 12px #0006;
+                outline: none;
+                background: linear-gradient(120deg, #23272f 80%, #ffb30022 100%);
+              }
+              .noticia-carousel-card-disabled {
+                filter: grayscale(0.5);
+                pointer-events: none;
+                cursor: not-allowed;
+                opacity: 0.7;
+              }
+              .noticia-carousel-img {
+                width: ${isMobile ? 62 : 90}px;
+                height: ${isMobile ? 62 : 90}px;
+                object-fit: cover;
+                border-radius: 10px;
+                box-shadow: 0 2px 8px #0006;
+                margin-bottom: ${isMobile ? 6 : 0}px;
+                flex-shrink: 0;
+                background: #222;
+              }
+              .noticia-carousel-info {
+                flex: 1;
+                min-width: 0;
+              }
+              .noticia-carousel-title {
+                font-weight: 700;
+                font-size: ${isMobile ? 14 : 18}px;
+                margin-bottom: 2px;
+                color: #fff;
+                line-height: 1.2;
+                text-shadow: 0 1px 4px #0007;
+              }
+              .noticia-carousel-date {
+                color: #ffb300;
+                font-size: ${isMobile ? 11 : 13}px;
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                margin-top: 2px;
+              }
+              .noticia-carousel-date-icon {
+                font-size: ${isMobile ? 13 : 15}px;
+              }
+              .noticia-carousel-arrow {
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+                color: #ffb300;
+                font-size: ${isMobile ? 18 : 22}px;
+                opacity: 0.7;
+                pointer-events: none;
+                display: flex;
+                align-items: center;
+              }
+              .noticia-carousel-arrow svg {
+                display: block;
+              }
+            `}</style>
+          </div>
+        ) : (
+          <div style={{ color: "#fff", fontSize: isMobile ? 13 : 16 }}>Nenhuma notícia encontrada.</div>
+        )}
+      </section>
+    </div>
   );
 }
