@@ -95,7 +95,7 @@ const PaginaDetalhes = () => {
 
   const handleSaveAnime = () => {
     if (!isAuthenticated) {
-      navigate("/login"); // Redireciona para login se não autenticado
+      navigate("/login");
     } else {
       if (!animeDetails || !animeId) {
         console.error("Detalhes do anime ou ID inválido:", animeDetails, animeId);
@@ -156,7 +156,7 @@ const PaginaDetalhes = () => {
         </div>
       ) : (
         <div className="detalhes-trailer-placeholder">
-          <p>Trailer não disponível</p>
+          <span>Trailer não disponível</span>
           {animeDetails.trailer?.url && (
             <a
               href={animeDetails.trailer.url}
