@@ -28,7 +28,7 @@ const ResultadoAnimes = () => {
 
   const fetchAnimes = async (pageNumber) => {
     setLoading(true);
-    setError(null); // Reset error state before fetching
+    setError(null); 
     try {
       const response = await axios.get(`${API_BASE_URL}/anime`, {
         params: {
@@ -61,18 +61,19 @@ const ResultadoAnimes = () => {
     if (searchTerm) {
       const cachedResults = sessionStorage.getItem(`search_${searchTerm}`);
       if (!cachedResults) {
-        setAnimes([]); // Clear previous results
-        setPage(1); // Reset to the first page
-        setHasMore(true); // Reset pagination
-        fetchAnimes(1); // Fetch without debounce for initial load
+        setAnimes([]); 
+        setPage(1); 
+        setHasMore(true); 
+        fetchAnimes(1); 
       } else {
-        setAnimes(JSON.parse(cachedResults)); // Load cached results
+        setAnimes(JSON.parse(cachedResults));
         setSearchPerformed(true);
       }
     }
   }, [searchTerm]);
 
   const handleLoadMore = () => {
+    if (loading || !hasMore) return;
     const nextPage = page + 1;
     setPage(nextPage);
     fetchAnimes(nextPage);
@@ -87,7 +88,7 @@ const ResultadoAnimes = () => {
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <div className="error-message">{error}</div>;
   }
 
   if (searchPerformed && animes.length === 0) {
@@ -98,20 +99,20 @@ const ResultadoAnimes = () => {
     <article className="container-inative-2">
       <section className="movie-list" aria-label="Lista de animes">
         <div className="title-wrapper">
-          <h2 className="title-large">Resultados da Pesquisa</h2>
+          <h2 className="title-large" tabIndex={0}>Resultados da Pesquisa</h2>
         </div>
         <div className="grid-list">
           {animes.map((anime) => (
-            <div className="movie-card" key={anime.mal_id}>
+            <div className="movie-card" key={anime.mal_id} tabIndex={0} aria-label={`Anime: ${anime.title || "Sem título"}`}>
               <figure className="poster-box card-banner">
                 <img
-                  src={anime.images?.jpg?.image_url || "fallback-image-url.jpg"}
-                  alt={anime.title}
+                  src={anime.images?.jpg?.image_url || "/fallback-image.jpg"}
+                  alt={anime.title || "Anime sem título"}
                   className="img-cover"
-                  onError={(e) => (e.target.src = "fallback-image-url.jpg")}
+                  onError={(e) => (e.target.src = "/fallback-image.jpg")}
                 />
               </figure>
-              <h4 className="title">{anime.title}</h4>
+              <h4 className="title">{anime.title || "Sem título"}</h4>
               <div className="meta-list">
                 <div className="meta-item">
                   <img
@@ -128,7 +129,8 @@ const ResultadoAnimes = () => {
               <Link
                 to={`/Detalhes/${anime.mal_id}`}
                 className="card-btn"
-                title="Ver detalhes"
+                title={`Ver detalhes de ${anime.title || "anime"}`}
+                tabIndex={0}
               >
                 Detalhes
               </Link>
@@ -140,6 +142,7 @@ const ResultadoAnimes = () => {
             className="btn load-more"
             onClick={handleLoadMore}
             disabled={loading}
+            aria-busy={loading}
           >
             {loading ? "Carregando..." : "Ver Mais"}
           </button>

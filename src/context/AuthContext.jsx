@@ -27,8 +27,8 @@ const localStorageUtil = {
 const ALERT_TIMEOUT = 2000;
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(() =>
-    localStorageUtil.get("isAuthenticated", false)
+  const [user, setUser] = useState(() =>
+    localStorageUtil.get("animeflix_user", null)
   );
   const [savedAnimes, setSavedAnimes] = useState(() =>
     localStorageUtil.get("savedAnimes", [])
@@ -37,8 +37,8 @@ export const AuthProvider = ({ children }) => {
 
   // Sincroniza autenticação e animes salvos com localStorage
   useEffect(() => {
-    localStorageUtil.set("isAuthenticated", isAuthenticated);
-  }, [isAuthenticated]);
+    localStorageUtil.set("animeflix_user", user);
+  }, [user]);
 
   useEffect(() => {
     localStorageUtil.set("savedAnimes", savedAnimes);
@@ -47,8 +47,8 @@ export const AuthProvider = ({ children }) => {
   // Sincroniza logout entre abas
   useEffect(() => {
     const handleStorageChange = (event) => {
-      if (event.key === "isAuthenticated" && event.newValue === "false") {
-        setIsAuthenticated(false);
+      if (event.key === "animeflix_user" && event.newValue === "null") {
+        setUser(null);
       }
     };
     window.addEventListener("storage", handleStorageChange);
@@ -56,19 +56,22 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   // Login fake (pode ser adaptado para backend)
-  const login = ({ email, password }) => {
+  const login = ({ email, password, username }) => {
     if (!email || !password) {
       showAlert("Credenciais inválidas.", "error", 3000);
       return;
     }
-    setIsAuthenticated(true);
+    const userData = { email, username: username || email.split("@")[0] };
+    setUser(userData);
+    localStorageUtil.set("animeflix_user", userData);
     showAlert("Login realizado com sucesso!", "success");
   };
 
   // Logout
   const logout = () => {
-    setIsAuthenticated(false);
+    setUser(null);
     setSavedAnimes([]);
+    localStorageUtil.set("animeflix_user", null);
     showAlert("Logout realizado.", "info");
   };
 
@@ -111,7 +114,8 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        isAuthenticated,
+        isAuthenticated: !!user,
+        user,
         login,
         logout,
         savedAnimes,
@@ -119,6 +123,7 @@ export const AuthProvider = ({ children }) => {
         removeAnime,
         isAnimeSaved,
         alert,
+        showAlert,
         clearAlert,
       }}
     >

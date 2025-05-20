@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types"; // Importação do PropTypes
+import PropTypes from "prop-types"; 
 import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { validateEmail, validatePassword, sanitizeInput } from "../../utils/validationUtils"; // Adicionado sanitizeInput
+import { validateEmail, validatePassword, sanitizeInput } from "../../utils/validationUtils"; 
 import "./Login.scss";
 
 const ErrorMessage = ({ message }) => (
@@ -95,15 +95,12 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (isBlocked) {
-      setErrors({ email: "", password: ERROR_MESSAGES.tooManyAttempts });
-      return;
-    }
+    if (isBlocked || isLoading) return;
 
     const sanitizedEmail = sanitizeInput(email);
     const sanitizedPassword = sanitizeInput(password);
 
-    const emailError = validateEmail(sanitizedEmail) ? "" : ERROR_MESSAGES.emailInvalid;
+    const emailError = validateEmail(sanitizedEmail);
     const passwordError = validatePassword(sanitizedPassword);
 
     setErrors({ email: emailError, password: passwordError });
@@ -144,7 +141,7 @@ export default function Login() {
   };
 
   return (
-    <div className="login-container">
+    <div className="login-container" aria-live="polite">
       <h1 className="login-title">Login</h1>
       <form onSubmit={handleSubmit} className="login-form">
         <div className="form-group">

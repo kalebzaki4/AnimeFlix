@@ -4,65 +4,74 @@ import { Link } from "react-router-dom";
 import "./Banner.scss";
 import play from "../../../assets/images/play_circle.png";
 
+function getDailyIndexes(total, count) {
+  // Gera índices diferentes por dia, mas sempre os mesmos para o mesmo dia
+  const seed = Number(new Date().toISOString().slice(0, 10).replace(/-/g, ""));
+  let arr = [];
+  for (let i = 0; i < total; i++) arr.push(i);
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = (seed + i * 31) % (i + 1);
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr.slice(0, count);
+}
+
 export default function Banner({ animes }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Função para alternar entre os animes e rolar para o topo
-  const handlePosterClick = (index) => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setActiveIndex(index);
-  };
+  // Seleção dinâmica dos animes do banner (muda todo dia, mostra só 3)
+  const dailyIndexes = getDailyIndexes(animes.length, Math.min(animes.length, 3));
+  const dailyAnimes = dailyIndexes.map(idx => animes[idx]).filter(Boolean);
 
-  // UseEffect para gerenciar o intervalo de mudança de anime
   useEffect(() => {
+    setActiveIndex(0);
+    if (dailyAnimes.length <= 1) return;
     const intervalId = setInterval(() => {
       setActiveIndex((prevIndex) =>
-        prevIndex === animes.length - 1 ? 0 : prevIndex + 1
+        prevIndex === dailyAnimes.length - 1 ? 0 : prevIndex + 1
       );
-    }, 7000); // 7 segundos de intervalo
+    }, 7000);
+    return () => clearInterval(intervalId);
+  }, [animes.length, dailyAnimes.length]);
 
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [animes.length]);
+  const renderAnimeInfo = (anime) => (
+    <>
+      <h2 className="heading">{anime.title}</h2>
+      <div className="meta-list">
+        <div className="meta-item">{anime.year}</div>
+        <div className="meta-item card-badge">{anime.score}</div>
+        <div className="meta-item">Episódios: {anime.episodes || "N/A"}</div>
+      </div>
+      <p className="genre">
+        {anime.genres.map((genre) => genre.name).join(", ")}
+      </p>
+      <p className="banner-text">{anime.synopsis}</p>
+      <Link 
+        to={`/Detalhes/${anime.mal_id}`} 
+        className="btn" 
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        <img
+          src={play}
+          alt="Botão de Play"
+          width={24}
+          height={24}
+          aria-hidden="true"
+        />
+        <span className="span">Assistir</span>
+      </Link>
+    </>
+  );
 
-  // Função para renderizar informações de anime
-  const renderAnimeInfo = (anime) => {
-    return (
-      <>
-        <h2 className="heading">{anime.title}</h2>
-        <div className="meta-list">
-          <div className="meta-item">{anime.year}</div>
-          <div className="meta-item card-badge">{anime.score}</div>
-          <div className="meta-item">Episódios: {anime.episodes || "N/A"}</div>
-        </div>
-        <p className="genre">
-          {anime.genres.map((genre) => genre.name).join(", ")}
-        </p>
-        <p className="banner-text">{anime.synopsis}</p>
-        <Link 
-          to={`/Detalhes/${anime.mal_id}`} 
-          className="btn" 
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        >
-          <img
-            src={play}
-            alt="Botão de Play"
-            width={24}
-            height={24}
-            aria-hidden="true"
-          />
-          <span className="span">Assistir</span>
-        </Link>
-      </>
-    );
-  };
+  if (!dailyAnimes.length) {
+    return null;
+  }
 
   return (
     <article className="container">
       <section className="banner" aria-label="Animes Populares">
         <div className="banner-slider">
-          {animes.map((anime, index) => (
+          {dailyAnimes.map((anime, index) => (
             <div
               key={anime.mal_id}
               className={`slider-item ${index === activeIndex ? "active" : ""}`}
@@ -79,11 +88,11 @@ export default function Banner({ animes }) {
         </div>
         <div className="slider-control">
           <div className="control-inner">
-            {animes.map((anime, index) => (
+            {dailyAnimes.map((anime, index) => (
               <button
                 key={anime.mal_id}
                 className={`poster-box slider-item ${index === activeIndex ? "active" : ""}`}
-                onClick={() => handlePosterClick(index)}
+                onClick={() => setActiveIndex(index)}
                 aria-label={`Exibir detalhes do anime ${anime.title}`}
               >
                 <img

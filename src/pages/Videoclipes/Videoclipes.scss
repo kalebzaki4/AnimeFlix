@@ -1,0 +1,146 @@
+.videoclipes-container {
+  padding: 32px 16px 48px 16px;
+  background: var(--fundo);
+  color: var(--branco);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.videoclipes-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primaria);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.videoclipes-desc {
+  color: var(--cor-texto);
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.videoclipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 32px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.videoclipes-card {
+  background: var(--superficie);
+  border-radius: var(--raio-16);
+  box-shadow: 0 2px 8px #0003;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px;
+}
+
+.videoclipes-video-wrapper {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #222;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.videoclipes-video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.videoclipes-info {
+  text-align: center;
+}
+
+.videoclipes-type {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.95rem;
+  color: var(--cor-texto);
+  background: var(--primaria-variacao);
+  border-radius: 8px;
+  padding: 2px 12px;
+}
+
+.videoclipes-fallback {
+  width: 100%;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #181818;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  border-radius: 12px;
+  padding: 24px 8px;
+}
+
+.videoclipes-loading {
+  width: 100%;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primaria);
+  font-size: 1.1rem;
+  background: #181818;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.videoclipes-add-btn {
+  margin-bottom: 18px;
+}
+
+.videoclipes-form input,
+.videoclipes-form select {
+  width: 100%;
+  margin-bottom: 6px;
+  font-size: 1rem;
+}
+
+.videoclipes-remove-btn {
+  margin-top: 8px;
+}
+
+.videoclipes-card:focus-within,
+.videoclipes-card:focus {
+  outline: 2px solid var(--primaria);
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .videoclipes-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .videoclipes-card {
+    padding: 8px;
+  }
+  .videoclipes-video-wrapper {
+    min-height: 180px;
+  }
+  .videoclipes-form {
+    max-width: 100%;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .videoclipes-title {
+    font-size: 1.5rem;
+  }
+  .videoclipes-card {
+    padding: 4px;
+  }
+}

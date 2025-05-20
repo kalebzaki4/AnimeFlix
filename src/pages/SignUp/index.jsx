@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { validateEmail, validatePassword } from "../../utils/validationUtils";
+import { sanitizeInput, validateEmail, validatePassword, validateUsername } from "../../utils/validationUtils";
 import { useAuth } from "../../context/AuthContext";
 import Alert from "../../components/common/Alert";
 import "./SignUp.scss";
@@ -11,7 +11,8 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState({ email: "", password: "", confirmPassword: "" });
+  const [username, setUsername] = useState("");
+  const [errors, setErrors] = useState({ email: "", password: "", confirmPassword: "", username: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [alert, setAlert] = useState(null);
   const { login } = useAuth();
@@ -20,20 +21,33 @@ export default function SignUp() {
   const ERROR_MESSAGES = {
     emailInvalid: "Email inválido.",
     passwordInvalid: "A senha deve ter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais.",
-    passwordsNotMatch: "As senhas não coincidem."
+    passwordsNotMatch: "As senhas não coincidem.",
+    usernameInvalid: "Nome de usuário inválido. Use 3-15 letras, números ou _",
   };
 
-  // Validação do formulário
   const validateForm = () => {
-    const emailError = validateEmail(email) ? "" : ERROR_MESSAGES.emailInvalid;
-    const passwordError = validatePassword(password);
-    const confirmPasswordError = password === confirmPassword ? "" : ERROR_MESSAGES.passwordsNotMatch;
-    setErrors({ email: emailError, password: passwordError, confirmPassword: confirmPasswordError });
-    return !emailError && !passwordError && !confirmPasswordError;
+    const sanitizedEmail = sanitizeInput(email);
+    const sanitizedPassword = sanitizeInput(password);
+    const sanitizedConfirm = sanitizeInput(confirmPassword);
+    const sanitizedUsername = sanitizeInput(username);
+
+    const emailError = validateEmail(sanitizedEmail);
+    const passwordError = validatePassword(sanitizedPassword);
+    const confirmPasswordError = sanitizedPassword === sanitizedConfirm ? "" : ERROR_MESSAGES.passwordsNotMatch;
+    const usernameError = validateUsername(sanitizedUsername);
+
+    setErrors({
+      email: emailError,
+      password: passwordError,
+      confirmPassword: confirmPasswordError,
+      username: usernameError,
+    });
+    return !emailError && !passwordError && !confirmPasswordError && !usernameError;
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (isSubmitting) return;
     if (!validateForm()) return;
 
     setIsSubmitting(true);
@@ -42,15 +56,15 @@ export default function SignUp() {
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+      setUsername("");
       setAlert({ message: "Conta criada com sucesso!", type: "success" });
-      login({ email, password });
+      login({ email, password, username });
       navigate("/");
     }, 1500);
   };
 
   const togglePasswordVisibility = () => setPasswordVisible((v) => !v);
 
-  // Dica de senha para mobile
   const PasswordHint = () => (
     <div style={{
       fontSize: "0.85rem",
@@ -63,16 +77,15 @@ export default function SignUp() {
     </div>
   );
 
-  // Limpa todos os campos rapidamente
   const handleClear = () => {
     setEmail("");
     setPassword("");
     setConfirmPassword("");
-    setErrors({ email: "", password: "", confirmPassword: "" });
+    setUsername("");
+    setErrors({ email: "", password: "", confirmPassword: "", username: "" });
     setAlert(null);
   };
 
-  // Animação de entrada para o formulário
   const formAnimation = {
     animation: "fadeInDown 0.7s",
     '@keyframes fadeInDown': {
@@ -93,6 +106,23 @@ export default function SignUp() {
       <h1 className="signup-title">Criar Conta</h1>
       <form onSubmit={handleSubmit} className="signup-form" autoComplete="off" style={formAnimation}>
         <div className="form-group mobile-full-width">
+          <label htmlFor="username">Nome de Usuário:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            required
+            autoFocus
+            minLength={3}
+            maxLength={15}
+            pattern="^[a-zA-Z0-9_]{3,15}$"
+            placeholder="Seu nome de usuário"
+          />
+          {errors.username && <p className="error-message">{errors.username}</p>}
+        </div>
+        <div className="form-group mobile-full-width">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -101,7 +131,6 @@ export default function SignUp() {
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
-            autoFocus
             inputMode="email"
             pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
           />

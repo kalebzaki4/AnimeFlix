@@ -11,7 +11,7 @@ import userIcon from "../../../assets/images/user.svg";
 import { useAuth } from "../../../context/AuthContext"; 
 
 export default function Menu() {
-  const { isAuthenticated, logout } = useAuth(); // Adicionei logout
+  const { isAuthenticated, logout, user } = useAuth();
   const [searchActive, setSearchActive] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
   const [userMenuActive, setUserMenuActive] = useState(false);
@@ -330,7 +330,6 @@ export default function Menu() {
         className={`overlay ${userMenuActive ? "active" : ""}`}
         ref={userOverlayRef}
       >
-        {/* Botão X para fechar o menu do usuário */}
         <button
           className="overlay-close"
           aria-label="Fechar menu do usuário"
@@ -347,85 +346,227 @@ export default function Menu() {
               width={200}
             />
             <span className="navegar-span">OPÇÕES</span>
-            {!isAuthenticated && (
+            {!isAuthenticated ? (
               <>
-                <button>
-                  <Link
-                    to="/signup"
-                    className="menu-item-2"
-                    onClick={() => handleUserMenuItemClick("perfil")}
-                  >
-                    Criar Conta
-                  </Link>
-                  <Link
-                    to="/signup"
-                    className="menu-item-3"
-                    onClick={() => handleUserMenuItemClick("perfil")}
-                  >
-                    Criando uma conta você terá benefícios!
-                  </Link>
-                </button>
-                <button>
-                  <Link
-                    to="/login"
-                    className="menu-item-2"
-                    onClick={() => handleUserMenuItemClick("favoritos")}
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to="/login"
-                    className="menu-item-3"
-                    onClick={() => handleUserMenuItemClick("perfil")}
-                  >
-                    Criando uma conta você terá benefícios!
-                  </Link>
-                </button>
+                <Link
+                  to="/signup"
+                  className="menu-item-2"
+                  onClick={() => handleUserMenuItemClick("perfil")}
+                >
+                  Criar Conta
+                </Link>
+                <Link
+                  to="/signup"
+                  className="menu-item-3"
+                  onClick={() => handleUserMenuItemClick("perfil")}
+                >
+                  Criando uma conta você terá benefícios!
+                </Link>
+                <Link
+                  to="/login"
+                  className="menu-item-2"
+                  onClick={() => handleUserMenuItemClick("favoritos")}
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/login"
+                  className="menu-item-3"
+                  onClick={() => handleUserMenuItemClick("perfil")}
+                >
+                  Criando uma conta você terá benefícios!
+                </Link>
               </>
-            )}
-            {isAuthenticated && (
-              <button
-                className="menu-item-2"
-                onClick={() => {
-                  logout(); // Chama a função de logout
-                  closeUserOverlay(); // Fecha o menu
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 24,
+                  marginTop: 18,
+                  width: "100%",
                 }}
               >
-                Sair da Conta
-              </button>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 16,
+                    background: "#23272f",
+                    borderRadius: 16,
+                    padding: "18px 18px 14px 18px",
+                    width: "100%",
+                    maxWidth: 340,
+                    boxShadow: "0 2px 12px #0005",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                  }}
+                >
+                  <img
+                    src={userIcon}
+                    alt="Avatar"
+                    width={44}
+                    height={44}
+                    style={{
+                      borderRadius: "50%",
+                      background: "#181818",
+                      border: "2.5px solid #ffb300",
+                      boxShadow: "0 2px 8px #0002",
+                    }}
+                  />
+                  <div style={{ flex: 1 }}>
+                    <div
+                      style={{
+                        color: "#fff",
+                        fontWeight: 700,
+                        fontSize: 18,
+                        letterSpacing: 0.2,
+                        textShadow: "0 1px 4px #0008",
+                        marginBottom: 2,
+                      }}
+                    >
+                      {`Olá, ${user?.username || "Usuário"}!`}
+                    </div>
+                    <div
+                      style={{
+                        color: "#ffb300",
+                        fontSize: 13,
+                        fontWeight: 500,
+                        opacity: 0.85,
+                      }}
+                    >
+                      Conta ativa
+                    </div>
+                  </div>
+                  <button
+                    className="menu-item-2"
+                    style={{
+                      background: "#b71c1c",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: 8,
+                      padding: "10px 18px",
+                      fontWeight: "bold",
+                      fontSize: "1rem",
+                      cursor: "pointer",
+                      transition: "background 0.2s",
+                      boxShadow: "0 2px 8px #0003",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 7,
+                    }}
+                    onClick={() => {
+                      logout();
+                      closeUserOverlay();
+                    }}
+                    aria-label="Sair da Conta"
+                  >
+                    <svg width={20} height={20} viewBox="0 0 24 24" fill="none" style={{ verticalAlign: "middle" }}>
+                      <path d="M16 17L21 12L16 7" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M21 12H9" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M12 19C7.58172 19 4 15.4183 4 11C4 6.58172 7.58172 3 12 3" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <span>Sair</span>
+                  </button>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 10,
+                    width: "100%",
+                    marginTop: 6,
+                  }}
+                >
+                  {[
+                    {
+                      to: "/perfil",
+                      className: "menu-item-2",
+                      style: {
+                        background: "#ffb300",
+                        color: "#181818",
+                        borderRadius: 8,
+                        fontWeight: "bold",
+                        padding: "12px 0",
+                        textAlign: "center",
+                        marginBottom: 2,
+                        textDecoration: "none",
+                        fontSize: "1.05rem",
+                        boxShadow: "0 2px 8px #0002",
+                        letterSpacing: 0.1,
+                      },
+                      icon: "👤",
+                      label: "Meu Perfil",
+                      onClick: () => handleUserMenuItemClick("perfil"),
+                    },
+                    {
+                      to: "/configuracoes",
+                      className: "menu-item-2",
+                      style: {
+                        background: "#23272f",
+                        color: "#fff",
+                        borderRadius: 8,
+                        fontWeight: "bold",
+                        padding: "12px 0",
+                        textAlign: "center",
+                        marginBottom: 2,
+                        textDecoration: "none",
+                        fontSize: "1.05rem",
+                        boxShadow: "0 2px 8px #0002",
+                        letterSpacing: 0.1,
+                      },
+                      icon: "⚙️",
+                      label: "Configurações",
+                      onClick: () => handleUserMenuItemClick("configuracoes"),
+                    },
+                    {
+                      to: "/configuracoes",
+                      className: "menu-item-2",
+                      style: {
+                        background: "#23272f",
+                        color: "#fff",
+                        borderRadius: 8,
+                        fontWeight: "bold",
+                        padding: "12px 0",
+                        textAlign: "center",
+                        marginBottom: 2,
+                        textDecoration: "none",
+                        fontSize: "1.05rem",
+                        boxShadow: "0 2px 8px #0002",
+                        letterSpacing: 0.1,
+                      },
+                      icon: "🎁",
+                      label: "Cartão de Presente",
+                      onClick: () => handleUserMenuItemClick("configuracoes"),
+                    },
+                  ].map((item) => (
+                    <Link
+                      key={item.label}
+                      to={item.to}
+                      className={item.className}
+                      style={item.style}
+                      onClick={item.onClick}
+                    >
+                      <span role="img" aria-label={item.label.toLowerCase()} style={{ marginRight: 6 }}>{item.icon}</span>
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+                <div
+                  style={{
+                    marginTop: 18,
+                    width: "100%",
+                    textAlign: "center",
+                    color: "#b3b3b3",
+                    fontSize: 13,
+                    opacity: 0.85,
+                  }}
+                >
+                  <span role="img" aria-label="estrela">⭐</span> Obrigado por usar o AnimeFlix!
+                </div>
+              </div>
             )}
-            <button>
-              <Link
-                to="/configuracoes"
-                className="menu-item-2"
-                onClick={() => handleUserMenuItemClick("configuracoes")}
-              >
-                Cartão de Presente
-              </Link>
-              <Link
-                to="/perfil"
-                className="menu-item-3"
-                onClick={() => handleUserMenuItemClick("perfil")}
-              >
-                Já é membro? Entre Aqui!
-              </Link>
-            </button>
-            <button>
-              <Link
-                to="/configuracoes"
-                className="menu-item-2"
-                onClick={() => handleUserMenuItemClick("configuracoes")}
-              >
-                Configurações
-              </Link>
-              <Link
-                to="/perfil"
-                className="menu-item-3"
-                onClick={() => handleUserMenuItemClick("perfil")}
-              >
-                Tem um cartão de Presente? Resgate Aqui!
-              </Link>
-            </button>
             <button
               className="menu-item-button"
               onClick={() => handleUserMenuItemClick("configuracoes")}

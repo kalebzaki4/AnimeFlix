@@ -15,6 +15,7 @@ import Novidades from './pages/Novidades';
 import AZ from './pages/AZ';
 import Simulcasts from './pages/Simulcasts';
 import Calendario from './pages/Calendario';
+import Videoclipes from './pages/Videoclipes';
 
 // App principal com rotas e alertas globais
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path='/az' element={<AZ />} />
         <Route path='/simulcasts' element={<Simulcasts />} />
         <Route path='/calendario' element={<Calendario />} />
+        <Route path='/videoclipes' element={<Videoclipes />} />
         <Route path='*' element={<Erro404 />} />
       </Routes>
       <Footer />
