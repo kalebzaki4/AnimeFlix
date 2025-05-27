@@ -41,55 +41,57 @@ export default function AZ() {
   const navigate = useNavigate();
   const currentPage = useRef(1);
 
-  const fetchAZ = useCallback(async (pageNum = 1, letter = selectedLetter, isFirst = false) => {
-    if (isFetching.current || !letter) return;
-    isFetching.current = true;
-    if (isFirst) setInitialLoading(true);
-    setLoading(true);
-    try {
-      const response = await axios.get("https://api.jikan.moe/v4/anime", {
-        params: {
-          q: letter,
-          order_by: "popularity",
-          sort: "desc",
-          limit: LIMIT,
-          page: pageNum,
-        },
-      });
-      let data = response.data.data || [];
-
-      data = data
-        .filter((anime) => anime.title?.toUpperCase().startsWith(letter))
-        .sort((a, b) => (b.score || 0) - (a.score || 0));
-      setAnimes((prev) => (pageNum === 1 ? data : [...prev, ...data]));
-      setHasMore(response.data.pagination?.has_next_page && data.length > 0);
-
-      const missingHQ = data.filter(
-        (anime) => !anime.images?.jpg?.large_image_url
-      );
-      if (missingHQ.length > 0) {
-        const promises = missingHQ.map(async (anime) => {
-          const img = await fetchKitsuImage(anime.mal_id);
-          return { mal_id: anime.mal_id, img };
+  const fetchAZ = useCallback(
+    async (pageNum = 1, letter = selectedLetter, isFirst = false) => {
+      if (isFetching.current || !letter) return;
+      isFetching.current = true;
+      if (isFirst) setInitialLoading(true);
+      setLoading(true);
+      try {
+        const response = await axios.get("https://api.jikan.moe/v4/anime", {
+          params: {
+            q: letter,
+            order_by: "popularity",
+            sort: "desc",
+            limit: LIMIT,
+            page: pageNum,
+          },
         });
-        const results = await Promise.all(promises);
-        setAltImages((prev) => {
-          const next = { ...prev };
-          results.forEach(({ mal_id, img }) => {
-            if (img) next[mal_id] = img;
+        let data = response.data.data || [];
+        data = data
+          .filter((anime) => anime.title?.toUpperCase().startsWith(letter))
+          .sort((a, b) => (b.score || 0) - (a.score || 0));
+        setAnimes((prev) => (pageNum === 1 ? data : [...prev, ...data]));
+        setHasMore(response.data.pagination?.has_next_page && data.length > 0);
+
+        const missingHQ = data.filter(
+          (anime) => !anime.images?.jpg?.large_image_url
+        );
+        if (missingHQ.length > 0) {
+          const results = await Promise.all(
+            missingHQ.map(async (anime) => ({
+              mal_id: anime.mal_id,
+              img: await fetchKitsuImage(anime.mal_id),
+            }))
+          );
+          setAltImages((prev) => {
+            const next = { ...prev };
+            results.forEach(({ mal_id, img }) => {
+              if (img) next[mal_id] = img;
+            });
+            return next;
           });
-          return next;
-        });
+        }
+      } catch {
+        setHasMore(false);
+      } finally {
+        setLoading(false);
+        setInitialLoading(false);
+        isFetching.current = false;
       }
-    } catch {
-      setHasMore(false);
-    } finally {
-      setLoading(false);
-      setInitialLoading(false);
-      isFetching.current = false;
-    }
-  }, [selectedLetter]);
-
+    },
+    [selectedLetter]
+  );
 
   useEffect(() => {
     setAnimes([]);
@@ -98,7 +100,6 @@ export default function AZ() {
     currentPage.current = 1;
     window.scrollTo({ top: 0, behavior: "smooth" });
     fetchAZ(1, selectedLetter, true);
-
   }, [selectedLetter]);
 
   useEffect(() => {
@@ -118,9 +119,42 @@ export default function AZ() {
     };
   }, [hasMore, loading, fetchAZ, selectedLetter, initialLoading]);
 
-  const handleCardClick = useCallback((mal_id) => {
-    navigate(`/Detalhes/${mal_id}`);
-  }, [navigate]);
+  const handleCardClick = useCallback(
+    (mal_id) => {
+      navigate(`/Detalhes/${mal_id}`);
+    },
+    [navigate]
+  );
+
+  if ((initialLoading || loading) && animes.length === 0) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "48px 0" }}>
+        <div style={{
+          border: "8px solid #222",
+          borderTop: "8px solid #ffb300",
+          borderRadius: "50%",
+          width: 48,
+          height: 48,
+          animation: "spin 1s linear infinite"
+        }} />
+        <span style={{
+          color: "#ffb300",
+          fontWeight: 700,
+          fontSize: 18,
+          marginTop: 10,
+          letterSpacing: 1.1,
+          textShadow: "0 2px 8px #0008"
+        }}>
+          Carregando animes...
+        </span>
+        <style>{`
+          @keyframes spin {
+            to { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    );
+  }
 
   return (
     <div className="az-container">
@@ -152,7 +186,7 @@ export default function AZ() {
       {initialLoading ? (
         <div className="az-initial-loading">
           <div className="az-spinner"></div>
-          <span style={{marginLeft: 16, color: "var(--cor-texto)"}}>Buscando animes incríveis para você...</span>
+          <span style={{ marginLeft: 16, color: "var(--cor-texto)" }}>Buscando animes incríveis para você...</span>
         </div>
       ) : (
         <>
@@ -174,6 +208,7 @@ export default function AZ() {
                     alt={anime.title}
                     className="az-img"
                     loading="lazy"
+                    onError={e => { e.target.src = "/fallback-image.jpg"; }}
                   />
                   <div className="az-info">
                     <h3 className="az-anime-title">{anime.title}</h3>
@@ -209,7 +244,7 @@ export default function AZ() {
               <p>
                 Ops! Não encontramos nenhum anime que comece com &quot;{selectedLetter}&quot;.
               </p>
-              <p style={{fontSize: "1rem", color: "var(--cor-texto)"}}>
+              <p style={{ fontSize: "1rem", color: "var(--cor-texto)" }}>
                 Tente outra letra ou confira se você digitou corretamente.
               </p>
             </div>
