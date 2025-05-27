@@ -104,6 +104,36 @@ const Novidades = () => {
     navigate(`/Detalhes/${mal_id}`);
   }, [navigate]);
 
+  if (loading && animes.length === 0) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "48px 0" }}>
+        <div style={{
+          border: "8px solid #222",
+          borderTop: "8px solid #ffb300",
+          borderRadius: "50%",
+          width: 48,
+          height: 48,
+          animation: "spin 1s linear infinite"
+        }} />
+        <span style={{
+          color: "#ffb300",
+          fontWeight: 700,
+          fontSize: 18,
+          marginTop: 10,
+          letterSpacing: 1.1,
+          textShadow: "0 2px 8px #0008"
+        }}>
+          Carregando novidades...
+        </span>
+        <style>{`
+          @keyframes spin {
+            to { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    );
+  }
+
   return (
     <div className="novidades-container">
       <h1 className="novidades-title">Novidades</h1>
