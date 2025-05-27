@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./PaginaDetalhes.scss";
 import TelaCarregamento from "../../components/common/TelaCarregamento";
 import Alert from "../../components/common/Alert";
 import axios from "axios";
-import { useAuth } from "../../context/AuthContext";
 
 const statusTraduzidos = {
   "Finished Airing": "Finalizado",
@@ -15,8 +14,6 @@ const statusTraduzidos = {
 
 const PaginaDetalhes = () => {
   const { animeId } = useParams();
-  const navigate = useNavigate();
-  const { isAuthenticated, saveAnime, removeAnime, savedAnimes } = useAuth();
   const [animeDetails, setAnimeDetails] = useState(null);
   const [episodes, setEpisodes] = useState([]); // State for episodes
   const [isFullSynopsis, setIsFullSynopsis] = useState(false);
@@ -93,25 +90,6 @@ const PaginaDetalhes = () => {
     setIsFullSynopsis((prev) => !prev);
   };
 
-  const handleSaveAnime = () => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    } else {
-      if (!animeDetails || !animeId) {
-        console.error("Detalhes do anime ou ID inválido:", animeDetails, animeId);
-        setAlert({ message: "Erro ao salvar o anime. Tente novamente.", type: "error" });
-        return;
-      }
-      saveAnime({ ...animeDetails, mal_id: parseInt(animeId, 10) }); // Certifique-se de passar o mal_id como número
-      setAlert({ message: "Anime adicionado aos favoritos", type: "success" });
-    }
-  };
-
-  const handleRemoveAnime = () => {
-    removeAnime(animeDetails.mal_id);
-    setAlert({ message: "Anime removido dos favoritos", type: "info" });
-  };
-
   const handleLoadMoreEpisodes = () => {
     setVisibleEpisodes((prev) => prev + 10); // Load 10 more episodes
   };
@@ -127,10 +105,6 @@ const PaginaDetalhes = () => {
   const shortSynopsis = animeDetails.synopsis
     ? animeDetails.synopsis.slice(0, 300) + "..."
     : "";
-
-  const isFavorite = savedAnimes.some(
-    (anime) => anime.mal_id === animeDetails.mal_id
-  );
 
   return (
     <div className="detalhes">
@@ -171,15 +145,7 @@ const PaginaDetalhes = () => {
 
       <div className="detalhes-titulo">
         <h1 className="Title">{animeDetails.title}</h1>
-        {isFavorite ? (
-          <button className="save-button" onClick={handleRemoveAnime}>
-            Remover dos Favoritos
-          </button>
-        ) : (
-          <button className="save-button" onClick={handleSaveAnime}>
-            Adicionar aos Favoritos
-          </button>
-        )}
+        {/* Botão de favoritos removido conforme solicitado */}
       </div>
 
       <p className="P-status">
