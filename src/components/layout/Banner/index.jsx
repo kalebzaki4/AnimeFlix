@@ -1,38 +1,66 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./Banner.scss";
 import play from "../../../assets/images/play_circle.png";
 
-function getDailyIndexes(total, count) {
-  // Gera índices diferentes por dia, mas sempre os mesmos para o mesmo dia
-  const seed = Number(new Date().toISOString().slice(0, 10).replace(/-/g, ""));
-  let arr = [];
-  for (let i = 0; i < total; i++) arr.push(i);
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = (seed + i * 31) % (i + 1);
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr.slice(0, count);
-}
-
-export default function Banner({ animes }) {
+export default function Banner({ animes, loadMoreAnimes, hasMore }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loadingMore, setLoadingMore] = useState(false);
 
-  // Seleção dinâmica dos animes do banner (muda todo dia, mostra só 3)
-  const dailyIndexes = getDailyIndexes(animes.length, Math.min(animes.length, 3));
-  const dailyAnimes = dailyIndexes.map(idx => animes[idx]).filter(Boolean);
+  const dailyAnimes = useMemo(() => {
+    if (!Array.isArray(animes) || animes.length === 0) return [];
+    const unique = [];
+    const seen = new Set();
+    for (const a of animes) {
+      if (!seen.has(a.title)) {
+        seen.add(a.title);
+        unique.push(a);
+      }
+    }
+    const ordered = unique
+      .filter(a =>
+        (typeof a.score === "number" && a.score >= 8.1) ||
+        (a.members && a.members > 250000)
+      )
+      .sort((a, b) => {
+        if ((b.score || 0) !== (a.score || 0)) return (b.score || 0) - (a.score || 0);
+        if ((b.members || 0) !== (a.members || 0)) return (b.members || 0) - (a.members || 0);
+        return (b.year || 0) - (a.year || 0);
+      });
+    const genresSeen = new Set();
+    const diverse = [];
+    for (const anime of ordered) {
+      const mainGenre = anime.genres?.[0]?.name || "";
+      if (!genresSeen.has(mainGenre) || diverse.length < 6) {
+        genresSeen.add(mainGenre);
+        diverse.push(anime);
+      }
+      if (diverse.length >= 10) break;
+    }
+    while (diverse.length < 10 && ordered[diverse.length]) {
+      diverse.push(ordered[diverse.length]);
+    }
+    return diverse;
+  }, [animes]);
 
   useEffect(() => {
     setActiveIndex(0);
     if (dailyAnimes.length <= 1) return;
     const intervalId = setInterval(() => {
-      setActiveIndex((prevIndex) =>
-        prevIndex === dailyAnimes.length - 1 ? 0 : prevIndex + 1
+      setActiveIndex((prev) =>
+        prev === dailyAnimes.length - 1 ? 0 : prev + 1
       );
     }, 7000);
     return () => clearInterval(intervalId);
-  }, [animes.length, dailyAnimes.length]);
+  }, [dailyAnimes.length]);
+
+  const renderWindow = 2;
+  const visibleIndexes = [];
+  for (let i = -renderWindow; i <= renderWindow; i++) {
+    const idx = activeIndex + i;
+    if (idx >= 0 && idx < dailyAnimes.length) visibleIndexes.push(idx);
+  }
 
   const renderAnimeInfo = (anime) => (
     <>
@@ -63,28 +91,42 @@ export default function Banner({ animes }) {
     </>
   );
 
-  if (!dailyAnimes.length) {
-    return null;
-  }
+  if (!dailyAnimes.length) return null;
+
+  const handleLoadMore = async () => {
+    if (!loadMoreAnimes) return;
+    setLoadingMore(true);
+    await loadMoreAnimes();
+    setLoadingMore(false);
+  };
 
   return (
     <article className="container">
       <section className="banner" aria-label="Animes Populares">
         <div className="banner-slider">
-          {dailyAnimes.map((anime, index) => (
-            <div
-              key={anime.mal_id}
-              className={`slider-item ${index === activeIndex ? "active" : ""}`}
-            >
-              <img
-                src={anime.images.jpg.large_image_url}
-                alt={anime.title}
-                className="img-cover"
-                loading="eager"
+          {dailyAnimes.map((anime, index) =>
+            visibleIndexes.includes(index) ? (
+              <div
+                key={anime.mal_id}
+                className={`slider-item ${index === activeIndex ? "active" : ""}`}
+                style={{ display: "block" }}
+              >
+                <img
+                  src={anime.images.jpg.large_image_url}
+                  alt={anime.title}
+                  className="img-cover"
+                  loading={index === activeIndex ? "eager" : "lazy"}
+                />
+                <div className="banner-content">{renderAnimeInfo(anime)}</div>
+              </div>
+            ) : (
+              <div
+                key={anime.mal_id}
+                style={{ display: "none" }}
+                aria-hidden="true"
               />
-              <div className="banner-content">{renderAnimeInfo(anime)}</div>
-            </div>
-          ))}
+            )
+          )}
         </div>
         <div className="slider-control">
           <div className="control-inner">
@@ -106,6 +148,31 @@ export default function Banner({ animes }) {
             ))}
           </div>
         </div>
+        {hasMore && loadMoreAnimes && (
+          <div style={{ display: "flex", justifyContent: "center", marginTop: 18 }}>
+            <button
+              className="btn"
+              style={{
+                background: "#ffb300",
+                color: "#181818",
+                border: "none",
+                borderRadius: 16,
+                padding: "8px 28px",
+                fontWeight: "bold",
+                fontSize: 18,
+                cursor: loadingMore ? "wait" : "pointer",
+                opacity: loadingMore ? 0.7 : 1,
+                boxShadow: "0 2px 8px #0002",
+                transition: "background 0.2s"
+              }}
+              onClick={handleLoadMore}
+              disabled={loadingMore}
+              aria-busy={loadingMore}
+            >
+              {loadingMore ? "Carregando..." : "Carregar mais"}
+            </button>
+          </div>
+        )}
       </section>
     </article>
   );
@@ -133,4 +200,6 @@ Banner.propTypes = {
       }).isRequired,
     })
   ).isRequired,
+  loadMoreAnimes: PropTypes.func,
+  hasMore: PropTypes.bool,
 };
