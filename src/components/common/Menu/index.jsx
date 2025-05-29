@@ -11,7 +11,7 @@ import userIcon from "../../../assets/images/user.svg";
 import { useAuth } from "../../../context/AuthContext"; 
 
 export default function Menu() {
-  const { isAuthenticated, logout, user } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const [searchActive, setSearchActive] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
   const [userMenuActive, setUserMenuActive] = useState(false);
@@ -106,24 +106,29 @@ export default function Menu() {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    function handleClickOutside(event) {
       if (
+        menuActive &&
         overlayRef.current &&
-        !overlayRef.current.contains(event.target) &&
-        userOverlayRef.current &&
-        !userOverlayRef.current.contains(event.target)
+        !overlayRef.current.querySelector('.menu-overlay').contains(event.target)
       ) {
-        closeOverlay();
-        closeUserOverlay();
+        setMenuActive(false);
       }
-    };
+      if (
+        userMenuActive &&
+        userOverlayRef.current &&
+        !userOverlayRef.current.querySelector('.menu-overlay-2').contains(event.target)
+      ) {
+        setUserMenuActive(false);
+      }
+    }
 
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [menuActive, userMenuActive]);
 
   useEffect(() => {
     if (menuActive || userMenuActive) {
@@ -143,7 +148,7 @@ export default function Menu() {
         Math.min(prevIndex + 1, recommendedAnimes.length - 1)
       );
     } else if (event.key === "ArrowUp") {
-      setSelectedRecommendationIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+      setSelectedRecommendationIndex((prevIndex) => Math.max(prevIndex - 0));
     } else if (event.key === "Enter") {
       const selectedAnime = recommendedAnimes[selectedRecommendationIndex];
       if (selectedAnime) {
@@ -344,6 +349,11 @@ export default function Menu() {
               src={logo}
               alt="Logo do Animeflix"
               width={200}
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                setUserMenuActive(false);
+                navigate("/");
+              }}
             />
             <span className="navegar-span">OPÇÕES</span>
             {!isAuthenticated ? (
@@ -439,119 +449,55 @@ export default function Menu() {
                       Conta ativa
                     </div>
                   </div>
-                  <button
+                </div>
+                <div style={{ width: "100%", marginTop: 10 }}>
+                  <Link
+                    to="/perfil"
                     className="menu-item-2"
                     style={{
-                      background: "#b71c1c",
-                      color: "#fff",
-                      border: "none",
+                      background: "#ffb300",
+                      color: "#181818",
                       borderRadius: 8,
-                      padding: "10px 18px",
                       fontWeight: "bold",
-                      fontSize: "1rem",
-                      cursor: "pointer",
-                      transition: "background 0.2s",
-                      boxShadow: "0 2px 8px #0003",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 7,
+                      padding: "12px 0",
+                      textAlign: "center",
+                      marginBottom: 2,
+                      textDecoration: "none",
+                      fontSize: "1.05rem",
+                      boxShadow: "0 2px 8px #0002",
+                      letterSpacing: 0.1,
+                      display: "block",
+                      top: 20
                     }}
-                    onClick={() => {
-                      logout();
-                      closeUserOverlay();
-                    }}
-                    aria-label="Sair da Conta"
+                    onClick={() => handleUserMenuItemClick("perfil")}
                   >
-                    <svg width={20} height={20} viewBox="0 0 24 24" fill="none" style={{ verticalAlign: "middle" }}>
-                      <path d="M16 17L21 12L16 7" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M21 12H9" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M12 19C7.58172 19 4 15.4183 4 11C4 6.58172 7.58172 3 12 3" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    <span>Sair</span>
-                  </button>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 10,
-                    width: "100%",
-                    marginTop: 6,
-                  }}
-                >
-                  {[
-                    {
-                      to: "/perfil",
-                      className: "menu-item-2",
-                      style: {
-                        background: "#ffb300",
-                        color: "#181818",
-                        borderRadius: 8,
-                        fontWeight: "bold",
-                        padding: "12px 0",
-                        textAlign: "center",
-                        marginBottom: 2,
-                        textDecoration: "none",
-                        fontSize: "1.05rem",
-                        boxShadow: "0 2px 8px #0002",
-                        letterSpacing: 0.1,
-                      },
-                      icon: "👤",
-                      label: "Meu Perfil",
-                      onClick: () => handleUserMenuItemClick("perfil"),
-                    },
-                    {
-                      to: "/configuracoes",
-                      className: "menu-item-2",
-                      style: {
-                        background: "#23272f",
-                        color: "#fff",
-                        borderRadius: 8,
-                        fontWeight: "bold",
-                        padding: "12px 0",
-                        textAlign: "center",
-                        marginBottom: 2,
-                        textDecoration: "none",
-                        fontSize: "1.05rem",
-                        boxShadow: "0 2px 8px #0002",
-                        letterSpacing: 0.1,
-                      },
-                      icon: "⚙️",
-                      label: "Configurações",
-                      onClick: () => handleUserMenuItemClick("configuracoes"),
-                    },
-                    {
-                      to: "/configuracoes",
-                      className: "menu-item-2",
-                      style: {
-                        background: "#23272f",
-                        color: "#fff",
-                        borderRadius: 8,
-                        fontWeight: "bold",
-                        padding: "12px 0",
-                        textAlign: "center",
-                        marginBottom: 2,
-                        textDecoration: "none",
-                        fontSize: "1.05rem",
-                        boxShadow: "0 2px 8px #0002",
-                        letterSpacing: 0.1,
-                      },
-                      icon: "🎁",
-                      label: "Cartão de Presente",
-                      onClick: () => handleUserMenuItemClick("configuracoes"),
-                    },
-                  ].map((item) => (
-                    <Link
-                      key={item.label}
-                      to={item.to}
-                      className={item.className}
-                      style={item.style}
-                      onClick={item.onClick}
-                    >
-                      <span role="img" aria-label={item.label.toLowerCase()} style={{ marginRight: 6 }}>{item.icon}</span>
-                      {item.label}
-                    </Link>
-                  ))}
+                    <span role="img" aria-label="perfil" style={{ marginRight: 6 }}>👤</span>
+                    Meu Perfil
+                  </Link>
+                  <Link
+                    to="/configuracoes"
+                    className="menu-item-2"
+                    style={{
+                      background: "#23272f",
+                      color: "#fff",
+                      borderRadius: 8,
+                      fontWeight: "bold",
+                      padding: "12px 0",
+                      textAlign: "center",
+                      marginBottom: 2,
+                      textDecoration: "none",
+                      fontSize: "1.05rem",
+                      boxShadow: "0 2px 8px #0002",
+                      letterSpacing: 0.1,
+                      display: "block",
+                      position: "relative",
+                      top: 20,
+                    }}
+                    onClick={() => handleUserMenuItemClick("configuracoes")}
+                  >
+                    <span role="img" aria-label="configurações" style={{ marginRight: 6 }}>⚙️</span>
+                    Configurações
+                  </Link>
                 </div>
                 <div
                   style={{

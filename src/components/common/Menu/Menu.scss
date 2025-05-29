@@ -15,6 +15,7 @@
   align-items: center;
   gap: var(--raio-8);
   box-shadow: var(--sombra-1);
+  background-color: #100f14;
 }
 
 .header .logo {
@@ -92,12 +93,20 @@
   padding: var(--raio-24) var(--raio-16);
   align-items: center;
   gap: var(--raio-8);
-  z-index: 1001; /* Aumente o z-index para garantir que fique na frente do banner */
-  display: none;
+  z-index: 1001;
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-32px) scale(0.98);
+  transition:
+    opacity 0.35s cubic-bezier(0.4, 0.2, 0.2, 1),
+    transform 0.35s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
 .search-box.active {
-  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
 }
 
 .search-wrapper {
@@ -158,11 +167,15 @@
     opacity var(--transicao-curta),
     visibility var(--transicao-curta);
   z-index: 100;
+  pointer-events: none;
 }
 
 .overlay.active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
+  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.25);
 }
 
 .overlay-close {
@@ -172,13 +185,13 @@
   background: none;
   border: none;
   color: var(--branco);
-  font-size: 6rem; /* X bem maior */
+  font-size: 3.7rem; // Aumentado de 3rem para 3.7rem
   font-weight: bold;
   cursor: pointer;
   transition: color var(--transicao-curta);
   padding: 0;
-  width: 80px;
-  height: 80px;
+  width: 56px;     // Aumentado de 48px para 56px
+  height: 56px;    // Aumentado de 48px para 56px
   display: flex;
   align-items: center;
   justify-content: center;
@@ -193,23 +206,25 @@
   width: 340px;
   max-width: 90vw;
   height: 100vh;
-  background-color: var(--superficie);
+  background: var(--background); /* Unified background color */
   box-shadow: 2px 0 16px #0008; /* sombra para direita */
   border-radius: 0 18px 18px 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  opacity: 1;
+  opacity: 0;
   z-index: 101;
   font-family: var(--ff-roboto);
   padding: 36px 28px 24px 28px;
   transform: translateX(-100%);
-  transition: transform var(--transicao-longa) cubic-bezier(0.4, 0, 0.2, 1);
+  transition: none; /* Removemos a transição padrão */
+  animation: menuSlideOut 0.35s cubic-bezier(0.4, 0.2, 0.2, 1) forwards;
+  pointer-events: none;
 }
 
 .menu-overlay.active {
-  transform: translateX(0);
-  opacity: 1;
+  animation: menuSlideIn 0.35s cubic-bezier(0.4, 0.2, 0.2, 1) forwards;
+  pointer-events: auto;
 }
 
 .menu-overlay-logo {
@@ -221,12 +236,13 @@
 }
 
 .menu-item {
-  color: var(--branco);
+  color: var(--cor-sobre-superficie);
   font-size: var(--fs-corpo);
   font-weight: var(--peso-negrito);
   text-decoration: none;
   margin: var(--raio-24) 0;
   padding: var(--raio-8) var(--raio-16);
+  background-color: var(--background);
   transition:
     color var(--transicao-curta),
     background-color var(--transicao-curta);
@@ -236,7 +252,7 @@
 .menu-item:hover,
 .menu-item:focus {
   color: var(--primaria);
-  background-color: var(--fundo-banner);
+  background-color: var(--background);
 }
 
 .menu-section {
@@ -254,9 +270,9 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: var(--superficie);
+  background-color: var(--background);
   border-radius: var(--raio-4);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--sombra-1);
   padding: 8px;
   z-index: 1002;
   flex-direction: column;
@@ -324,16 +340,20 @@
   flex-direction: column;
   justify-content: flex-start;
   opacity: 0;
-  transition: opacity var(--transicao-longa) ease-in-out;
+  transition: none; /* Removemos a transição padrão */
+  animation: menuUserSlideOut 0.35s cubic-bezier(0.4, 0.2, 0.2, 1) forwards;
   z-index: 102;
   font-family: var(--ff-roboto);
   border-radius: 18px 0 0 18px;
   background-color: var(--superficie);
   box-shadow: -2px 0 16px #0008;
+  transform: translateY(-24px) scale(0.98);
+  pointer-events: none;
 }
 
 .menu-overlay-2.active {
-  opacity: 1;
+  animation: menuUserSlideIn 0.35s cubic-bezier(0.4, 0.2, 0.2, 1) forwards;
+  pointer-events: auto;
 }
 
 .menu-overlay-logo-2 {
@@ -388,6 +408,18 @@
   box-shadow: 0px 2px 0px 0px rgb(60, 60, 60);
   padding: var(--raio-24);
   margin-top: var(--raio-8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: -4px; 
+}
+
+
+.menu-section-2 > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+  align-items: center;
 }
 
 .menu-item-button {
@@ -395,7 +427,7 @@
   font-size: var(--fs-corpo);
   font-weight: var(--peso-negrito);
   text-decoration: none;
-  margin: var(--raio-24) 0;
+  margin: var(--raio-24) 0 0 0;
   padding: var(--raio-8) var(--raio-16);
   transition:
     color var(--transicao-curta),
@@ -404,9 +436,14 @@
   background-color: var(--primaria);
   border: none;
   cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 80%;
+  max-width: 260px;
 }
 
-/* Estilos para a lista de recomendações */
 .recommendations {
   position: absolute;
   top: 100%;
@@ -415,10 +452,11 @@
   background-color: var(--fundo-banner);
   border-radius: var(--raio-8);
   box-shadow: var(--sombra-1);
-  z-index: 1000; /* Aumente o z-index para garantir que fique na frente do banner */
+  z-index: 1000; 
   max-height: 300px;
   overflow-y: auto;
   margin-top: 8px;
+  animation: fadeInMenu 0.35s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
 .recommendation-item {
@@ -446,6 +484,55 @@
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInMenu {
+  from { opacity: 0; transform: translateY(12px);}
+  to   { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes menuSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes menuSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes menuUserSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes menuUserSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-24px) scale(0.98);
   }
 }
 
@@ -490,9 +577,9 @@
   .overlay-close {
     top: 10px;
     right: 10px;
-    width: 48px;
-    height: 48px;
-    font-size: 2.6rem;
+    width: 56px;
+    height: 56px;
+    font-size: 2.7rem; // Aumentado de 2.2rem para 2.7rem
   }
 }
 

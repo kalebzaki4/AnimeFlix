@@ -6,7 +6,6 @@ import Banner from "../../components/layout/Banner";
 import ListaDeAnimesHorizontal from "../../components/animes/ListaDeAnimesHorizontal";
 import TelaCarregamento from "../../components/common/TelaCarregamento";
 import Estrelas from "../../components/animes/Estrelas/Estrelas";
-import { useAuth } from "../../context/AuthContext";
 import "../../styles/message.scss";
 
 // --- Hooks e helpers ---
@@ -42,7 +41,6 @@ const rankingGeneros = [
   { genero: "Romance", count: 60 },
 ];
 
-// --- Componentes menores ---
 function Curiosidade({ curioIndex, onNova, isMobile, curiosidades, loading }) {
   return (
     <section style={{
@@ -204,7 +202,6 @@ export default function Inicio() {
     return cachedLancamentos ? JSON.parse(cachedLancamentos) : [];
   });
   const [famososPage, setFamososPage] = useState(1);
-  const { isAuthenticated, savedAnimes } = useAuth();
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const [showCookiePopup] = useState(() => {
@@ -339,7 +336,6 @@ export default function Inicio() {
 
   if (loading) return <TelaCarregamento />;
 
-  // Carregamento para lançamentos
   if (lancamentos.length === 0) {
     return (
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "48px 0" }}>
@@ -407,16 +403,6 @@ export default function Inicio() {
         loadMoreAnimes={() => {}}
       />
       <RankingGeneros isMobile={isMobile} />
-      {isAuthenticated && savedAnimes.length > 0 && (
-        <ListaDeAnimesHorizontal
-          title="Animes Salvos"
-          description="Seus animes favoritos salvos"
-          animes={savedAnimes.slice(0, maxAnimes)}
-          onClick={handleClick}
-          disableLoadingIndicator
-          loadMoreAnimes={() => {}}
-        />
-      )}
       {animeDoDia && (
         <section style={{
           margin: isMobile ? "12px 0" : "1.2rem 0",

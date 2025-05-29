@@ -55,6 +55,16 @@
   position: relative;
   min-width: 200px;
   color: var(--cor-sobre-superficie);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.23, 1.2, 0.32, 1), box-shadow 0.35s cubic-bezier(0.23, 1.2, 0.32, 1);
+}
+
+.movie-card:hover {
+  transform: translateY(-8px) scale(1.04) rotate(-1deg);
+  box-shadow: 0 8px 32px #0006;
+  z-index: 2;
 }
 
 .movie-card .card-banner {
@@ -102,13 +112,6 @@
 
 .fracionada {
   clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-}
-
-.movie-card {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  transition: transform 0.3s ease;
 }
 
 .error-message {

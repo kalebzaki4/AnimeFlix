@@ -63,7 +63,7 @@
     background-color: var(--fundo-banner);
     opacity: 0;
     visibility: hidden;
-    transition: opacity var(--transicao-longa);
+    transition: opacity 0.45s cubic-bezier(0.4, 0.2, 0.2, 1), left 0.45s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
 .banner-slider .slider-item::before {
@@ -79,6 +79,22 @@
     visibility: visible;
 }
 
+.banner-slider .slider-item.slide-right {
+  animation: bannerSlideInRight 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.banner-slider .slider-item.slide-left {
+  animation: bannerSlideInLeft 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+@keyframes bannerSlideInRight {
+  from { opacity: 0; transform: translateX(60px);}
+  to   { opacity: 1; transform: translateX(0);}
+}
+@keyframes bannerSlideInLeft {
+  from { opacity: 0; transform: translateX(-60px);}
+  to   { opacity: 1; transform: translateX(0);}
+}
+
 .banner-content {
     position: absolute;
     left: 24px;
@@ -86,6 +102,12 @@
     bottom: 206px;
     z-index: 1;
     color: var(--cor-texto);
+    animation: bannerFadeIn 0.45s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+@keyframes bannerFadeIn {
+  from { opacity: 0; transform: translateY(16px);}
+  to   { opacity: 1; transform: translateY(0);}
 }
 
 .banner :is(.heading, .banner-text) {

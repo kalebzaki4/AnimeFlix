@@ -38,15 +38,15 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.35s cubic-bezier(0.23, 1.2, 0.32, 1), box-shadow 0.35s cubic-bezier(0.23, 1.2, 0.32, 1);
   min-height: 420px;
   cursor: pointer;
   outline: none;
 }
 
 .novidade-card:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 6px 24px #0005;
+  transform: translateY(-10px) scale(1.04) rotate(-1deg);
+  box-shadow: 0 12px 32px #0007;
 }
 
 .novidade-card:focus {

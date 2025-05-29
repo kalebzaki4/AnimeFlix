@@ -1,0 +1,113 @@
+.perfil-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 32px 16px 48px 16px;
+  color: #fff;
+}
+
+.perfil-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: var(--primaria, #ffb300);
+  margin-bottom: 12px;
+}
+
+.perfil-info {
+  margin-bottom: 24px;
+  font-size: 1.1rem;
+  background: #23272f;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 2px 8px #0003;
+}
+
+.perfil-subtitle {
+  font-size: 1.4rem;
+  margin: 18px 0 10px 0;
+  color: #ffb300;
+}
+
+.perfil-empty {
+  color: #bbb;
+  font-size: 1.1rem;
+  margin-top: 18px;
+}
+
+.perfil-animes-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.perfil-anime-card {
+  background: #181818;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #0004;
+  padding: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 260px;
+  max-width: 320px;
+  flex: 1 1 260px;
+}
+
+.perfil-anime-card.removendo {
+  animation: perfilRemoveFadeOut 0.4s forwards;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+@keyframes perfilRemoveFadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  60% {
+    opacity: 0.7;
+    transform: scale(0.97) translateY(-6px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.85) translateY(40px);
+  }
+}
+
+.perfil-anime-img {
+  width: 80px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #0002;
+}
+
+.perfil-anime-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.perfil-remove-btn {
+  background: #b71c1c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 4px;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.perfil-remove-btn:hover {
+  background: #e50914;
+}
+
+.perfil-details-link {
+  color: #ffb300;
+  font-size: 0.98rem;
+  text-decoration: underline;
+  margin-top: 2px;
+}

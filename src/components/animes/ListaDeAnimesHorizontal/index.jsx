@@ -4,7 +4,7 @@ import Estrelas from '../Estrelas/Estrelas';
 import { Link } from 'react-router-dom';
 import './ListaDeAnimes.scss';
 
-const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes }) => {
+const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes, getAnimeImage }) => {
   const sliderListRef = useRef(null);
 
   const uniqueAnimes = animes.filter(
@@ -96,7 +96,11 @@ const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes })
               >
                 <figure className="poster-box card-banner">
                   <img
-                    src={anime.images?.jpg?.image_url || "/fallback-image.jpg"}
+                    src={
+                      getAnimeImage
+                        ? getAnimeImage(anime)
+                        : anime.images?.jpg?.image_url || "/fallback-image.jpg"
+                    }
                     alt={anime.title || "Anime sem título"}
                     className="img-cover"
                     onError={(e) => (e.target.src = "/fallback-image.jpg")}
@@ -136,6 +140,7 @@ ListaDeAnimesHorizontal.propTypes = {
     })
   ).isRequired,
   loadMoreAnimes: PropTypes.func,
+  getAnimeImage: PropTypes.func,
 };
 
 export default ListaDeAnimesHorizontal;

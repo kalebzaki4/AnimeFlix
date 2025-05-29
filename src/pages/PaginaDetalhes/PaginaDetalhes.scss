@@ -1,4 +1,5 @@
 .detalhes {
+  background-color: #1A1820;
   padding: 20px;
   font-family: Arial, sans-serif;
 }
@@ -25,6 +26,26 @@
 
 .save-button:hover {
   color: #ff6347;
+}
+
+.save-button svg.pop-animate {
+  animation: pop-elastic 0.5s cubic-bezier(0.23, 1.5, 0.32, 1) both, shine 0.7s 0.1s linear both;
+  /* shine inicia após o pop */
+}
+
+@keyframes pop-elastic {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.35) rotate(-8deg); }
+  55%  { transform: scale(0.92) rotate(4deg);}
+  70%  { transform: scale(1.08) rotate(-2deg);}
+  85%  { transform: scale(0.98) rotate(1deg);}
+  100% { transform: scale(1) rotate(0);}
+}
+
+@keyframes shine {
+  0% { filter: drop-shadow(0 0 0 #fff0); }
+  40% { filter: drop-shadow(0 0 12px #fff8); }
+  100% { filter: drop-shadow(0 0 0 #fff0); }
 }
 
 /* Estilo para o trailer */
@@ -109,12 +130,12 @@
   padding: 10px; /* Reduzi o padding */
   border-radius: 8px; /* Reduzi o raio */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduzi a sombra */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.35s cubic-bezier(0.23, 1.2, 0.32, 1), box-shadow 0.35s cubic-bezier(0.23, 1.2, 0.32, 1);
 }
 
 .episodio-card:hover {
-  transform: translateY(-3px); /* Reduzi o deslocamento no hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ajustei a sombra no hover */
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
 }
 
 .episodio-imagem {

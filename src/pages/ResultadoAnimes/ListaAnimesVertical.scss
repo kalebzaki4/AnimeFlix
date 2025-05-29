@@ -82,6 +82,13 @@
 .movie-card {
   position: relative;
   min-width: 200px;
+  transition: transform 0.35s cubic-bezier(0.23, 1.2, 0.32, 1), box-shadow 0.35s cubic-bezier(0.23, 1.2, 0.32, 1);
+}
+
+.movie-card:hover {
+  transform: translateY(-10px) scale(1.04) rotate(-1deg);
+  box-shadow: 0 12px 32px #0007;
+  z-index: 2;
 }
 
 .movie-card .card-banner {

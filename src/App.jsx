@@ -16,6 +16,7 @@ import AZ from './pages/AZ';
 import Simulcasts from './pages/Simulcasts';
 import Calendario from './pages/Calendario';
 import Videoclipes from './pages/Videoclipes';
+import Perfil from './pages/Perfil';
 
 // App principal com rotas e alertas globais
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path='/' element={<Inicio />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
+        <Route path='/perfil' element={<Perfil />} />
         <Route path='/Detalhes/:animeId' element={<PaginaDetalhes />} />
         <Route path='/search' element={<ResultadoAnimes />} />
         <Route path='/popular' element={<Populares />} />

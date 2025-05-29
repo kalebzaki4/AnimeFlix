@@ -1,68 +1,80 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./Banner.scss";
 import play from "../../../assets/images/play_circle.png";
 
-export default function Banner({ animes, loadMoreAnimes, hasMore }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [loadingMore, setLoadingMore] = useState(false);
+// Utilitário global para imagens seguras e de alta qualidade
+function getSafeImage(anime, type = "large") {
+  if (!anime?.images?.jpg) return "/fallback-image.jpg";
+  if (type === "large") {
+    return anime.images.jpg.large_image_url || anime.images.jpg.image_url || "/fallback-image.jpg";
+  }
+  return anime.images.jpg.image_url || anime.images.jpg.large_image_url || "/fallback-image.jpg";
+}
 
-  const dailyAnimes = useMemo(() => {
-    if (!Array.isArray(animes) || animes.length === 0) return [];
+export default function Banner({ animes }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [slideDirection, setSlideDirection] = useState("right"); // "right" ou "left"
+
+  // Embaralha apenas uma vez por reload, mantendo estável até recarregar a página
+  const [shuffled, setShuffled] = useState([]);
+
+  useEffect(() => {
+    if (!Array.isArray(animes) || animes.length === 0) {
+      setShuffled([]);
+      return;
+    }
+    // Fisher-Yates shuffle
+    const arr = [...animes];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+
     const unique = [];
     const seen = new Set();
-    for (const a of animes) {
+    for (const a of arr) {
       if (!seen.has(a.title)) {
         seen.add(a.title);
         unique.push(a);
       }
     }
-    const ordered = unique
-      .filter(a =>
-        (typeof a.score === "number" && a.score >= 8.1) ||
-        (a.members && a.members > 250000)
-      )
-      .sort((a, b) => {
-        if ((b.score || 0) !== (a.score || 0)) return (b.score || 0) - (a.score || 0);
-        if ((b.members || 0) !== (a.members || 0)) return (b.members || 0) - (a.members || 0);
-        return (b.year || 0) - (a.year || 0);
-      });
-    const genresSeen = new Set();
-    const diverse = [];
-    for (const anime of ordered) {
-      const mainGenre = anime.genres?.[0]?.name || "";
-      if (!genresSeen.has(mainGenre) || diverse.length < 6) {
-        genresSeen.add(mainGenre);
-        diverse.push(anime);
-      }
-      if (diverse.length >= 10) break;
-    }
-    while (diverse.length < 10 && ordered[diverse.length]) {
-      diverse.push(ordered[diverse.length]);
-    }
-    return diverse;
+    setShuffled(unique);
   }, [animes]);
+
+  const dailyAnimes = shuffled;
 
   useEffect(() => {
     setActiveIndex(0);
     if (dailyAnimes.length <= 1) return;
     const intervalId = setInterval(() => {
-      setActiveIndex((prev) =>
-        prev === dailyAnimes.length - 1 ? 0 : prev + 1
-      );
-    }, 7000);
+      setSlideDirection("right");
+      setActiveIndex(prev => (prev === dailyAnimes.length - 1 ? 0 : prev + 1));
+    }, 7000); // 7 segundos
     return () => clearInterval(intervalId);
   }, [dailyAnimes.length]);
 
-  const renderWindow = 2;
-  const visibleIndexes = [];
-  for (let i = -renderWindow; i <= renderWindow; i++) {
-    const idx = activeIndex + i;
-    if (idx >= 0 && idx < dailyAnimes.length) visibleIndexes.push(idx);
-  }
+  // Handler para clique nos controles do carrossel
+  const handleControlClick = useCallback((index) => {
+    if (index === activeIndex) return;
+    setSlideDirection(index < activeIndex ? "left" : "right");
+    setActiveIndex(index);
+  }, [activeIndex]);
 
-  const renderAnimeInfo = (anime) => (
+  // Renderiza apenas os banners próximos para performance
+  const renderWindow = 2;
+  const visibleIndexes = useMemo(() => {
+    const arr = [];
+    for (let i = -renderWindow; i <= renderWindow; i++) {
+      const idx = activeIndex + i;
+      if (idx >= 0 && idx < dailyAnimes.length) arr.push(idx);
+    }
+    return arr;
+  }, [activeIndex, dailyAnimes.length]);
+
+  // Renderização das informações do anime
+  const renderAnimeInfo = useCallback((anime) => (
     <>
       <h2 className="heading">{anime.title}</h2>
       <div className="meta-list">
@@ -89,16 +101,9 @@ export default function Banner({ animes, loadMoreAnimes, hasMore }) {
         <span className="span">Assistir</span>
       </Link>
     </>
-  );
+  ), []);
 
   if (!dailyAnimes.length) return null;
-
-  const handleLoadMore = async () => {
-    if (!loadMoreAnimes) return;
-    setLoadingMore(true);
-    await loadMoreAnimes();
-    setLoadingMore(false);
-  };
 
   return (
     <article className="container">
@@ -108,14 +113,17 @@ export default function Banner({ animes, loadMoreAnimes, hasMore }) {
             visibleIndexes.includes(index) ? (
               <div
                 key={anime.mal_id}
-                className={`slider-item ${index === activeIndex ? "active" : ""}`}
+                className={`slider-item ${index === activeIndex ? "active" : ""} slide-${index === activeIndex ? slideDirection : ""}`}
                 style={{ display: "block" }}
               >
                 <img
-                  src={anime.images.jpg.large_image_url}
+                  src={getSafeImage(anime, "large")}
                   alt={anime.title}
                   className="img-cover"
                   loading={index === activeIndex ? "eager" : "lazy"}
+                  onError={e => { e.target.src = "/fallback-image.jpg"; }}
+                  decoding="async"
+                  fetchPriority={index === activeIndex ? "high" : "auto"}
                 />
                 <div className="banner-content">{renderAnimeInfo(anime)}</div>
               </div>
@@ -134,45 +142,23 @@ export default function Banner({ animes, loadMoreAnimes, hasMore }) {
               <button
                 key={anime.mal_id}
                 className={`poster-box slider-item ${index === activeIndex ? "active" : ""}`}
-                onClick={() => setActiveIndex(index)}
+                onClick={() => handleControlClick(index)}
                 aria-label={`Exibir detalhes do anime ${anime.title}`}
+                tabIndex={0}
               >
                 <img
-                  src={anime.images.jpg.image_url}
+                  src={getSafeImage(anime, "thumb")}
                   alt={`Poster de ${anime.title}`}
                   loading="lazy"
                   draggable="false"
                   className="img-cover"
+                  onError={e => { e.target.src = "/fallback-image.jpg"; }}
+                  decoding="async"
                 />
               </button>
             ))}
           </div>
         </div>
-        {hasMore && loadMoreAnimes && (
-          <div style={{ display: "flex", justifyContent: "center", marginTop: 18 }}>
-            <button
-              className="btn"
-              style={{
-                background: "#ffb300",
-                color: "#181818",
-                border: "none",
-                borderRadius: 16,
-                padding: "8px 28px",
-                fontWeight: "bold",
-                fontSize: 18,
-                cursor: loadingMore ? "wait" : "pointer",
-                opacity: loadingMore ? 0.7 : 1,
-                boxShadow: "0 2px 8px #0002",
-                transition: "background 0.2s"
-              }}
-              onClick={handleLoadMore}
-              disabled={loadingMore}
-              aria-busy={loadingMore}
-            >
-              {loadingMore ? "Carregando..." : "Carregar mais"}
-            </button>
-          </div>
-        )}
       </section>
     </article>
   );
@@ -200,6 +186,4 @@ Banner.propTypes = {
       }).isRequired,
     })
   ).isRequired,
-  loadMoreAnimes: PropTypes.func,
-  hasMore: PropTypes.bool,
 };
