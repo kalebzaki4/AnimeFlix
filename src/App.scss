@@ -140,4 +140,23 @@ body {
   }
 }
 
+/* Animações globais para páginas */
+.page-fadein {
+  opacity: 0;
+  animation: pageFadeIn 0.7s cubic-bezier(0.4,1.4,0.2,1) forwards;
+}
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(32px) scale(0.97);}
+  to   { opacity: 1; transform: translateY(0) scale(1);}
+}
+
+.page-slidein {
+  opacity: 0;
+  animation: pageSlideIn 0.7s cubic-bezier(0.4,1.4,0.2,1) forwards;
+}
+@keyframes pageSlideIn {
+  from { opacity: 0; transform: translateX(-40px) scale(0.97);}
+  to   { opacity: 1; transform: translateX(0) scale(1);}
+}
+
 

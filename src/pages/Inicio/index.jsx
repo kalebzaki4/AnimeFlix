@@ -367,7 +367,7 @@ export default function Inicio() {
   }
 
   return (
-    <div>
+    <div className="page-fadein">
       <Banner
         title="Mais Famosos"
         description="Os animes mais populares do momento"
