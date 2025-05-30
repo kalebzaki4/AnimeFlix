@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="850eb242-0d89-4a70-99de-850001082c2a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../node_modules/.bin/acorn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/.bin/acorn.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/.bin/acorn.ps1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/Erro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/cardapio.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/logo-animeflix.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/menu-close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/menu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/play_circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/poster-bg-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/star.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/user.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/video-bg-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/animes/Estrelas/Estrelas.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/animes/Estrelas/Estrelas.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/animes/ListaDeAnimesHorizontal/ListaDeAnimes.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/animes/ListaDeAnimesHorizontal/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/common/Alert/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/common/Footer/Footer.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/common/Footer/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/common/Menu/Menu.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/common/Menu/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/common/TelaCarregamento/TelaCarregamento.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/common/TelaCarregamento/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/errors/Erro404/Erro404.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/errors/Erro404/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/layout/Banner/Banner.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../components/layout/Banner/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../context/AuthContext.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/AZ/AZ.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/AZ/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/AnimesSalvos/AnimesSalvos.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/AnimesSalvos/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Calendario/Calendario.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Calendario/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Inicio/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Login/Login.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Login/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Novidades/Novidades.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Novidades/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/PaginaDetalhes/PaginaDetalhes.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/PaginaDetalhes/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Perfil/Perfil.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Perfil/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Populares/Populares.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Populares/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/ResultadoAnimes/ListaAnimesVertical.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/ResultadoAnimes/Spinner.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/ResultadoAnimes/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/SignUp/SignUp.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/SignUp/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Simulcasts/Simulcasts.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Simulcasts/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Videoclipes/Videoclipes.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/Videoclipes/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../styles/message.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../utils/validationUtils" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../variables.css" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2xp4XvR1Pe1HiOY4my8Rr6LuAqy" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/kalebzaki/Documents/GitHub/AnimeFlix/src/animeflix-api"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="850eb242-0d89-4a70-99de-850001082c2a" name="Changes" comment="" />
+      <created>1748621724133</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1748621724133</updated>
+    </task>
+    <servers />
+  </component>
+</project>

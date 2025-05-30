@@ -1,0 +1,205 @@
+.detalhes {
+  background-color: #1A1820;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.detalhes-titulo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.Title {
+  font-size: 2rem;
+  padding: 20px 0px 10px 0px;
+}
+
+.save-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #444;
+  transition: color 0.3s ease;
+}
+
+.save-button:hover {
+  color: #ff6347;
+}
+
+.save-button svg.pop-animate {
+  animation: pop-elastic 0.5s cubic-bezier(0.23, 1.5, 0.32, 1) both, shine 0.7s 0.1s linear both;
+  /* shine inicia após o pop */
+}
+
+@keyframes pop-elastic {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.35) rotate(-8deg); }
+  55%  { transform: scale(0.92) rotate(4deg);}
+  70%  { transform: scale(1.08) rotate(-2deg);}
+  85%  { transform: scale(0.98) rotate(1deg);}
+  100% { transform: scale(1) rotate(0);}
+}
+
+@keyframes shine {
+  0% { filter: drop-shadow(0 0 0 #fff0); }
+  40% { filter: drop-shadow(0 0 12px #fff8); }
+  100% { filter: drop-shadow(0 0 0 #fff0); }
+}
+
+/* Estilo para o trailer */
+.detalhes-trailer {
+  margin-top: 20px;
+}
+
+.anime-trailer {
+  width: 100%;
+  height: 300px;
+  border: none;
+  border-radius: 10px;
+}
+
+.detalhes-trailer-placeholder {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+/* Estilo para a sinopse */
+.detalhes-sinopse {
+  margin-top: 20px;
+}
+
+.detalhes-sinopse p {
+  padding-bottom: 0px;
+}
+
+.ler-mais {
+  color: hsla(356, 74%, 49%);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: block;
+  margin-left: -10px;
+  margin-right: auto;
+  position: absolute;
+}
+
+.ver-mais {
+  background-color: #99080f;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ver-mais:hover {
+  background-color: #c40812;
+  transform: scale(1.05);
+}
+
+.ver-mais:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para os episódios */
+.proximo-episodio {
+  margin-top: 50px;
+}
+
+.episodios-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Reduzi o espaçamento entre os cartões */
+}
+
+.episodio-card {
+  display: flex;
+  align-items: center; /* Centraliza verticalmente */
+  background-color: #ffffff;
+  padding: 10px; /* Reduzi o padding */
+  border-radius: 8px; /* Reduzi o raio */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduzi a sombra */
+  transition: transform 0.35s cubic-bezier(0.23, 1.2, 0.32, 1), box-shadow 0.35s cubic-bezier(0.23, 1.2, 0.32, 1);
+}
+
+.episodio-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+.episodio-imagem {
+  width: 80px; /* Reduzi a largura */
+  height: 60px; /* Reduzi a altura */
+  object-fit: cover;
+  border-radius: 6px; /* Reduzi o raio */
+  margin-right: 10px; /* Reduzi o espaçamento lateral */
+  background-color: #f0f0f0; /* Cor de fundo para imagens de fallback */
+}
+
+.episodio-card:hover .episodio-imagem {
+  transform: scale(1.05);
+}
+
+.episodio-info {
+  flex: 1;
+}
+
+.episodio-info h3 {
+  font-size: 1rem; /* Reduzi o tamanho da fonte */
+  margin-bottom: 4px; /* Reduzi o espaçamento inferior */
+  color: #333;
+  font-weight: bold;
+}
+
+.episodio-info p {
+  font-size: 0.85rem; /* Reduzi o tamanho da fonte */
+  color: #666;
+  line-height: 1.2; /* Ajustei o espaçamento entre linhas */
+}
+
+/* Estilo responsivo */
+@media (max-width: 768px) {
+  .anime-imagem {
+    max-width: 90%;
+  }
+
+  .ver-mais {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 14px;
+  }
+
+  .episodio-card {
+    flex-direction: row; /* Mantém os itens em linha no mobile */
+    align-items: center;
+    padding: 10px;
+  }
+
+  .episodio-imagem {
+    width: 70px; /* Ajustei para telas menores */
+    height: 50px;
+  }
+
+  .episodio-info {
+    text-align: center;
+  }
+
+  .episodio-info h3 {
+    font-size: 0.9rem; /* Ajustei o tamanho da fonte */
+  }
+
+  .episodio-info p {
+    font-size: 0.8rem; /* Ajustei o tamanho da fonte */
+  }
+}
