@@ -29,8 +29,14 @@ const PaginaDetalhes = () => {
   const { isAuthenticated, saveAnime, removeAnime, isAnimeSaved, showAlert } = useAuth();
 
   useEffect(() => {
+    if (!animeId || isNaN(Number(animeId))) {
+      setError("Anime não encontrado.");
+      setAnimeDetails(null);
+      setEpisodes([]);
+      return;
+    }
     fetchAnimeDetails(animeId);
-    fetchEpisodes(animeId); // Fetch episodes
+    fetchEpisodes(animeId);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [animeId]);
 
@@ -40,9 +46,8 @@ const PaginaDetalhes = () => {
     return () => clearTimeout(timeout);
   }, [animeId, episodioId]);
 
-  // Quando episodioId mudar, seleciona o episódio correspondente
   useEffect(() => {
-    if (!episodioId || !episodes.length) {
+    if (!episodioId) {
       setSelectedEpisode(null);
       return;
     }
@@ -52,7 +57,13 @@ const PaginaDetalhes = () => {
         String(e.mal_id) === String(episodioId) ||
         String(e.id) === String(episodioId)
     );
-    setSelectedEpisode(ep || null);
+    if (!ep) {
+      setError("Episódio não encontrado.");
+      setSelectedEpisode(null);
+    } else {
+      setError(null);
+      setSelectedEpisode(ep);
+    }
   }, [episodioId, episodes]);
 
   const fetchAnimeDetails = async (id) => {
@@ -80,7 +91,6 @@ const PaginaDetalhes = () => {
     try {
       const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}/episodes`);
       const episodesData = response.data.data || [];
-      // Busca imagem do anime principal para fallback
       let animeImage = null;
       try {
         const animeResp = await axios.get(`https://api.jikan.moe/v4/anime/${id}`);
@@ -91,10 +101,8 @@ const PaginaDetalhes = () => {
       } catch {
         animeImage = null;
       }
-      // Busca imagens preview dos episódios (se disponíveis)
       const updatedEpisodes = await Promise.all(
         episodesData.map(async (episode) => {
-          // Jikan v4 pode trazer preview/still em episode.images.jpg.image_url ou episode.images.jpg.still_image
           let img =
             episode.images?.jpg?.image_url ||
             episode.images?.jpg?.still_image ||
@@ -105,10 +113,8 @@ const PaginaDetalhes = () => {
             animeImage ||
             null;
 
-          // Se ainda não tem imagem, tenta buscar na Kitsu pelo número do episódio e animeId
           if (!img && episode.mal_id) {
             try {
-              // Busca episódio na Kitsu pelo malId do anime e número do episódio
               const kitsuResp = await axios.get(
                 `https://kitsu.io/api/edge/episodes?filter[mediaType]=Anime&filter[number]=${episode.mal_id}&filter[animeId]=${id}`
               );
@@ -116,8 +122,8 @@ const PaginaDetalhes = () => {
               if (kitsuEp?.attributes?.thumbnail?.original) {
                 img = kitsuEp.attributes.thumbnail.original;
               }
-            } catch {
-              // ignora erro
+            } catch (e) {
+              // ignora erro de fallback de imagem
             }
           }
           img = img || "/fallback-image.jpg";
@@ -136,12 +142,9 @@ const PaginaDetalhes = () => {
       setEpisodes(updatedEpisodes);
     } catch (error) {
       console.error("Erro ao buscar episódios na API principal:", error.message);
-      // Tentar API alternativa
       try {
-        // Busca episódios na Kitsu e usa thumbnail do anime como fallback
         const altResponse = await axios.get(`https://kitsu.io/api/edge/anime/${id}/episodes`);
         const altEpisodesData = altResponse.data.data || [];
-        // Busca imagem do anime na Kitsu
         let animeKitsuImg = null;
         try {
           const animeResp = await axios.get(`https://kitsu.io/api/edge/anime/${id}`);
@@ -171,7 +174,7 @@ const PaginaDetalhes = () => {
         setEpisodes(updatedAltEpisodes);
       } catch (altError) {
         console.error("Erro ao buscar episódios na API alternativa:", altError.message);
-        setEpisodes([]); // Garante que o estado seja atualizado mesmo em caso de erro
+        setEpisodes([]);
       }
     }
   };
@@ -179,17 +182,17 @@ const PaginaDetalhes = () => {
   const toggleSynopsis = (event) => {
     event.preventDefault();
     setIsFullSynopsis((prev) => !prev);
-    window.scrollTo({ top: 0, behavior: "smooth" }); // Volta ao topo ao clicar em "Ler mais"/"Ler menos"
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleLoadMoreEpisodes = () => {
-    setVisibleEpisodes((prev) => prev + 10); // Load 10 more episodes
+    setVisibleEpisodes((prev) => prev + 10);
   };
 
   const handleSaveAnime = () => {
     if (!animeDetails) return;
     setIsSaveAnimating(true);
-    setTimeout(() => setIsSaveAnimating(false), 350); // duração da animação
+    setTimeout(() => setIsSaveAnimating(false), 350);
     if (isAnimeSaved(Number(animeId))) {
       removeAnime(Number(animeId));
       showAlert("Anime removido dos salvos!", "info");
@@ -220,6 +223,31 @@ const PaginaDetalhes = () => {
     setSelectedEpisode(null);
   };
 
+  if (error) {
+    return (
+      <div className="error-message" style={{ color: "#fff", background: "#b71c1c", padding: 24 }}>
+        <h2>Ocorreu um erro</h2>
+        <p>{error}</p>
+        <button
+          style={{
+            background: "#23272f",
+            color: "#ffb300",
+            border: "none",
+            borderRadius: 8,
+            padding: "8px 18px",
+            fontWeight: 600,
+            fontSize: 16,
+            marginTop: 16,
+            cursor: "pointer"
+          }}
+          onClick={() => navigate("/")}
+        >
+          Voltar para a página inicial
+        </button>
+      </div>
+    );
+  }
+
   if (selectedEpisode) {
     return (
       <div className="assistir-episodio" style={{ background: "#181818", minHeight: "100vh", color: "#fff" }}>
@@ -231,57 +259,28 @@ const PaginaDetalhes = () => {
             border: "none",
             borderRadius: 8,
             padding: "8px 18px",
-            margin: "24px 0 18px 18px",
-            fontWeight: "bold",
-            cursor: "pointer",
-            fontSize: "1rem",
-            boxShadow: "0 2px 8px #0002"
+            fontWeight: 600,
+            fontSize: 16,
+            margin: "24px 0 16px 0",
+            cursor: "pointer"
           }}
-          className="fade-in-up"
         >
-          ← Voltar para detalhes
+          ← Voltar para Detalhes
         </button>
-        <div className="fade-in-up" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 18, animationDelay: "0.08s" }}>
-          <h2 style={{ color: "#ffb300", marginBottom: 8 }}>
-            Episódio {selectedEpisode.number}: {selectedEpisode.title}
-          </h2>
-          <img
-            src={selectedEpisode.images?.jpg?.image_url || "/fallback-image.jpg"}
-            alt={selectedEpisode.title}
-            style={{
-              width: "100%",
-              maxWidth: 480,
-              borderRadius: 10,
-              boxShadow: "0 2px 12px #0007",
-              marginBottom: 18,
-              background: "#23272f",
-              animation: "popIn 0.7s cubic-bezier(0.4,1.4,0.2,1)"
-            }}
-            onError={e => { e.target.src = "/fallback-image.jpg"; }}
-          />
-          <div style={{
-            background: "#23272f",
-            borderRadius: 10,
-            padding: 18,
-            maxWidth: 600,
-            width: "100%",
-            boxShadow: "0 2px 8px #0003",
-            animation: "fadeInUp 0.7s cubic-bezier(0.4,1.4,0.2,1)"
-          }}>
-            <p style={{ color: "#fff", fontSize: 16, marginBottom: 10 }}>
-              {selectedEpisode.synopsis
-                ? selectedEpisode.synopsis
-                : "Sinopse não disponível para este episódio."}
-            </p>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <h2 style={{ marginBottom: 12 }}>{selectedEpisode.title || `Episódio ${selectedEpisode.number}`}</h2>
+          <p style={{ color: "#bbb", maxWidth: 600, marginBottom: 16 }}>
+            {selectedEpisode.synopsis || "Sinopse não disponível para este episódio."}
+          </p>
+          <div style={{ width: "100%", maxWidth: 800 }}>
             {selectedEpisode.video_url ? (
               <video
                 src={selectedEpisode.video_url}
                 controls
                 style={{
                   width: "100%",
-                  maxWidth: 600,
+                  maxWidth: 800,
                   borderRadius: 10,
-                  marginTop: 16,
                   background: "#000"
                 }}
               >
@@ -300,10 +299,6 @@ const PaginaDetalhes = () => {
 
   if (!animeDetails && !error) {
     return <TelaCarregamento />;
-  }
-
-  if (error) {
-    return <div className="error-message">{error}</div>;
   }
 
   const shortSynopsis = animeDetails.synopsis
