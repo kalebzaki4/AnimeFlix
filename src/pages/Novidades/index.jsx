@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Novidades.scss";
 import { Link, useNavigate } from "react-router-dom";
 import Estrelas from "../../components/animes/Estrelas/Estrelas";
+import { fetchMissingImages } from "../../utils/fetchUtils";
 
 const LIMIT = 12;
 
@@ -11,23 +12,6 @@ const getHighQualityImage = (anime) => (
   anime.images?.jpg?.image_url ||
   "/fallback-image.jpg"
 );
-
-const fetchKitsuImage = async (malId) => {
-  try {
-    const resp = await axios.get(
-      `https://kitsu.io/api/edge/anime?filter[malId]=${malId}`
-    );
-    const data = resp.data.data?.[0];
-    return (
-      data?.attributes?.posterImage?.original ||
-      data?.attributes?.posterImage?.large ||
-      data?.attributes?.posterImage?.medium ||
-      null
-    );
-  } catch {
-    return null;
-  }
-};
 
 const Novidades = () => {
   const [animes, setAnimes] = useState([]);
@@ -39,7 +23,7 @@ const Novidades = () => {
   const loaderRef = useRef(null);
 
   const fetchNovidades = useCallback(async (pageNum = 1) => {
-    if (isFetching.current) return;
+    if (isFetching.current || loading) return;
     isFetching.current = true;
     setLoading(true);
     try {
@@ -50,33 +34,21 @@ const Novidades = () => {
       setAnimes((prev) => (pageNum === 1 ? data : [...prev, ...data]));
       setHasMore(response.data.pagination?.has_next_page);
 
-      // Busca imagens alternativas para animes sem large_image_url
-      const missingHQ = data.filter(
-        (anime) => !anime.images?.jpg?.large_image_url
-      );
-      if (missingHQ.length > 0) {
-        const promises = missingHQ.map(async (anime) => {
-          const img = await fetchKitsuImage(anime.mal_id);
-          return { mal_id: anime.mal_id, img };
-        });
-        const results = await Promise.all(promises);
-        setAltImages((prev) => {
-          const next = { ...prev };
-          results.forEach(({ mal_id, img }) => {
-            if (img) next[mal_id] = img;
-          });
-          return next;
-        });
+      const altImgs = await fetchMissingImages(data);
+      if (Object.keys(altImgs).length > 0) {
+        setAltImages((prev) => ({ ...prev, ...altImgs }));
       }
-    } catch {
+    } catch (err) {
       setHasMore(false);
+      // Opcional: console.error("Erro ao buscar novidades:", err);
     } finally {
       setLoading(false);
       isFetching.current = false;
     }
-  }, []);
+  }, [loading]);
 
   useEffect(() => {
+    setAltImages({});
     fetchNovidades(1);
     // eslint-disable-next-line
   }, []);

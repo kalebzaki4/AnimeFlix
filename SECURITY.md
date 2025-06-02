@@ -16,10 +16,10 @@ Se deseja utilizar partes do projeto para outro propósito, entre em contato par
 
 | Versão  | Suporte            |  
 | ------- | ------------------ |  
-| 0.0.28 | ✅ Suportada       |  
-| < 0.0.25 | ❌ Não suportada  |  
+| 0.0.29 | ✅ Suportada       |  
+| < 0.0.28 | ❌ Não suportada  |  
 
-Apenas a versão **0.0.26** do AnimeFlix recebe atualizações e suporte. Versões anteriores não são mais mantidas.  
+Apenas a versão **0.0.29** do AnimeFlix recebe atualizações e suporte. Versões anteriores não são mais mantidas.  
 
 ## 🛡️ Relatar uma Vulnerabilidade  
 

@@ -8,7 +8,16 @@ import cancelarLogo from "../../../assets/images/close.png";
 import menuLateral from "../../../assets/images/menu.png";
 import cancelarMenuLateral from "../../../assets/images/menu-close.png";
 import userIcon from "../../../assets/images/user.svg";
-import { useAuth } from "../../../context/AuthContext"; 
+import { useAuth } from "../../../context/AuthContext";
+
+function useDebouncedValue(value, delay = 250) {
+  const [debounced, setDebounced] = useState(value);
+  useEffect(() => {
+    const handler = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(handler);
+  }, [value, delay]);
+  return debounced;
+}
 
 export default function Menu() {
   const { isAuthenticated, user, logout } = useAuth();
@@ -17,13 +26,14 @@ export default function Menu() {
   const [userMenuActive, setUserMenuActive] = useState(false);
   const [selectedItem, setSelectedItem] = useState("home");
   const [searchTerm, setSearchTerm] = useState("");
-  const [recommendedAnimes, setRecommendedAnimes] = useState([]);
-  const [selectedRecommendationIndex, setSelectedRecommendationIndex] =
-    useState(0);
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const debouncedSearchTerm = useDebouncedValue(searchTerm, 250);
+  const navigate = useNavigate();
   const overlayRef = useRef(null);
   const userOverlayRef = useRef(null);
-  const navigate = useNavigate();
   const headerRef = useRef(null);
+  const inputRef = useRef(null);
   const [isFixed, setIsFixed] = useState(false);
 
   const menuItems = [
@@ -36,40 +46,55 @@ export default function Menu() {
     { name: "videoclipes", label: "Videoclipes & Shows" },
   ];
 
-  const handleSearchChange = async (event) => {
-    const term = event.target.value;
-    setSearchTerm(term);
-
-    if (term.length > 2) {
+  // Sugestões/autocomplete
+  useEffect(() => {
+    if (debouncedSearchTerm.length < 2) {
+      setSuggestions([]);
+      setShowSuggestions(false);
+      return;
+    }
+    let cancel = false;
+    (async () => {
       try {
-        const response = await axios.get(
-          `https://api.jikan.moe/v4/anime?q=${term}`
-        );
-        setRecommendedAnimes(response.data.data);
-      } catch (error) {
-        console.error("Erro ao buscar dados de animes:", error);
+        const resp = await axios.get("https://api.jikan.moe/v4/anime", {
+          params: { q: debouncedSearchTerm, limit: 5 },
+        });
+        if (!cancel) {
+          setSuggestions(resp.data?.data || []);
+          setShowSuggestions(true);
+        }
+      } catch {
+        setSuggestions([]);
+        setShowSuggestions(false);
       }
-    } else {
-      setRecommendedAnimes([]);
+    })();
+    return () => {
+      cancel = true;
+    };
+  }, [debouncedSearchTerm]);
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const term = inputRef.current?.value?.trim() ?? searchTerm.trim();
+    if (term) {
+      setShowSuggestions(false);
+      setSearchActive(false); // FECHA O INPUT DE PESQUISA AO ENTER
+      setSuggestions([]); // Limpa sugestões imediatamente
+      navigate(`/search?q=${encodeURIComponent(term)}`);
     }
   };
 
-  const handleRecommendationClick = () => {
-    setRecommendedAnimes([]);
-  };
-
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-    if (searchTerm) {
-      navigate(`/search?q=${searchTerm}`);
-      setSearchActive(false);
-    }
+  // Clique em sugestão/autocomplete
+  const handleSuggestionClick = (anime) => {
+    setShowSuggestions(false);
+    navigate(`/Detalhes/${anime.mal_id}`);
   };
 
   const toggleSearch = () => {
     setSearchActive((prevSearchActive) => !prevSearchActive);
     setSearchTerm("");
-    setRecommendedAnimes([]);
+    setSuggestions([]);
+    setShowSuggestions(false); // Garante fechamento imediato das sugestões
   };
 
   const toggleMenu = () => {
@@ -110,14 +135,14 @@ export default function Menu() {
       if (
         menuActive &&
         overlayRef.current &&
-        !overlayRef.current.querySelector('.menu-overlay').contains(event.target)
+        !overlayRef.current.querySelector(".menu-overlay").contains(event.target)
       ) {
         setMenuActive(false);
       }
       if (
         userMenuActive &&
         userOverlayRef.current &&
-        !userOverlayRef.current.querySelector('.menu-overlay-2').contains(event.target)
+        !userOverlayRef.current.querySelector(".menu-overlay-2").contains(event.target)
       ) {
         setUserMenuActive(false);
       }
@@ -141,30 +166,6 @@ export default function Menu() {
       document.body.style.overflow = "";
     };
   }, [menuActive, userMenuActive]);
-
-  const handleKeyDown = (event) => {
-    if (event.key === "ArrowDown") {
-      setSelectedRecommendationIndex((prevIndex) =>
-        Math.min(prevIndex + 1, recommendedAnimes.length - 1)
-      );
-    } else if (event.key === "ArrowUp") {
-      setSelectedRecommendationIndex((prevIndex) => Math.max(prevIndex - 0));
-    } else if (event.key === "Enter") {
-      const selectedAnime = recommendedAnimes[selectedRecommendationIndex];
-      if (selectedAnime) {
-        navigate(`/Detalhes/${selectedAnime.mal_id}`);
-        setRecommendedAnimes([]);
-      }
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [recommendedAnimes, selectedRecommendationIndex]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -222,15 +223,19 @@ export default function Menu() {
         </button>
 
         <div className={`search-box ${searchActive ? "active" : ""}`}>
-          <form onSubmit={handleSearchSubmit} className="search-wrapper">
+          <form onSubmit={handleSearchSubmit} className="search-wrapper" autoComplete="off">
             <input
+              ref={inputRef}
               type="text"
               name="search"
               placeholder="Procurar Animes"
               className="search-field"
               autoComplete="off"
               value={searchTerm}
-              onChange={handleSearchChange}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onFocus={() => setShowSuggestions(suggestions.length > 0)}
+              onBlur={() => setTimeout(() => setShowSuggestions(false), 120)}
+              aria-label="Buscar animes"
             />
             <img
               src={logoPesquisa}
@@ -239,6 +244,103 @@ export default function Menu() {
               width={24}
               height={24}
             />
+            {showSuggestions && suggestions.length > 0 && (
+              <ul
+                className="search-suggestions-list"
+                style={{
+                  position: "absolute",
+                  top: 48,
+                  left: 0,
+                  right: 0,
+                  background: "#181818",
+                  borderRadius: 16,
+                  boxShadow: "0 8px 32px #000b",
+                  zIndex: 10,
+                  padding: 0,
+                  margin: 0,
+                  listStyle: "none",
+                  maxHeight: 320,
+                  overflowY: "auto",
+                  border: "1.5px solid #23272f",
+                  minWidth: 260,
+                  animation: "fadeInMenu 0.25s cubic-bezier(0.4,0.2,0.2,1)"
+                }}
+              >
+                {suggestions.map((anime, idx) => (
+                  <li
+                    key={anime.mal_id}
+                    className="search-suggestion-item"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 14,
+                      padding: "12px 18px",
+                      cursor: "pointer",
+                      borderBottom: idx === suggestions.length - 1 ? "none" : "1px solid #23272f",
+                      background: "none",
+                      transition: "background 0.16s, box-shadow 0.16s",
+                      position: "relative"
+                    }}
+                    onMouseDown={() => handleSuggestionClick(anime)}
+                    tabIndex={0}
+                    onKeyDown={(e) =>
+                      (e.key === "Enter" || e.key === " ") &&
+                      handleSuggestionClick(anime)
+                    }
+                    aria-label={`Ir para detalhes de ${anime.title}`}
+                  >
+                    <img
+                      src={anime.images?.jpg?.image_url || "/fallback-image.jpg"}
+                      alt={anime.title}
+                      width={44}
+                      height={62}
+                      style={{
+                        borderRadius: 8,
+                        objectFit: "cover",
+                        boxShadow: "0 2px 8px #0007",
+                        background: "#23272f",
+                        flexShrink: 0,
+                        border: "1.5px solid #23272f"
+                      }}
+                    />
+                    <span
+                      style={{
+                        color: "#fff",
+                        fontWeight: 600,
+                        fontSize: 16,
+                        flex: 1,
+                        textShadow: "0 1px 4px #000a",
+                        letterSpacing: 0.01,
+                        lineHeight: 1.18,
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
+                        textOverflow: "ellipsis"
+                      }}
+                    >
+                      {anime.title}
+                    </span>
+                    <span
+                      style={{
+                        background: "#ffb300",
+                        color: "#181818",
+                        fontWeight: 700,
+                        fontSize: 15,
+                        borderRadius: 8,
+                        padding: "3px 10px",
+                        marginLeft: 6,
+                        minWidth: 38,
+                        textAlign: "center",
+                        boxShadow: "0 1px 4px #0003",
+                        letterSpacing: 0.01,
+                        display: "inline-block"
+                      }}
+                    >
+                      {anime.score ?? "N/A"}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </form>
           <button className="search-btn" onClick={toggleSearch}>
             <img
@@ -248,28 +350,6 @@ export default function Menu() {
               height={24}
             />
           </button>
-          {recommendedAnimes.length > 0 && (
-            <div className="recommendations">
-              {recommendedAnimes.map((anime, index) => (
-                <Link
-                  key={anime.mal_id}
-                  to={`/Detalhes/${anime.mal_id}`}
-                  className={`recommendation-item ${
-                    index === selectedRecommendationIndex ? "selected" : ""
-                  }`}
-                  onClick={handleRecommendationClick}
-                >
-                  <img
-                    src={anime.images.jpg.image_url}
-                    alt={anime.title}
-                    width={50}
-                    height={70}
-                  />
-                  <span>{anime.title}</span>
-                </Link>
-              ))}
-            </div>
-          )}
         </div>
 
         <button className="user-btn" onClick={toggleUserMenu}>
@@ -456,7 +536,7 @@ export default function Menu() {
                           boxShadow: "0 2px 8px #0002",
                           letterSpacing: 0.1,
                           border: "none",
-                          cursor: "pointer"
+                          cursor: "pointer",
                         }}
                         onClick={() => {
                           logout();
@@ -498,11 +578,17 @@ export default function Menu() {
                       boxShadow: "0 2px 8px #0002",
                       letterSpacing: 0.1,
                       display: "block",
-                      top: 20
+                      top: 20,
                     }}
                     onClick={() => handleUserMenuItemClick("perfil")}
                   >
-                    <span role="img" aria-label="perfil" style={{ marginRight: 6 }}>👤</span>
+                    <span
+                      role="img"
+                      aria-label="perfil"
+                      style={{ marginRight: 6 }}
+                    >
+                      👤
+                    </span>
                     Meu Perfil
                   </Link>
                   <Link
@@ -526,7 +612,13 @@ export default function Menu() {
                     }}
                     onClick={() => handleUserMenuItemClick("configuracoes")}
                   >
-                    <span role="img" aria-label="configurações" style={{ marginRight: 6 }}>⚙️</span>
+                    <span
+                      role="img"
+                      aria-label="configurações"
+                      style={{ marginRight: 6 }}
+                    >
+                      ⚙️
+                    </span>
                     Configurações
                   </Link>
                 </div>
@@ -540,7 +632,10 @@ export default function Menu() {
                     opacity: 0.85,
                   }}
                 >
-                  <span role="img" aria-label="estrela">⭐</span> Obrigado por usar o AnimeFlix!
+                  <span role="img" aria-label="estrela">
+                    ⭐
+                  </span>{" "}
+                  Obrigado por usar o AnimeFlix!
                 </div>
               </div>
             )}
@@ -553,6 +648,27 @@ export default function Menu() {
           </div>
         </div>
       </div>
+      <style>{`
+        .search-suggestions-list {
+          backdrop-filter: blur(2px);
+        }
+        .search-suggestion-item {
+          border-left: 3.5px solid transparent;
+        }
+        .search-suggestion-item:hover,
+        .search-suggestion-item:focus {
+          background: #23272f;
+          border-left: 3.5px solid #ffb300;
+          box-shadow: 0 2px 12px #0007;
+        }
+        .search-suggestion-item:active {
+          background: #181818;
+        }
+        @keyframes fadeInMenu {
+          from { opacity: 0; transform: translateY(12px);}
+          to   { opacity: 1; transform: translateY(0);}
+        }
+      `}</style>
     </>
   );
 }

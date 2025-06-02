@@ -14,16 +14,16 @@ const statusTraduzidos = {
 };
 
 const PaginaDetalhes = () => {
-  const { animeId, episodioId } = useParams(); 
+  const { animeId, episodioId } = useParams();
   const navigate = useNavigate();
   const [animeDetails, setAnimeDetails] = useState(null);
-  const [episodes, setEpisodes] = useState([]); 
+  const [episodes, setEpisodes] = useState([]);
   const [isFullSynopsis, setIsFullSynopsis] = useState(false);
   const [error, setError] = useState(null);
   const [alert, setAlert] = useState(null);
-  const [visibleEpisodes, setVisibleEpisodes] = useState(10); 
-  const [isSaveAnimating, setIsSaveAnimating] = useState(false); 
-  const [selectedEpisode, setSelectedEpisode] = useState(null); 
+  const [visibleEpisodes, setVisibleEpisodes] = useState(10);
+  const [isSaveAnimating, setIsSaveAnimating] = useState(false);
+  const [selectedEpisode, setSelectedEpisode] = useState(null);
   const [showAnim, setShowAnim] = useState(false);
 
   const { isAuthenticated, saveAnime, removeAnime, isAnimeSaved, showAlert } = useAuth();
@@ -78,6 +78,11 @@ const PaginaDetalhes = () => {
         synopsis: data.synopsis,
         status: statusTraduzidos[data.status] || data.status,
         trailer: { url: data.trailer?.url || null },
+        images: data.images,
+        year: data.year,
+        score: data.score,
+        episodes: data.episodes,
+        genres: data.genres,
       });
     } catch (error) {
       setError(
@@ -91,91 +96,9 @@ const PaginaDetalhes = () => {
     try {
       const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}/episodes`);
       const episodesData = response.data.data || [];
-      let animeImage = null;
-      try {
-        const animeResp = await axios.get(`https://api.jikan.moe/v4/anime/${id}`);
-        animeImage =
-          animeResp.data?.data?.images?.jpg?.large_image_url ||
-          animeResp.data?.data?.images?.jpg?.image_url ||
-          null;
-      } catch {
-        animeImage = null;
-      }
-      const updatedEpisodes = await Promise.all(
-        episodesData.map(async (episode) => {
-          let img =
-            episode.images?.jpg?.image_url ||
-            episode.images?.jpg?.still_image ||
-            episode.still ||
-            episode.image ||
-            episode.images?.jpg?.large_image_url ||
-            episode.images?.jpg?.small_image_url ||
-            animeImage ||
-            null;
-
-          if (!img && episode.mal_id) {
-            try {
-              const kitsuResp = await axios.get(
-                `https://kitsu.io/api/edge/episodes?filter[mediaType]=Anime&filter[number]=${episode.mal_id}&filter[animeId]=${id}`
-              );
-              const kitsuEp = kitsuResp.data.data?.[0];
-              if (kitsuEp?.attributes?.thumbnail?.original) {
-                img = kitsuEp.attributes.thumbnail.original;
-              }
-            } catch (e) {
-              // ignora erro de fallback de imagem
-            }
-          }
-          img = img || "/fallback-image.jpg";
-          return {
-            title: episode.title,
-            synopsis: episode.synopsis,
-            images: {
-              jpg: {
-                image_url: img,
-              },
-            },
-            number: episode.mal_id || episode.episode_id || episode.id || episode.number,
-          };
-        })
-      );
-      setEpisodes(updatedEpisodes);
+      setEpisodes(episodesData);
     } catch (error) {
-      console.error("Erro ao buscar episódios na API principal:", error.message);
-      try {
-        const altResponse = await axios.get(`https://kitsu.io/api/edge/anime/${id}/episodes`);
-        const altEpisodesData = altResponse.data.data || [];
-        let animeKitsuImg = null;
-        try {
-          const animeResp = await axios.get(`https://kitsu.io/api/edge/anime/${id}`);
-          animeKitsuImg =
-            animeResp.data?.data?.attributes?.posterImage?.original ||
-            animeResp.data?.data?.attributes?.posterImage?.large ||
-            animeResp.data?.data?.attributes?.posterImage?.medium ||
-            null;
-        } catch {
-          animeKitsuImg = null;
-        }
-        const updatedAltEpisodes = altEpisodesData.map((episode, idx) => ({
-          title: episode.attributes.canonicalTitle,
-          synopsis: episode.attributes.synopsis || "Sinopse não disponível",
-          images: {
-            jpg: {
-              image_url:
-                episode.attributes.thumbnail?.original ||
-                episode.attributes.thumbnail?.small ||
-                episode.attributes.thumbnail?.medium ||
-                animeKitsuImg ||
-                "/fallback-image.jpg",
-            },
-          },
-          number: idx + 1,
-        }));
-        setEpisodes(updatedAltEpisodes);
-      } catch (altError) {
-        console.error("Erro ao buscar episódios na API alternativa:", altError.message);
-        setEpisodes([]);
-      }
+      setEpisodes([]);
     }
   };
 

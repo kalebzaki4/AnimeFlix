@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Simulcasts.scss";
 import { Link, useNavigate } from "react-router-dom";
 import Estrelas from "../../components/animes/Estrelas/Estrelas";
+import { fetchMissingImages } from "../../utils/fetchUtils";
 
 const LIMIT = 18;
 
@@ -10,23 +11,6 @@ const getHighQualityImage = (anime) =>
   anime.images?.jpg?.large_image_url ||
   anime.images?.jpg?.image_url ||
   "/fallback-image.jpg";
-
-const fetchKitsuImage = async (malId) => {
-  try {
-    const resp = await axios.get(
-      `https://kitsu.io/api/edge/anime?filter[malId]=${malId}`
-    );
-    const data = resp.data.data?.[0];
-    return (
-      data?.attributes?.posterImage?.original ||
-      data?.attributes?.posterImage?.large ||
-      data?.attributes?.posterImage?.medium ||
-      null
-    );
-  } catch {
-    return null;
-  }
-};
 
 export default function Simulcasts() {
   const [animes, setAnimes] = useState([]);
@@ -39,11 +23,15 @@ export default function Simulcasts() {
   const navigate = useNavigate();
   const currentPage = useRef(1);
 
+  // Controle de requisições para evitar race condition
+  const requestIdRef = useRef(0);
+
   const fetchSimulcasts = useCallback(async (pageNum = 1, isFirst = false) => {
-    if (isFetching.current) return;
+    if (isFetching.current || loading) return;
     isFetching.current = true;
     if (isFirst) setInitialLoading(true);
     setLoading(true);
+    const thisRequestId = ++requestIdRef.current;
     try {
       const response = await axios.get("https://api.jikan.moe/v4/anime", {
         params: {
@@ -55,37 +43,30 @@ export default function Simulcasts() {
         },
       });
       let data = response.data.data || [];
+      if (thisRequestId !== requestIdRef.current) return; // IGNORA resposta antiga
       setAnimes((prev) => (pageNum === 1 ? data : [...prev, ...data]));
       setHasMore(response.data.pagination?.has_next_page && data.length > 0);
 
-      // Busca imagens alternativas para animes sem large_image_url
-      const missingHQ = data.filter(
-        (anime) => !anime.images?.jpg?.large_image_url
-      );
-      if (missingHQ.length > 0) {
-        const promises = missingHQ.map(async (anime) => {
-          const img = await fetchKitsuImage(anime.mal_id);
-          return { mal_id: anime.mal_id, img };
-        });
-        const results = await Promise.all(promises);
-        setAltImages((prev) => {
-          const next = { ...prev };
-          results.forEach(({ mal_id, img }) => {
-            if (img) next[mal_id] = img;
-          });
-          return next;
-        });
+      const altImgs = await fetchMissingImages(data);
+      if (Object.keys(altImgs).length > 0 && thisRequestId === requestIdRef.current) {
+        setAltImages((prev) => ({ ...prev, ...altImgs }));
       }
-    } catch {
-      setHasMore(false);
+    } catch (err) {
+      if (thisRequestId === requestIdRef.current) {
+        setHasMore(false);
+      }
     } finally {
-      setLoading(false);
-      setInitialLoading(false);
-      isFetching.current = false;
+      if (thisRequestId === requestIdRef.current) {
+        setLoading(false);
+        setInitialLoading(false);
+        isFetching.current = false;
+      }
     }
-  }, []);
+  }, [loading]);
 
   useEffect(() => {
+    // Ao iniciar nova busca, invalida todas as anteriores
+    requestIdRef.current += 1;
     setAnimes([]);
     setHasMore(true);
     setAltImages({});
@@ -97,9 +78,16 @@ export default function Simulcasts() {
 
   useEffect(() => {
     if (!hasMore || loading || initialLoading) return;
+    let cancelled = false;
     const observer = new window.IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasMore && !loading && !initialLoading) {
+        if (
+          entries[0].isIntersecting &&
+          hasMore &&
+          !loading &&
+          !initialLoading &&
+          !cancelled
+        ) {
           currentPage.current += 1;
           fetchSimulcasts(currentPage.current);
         }
@@ -108,6 +96,7 @@ export default function Simulcasts() {
     );
     if (loaderRef.current) observer.observe(loaderRef.current);
     return () => {
+      cancelled = true;
       if (loaderRef.current) observer.unobserve(loaderRef.current);
     };
   }, [hasMore, loading, fetchSimulcasts, initialLoading]);

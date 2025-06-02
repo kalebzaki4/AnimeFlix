@@ -3,6 +3,7 @@ import axios from "axios";
 import "./AZ.scss";
 import { Link, useNavigate } from "react-router-dom";
 import Estrelas from "../../components/animes/Estrelas/Estrelas";
+import { fetchMissingImages } from "../../utils/fetchUtils";
 
 const LIMIT = 18;
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -11,23 +12,6 @@ const getHighQualityImage = (anime) =>
   anime.images?.jpg?.large_image_url ||
   anime.images?.jpg?.image_url ||
   "/fallback-image.jpg";
-
-const fetchKitsuImage = async (malId) => {
-  try {
-    const resp = await axios.get(
-      `https://kitsu.io/api/edge/anime?filter[malId]=${malId}`
-    );
-    const data = resp.data.data?.[0];
-    return (
-      data?.attributes?.posterImage?.original ||
-      data?.attributes?.posterImage?.large ||
-      data?.attributes?.posterImage?.medium ||
-      null
-    );
-  } catch {
-    return null;
-  }
-};
 
 export default function AZ() {
   const [animes, setAnimes] = useState([]);
@@ -43,7 +27,7 @@ export default function AZ() {
 
   const fetchAZ = useCallback(
     async (pageNum = 1, letter = selectedLetter, isFirst = false) => {
-      if (isFetching.current || !letter) return;
+      if (isFetching.current || loading || !letter) return;
       isFetching.current = true;
       if (isFirst) setInitialLoading(true);
       setLoading(true);
@@ -64,33 +48,20 @@ export default function AZ() {
         setAnimes((prev) => (pageNum === 1 ? data : [...prev, ...data]));
         setHasMore(response.data.pagination?.has_next_page && data.length > 0);
 
-        const missingHQ = data.filter(
-          (anime) => !anime.images?.jpg?.large_image_url
-        );
-        if (missingHQ.length > 0) {
-          const results = await Promise.all(
-            missingHQ.map(async (anime) => ({
-              mal_id: anime.mal_id,
-              img: await fetchKitsuImage(anime.mal_id),
-            }))
-          );
-          setAltImages((prev) => {
-            const next = { ...prev };
-            results.forEach(({ mal_id, img }) => {
-              if (img) next[mal_id] = img;
-            });
-            return next;
-          });
+        const altImgs = await fetchMissingImages(data);
+        if (Object.keys(altImgs).length > 0) {
+          setAltImages((prev) => ({ ...prev, ...altImgs }));
         }
-      } catch {
+      } catch (err) {
         setHasMore(false);
+        // Opcional: console.error("Erro ao buscar animes A-Z:", err);
       } finally {
         setLoading(false);
         setInitialLoading(false);
         isFetching.current = false;
       }
     },
-    [selectedLetter]
+    [selectedLetter, loading]
   );
 
   useEffect(() => {
@@ -100,7 +71,7 @@ export default function AZ() {
     currentPage.current = 1;
     window.scrollTo({ top: 0, behavior: "smooth" });
     fetchAZ(1, selectedLetter, true);
-  }, [selectedLetter]);
+  }, [selectedLetter, fetchAZ]);
 
   useEffect(() => {
     if (!hasMore || loading || initialLoading) return;
