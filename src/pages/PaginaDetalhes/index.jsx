@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./PaginaDetalhes.scss";
 import TelaCarregamento from "../../components/common/TelaCarregamento";
@@ -28,6 +28,39 @@ const PaginaDetalhes = () => {
 
   const { isAuthenticated, saveAnime, removeAnime, isAnimeSaved, showAlert } = useAuth();
 
+  const statusTraduzidosMemo = useMemo(() => statusTraduzidos, []);
+
+  const fetchAnimeDetails = useCallback(async (id) => {
+    try {
+      const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}`);
+      if (response.status !== 200) throw new Error("Anime não encontrado!");
+      const data = response.data.data;
+      setAnimeDetails({
+        title: data.title,
+        synopsis: data.synopsis,
+        status: statusTraduzidosMemo[data.status] || data.status,
+        trailer: { url: data.trailer?.url || null },
+        images: data.images,
+        year: data.year,
+        score: data.score,
+        episodes: data.episodes,
+        genres: data.genres,
+      });
+    } catch {
+      setError("Ocorreu um erro ao carregar os detalhes do anime. Tente novamente mais tarde.");
+      setAnimeDetails(null);
+    }
+  }, [statusTraduzidosMemo]);
+
+  const fetchEpisodes = useCallback(async (id) => {
+    try {
+      const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}/episodes`);
+      setEpisodes(response.data.data || []);
+    } catch {
+      setEpisodes([]);
+    }
+  }, []);
+
   useEffect(() => {
     if (!animeId || isNaN(Number(animeId))) {
       setError("Anime não encontrado.");
@@ -38,7 +71,7 @@ const PaginaDetalhes = () => {
     fetchAnimeDetails(animeId);
     fetchEpisodes(animeId);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [animeId]);
+  }, [animeId, fetchAnimeDetails, fetchEpisodes]);
 
   useEffect(() => {
     setShowAnim(false);
@@ -65,42 +98,6 @@ const PaginaDetalhes = () => {
       setSelectedEpisode(ep);
     }
   }, [episodioId, episodes]);
-
-  const fetchAnimeDetails = async (id) => {
-    try {
-      const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}`);
-      if (response.status !== 200) {
-        throw new Error("Anime não encontrado!");
-      }
-      const data = response.data.data;
-      setAnimeDetails({
-        title: data.title,
-        synopsis: data.synopsis,
-        status: statusTraduzidos[data.status] || data.status,
-        trailer: { url: data.trailer?.url || null },
-        images: data.images,
-        year: data.year,
-        score: data.score,
-        episodes: data.episodes,
-        genres: data.genres,
-      });
-    } catch (error) {
-      setError(
-        "Ocorreu um erro ao carregar os detalhes do anime. Tente novamente mais tarde."
-      );
-      setAnimeDetails(null);
-    }
-  };
-
-  const fetchEpisodes = async (id) => {
-    try {
-      const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}/episodes`);
-      const episodesData = response.data.data || [];
-      setEpisodes(episodesData);
-    } catch (error) {
-      setEpisodes([]);
-    }
-  };
 
   const toggleSynopsis = (event) => {
     event.preventDefault();
@@ -145,6 +142,27 @@ const PaginaDetalhes = () => {
     navigate(`/Detalhes/${animeId}`);
     setSelectedEpisode(null);
   };
+
+  const getEpisodeImage = useCallback((ep) => {
+    const img =
+      ep?.images?.jpg?.large_image_url ||
+      ep?.images?.jpg?.image_url ||
+      ep?.images?.jpg?.small_image_url ||
+      ep?.image_url ||
+      ep?.thumbnail ||
+      animeDetails?.images?.jpg?.large_image_url ||
+      animeDetails?.images?.jpg?.image_url ||
+      animeDetails?.images?.webp?.large_image_url ||
+      animeDetails?.images?.webp?.image_url ||
+      "/fallback-image.jpg";
+    return img;
+  }, [animeDetails]);
+
+  const shortSynopsis = useMemo(() =>
+    animeDetails?.synopsis
+      ? animeDetails.synopsis.slice(0, 300) + (animeDetails.synopsis.length > 300 ? "..." : "")
+      : ""
+  , [animeDetails]);
 
   if (error) {
     return (
@@ -223,10 +241,6 @@ const PaginaDetalhes = () => {
   if (!animeDetails && !error) {
     return <TelaCarregamento />;
   }
-
-  const shortSynopsis = animeDetails.synopsis
-    ? animeDetails.synopsis.slice(0, 300) + "..."
-    : "";
 
   return (
     <div className={`detalhes${showAnim ? " show-anim" : ""}`} style={{ background: "#181818" }}>
@@ -328,11 +342,11 @@ const PaginaDetalhes = () => {
           <div className="episodios-container">
             {episodes.slice(0, visibleEpisodes).map((episodio, index) => (
               <div
-                key={`${episodio.title}-${index}`}
+                key={`${episodio.title || "ep"}-${episodio.number || index}`}
                 className="episodio-card fade-in-episodio"
                 tabIndex={0}
                 role="button"
-                aria-label={`Ver detalhes do episódio ${episodio.title}`}
+                aria-label={`Ver detalhes do episódio ${episodio.title || episodio.number || index + 1}`}
                 style={{
                   cursor: "pointer",
                   background: "#23272f",
@@ -343,15 +357,23 @@ const PaginaDetalhes = () => {
                 onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleEpisodeClick(episodio)}
               >
                 <img
-                  src={episodio.images?.jpg?.image_url || "/fallback-image.jpg"}
-                  alt={episodio.title}
+                  src={getEpisodeImage(episodio)}
+                  alt={episodio.title || animeDetails?.title || "Imagem do episódio"}
                   className="episodio-imagem"
                   style={{
                     background: "#181818",
                     border: "2px solid #222",
-                    objectFit: "cover"
+                    objectFit: "cover",
+                    width: 80,
+                    height: 60,
+                    borderRadius: 6,
+                    marginRight: 10,
+                    display: "block"
                   }}
-                  onError={e => { e.target.src = "/fallback-image.jpg"; }}
+                  onError={e => { e.target.onerror = null; e.target.src = "/fallback-image.jpg"; }}
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
                 />
                 <div className="episodio-info">
                   <h3 style={{ color: "#ffb300" }}>
@@ -359,7 +381,7 @@ const PaginaDetalhes = () => {
                   </h3>
                   <p style={{ color: "#ccc" }}>
                     {episodio.synopsis
-                      ? episodio.synopsis.slice(0, 100) + "..."
+                      ? episodio.synopsis.slice(0, 100) + (episodio.synopsis.length > 100 ? "..." : "")
                       : "Sem sinopse disponível"}
                   </p>
                 </div>
