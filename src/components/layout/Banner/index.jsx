@@ -123,7 +123,6 @@ export default function Banner({ animes }) {
                   loading={index === activeIndex ? "eager" : "lazy"}
                   onError={e => { e.target.src = "/fallback-image.jpg"; }}
                   decoding="async"
-                  fetchPriority={index === activeIndex ? "high" : "auto"}
                 />
                 <div className="banner-content">{renderAnimeInfo(anime)}</div>
               </div>

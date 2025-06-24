@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import axios from "axios";
+import { apiGet } from "../../utils/api";
 import "./AZ.scss";
 import { Link, useNavigate } from "react-router-dom";
 import Estrelas from "../../components/animes/Estrelas/Estrelas";
@@ -20,6 +20,7 @@ export default function AZ() {
   const [initialLoading, setInitialLoading] = useState(true);
   const [selectedLetter, setSelectedLetter] = useState("A");
   const [altImages, setAltImages] = useState({});
+  const [error, setError] = useState(null);
   const isFetching = useRef(false);
   const loaderRef = useRef(null);
   const navigate = useNavigate();
@@ -31,15 +32,14 @@ export default function AZ() {
       isFetching.current = true;
       if (isFirst) setInitialLoading(true);
       setLoading(true);
+      setError(null);
       try {
-        const response = await axios.get("https://api.jikan.moe/v4/anime", {
-          params: {
-            q: letter,
-            order_by: "popularity",
-            sort: "desc",
-            limit: LIMIT,
-            page: pageNum,
-          },
+        const response = await apiGet("https://api.jikan.moe/v4/anime", {
+          q: letter,
+          order_by: "popularity",
+          sort: "desc",
+          limit: LIMIT,
+          page: pageNum,
         });
         let data = response.data.data || [];
         data = data
@@ -54,7 +54,11 @@ export default function AZ() {
         }
       } catch (err) {
         setHasMore(false);
-        // Opcional: console.error("Erro ao buscar animes A-Z:", err);
+        let msg = "Erro ao buscar animes. Tente novamente mais tarde.";
+        if (err?.code === "ECONNABORTED") msg = "A conexão com a API demorou demais. Tente novamente.";
+        else if (err?.response?.status === 429) msg = "Muitas requisições para a API. Aguarde alguns segundos.";
+        else if (err?.response?.status === 404) msg = "Nenhum anime encontrado para essa letra.";
+        setError(msg);
       } finally {
         setLoading(false);
         setInitialLoading(false);
@@ -154,6 +158,11 @@ export default function AZ() {
           ? `Encontramos ${animes.length} anime${animes.length > 1 ? "s" : ""} com a letra "${selectedLetter}".`
           : null}
       </div>
+      {error && (
+        <div className="az-error" style={{ color: "#ff5252", margin: "24px 0", fontWeight: 600 }}>
+          {error}
+        </div>
+      )}
       {initialLoading ? (
         <div className="az-initial-loading">
           <div className="az-spinner"></div>

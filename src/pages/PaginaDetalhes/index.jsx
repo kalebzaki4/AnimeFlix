@@ -426,7 +426,6 @@ const PaginaDetalhes = () => {
                   onError={e => { e.target.onerror = null; e.target.src = "/fallback-image.jpg"; }}
                   loading="lazy"
                   decoding="async"
-                  fetchPriority="low"
                 />
                 <div className="episodio-info">
                   <h3 style={{ color: "#ffb300" }}>
