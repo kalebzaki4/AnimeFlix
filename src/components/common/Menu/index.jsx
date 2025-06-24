@@ -10,7 +10,7 @@ import cancelarMenuLateral from "../../../assets/images/menu-close.png";
 import userIcon from "../../../assets/images/user.svg";
 import { useAuth } from "../../../context/AuthContext";
 
-function useDebouncedValue(value, delay = 250) {
+function useDebouncedValue(value, delay = 20) {
   const [debounced, setDebounced] = useState(value);
   useEffect(() => {
     const handler = setTimeout(() => setDebounced(value), delay);
@@ -28,13 +28,15 @@ export default function Menu() {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const debouncedSearchTerm = useDebouncedValue(searchTerm, 250);
+  const [isSearching, setIsSearching] = useState(false); // novo estado
+  const debouncedSearchTerm = useDebouncedValue(searchTerm, 20);
   const navigate = useNavigate();
   const overlayRef = useRef(null);
   const userOverlayRef = useRef(null);
   const headerRef = useRef(null);
   const inputRef = useRef(null);
   const [isFixed, setIsFixed] = useState(false);
+  const requestIdRef = useRef(0);
 
   const menuItems = [
     { name: "home", label: "Home" },
@@ -46,30 +48,46 @@ export default function Menu() {
     { name: "videoclipes", label: "Videoclipes & Shows" },
   ];
 
-  // Sugestões/autocomplete
   useEffect(() => {
     if (debouncedSearchTerm.length < 2) {
       setSuggestions([]);
       setShowSuggestions(false);
+      setIsSearching(false);
       return;
     }
     let cancel = false;
+    const controller = new AbortController();
+    const thisRequestId = ++requestIdRef.current;
+    setIsSearching(true);
+    setSuggestions([]); // Limpa sugestões enquanto busca
     (async () => {
       try {
         const resp = await axios.get("https://api.jikan.moe/v4/anime", {
-          params: { q: debouncedSearchTerm, limit: 5 },
+          params: { q: debouncedSearchTerm, limit: 8 },
+          timeout: 1200,
+          signal: controller.signal,
         });
-        if (!cancel) {
-          setSuggestions(resp.data?.data || []);
-          setShowSuggestions(true);
+        if (!cancel && thisRequestId === requestIdRef.current) {
+          const filtered = (resp.data?.data || []).filter(
+            (anime) =>
+              (anime.type === "TV" || anime.type === "ONA") &&
+              anime.images?.jpg?.image_url
+          );
+          setSuggestions(filtered);
+          setShowSuggestions(filtered.length > 0);
         }
-      } catch {
-        setSuggestions([]);
-        setShowSuggestions(false);
+      } catch (err) {
+        if (!cancel && thisRequestId === requestIdRef.current) {
+          setSuggestions([]);
+          setShowSuggestions(false);
+        }
+      } finally {
+        if (thisRequestId === requestIdRef.current) setIsSearching(false);
       }
     })();
     return () => {
       cancel = true;
+      controller.abort();
     };
   }, [debouncedSearchTerm]);
 
@@ -78,13 +96,12 @@ export default function Menu() {
     const term = inputRef.current?.value?.trim() ?? searchTerm.trim();
     if (term) {
       setShowSuggestions(false);
-      setSearchActive(false); // FECHA O INPUT DE PESQUISA AO ENTER
-      setSuggestions([]); // Limpa sugestões imediatamente
+      setSearchActive(false);
+      setSuggestions([]);
       navigate(`/search?q=${encodeURIComponent(term)}`);
     }
   };
 
-  // Clique em sugestão/autocomplete
   const handleSuggestionClick = (anime) => {
     setShowSuggestions(false);
     navigate(`/Detalhes/${anime.mal_id}`);
@@ -94,7 +111,7 @@ export default function Menu() {
     setSearchActive((prevSearchActive) => !prevSearchActive);
     setSearchTerm("");
     setSuggestions([]);
-    setShowSuggestions(false); // Garante fechamento imediato das sugestões
+    setShowSuggestions(false);
   };
 
   const toggleMenu = () => {
@@ -244,7 +261,7 @@ export default function Menu() {
               width={24}
               height={24}
             />
-            {showSuggestions && suggestions.length > 0 && (
+            {showSuggestions && (
               <ul
                 className="search-suggestions-list"
                 style={{
@@ -266,79 +283,89 @@ export default function Menu() {
                   animation: "fadeInMenu 0.25s cubic-bezier(0.4,0.2,0.2,1)"
                 }}
               >
-                {suggestions.map((anime, idx) => (
-                  <li
-                    key={anime.mal_id}
-                    className="search-suggestion-item"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 14,
-                      padding: "12px 18px",
-                      cursor: "pointer",
-                      borderBottom: idx === suggestions.length - 1 ? "none" : "1px solid #23272f",
-                      background: "none",
-                      transition: "background 0.16s, box-shadow 0.16s",
-                      position: "relative"
-                    }}
-                    onMouseDown={() => handleSuggestionClick(anime)}
-                    tabIndex={0}
-                    onKeyDown={(e) =>
-                      (e.key === "Enter" || e.key === " ") &&
-                      handleSuggestionClick(anime)
-                    }
-                    aria-label={`Ir para detalhes de ${anime.title}`}
-                  >
-                    <img
-                      src={anime.images?.jpg?.image_url || "/fallback-image.jpg"}
-                      alt={anime.title}
-                      width={44}
-                      height={62}
-                      style={{
-                        borderRadius: 8,
-                        objectFit: "cover",
-                        boxShadow: "0 2px 8px #0007",
-                        background: "#23272f",
-                        flexShrink: 0,
-                        border: "1.5px solid #23272f"
-                      }}
-                    />
-                    <span
-                      style={{
-                        color: "#fff",
-                        fontWeight: 600,
-                        fontSize: 16,
-                        flex: 1,
-                        textShadow: "0 1px 4px #000a",
-                        letterSpacing: 0.01,
-                        lineHeight: 1.18,
-                        overflow: "hidden",
-                        whiteSpace: "nowrap",
-                        textOverflow: "ellipsis"
-                      }}
-                    >
-                      {anime.title}
-                    </span>
-                    <span
-                      style={{
-                        background: "#ffb300",
-                        color: "#181818",
-                        fontWeight: 700,
-                        fontSize: 15,
-                        borderRadius: 8,
-                        padding: "3px 10px",
-                        marginLeft: 6,
-                        minWidth: 38,
-                        textAlign: "center",
-                        boxShadow: "0 1px 4px #0003",
-                        letterSpacing: 0.01,
-                        display: "inline-block"
-                      }}
-                    >
-                      {anime.score ?? "N/A"}
-                    </span>
+                {isSearching ? (
+                  <li className="search-suggestion-item" style={{ color: "#ffb300", fontWeight: 600 }}>
+                    Buscando...
                   </li>
-                ))}
+                ) : suggestions.length === 0 ? (
+                  <li className="search-suggestion-item" style={{ color: "#ffb300", fontWeight: 600 }}>
+                    Nenhuma sugestão encontrada.
+                  </li>
+                ) : (
+                  suggestions.map((anime, idx) => (
+                    <li
+                      key={anime.mal_id}
+                      className="search-suggestion-item"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 14,
+                        padding: "12px 18px",
+                        cursor: "pointer",
+                        borderBottom: idx === suggestions.length - 1 ? "none" : "1px solid #23272f",
+                        background: "none",
+                        transition: "background 0.16s, box-shadow 0.16s",
+                        position: "relative"
+                      }}
+                      onMouseDown={() => handleSuggestionClick(anime)}
+                      tabIndex={0}
+                      onKeyDown={(e) =>
+                        (e.key === "Enter" || e.key === " ") &&
+                        handleSuggestionClick(anime)
+                      }
+                      aria-label={`Ir para detalhes de ${anime.title}`}
+                    >
+                      <img
+                        src={anime.images?.jpg?.image_url || "/fallback-image.jpg"}
+                        alt={anime.title}
+                        width={44}
+                        height={62}
+                        style={{
+                          borderRadius: 8,
+                          objectFit: "cover",
+                          boxShadow: "0 2px 8px #0007",
+                          background: "#23272f",
+                          flexShrink: 0,
+                          border: "1.5px solid #23272f"
+                        }}
+                      />
+                      <span
+                        style={{
+                          color: "#fff",
+                          fontWeight: 600,
+                          fontSize: 16,
+                          flex: 1,
+                          textShadow: "0 1px 4px #000a",
+                          letterSpacing: 0.01,
+                          lineHeight: 1.18,
+                          overflow: "hidden",
+                          whiteSpace: "nowrap",
+                          textOverflow: "ellipsis"
+                        }}
+                      >
+                        {anime.title}
+                      </span>
+                      <span
+                        style={{
+                          background: "#ffb300",
+                          color: "#181818",
+                          fontWeight: 700,
+                          fontSize: 15,
+                          borderRadius: 8,
+                          padding: "3px 10px",
+                          marginLeft: 6,
+                          minWidth: 38,
+                          textAlign: "center",
+                          boxShadow: "0 1px 4px #0003",
+                          letterSpacing: 0.01,
+                          display: "inline-block"
+                        }}
+                      >
+                        {anime.score ?? "N/A"}
+                      </span>
+                    </li>
+                  ))
+                )}
               </ul>
             )}
           </form>

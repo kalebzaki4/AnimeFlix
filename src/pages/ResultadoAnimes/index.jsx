@@ -18,14 +18,18 @@ const ResultadoAnimes = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchPerformed, setSearchPerformed] = useState(false);
-  const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [lastPageLoaded, setLastPageLoaded] = useState(1);
   const requestIdRef = useRef(0);
+  const abortControllerRef = useRef(null);
   const navigate = useNavigate();
 
   const fetchAnimes = async (pageNumber, term = searchTerm) => {
     setLoading(true);
     setError(null);
+    if (abortControllerRef.current) abortControllerRef.current.abort();
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
     const thisRequestId = ++requestIdRef.current;
     try {
       const response = await axios.get(`${API_BASE_URL}/anime`, {
@@ -34,21 +38,50 @@ const ResultadoAnimes = () => {
           limit: 12,
           page: pageNumber,
         },
+        timeout: 6000,
+        signal: controller.signal,
       });
 
-      if (response.data?.data) {
+      // Garante que a resposta é válida e tem dados
+      if (response?.data?.data && Array.isArray(response.data.data)) {
         if (thisRequestId !== requestIdRef.current) return;
-        const newResults = pageNumber === 1 ? response.data.data : [...animes, ...response.data.data];
-        setAnimes(newResults);
-        setHasMore(response.data.pagination.has_next_page);
-        sessionStorage.setItem(`search_${term}`, JSON.stringify(newResults));
+        let filtered = response.data.data.filter(
+          anime =>
+            (anime.type === "TV" || anime.type === "ONA") &&
+            anime.images?.jpg?.image_url
+        );
+        // Fallback: se filtro por tipo não retornar nada, mostra todos com imagem
+        if (filtered.length === 0) {
+          filtered = response.data.data.filter(anime => anime.images?.jpg?.image_url);
+        }
+        setAnimes(prev =>
+          pageNumber === 1 ? filtered : [...prev, ...filtered]
+        );
+        setLastPageLoaded(pageNumber); // Atualiza a última página carregada
+        setHasMore(response.data.pagination?.has_next_page && filtered.length > 0);
+        if (pageNumber === 1) {
+          sessionStorage.setItem(`search_${term}`, JSON.stringify(filtered));
+        } else {
+          const prevResults = JSON.parse(sessionStorage.getItem(`search_${term}`) || "[]");
+          sessionStorage.setItem(`search_${term}`, JSON.stringify([...prevResults, ...filtered]));
+        }
       } else {
         setHasMore(false);
+        if (pageNumber === 1) setAnimes([]);
       }
       setSearchPerformed(true);
     } catch (err) {
+      if (axios.isCancel(err)) return;
       if (thisRequestId !== requestIdRef.current) return;
-      setError("Erro ao carregar animes. Tente novamente mais tarde.");
+      let msg = "Erro ao carregar animes. Tente novamente mais tarde.";
+      if (err?.code === "ECONNABORTED") {
+        msg = "A conexão com a API demorou demais. Tente novamente.";
+      } else if (err?.response?.status === 429) {
+        msg = "Muitas requisições para a API. Aguarde alguns segundos e tente novamente.";
+      } else if (err?.response?.status === 404) {
+        msg = "Nenhum anime encontrado para esse termo.";
+      }
+      setError(msg);
     } finally {
       if (thisRequestId === requestIdRef.current) setLoading(false);
     }
@@ -56,12 +89,13 @@ const ResultadoAnimes = () => {
 
   useEffect(() => {
     if (searchTerm) {
+      if (abortControllerRef.current) abortControllerRef.current.abort();
       requestIdRef.current += 1;
       setAnimes([]);
-      setPage(1);
       setHasMore(true);
       setError(null);
       setSearchPerformed(false);
+      setLastPageLoaded(1); // Reset ao buscar novo termo
       fetchAnimes(1, searchTerm);
     }
     // eslint-disable-next-line
@@ -69,8 +103,7 @@ const ResultadoAnimes = () => {
 
   const handleLoadMore = () => {
     if (loading || !hasMore) return;
-    const nextPage = page + 1;
-    setPage(nextPage);
+    const nextPage = lastPageLoaded + 1;
     fetchAnimes(nextPage, searchTerm);
   };
 
@@ -165,18 +198,85 @@ const ResultadoAnimes = () => {
             aria-busy={loading}
             aria-label={loading ? "Carregando mais resultados" : "Ver mais resultados"}
             tabIndex={0}
-            style={{ position: "relative", overflow: "hidden" }}
+            style={{
+              position: "relative",
+              overflow: "hidden",
+              border: "none",
+              borderRadius: 32,
+              background: "linear-gradient(90deg, #ffb300 80%, #ffd740 100%)",
+              color: "#181818",
+              fontWeight: 700,
+              fontSize: "1.18rem",
+              boxShadow: "0 4px 18px #ffb30033, 0 2px 8px #0002",
+              margin: "36px auto 0 auto",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 12,
+              minHeight: 54,
+              maxWidth: 340,
+              width: "100%",
+              cursor: loading ? "not-allowed" : "pointer",
+              opacity: loading ? 0.7 : 1,
+              transition: "background 0.18s, transform 0.18s, box-shadow 0.18s, filter 0.18s"
+            }}
+            onMouseDown={e => {
+              // Ripple effect
+              const btn = e.currentTarget;
+              const ripple = document.createElement("span");
+              ripple.className = "ripple";
+              ripple.style.left = `${e.nativeEvent.offsetX}px`;
+              ripple.style.top = `${e.nativeEvent.offsetY}px`;
+              btn.appendChild(ripple);
+              setTimeout(() => ripple.remove(), 400);
+            }}
           >
             {loading ? (
               <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-                <span className="search-btn-spinner" aria-hidden="true"></span>
+                <span
+                  className="search-btn-spinner"
+                  aria-hidden="true"
+                  style={{
+                    width: 26,
+                    height: 26,
+                    border: "3px solid #fffbe0",
+                    borderTop: "3px solid #ffb300",
+                    borderRadius: "50%",
+                    animation: "spin 0.8s linear infinite",
+                    marginRight: 4,
+                  }}
+                ></span>
                 <span>Carregando...</span>
               </span>
             ) : (
               <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style={{marginRight: 2}}>
-                  <circle cx="11" cy="11" r="10" stroke="#ffb300" strokeWidth="2" fill="none"/>
-                  <path d="M11 6v5l4 2" stroke="#ffb300" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 28 28"
+                  fill="none"
+                  style={{
+                    marginRight: 2,
+                    transition: "transform 0.18s",
+                  }}
+                  className="ver-mais-icone"
+                >
+                  <circle
+                    cx="14"
+                    cy="14"
+                    r="12"
+                    stroke="#ffb300"
+                    strokeWidth="2.5"
+                    fill="#fffbe0"
+                    style={{ filter: "drop-shadow(0 2px 8px #ffb30033)" }}
+                  />
+                  <path
+                    d="M14 10v6M14 16l-3-3m3 3l3-3"
+                    stroke="#e53935"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
                 <span>Ver Mais</span>
               </span>

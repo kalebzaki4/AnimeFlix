@@ -58,6 +58,18 @@
   opacity: 0.5;
 }
 
+.perfil-anime-card:focus, .perfil-anime-card:active {
+  outline: 3px solid var(--primaria-variacao);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px #ffb30055;
+}
+
+.perfil-anime-card:hover {
+  filter: brightness(1.08) drop-shadow(0 2px 12px #ffb30033);
+  transform: translateY(-4px) scale(1.03);
+  transition: filter 0.18s, transform 0.18s;
+}
+
 @keyframes perfilRemoveFadeOut {
   0% {
     opacity: 1;

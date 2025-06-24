@@ -13,26 +13,37 @@ const statusTraduzidos = {
   Hiatus: "Em hiato",
 };
 
+const MAX_EPISODE_PAGES = 20; // Limite de segurança para evitar abuso
+
 const PaginaDetalhes = () => {
   const { animeId, episodioId } = useParams();
   const navigate = useNavigate();
   const [animeDetails, setAnimeDetails] = useState(null);
   const [episodes, setEpisodes] = useState([]);
+  const [episodesPage, setEpisodesPage] = useState(1);
+  const [episodesLoading, setEpisodesLoading] = useState(false);
+  const [totalEpisodesLoaded, setTotalEpisodesLoaded] = useState(10);
   const [isFullSynopsis, setIsFullSynopsis] = useState(false);
   const [error, setError] = useState(null);
   const [alert, setAlert] = useState(null);
-  const [visibleEpisodes, setVisibleEpisodes] = useState(10);
   const [isSaveAnimating, setIsSaveAnimating] = useState(false);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
   const [showAnim, setShowAnim] = useState(false);
+  const [abortControllers, setAbortControllers] = useState({}); // Para cancelar requisições
 
   const { isAuthenticated, saveAnime, removeAnime, isAnimeSaved, showAlert } = useAuth();
 
   const statusTraduzidosMemo = useMemo(() => statusTraduzidos, []);
 
+  // Busca detalhes do anime com timeout/cancelamento
   const fetchAnimeDetails = useCallback(async (id) => {
+    const controller = new AbortController();
+    setAbortControllers(prev => ({ ...prev, details: controller }));
     try {
-      const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}`);
+      const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}`, {
+        timeout: 6000,
+        signal: controller.signal,
+      });
       if (response.status !== 200) throw new Error("Anime não encontrado!");
       const data = response.data.data;
       setAnimeDetails({
@@ -46,20 +57,54 @@ const PaginaDetalhes = () => {
         episodes: data.episodes,
         genres: data.genres,
       });
-    } catch {
-      setError("Ocorreu um erro ao carregar os detalhes do anime. Tente novamente mais tarde.");
+    } catch (err) {
+      if (axios.isCancel(err)) return;
+      let msg =
+        err?.code === "ECONNABORTED"
+          ? "A conexão com a API demorou demais. Tente novamente."
+          : err?.response?.status === 429
+          ? "Muitas requisições para a API. Aguarde alguns segundos e tente novamente."
+          : "Ocorreu um erro ao carregar os detalhes do anime. Tente novamente mais tarde.";
+      setError(msg);
       setAnimeDetails(null);
     }
   }, [statusTraduzidosMemo]);
 
-  const fetchEpisodes = useCallback(async (id) => {
+  // Busca episódios paginados com timeout/cancelamento
+  const fetchEpisodes = useCallback(async (id, page = 1, append = false) => {
+    if (page > MAX_EPISODE_PAGES) return; // Limite de segurança
+    const controller = new AbortController();
+    setAbortControllers(prev => ({ ...prev, [`episodes_${page}`]: controller }));
     try {
-      const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}/episodes`);
-      setEpisodes(response.data.data || []);
-    } catch {
-      setEpisodes([]);
+      if (page === 1) setEpisodesLoading(true);
+      const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}/episodes`, {
+        params: { page, limit: 25 },
+        timeout: 6000,
+        signal: controller.signal,
+      });
+      const data = response.data.data || [];
+      setEpisodes(prev => append ? [...prev, ...data] : data);
+    } catch (err) {
+      if (axios.isCancel(err)) return;
+      if (!append) setEpisodes([]);
+      setError(
+        err?.code === "ECONNABORTED"
+          ? "A conexão com a API demorou demais. Tente novamente."
+          : "Ocorreu um erro ao carregar episódios. Tente novamente mais tarde."
+      );
+    } finally {
+      setEpisodesLoading(false);
     }
   }, []);
+
+  // Cancela requisições pendentes ao desmontar/trocar anime
+  useEffect(() => {
+    return () => {
+      Object.values(abortControllers).forEach((controller) => {
+        if (controller && typeof controller.abort === "function") controller.abort();
+      });
+    };
+  }, [animeId]);
 
   useEffect(() => {
     if (!animeId || isNaN(Number(animeId))) {
@@ -69,7 +114,9 @@ const PaginaDetalhes = () => {
       return;
     }
     fetchAnimeDetails(animeId);
-    fetchEpisodes(animeId);
+    setEpisodesPage(1);
+    setTotalEpisodesLoaded(10);
+    fetchEpisodes(animeId, 1, false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [animeId, fetchAnimeDetails, fetchEpisodes]);
 
@@ -106,7 +153,13 @@ const PaginaDetalhes = () => {
   };
 
   const handleLoadMoreEpisodes = () => {
-    setVisibleEpisodes((prev) => prev + 10);
+    if (totalEpisodesLoaded >= episodes.length && episodes.length % 25 === 0) {
+      const nextPage = episodesPage + 1;
+      setEpisodesPage(nextPage);
+      setEpisodesLoading(true);
+      fetchEpisodes(animeId, nextPage, true);
+    }
+    setTotalEpisodesLoaded(prev => prev + 10);
   };
 
   const handleSaveAnime = () => {
@@ -340,7 +393,7 @@ const PaginaDetalhes = () => {
         <h2 style={{ color: "#ffb300" }}>EPISÓDIOS:</h2>
         {episodes.length > 0 ? (
           <div className="episodios-container">
-            {episodes.slice(0, visibleEpisodes).map((episodio, index) => (
+            {episodes.slice(0, totalEpisodesLoaded).map((episodio, index) => (
               <div
                 key={`${episodio.title || "ep"}-${episodio.number || index}`}
                 className="episodio-card fade-in-episodio"
@@ -387,10 +440,20 @@ const PaginaDetalhes = () => {
                 </div>
               </div>
             ))}
-            {visibleEpisodes < episodes.length && (
-              <button className="ver-mais" onClick={handleLoadMoreEpisodes}>
-                Ver Mais
-              </button>
+            {episodesLoading && (
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", margin: "18px 0" }}>
+                <span className="search-btn-spinner" style={{
+                  width: 28, height: 28, borderWidth: 3, marginRight: 10
+                }} />
+                <span style={{ color: "#ffb300", fontWeight: 600 }}>Carregando episódios...</span>
+              </div>
+            )}
+            {!episodesLoading && (
+              (totalEpisodesLoaded < episodes.length || episodes.length % 25 === 0) && (
+                <button className="ver-mais" onClick={handleLoadMoreEpisodes} disabled={episodesLoading}>
+                  Ver Mais Episódios
+                </button>
+              )
             )}
           </div>
         ) : (

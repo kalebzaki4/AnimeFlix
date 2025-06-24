@@ -1,19 +1,19 @@
 :root {
-  --fundo: hsla(220, 17%, 7%, 1);
-  --fundo-banner: hsla(250, 6%, 20%, 1);
-  --branco-alpha-20: hsla(0, 0%, 100%, 0.2);
-  --cor-principal: hsla(220, 100%, 95%, 1);
-  --cor-sobre-superficie: hsla(250, 100%, 95%, 1);
-  --cor-sobre-superficie-variacao: hsla(250, 1%, 44%, 1);
-  --primaria: #99080f;
-  --primaria-variacao: rgb(146, 19, 28);
-  --cor-avaliacao: hsla(44, 100%, 49%, 1);
-  --superficie: hsla(250, 13%, 11%, 1);
-  --cor-texto: hsla(250, 2%, 59%, 1);
-  --branco: hsla(0, 0%, 100%, 1);
+  --fundo: #111216;
+  --fundo-banner: #18191f;
+  --branco-alpha-20: rgba(255,255,255,0.10);
+  --cor-principal: #f3f3f3;
+  --cor-sobre-superficie: #f3f3f3;
+  --cor-sobre-superficie-variacao: #bdbdbd;
+  --primaria: #e50914;
+  --primaria-variacao: #b71c1c;
+  --cor-avaliacao: #ffd700;
+  --superficie: #18191f;
+  --cor-texto: #bdbdbd;
+  --branco: #fff;
 
-  --sobreposicao-banner: 90deg, hsla(220, 17%, 7%) 0%, hsla(220, 17%, 7%, 0.5) 100%;
-  --sobreposicao-inferior: 180deg, hsla(250, 13%, 11%, 0), hsla(250, 13%, 11%, 1);
+  --sobreposicao-banner: 90deg, #18191f 0%, #111216cc 100%;
+  --sobreposicao-inferior: 180deg, #18191f00, #111216ff;
 
   --ff-dm-sans: 'DM Sans', sans-serif;
 
@@ -27,8 +27,8 @@
 
   --peso-negrito: 700;
 
-  --sombra-1: 0 1px 4px hsla(0, 0%, 0%, 0.75);
-  --sombra-2: 0 2px 4px hsla(350, 100%, 43%, 0.3);
+  --sombra-1: 0 1px 4px rgba(0,0,0,0.85);
+  --sombra-2: 0 2px 4px #e5091444;
 
   --raio-1: 1px;
   --raio-2: 2px;

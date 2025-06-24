@@ -45,12 +45,16 @@
 }
 
 .populares-card:hover {
-  transform: translateY(-6px) scale(1.03);
+  filter: brightness(1.08) drop-shadow(0 2px 12px #ffb30033);
+  transform: translateY(-4px) scale(1.03);
+  transition: filter 0.18s, transform 0.18s;
   box-shadow: 0 6px 24px #0005;
 }
 
 .populares-card:focus {
-  box-shadow: 0 0 0 3px var(--primaria-variacao);
+  outline: 3px solid var(--primaria-variacao);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px #ffb30055;
 }
 
 .populares-img {
@@ -120,7 +124,24 @@
 }
 
 .populares-btn:hover {
+  filter: brightness(1.08) drop-shadow(0 2px 12px #ffb30033);
+  transform: translateY(-4px) scale(1.03);
+  transition: filter 0.18s, transform 0.18s;
   background: var(--primaria-variacao);
+}
+
+.populares-btn:focus {
+  outline: 3px solid var(--primaria-variacao);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px #ffb30055;
+}
+
+.populares-btn:active {
+  filter: brightness(0.95);
+  transform: scale(0.97);
+  outline: 3px solid var(--primaria-variacao);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px #ffb30055;
 }
 
 .populares-vermais {

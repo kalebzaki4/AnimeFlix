@@ -53,6 +53,23 @@
   box-shadow: 0 0 0 3px var(--primaria-variacao);
 }
 
+.novidade-card:focus, .novidade-btn:focus, .novidade-btn:active {
+  outline: 3px solid var(--primaria-variacao);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px #ffb30055;
+}
+
+.novidade-card:hover, .novidade-btn:hover {
+  filter: brightness(1.08) drop-shadow(0 2px 12px #ffb30033);
+  transform: translateY(-4px) scale(1.03);
+  transition: filter 0.18s, transform 0.18s;
+}
+
+.novidade-btn:active {
+  filter: brightness(0.95);
+  transform: scale(0.97);
+}
+
 .novidade-img {
   width: 100%;
   height: 320px;
