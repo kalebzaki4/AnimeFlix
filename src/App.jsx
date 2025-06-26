@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.scss';
 import Menu from './components/common/Menu';
@@ -22,6 +22,24 @@ import Configuracoes from './pages/Configuracoes';
 // App principal com rotas e alertas globais
 function App() {
   const { alert } = useAuth();
+
+  useEffect(() => {
+    document.body.style.overflow = "auto";
+    document.body.style.height = "auto";
+    document.documentElement.style.overflow = "auto";
+    document.documentElement.style.height = "auto";
+    // Remove qualquer touch-action que possa travar
+    document.body.style.touchAction = "auto";
+    document.documentElement.style.touchAction = "auto";
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.height = "";
+      document.documentElement.style.overflow = "";
+      document.documentElement.style.height = "";
+      document.body.style.touchAction = "";
+      document.documentElement.style.touchAction = "";
+    };
+  }, []);
 
   return (
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>

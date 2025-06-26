@@ -213,6 +213,13 @@ export default function Inicio() {
   const [curioLoading, setCurioLoading] = useState(false);
 
   useEffect(() => {
+    document.body.style.overflow = "auto";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  useEffect(() => {
     if (showCookiePopup) {
       document.body.style.overflow = "hidden";
     } else {

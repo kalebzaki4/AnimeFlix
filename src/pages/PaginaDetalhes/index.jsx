@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useCallback, useMemo, Suspense } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./PaginaDetalhes.scss";
 import TelaCarregamento from "../../components/common/TelaCarregamento";
@@ -15,7 +15,7 @@ const statusTraduzidos = {
 
 const MAX_EPISODE_PAGES = 20; // Limite de segurança para evitar abuso
 
-const PaginaDetalhes = () => {
+const PaginaDetalhesContent = () => {
   const { animeId, episodioId } = useParams();
   const navigate = useNavigate();
   const [animeDetails, setAnimeDetails] = useState(null);
@@ -494,5 +494,11 @@ const PaginaDetalhes = () => {
     </div>
   );
 };
+
+const PaginaDetalhes = () => (
+  <Suspense fallback={<TelaCarregamento />}>
+    <PaginaDetalhesContent />
+  </Suspense>
+);
 
 export default PaginaDetalhes;

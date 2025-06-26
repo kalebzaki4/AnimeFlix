@@ -178,11 +178,24 @@ export default function Menu() {
     } else {
       document.body.style.overflow = "";
     }
-
+    // Fallback: sempre resetar ao desmontar
     return () => {
       document.body.style.overflow = "";
     };
   }, [menuActive, userMenuActive]);
+
+  useEffect(() => {
+    const resetBodyOverflow = () => {
+      document.body.style.overflow = "";
+    };
+    window.addEventListener("popstate", resetBodyOverflow);
+    window.addEventListener("hashchange", resetBodyOverflow);
+    return () => {
+      window.removeEventListener("popstate", resetBodyOverflow);
+      window.removeEventListener("hashchange", resetBodyOverflow);
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {

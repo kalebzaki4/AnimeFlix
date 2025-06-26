@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import React, { useState, useEffect, useCallback, useRef, useMemo, useTransition } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Estrelas from "../../components/animes/Estrelas/Estrelas";
@@ -23,6 +23,7 @@ function Populares() {
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [altImages, setAltImages] = useState({});
+  const [isPending, startTransition] = useTransition();
   const isFetching = useRef(false);
   const loaderRef = useRef(null);
   const currentPage = useRef(1);
@@ -40,8 +41,10 @@ function Populares() {
         params: { type: "tv", limit: LIMIT, page: pageNum, sort: "bypopularity" },
       });
       const data = response.data.data || [];
-      setAnimes((prev) => (pageNum === 1 ? data : [...prev, ...data]));
-      setHasMore(response.data.pagination?.has_next_page);
+      startTransition(() => {
+        setAnimes((prev) => (pageNum === 1 ? data : [...prev, ...data]));
+        setHasMore(response.data.pagination?.has_next_page);
+      });
 
       // Busca imagens alternativas se necessário
       const altImgs = await fetchMissingImages(data);
@@ -220,6 +223,7 @@ function Populares() {
           `}</style>
         </div>
       )}
+      {isPending && <div className="pending-loader">Carregando...</div>}
       {!loading && animes.length === 0 && (
         <p className="populares-empty">Nenhum anime popular encontrado.</p>
       )}

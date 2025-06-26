@@ -87,7 +87,7 @@ if (rootEl) {
       </React.StrictMode>
     );
   } catch (err) {
-    showGlobalError("Falha ao iniciar o React: " + (err?.message || "Erro desconhecido"));
+    showGlobalError("Erro crítico ao iniciar o app.");
   }
 } else {
   alert("Elemento root não encontrado. Não foi possível iniciar o aplicativo.");

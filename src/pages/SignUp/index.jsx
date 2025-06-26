@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useId } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { sanitizeInput, validateEmail, validatePassword, validateUsername } from "../../utils/validationUtils";
@@ -17,6 +17,11 @@ export default function SignUp() {
   const [alert, setAlert] = useState(null);
   const { login } = useAuth();
   const navigate = useNavigate();
+
+  const idEmail = useId();
+  const idPassword = useId();
+  const idConfirmPassword = useId();
+  const idUsername = useId();
 
   const ERROR_MESSAGES = {
     emailInvalid: "Email inválido.",
@@ -108,10 +113,10 @@ export default function SignUp() {
       <h1 className="signup-title">Criar Conta</h1>
       <form onSubmit={handleSubmit} className="signup-form" autoComplete="off" style={formAnimation}>
         <div className="form-group mobile-full-width">
-          <label htmlFor="username">Nome de Usuário:</label>
+          <label htmlFor={idUsername}>Nome de Usuário:</label>
           <input
             type="text"
-            id="username"
+            id={idUsername}
             name="username"
             value={username}
             onChange={e => setUsername(e.target.value.slice(0, 8))}
@@ -125,10 +130,10 @@ export default function SignUp() {
           {errors.username && <p className="error-message">{errors.username}</p>}
         </div>
         <div className="form-group mobile-full-width">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor={idEmail}>Email:</label>
           <input
             type="email"
-            id="email"
+            id={idEmail}
             name="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
@@ -139,12 +144,12 @@ export default function SignUp() {
           {errors.email && <p className="error-message">{errors.email}</p>}
         </div>
         <div className="form-group mobile-full-width">
-          <label htmlFor="password">Senha:</label>
+          <label htmlFor={idPassword}>Senha:</label>
           <PasswordHint />
           <div className="password-container">
             <input
               type={passwordVisible ? "text" : "password"}
-              id="password"
+              id={idPassword}
               name="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
@@ -164,10 +169,10 @@ export default function SignUp() {
           {errors.password && <p className="error-message">{errors.password}</p>}
         </div>
         <div className="form-group mobile-full-width">
-          <label htmlFor="confirmPassword">Confirmar Senha:</label>
+          <label htmlFor={idConfirmPassword}>Confirmar Senha:</label>
           <input
             type="password"
-            id="confirmPassword"
+            id={idConfirmPassword}
             name="confirmPassword"
             value={confirmPassword}
             onChange={e => setConfirmPassword(e.target.value)}
