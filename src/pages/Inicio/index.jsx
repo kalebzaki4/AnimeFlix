@@ -383,8 +383,7 @@ export default function Inicio() {
         hasMore={hasMoreFamosos}
         onClick={handleClick}
       />
-      {/* Espaço visual após o Banner para separar da lista horizontal */}
-      <div style={{ height: isMobile ? 18 : 32 }} />
+      <div style={{ height: isMobile ? 20 : 32 }} />
       <ListaDeAnimesHorizontal
         title="Mais Famosos"
         description="Os animes mais populares do momento"
