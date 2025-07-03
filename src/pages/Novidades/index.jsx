@@ -76,6 +76,17 @@ const Novidades = () => {
     navigate(`/Detalhes/${mal_id}`);
   }, [navigate]);
 
+  // Garante que cada mal_id apareça apenas uma vez
+  const uniqueAnimes = React.useMemo(() => {
+    const seen = new Set();
+    return animes.filter(anime => {
+      if (!anime.mal_id) return true;
+      if (seen.has(anime.mal_id)) return false;
+      seen.add(anime.mal_id);
+      return true;
+    });
+  }, [animes]);
+
   if (loading && animes.length === 0) {
     return (
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "48px 0" }}>
@@ -111,14 +122,20 @@ const Novidades = () => {
       <h1 className="novidades-title">Novidades</h1>
       <p className="novidades-desc">Confira os animes lançados recentemente!</p>
       <div className="novidades-grid">
-        {animes.map((anime) => {
+        {uniqueAnimes.map((anime, idx) => {
           const imgSrc =
             altImages[anime.mal_id] ||
             getHighQualityImage(anime);
+          // Garante key única: mal_id + idx (idx só entra se houver duplicidade)
+          const key = anime.mal_id
+            ? `${anime.mal_id}-${idx}`
+            : anime.title
+            ? `title-${anime.title}-${idx}`
+            : `idx-${idx}`;
           return (
             <div
               className="novidade-card"
-              key={anime.mal_id}
+              key={key}
               tabIndex={0}
               role="button"
               onClick={() => handleCardClick(anime.mal_id)}

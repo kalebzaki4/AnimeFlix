@@ -20,11 +20,14 @@ const ResultadoAnimes = () => {
   const [searchPerformed, setSearchPerformed] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [lastPageLoaded, setLastPageLoaded] = useState(1);
+  const [blockSearchUntil, setBlockSearchUntil] = useState(0);
   const requestIdRef = useRef(0);
   const abortControllerRef = useRef(null);
   const navigate = useNavigate();
 
   const fetchAnimes = async (pageNumber, term = searchTerm) => {
+    // Bloqueia buscas se estiver em período de bloqueio
+    if (blockSearchUntil && Date.now() < blockSearchUntil) return;
     setLoading(true);
     setError(null);
     if (abortControllerRef.current) abortControllerRef.current.abort();
@@ -78,6 +81,7 @@ const ResultadoAnimes = () => {
         msg = "A conexão com a API demorou demais. Tente novamente.";
       } else if (err?.response?.status === 429) {
         msg = "Muitas requisições para a API. Aguarde alguns segundos e tente novamente.";
+        setBlockSearchUntil(Date.now() + 8000); // Bloqueia por 8 segundos
       } else if (err?.response?.status === 404) {
         msg = "Nenhum anime encontrado para esse termo.";
       }
@@ -88,7 +92,7 @@ const ResultadoAnimes = () => {
   };
 
   useEffect(() => {
-    if (searchTerm) {
+    if (searchTerm && (!blockSearchUntil || Date.now() >= blockSearchUntil)) {
       if (abortControllerRef.current) abortControllerRef.current.abort();
       requestIdRef.current += 1;
       setAnimes([]);
@@ -99,13 +103,24 @@ const ResultadoAnimes = () => {
       fetchAnimes(1, searchTerm);
     }
     // eslint-disable-next-line
-  }, [searchTerm]);
+  }, [searchTerm, blockSearchUntil]);
 
   const handleLoadMore = () => {
-    if (loading || !hasMore) return;
+    if (loading || !hasMore || (blockSearchUntil && Date.now() < blockSearchUntil)) return;
     const nextPage = lastPageLoaded + 1;
     fetchAnimes(nextPage, searchTerm);
   };
+
+  // Garante que cada mal_id apareça apenas uma vez
+  const uniqueAnimes = React.useMemo(() => {
+    const seen = new Set();
+    return animes.filter(anime => {
+      if (!anime.mal_id) return true;
+      if (seen.has(anime.mal_id)) return false;
+      seen.add(anime.mal_id);
+      return true;
+    });
+  }, [animes]);
 
   // --- UI ---
   return (
@@ -139,10 +154,16 @@ const ResultadoAnimes = () => {
           </div>
         )}
         <div className="search-grid-list">
-          {animes.map((anime) => (
+          {uniqueAnimes.map((anime, idx) => (
             <div
               className="search-card"
-              key={anime.mal_id}
+              key={
+                anime.mal_id
+                  ? `${anime.mal_id}-${idx}`
+                  : anime.title
+                  ? `title-${anime.title}-${idx}`
+                  : `idx-${idx}`
+              }
               tabIndex={0}
               aria-label={`Anime: ${anime.title || "Sem título"}`}
               onClick={() => navigate(`/Detalhes/${anime.mal_id}`)}

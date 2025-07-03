@@ -14,6 +14,7 @@ const statusTraduzidos = {
 };
 
 const MAX_EPISODE_PAGES = 20; // Limite de segurança para evitar abuso
+const EPISODES_PER_PAGE = 25; // Jikan retorna 25 por página
 
 const PaginaDetalhesContent = () => {
   const { animeId, episodioId } = useParams();
@@ -217,6 +218,24 @@ const PaginaDetalhesContent = () => {
       : ""
   , [animeDetails]);
 
+  // Calcula o total de páginas de episódios baseado no total real do anime
+  const totalEpisodes = animeDetails?.episodes || episodes.length;
+  const totalEpisodePages = Math.max(
+    Math.ceil((totalEpisodes || episodes.length) / EPISODES_PER_PAGE),
+    1
+  );
+
+  // Handler para mudar de página de episódios
+  const handleChangeEpisodePage = (page) => {
+    if (page === episodesPage || page < 1 || page > totalEpisodePages) return;
+    setEpisodesPage(page);
+    setTotalEpisodesLoaded(page * EPISODES_PER_PAGE);
+    if (episodes.length < page * EPISODES_PER_PAGE) {
+      fetchEpisodes(animeId, page, true);
+    }
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  };
+
   if (error) {
     return (
       <div className="error-message" style={{ color: "#fff", background: "#b71c1c", padding: 24 }}>
@@ -296,7 +315,7 @@ const PaginaDetalhesContent = () => {
   }
 
   return (
-    <div className={`detalhes${showAnim ? " show-anim" : ""}`} style={{ background: "#181818" }}>
+    <div className={`detalhes${showAnim ? " show-anim" : ""}`}>
       {alert && (
         <Alert
           message={alert.message}
@@ -393,52 +412,57 @@ const PaginaDetalhesContent = () => {
         <h2 style={{ color: "#ffb300" }}>EPISÓDIOS:</h2>
         {episodes.length > 0 ? (
           <div className="episodios-container">
-            {episodes.slice(0, totalEpisodesLoaded).map((episodio, index) => (
-              <div
-                key={`${episodio.title || "ep"}-${episodio.number || index}`}
-                className="episodio-card fade-in-episodio"
-                tabIndex={0}
-                role="button"
-                aria-label={`Ver detalhes do episódio ${episodio.title || episodio.number || index + 1}`}
-                style={{
-                  cursor: "pointer",
-                  background: "#23272f",
-                  color: "#fff",
-                  animationDelay: `${0.05 + index * 0.03}s`
-                }}
-                onClick={() => handleEpisodeClick(episodio)}
-                onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleEpisodeClick(episodio)}
-              >
-                <img
-                  src={getEpisodeImage(episodio)}
-                  alt={episodio.title || animeDetails?.title || "Imagem do episódio"}
-                  className="episodio-imagem"
-                  style={{
-                    background: "#181818",
-                    border: "2px solid #222",
-                    objectFit: "cover",
-                    width: 80,
-                    height: 60,
-                    borderRadius: 6,
-                    marginRight: 10,
-                    display: "block"
-                  }}
-                  onError={e => { e.target.onerror = null; e.target.src = "/fallback-image.jpg"; }}
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="episodio-info">
-                  <h3 style={{ color: "#ffb300" }}>
-                    Episódio {episodio.number ?? index + 1}: {episodio.title}
-                  </h3>
-                  <p style={{ color: "#ccc" }}>
-                    {episodio.synopsis
-                      ? episodio.synopsis.slice(0, 100) + (episodio.synopsis.length > 100 ? "..." : "")
-                      : "Sem sinopse disponível"}
-                  </p>
-                </div>
-              </div>
-            ))}
+            {episodes
+              .slice((episodesPage - 1) * EPISODES_PER_PAGE, episodesPage * EPISODES_PER_PAGE)
+              .map((episodio, index) => {
+                const realEpNumber = (episodesPage - 1) * EPISODES_PER_PAGE + index + 1;
+                return (
+                  <div
+                    key={`${episodio.title || "ep"}-${episodio.number || realEpNumber}`}
+                    className="episodio-card fade-in-episodio"
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`Ver detalhes do episódio ${episodio.title || episodio.number || realEpNumber}`}
+                    style={{
+                      cursor: "pointer",
+                      background: "#23272f",
+                      color: "#fff",
+                      animationDelay: `${0.05 + index * 0.03}s`
+                    }}
+                    onClick={() => handleEpisodeClick(episodio)}
+                    onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleEpisodeClick(episodio)}
+                  >
+                    <img
+                      src={getEpisodeImage(episodio)}
+                      alt={episodio.title || animeDetails?.title || "Imagem do episódio"}
+                      className="episodio-imagem"
+                      style={{
+                        background: "#181818",
+                        border: "2px solid #222",
+                        objectFit: "cover",
+                        width: 80,
+                        height: 60,
+                        borderRadius: 6,
+                        marginRight: 10,
+                        display: "block"
+                      }}
+                      onError={e => { e.target.onerror = null; e.target.src = "/fallback-image.jpg"; }}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="episodio-info">
+                      <h3 style={{ color: "#ffb300" }}>
+                        Episódio {episodio.number ?? realEpNumber}: {episodio.title}
+                      </h3>
+                      <p style={{ color: "#ccc" }}>
+                        {episodio.synopsis
+                          ? episodio.synopsis.slice(0, 100) + (episodio.synopsis.length > 100 ? "..." : "")
+                          : "Sem sinopse disponível"}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             {episodesLoading && (
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", margin: "18px 0" }}>
                 <span className="search-btn-spinner" style={{
@@ -447,12 +471,62 @@ const PaginaDetalhesContent = () => {
                 <span style={{ color: "#ffb300", fontWeight: 600 }}>Carregando episódios...</span>
               </div>
             )}
-            {!episodesLoading && (
-              (totalEpisodesLoaded < episodes.length || episodes.length % 25 === 0) && (
-                <button className="ver-mais" onClick={handleLoadMoreEpisodes} disabled={episodesLoading}>
-                  Ver Mais Episódios
+            {/* Paginação de episódios estilizada */}
+            {!episodesLoading && totalEpisodePages > 1 && (
+              <div className="episodios-pagination">
+                <button
+                  className="episodios-pagination-arrow"
+                  onClick={() => handleChangeEpisodePage(episodesPage - 1)}
+                  disabled={episodesPage === 1}
+                  aria-label="Página anterior"
+                  tabIndex={0}
+                >
+                  <span aria-hidden="true">←</span>
                 </button>
-              )
+                {(() => {
+                  // Só mostra quadradinhos até a última página real de episódios
+                  const pages = [];
+                  for (let i = 1; i <= totalEpisodePages; i++) {
+                    // Elipses para paginação longa
+                    const isEdge = i <= 2 || i > totalEpisodePages - 2;
+                    const isNear = Math.abs(i - episodesPage) <= 1;
+                    if (totalEpisodePages > 9 && !isEdge && !isNear) {
+                      if (
+                        (i === 3 && episodesPage > 5) ||
+                        (i === totalEpisodePages - 2 && episodesPage < totalEpisodePages - 4)
+                      ) {
+                        pages.push(
+                          <span key={`ellipsis-${i}`} className="episodios-pagination-ellipsis">…</span>
+                        );
+                      }
+                      continue;
+                    }
+                    pages.push(
+                      <button
+                        key={i}
+                        onClick={() => handleChangeEpisodePage(i)}
+                        className={`episodios-pagination-btn${i === episodesPage ? " active" : ""}`}
+                        disabled={i === episodesPage}
+                        aria-current={i === episodesPage ? "page" : undefined}
+                        tabIndex={0}
+                        title={`Página ${i}`}
+                      >
+                        {i}
+                      </button>
+                    );
+                  }
+                  return pages;
+                })()}
+                <button
+                  className="episodios-pagination-arrow"
+                  onClick={() => handleChangeEpisodePage(episodesPage + 1)}
+                  disabled={episodesPage === totalEpisodePages}
+                  aria-label="Próxima página"
+                  tabIndex={0}
+                >
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
             )}
           </div>
         ) : (
@@ -461,33 +535,101 @@ const PaginaDetalhesContent = () => {
       </div>
       <style>
         {`
-        .show-anim .fade-in-up {
-          opacity: 0;
-          transform: translateY(32px) scale(0.97);
-          animation: fadeInUp 0.7s cubic-bezier(0.4,1.4,0.2,1) forwards;
+        .episodios-pagination {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          gap: 12px;
+          margin: 32px 0 0 0;
+          padding: 0 4px;
+          user-select: none;
         }
-        .show-anim .fade-in-up[style*="animation-delay"] {
-          animation-fill-mode: both;
+        .episodios-pagination-btn {
+          background: linear-gradient(90deg, #fffbe0 60%, #ffb300 100%);
+          color: #b71c1c;
+          border: none;
+          border-radius: 16px;
+          padding: 12px 24px;
+          font-weight: 700;
+          font-size: 1.13rem;
+          margin: 0 3px;
+          cursor: pointer;
+          box-shadow: 0 2px 14px #ffb30022, 0 1.5px 6px #b71c1c11;
+          outline: none;
+          transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.15s;
+          min-width: 48px;
+          min-height: 48px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          letter-spacing: 0.02em;
         }
-        .show-anim .animated-title {
-          animation: popIn 0.7s cubic-bezier(0.4,1.4,0.2,1);
+        .episodios-pagination-btn:hover:not(:disabled),
+        .episodios-pagination-btn:focus-visible:not(:disabled) {
+          background: linear-gradient(90deg, #ffb300 80%, #e53935 100%);
+          color: #fffbe0;
+          box-shadow: 0 4px 18px #e5393533, 0 2px 8px #ffb30033;
+          transform: translateY(-2px) scale(1.10);
         }
-        .show-anim .fade-in-episodio {
-          opacity: 0;
-          transform: translateY(24px) scale(0.97);
-          animation: fadeInUp 0.5s cubic-bezier(0.4,1.4,0.2,1) forwards;
+        .episodios-pagination-btn.active,
+        .episodios-pagination-btn:disabled {
+          background: linear-gradient(90deg, #e53935 80%, #ffb300 100%);
+          color: #181818;
+          cursor: default;
+          box-shadow: 0 2px 12px #e5393533;
+          outline: 2px solid #ffb300;
+          z-index: 1;
         }
-        .show-anim .fade-in-episodio[style*="animation-delay"] {
-          animation-fill-mode: both;
+        .episodios-pagination-ellipsis {
+          color: #e53935;
+          font-size: 1.4rem;
+          font-weight: bold;
+          padding: 0 12px;
+          user-select: none;
         }
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(32px) scale(0.97);}
-          to   { opacity: 1; transform: translateY(0) scale(1);}
+        .episodios-pagination-arrow {
+          background: #23272f;
+          color: #ffb300;
+          border: none;
+          border-radius: 14px;
+          padding: 0 20px;
+          font-size: 1.6rem;
+          font-weight: bold;
+          min-width: 48px;
+          min-height: 48px;
+          margin: 0 5px;
+          cursor: pointer;
+          box-shadow: 0 2px 8px #0002;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.15s;
         }
-        @keyframes popIn {
-          0% { opacity: 0; transform: scale(0.92);}
-          60% { opacity: 1; transform: scale(1.06);}
-          100% { opacity: 1; transform: scale(1);}
+        .episodios-pagination-arrow:disabled {
+          background: #23272f;
+          color: #888;
+          cursor: not-allowed;
+          opacity: 0.6;
+        }
+        .episodios-pagination-arrow:not(:disabled):hover,
+        .episodios-pagination-arrow:not(:disabled):focus-visible {
+          background: #e53935;
+          color: #fffbe0;
+          box-shadow: 0 4px 18px #e5393533;
+          transform: scale(1.10);
+        }
+        @media (max-width: 600px) {
+          .episodios-pagination-btn,
+          .episodios-pagination-arrow {
+            padding: 8px 10px;
+            font-size: 1rem;
+            min-width: 36px;
+            min-height: 36px;
+          }
+          .episodios-pagination {
+            gap: 6px;
+          }
         }
         `}
       </style>
