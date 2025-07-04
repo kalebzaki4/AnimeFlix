@@ -13,7 +13,6 @@ const statusTraduzidos = {
   Hiatus: "Em hiato",
 };
 
-const MAX_EPISODE_PAGES = 20; // Limite de segurança para evitar abuso
 const EPISODES_PER_PAGE = 25; // Jikan retorna 25 por página
 
 const PaginaDetalhesContent = () => {
@@ -31,6 +30,7 @@ const PaginaDetalhesContent = () => {
   const [selectedEpisode, setSelectedEpisode] = useState(null);
   const [showAnim, setShowAnim] = useState(false);
   const [abortControllers, setAbortControllers] = useState({}); // Para cancelar requisições
+  const [blockEpisodesUntil, setBlockEpisodesUntil] = useState(0); // Bloqueio temporário para requisições
 
   const { isAuthenticated, saveAnime, removeAnime, isAnimeSaved, showAlert } = useAuth();
 
@@ -73,7 +73,7 @@ const PaginaDetalhesContent = () => {
 
   // Busca episódios paginados com timeout/cancelamento
   const fetchEpisodes = useCallback(async (id, page = 1, append = false) => {
-    if (page > MAX_EPISODE_PAGES) return; // Limite de segurança
+    if (blockEpisodesUntil && Date.now() < blockEpisodesUntil) return; // Bloqueio temporário
     const controller = new AbortController();
     setAbortControllers(prev => ({ ...prev, [`episodes_${page}`]: controller }));
     try {
@@ -87,6 +87,11 @@ const PaginaDetalhesContent = () => {
       setEpisodes(prev => append ? [...prev, ...data] : data);
     } catch (err) {
       if (axios.isCancel(err)) return;
+      if (err?.response?.status === 429) {
+        setBlockEpisodesUntil(Date.now() + 8000);
+        setError("Muitas requisições para a API. Aguarde alguns segundos para tentar novamente.");
+        return;
+      }
       if (!append) setEpisodes([]);
       setError(
         err?.code === "ECONNABORTED"
@@ -96,7 +101,7 @@ const PaginaDetalhesContent = () => {
     } finally {
       setEpisodesLoading(false);
     }
-  }, []);
+  }, [blockEpisodesUntil]);
 
   // Cancela requisições pendentes ao desmontar/trocar anime
   useEffect(() => {
@@ -151,16 +156,6 @@ const PaginaDetalhesContent = () => {
     event.preventDefault();
     setIsFullSynopsis((prev) => !prev);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleLoadMoreEpisodes = () => {
-    if (totalEpisodesLoaded >= episodes.length && episodes.length % 25 === 0) {
-      const nextPage = episodesPage + 1;
-      setEpisodesPage(nextPage);
-      setEpisodesLoading(true);
-      fetchEpisodes(animeId, nextPage, true);
-    }
-    setTotalEpisodesLoaded(prev => prev + 10);
   };
 
   const handleSaveAnime = () => {
@@ -235,6 +230,14 @@ const PaginaDetalhesContent = () => {
     }
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   };
+
+  if (blockEpisodesUntil && Date.now() < blockEpisodesUntil) {
+    return (
+      <div className="error-message" style={{ color: "#ffb300", background: "#23272f", padding: 24, borderRadius: 10, margin: 32 }}>
+        Muitas requisições para a API. Aguarde alguns segundos para tentar novamente.
+      </div>
+    );
+  }
 
   if (error) {
     return (
@@ -483,40 +486,20 @@ const PaginaDetalhesContent = () => {
                 >
                   <span aria-hidden="true">←</span>
                 </button>
-                {(() => {
-                  // Só mostra quadradinhos até a última página real de episódios
-                  const pages = [];
-                  for (let i = 1; i <= totalEpisodePages; i++) {
-                    // Elipses para paginação longa
-                    const isEdge = i <= 2 || i > totalEpisodePages - 2;
-                    const isNear = Math.abs(i - episodesPage) <= 1;
-                    if (totalEpisodePages > 9 && !isEdge && !isNear) {
-                      if (
-                        (i === 3 && episodesPage > 5) ||
-                        (i === totalEpisodePages - 2 && episodesPage < totalEpisodePages - 4)
-                      ) {
-                        pages.push(
-                          <span key={`ellipsis-${i}`} className="episodios-pagination-ellipsis">…</span>
-                        );
-                      }
-                      continue;
-                    }
-                    pages.push(
-                      <button
-                        key={i}
-                        onClick={() => handleChangeEpisodePage(i)}
-                        className={`episodios-pagination-btn${i === episodesPage ? " active" : ""}`}
-                        disabled={i === episodesPage}
-                        aria-current={i === episodesPage ? "page" : undefined}
-                        tabIndex={0}
-                        title={`Página ${i}`}
-                      >
-                        {i}
-                      </button>
-                    );
-                  }
-                  return pages;
-                })()}
+                {/* Mostra todos os quadrados de página, sem elipses */}
+                {Array.from({ length: totalEpisodePages }, (_, i) => (
+                  <button
+                    key={i + 1}
+                    onClick={() => handleChangeEpisodePage(i + 1)}
+                    className={`episodios-pagination-btn${i + 1 === episodesPage ? " active" : ""}`}
+                    disabled={i + 1 === episodesPage}
+                    aria-current={i + 1 === episodesPage ? "page" : undefined}
+                    tabIndex={0}
+                    title={`Página ${i + 1}`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
                 <button
                   className="episodios-pagination-arrow"
                   onClick={() => handleChangeEpisodePage(episodesPage + 1)}

@@ -17,13 +17,14 @@ const Novidades = () => {
   const [animes, setAnimes] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [blockUntil, setBlockUntil] = useState(0);
   const isFetching = useRef(false);
   const navigate = useNavigate();
   const [altImages, setAltImages] = useState({});
   const loaderRef = useRef(null);
 
   const fetchNovidades = useCallback(async (pageNum = 1) => {
-    if (isFetching.current || loading) return;
+    if (isFetching.current || loading || (blockUntil && Date.now() < blockUntil)) return;
     isFetching.current = true;
     setLoading(true);
     try {
@@ -39,13 +40,15 @@ const Novidades = () => {
         setAltImages((prev) => ({ ...prev, ...altImgs }));
       }
     } catch (err) {
+      if (err?.response?.status === 429) {
+        setBlockUntil(Date.now() + 8000);
+      }
       setHasMore(false);
-      // Opcional: console.error("Erro ao buscar novidades:", err);
     } finally {
       setLoading(false);
       isFetching.current = false;
     }
-  }, [loading]);
+  }, [loading, blockUntil]);
 
   useEffect(() => {
     setAltImages({});
@@ -86,6 +89,23 @@ const Novidades = () => {
       return true;
     });
   }, [animes]);
+
+  if (blockUntil && Date.now() < blockUntil) {
+    return (
+      <div style={{
+        color: "#ffb300",
+        background: "#23272f",
+        borderRadius: 10,
+        padding: "18px 24px",
+        margin: "48px auto",
+        maxWidth: 420,
+        textAlign: "center",
+        fontWeight: 600
+      }}>
+        Muitas buscas em sequência. Aguarde alguns segundos para tentar novamente.
+      </div>
+    );
+  }
 
   if (loading && animes.length === 0) {
     return (

@@ -10,7 +10,7 @@ import cancelarMenuLateral from "../../../assets/images/menu-close.png";
 import userIcon from "../../../assets/images/user.svg";
 import { useAuth } from "../../../context/AuthContext";
 
-function useDebouncedValue(value, delay = 20) {
+function useDebouncedValue(value, delay = 400) { // era 20
   const [debounced, setDebounced] = useState(value);
   useEffect(() => {
     const handler = setTimeout(() => setDebounced(value), delay);
@@ -307,7 +307,7 @@ export default function Menu() {
                 ) : (
                   suggestions.map((anime, idx) => (
                     <li
-                      key={anime.mal_id}
+                      key={`${anime.mal_id}-${anime.title}-${idx}`} // <-- chave única robusta
                       className="search-suggestion-item"
                       style={{
                         display: "flex",

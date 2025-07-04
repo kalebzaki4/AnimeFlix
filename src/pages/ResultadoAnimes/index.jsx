@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Estrelas from "../../assets/images/star.png";
@@ -21,12 +21,12 @@ const ResultadoAnimes = () => {
   const [hasMore, setHasMore] = useState(true);
   const [lastPageLoaded, setLastPageLoaded] = useState(1);
   const [blockSearchUntil, setBlockSearchUntil] = useState(0);
+  const [searchTimeout, setSearchTimeout] = useState(null);
   const requestIdRef = useRef(0);
   const abortControllerRef = useRef(null);
   const navigate = useNavigate();
 
   const fetchAnimes = async (pageNumber, term = searchTerm) => {
-    // Bloqueia buscas se estiver em período de bloqueio
     if (blockSearchUntil && Date.now() < blockSearchUntil) return;
     setLoading(true);
     setError(null);
@@ -45,7 +45,6 @@ const ResultadoAnimes = () => {
         signal: controller.signal,
       });
 
-      // Garante que a resposta é válida e tem dados
       if (response?.data?.data && Array.isArray(response.data.data)) {
         if (thisRequestId !== requestIdRef.current) return;
         let filtered = response.data.data.filter(
@@ -53,14 +52,13 @@ const ResultadoAnimes = () => {
             (anime.type === "TV" || anime.type === "ONA") &&
             anime.images?.jpg?.image_url
         );
-        // Fallback: se filtro por tipo não retornar nada, mostra todos com imagem
         if (filtered.length === 0) {
           filtered = response.data.data.filter(anime => anime.images?.jpg?.image_url);
         }
         setAnimes(prev =>
           pageNumber === 1 ? filtered : [...prev, ...filtered]
         );
-        setLastPageLoaded(pageNumber); // Atualiza a última página carregada
+        setLastPageLoaded(pageNumber);
         setHasMore(response.data.pagination?.has_next_page && filtered.length > 0);
         if (pageNumber === 1) {
           sessionStorage.setItem(`search_${term}`, JSON.stringify(filtered));
@@ -81,7 +79,7 @@ const ResultadoAnimes = () => {
         msg = "A conexão com a API demorou demais. Tente novamente.";
       } else if (err?.response?.status === 429) {
         msg = "Muitas requisições para a API. Aguarde alguns segundos e tente novamente.";
-        setBlockSearchUntil(Date.now() + 8000); // Bloqueia por 8 segundos
+        setBlockSearchUntil(Date.now() + 8000);
       } else if (err?.response?.status === 404) {
         msg = "Nenhum anime encontrado para esse termo.";
       }
@@ -91,6 +89,13 @@ const ResultadoAnimes = () => {
     }
   };
 
+  const debouncedFetchAnimes = useCallback((page, term) => {
+    if (searchTimeout) clearTimeout(searchTimeout);
+    setSearchTimeout(setTimeout(() => {
+      fetchAnimes(page, term);
+    }, 400));
+  }, [fetchAnimes, searchTimeout]);
+
   useEffect(() => {
     if (searchTerm && (!blockSearchUntil || Date.now() >= blockSearchUntil)) {
       if (abortControllerRef.current) abortControllerRef.current.abort();
@@ -99,11 +104,18 @@ const ResultadoAnimes = () => {
       setHasMore(true);
       setError(null);
       setSearchPerformed(false);
-      setLastPageLoaded(1); // Reset ao buscar novo termo
-      fetchAnimes(1, searchTerm);
+      setLastPageLoaded(1);
+      debouncedFetchAnimes(1, searchTerm);
     }
     // eslint-disable-next-line
   }, [searchTerm, blockSearchUntil]);
+
+  useEffect(() => {
+    return () => {
+      if (searchTimeout) clearTimeout(searchTimeout);
+      if (abortControllerRef.current) abortControllerRef.current.abort();
+    };
+  }, [searchTimeout]);
 
   const handleLoadMore = () => {
     if (loading || !hasMore || (blockSearchUntil && Date.now() < blockSearchUntil)) return;
@@ -111,18 +123,17 @@ const ResultadoAnimes = () => {
     fetchAnimes(nextPage, searchTerm);
   };
 
-  // Garante que cada mal_id apareça apenas uma vez
   const uniqueAnimes = React.useMemo(() => {
     const seen = new Set();
     return animes.filter(anime => {
-      if (!anime.mal_id) return true;
-      if (seen.has(anime.mal_id)) return false;
-      seen.add(anime.mal_id);
+      const key = `${anime.mal_id}-${anime.title}`;
+      if (!anime.mal_id || !anime.title) return true;
+      if (seen.has(key)) return false;
+      seen.add(key);
       return true;
     });
   }, [animes]);
 
-  // --- UI ---
   return (
     <article className="search-container">
       <section className="search-list" aria-label="Resultados da Pesquisa">
@@ -146,6 +157,20 @@ const ResultadoAnimes = () => {
             <p>{error}</p>
           </div>
         )}
+        {blockSearchUntil && Date.now() < blockSearchUntil && (
+          <div className="search-block-message" style={{
+            color: "#ffb300",
+            background: "#23272f",
+            borderRadius: 10,
+            padding: "12px 18px",
+            margin: "18px auto",
+            maxWidth: 420,
+            textAlign: "center",
+            fontWeight: 600
+          }}>
+            Muitas buscas em sequência. Aguarde alguns segundos para tentar novamente.
+          </div>
+        )}
         {searchPerformed && animes.length === 0 && !loading && !error && (
           <div className="search-empty-state">
             <img src="/assets/images/empty-search.svg" alt="Nenhum resultado" style={{ width: 120, marginBottom: 16 }} />
@@ -157,13 +182,7 @@ const ResultadoAnimes = () => {
           {uniqueAnimes.map((anime, idx) => (
             <div
               className="search-card"
-              key={
-                anime.mal_id
-                  ? `${anime.mal_id}-${idx}`
-                  : anime.title
-                  ? `title-${anime.title}-${idx}`
-                  : `idx-${idx}`
-              }
+              key={`${anime.mal_id}-${anime.title}-${idx}`}
               tabIndex={0}
               aria-label={`Anime: ${anime.title || "Sem título"}`}
               onClick={() => navigate(`/Detalhes/${anime.mal_id}`)}
@@ -242,7 +261,6 @@ const ResultadoAnimes = () => {
               transition: "background 0.18s, transform 0.18s, box-shadow 0.18s, filter 0.18s"
             }}
             onMouseDown={e => {
-              // Ripple effect
               const btn = e.currentTarget;
               const ripple = document.createElement("span");
               ripple.className = "ripple";
