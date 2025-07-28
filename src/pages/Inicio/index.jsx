@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Banner from "../../components/layout/Banner";
 import ListaDeAnimesHorizontal from "../../components/animes/ListaDeAnimesHorizontal";
 import TelaCarregamento from "../../components/common/TelaCarregamento";
-import Estrelas from "../../components/animes/Estrelas/Estrelas";
 import "../../styles/message.scss";
+import { getAnimes, getCuriosidade } from "../../services/homeService.js";
 
 // --- Hooks e helpers ---
 function useIsMobile(breakpoint = 768) {
@@ -17,6 +16,43 @@ function useIsMobile(breakpoint = 768) {
     return () => window.removeEventListener("resize", handleResize);
   }, [breakpoint]);
   return isMobile;
+}
+
+function useAnimes() {
+  const [loading, setLoading] = useState(true);
+  const [animesFamosos, setAnimesFamosos] = useState(() => {
+    const cachedFamosos = sessionStorage.getItem("animesFamosos");
+    return cachedFamosos ? JSON.parse(cachedFamosos) : [];
+  });
+  const [lancamentos, setLancamentos] = useState(() => {
+    const cachedLancamentos = sessionStorage.getItem("lancamentos");
+    return cachedLancamentos ? JSON.parse(cachedLancamentos) : [];
+  });
+
+  const fetchAnimes = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { famososData, lancamentosData } = await getAnimes();
+      setAnimesFamosos(famososData);
+      setLancamentos(lancamentosData);
+      sessionStorage.setItem("animesFamosos", JSON.stringify(famososData));
+      sessionStorage.setItem("lancamentos", JSON.stringify(lancamentosData));
+    } catch (error) {
+      console.error("Erro ao buscar animes:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!animesFamosos.length || !lancamentos.length) {
+      fetchAnimes();
+    } else {
+      setLoading(false);
+    }
+  }, [fetchAnimes, animesFamosos.length, lancamentos.length]);
+
+  return { loading, animesFamosos, lancamentos };
 }
 
 // Fallback para curiosidades
@@ -31,14 +67,6 @@ const curiosidadesFallback = [
   "O mangá mais vendido da história é One Piece.",
   "O termo 'anime' no Japão significa qualquer animação.",
   "O primeiro anime colorido foi Hakujaden (1958)."
-];
-
-const rankingGeneros = [
-  { genero: "Ação", count: 120 },
-  { genero: "Comédia", count: 95 },
-  { genero: "Drama", count: 80 },
-  { genero: "Fantasia", count: 75 },
-  { genero: "Romance", count: 60 },
 ];
 
 function Curiosidade({ curioIndex, onNova, isMobile, curiosidades, loading }) {
@@ -147,6 +175,13 @@ Curiosidade.propTypes = {
 };
 
 function RankingGeneros({ isMobile }) {
+  const rankingGeneros = [
+    { genero: "Ação", count: 120 },
+    { genero: "Comédia", count: 95 },
+    { genero: "Drama", count: 80 },
+    { genero: "Fantasia", count: 75 },
+    { genero: "Romance", count: 60 },
+  ];
   const maxGenero = Math.max(...rankingGeneros.map(g => g.count));
   return (
     <section style={{
@@ -192,16 +227,7 @@ RankingGeneros.propTypes = {
 };
 
 export default function Inicio() {
-  const [loading, setLoading] = useState(true);
-  const [animesFamosos, setAnimesFamosos] = useState(() => {
-    const cachedFamosos = sessionStorage.getItem("animesFamosos");
-    return cachedFamosos ? JSON.parse(cachedFamosos) : [];
-  });
-  const [lancamentos, setLancamentos] = useState(() => {
-    const cachedLancamentos = sessionStorage.getItem("lancamentos");
-    return cachedLancamentos ? JSON.parse(cachedLancamentos) : [];
-  });
-  const [famososPage, setFamososPage] = useState(1);
+  const { loading, animesFamosos, lancamentos } = useAnimes();
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const [showCookiePopup] = useState(() => {
@@ -230,57 +256,12 @@ export default function Inicio() {
     };
   }, [showCookiePopup]);
 
-  const maxAnimes = isMobile ? 8 : 25;
-
-  const fetchAnimes = useCallback(async () => {
-    setLoading(true);
-    try {
-      const [famososResponse, lancamentosResponse] = await Promise.all([
-        axios.get("https://api.jikan.moe/v4/top/anime", {
-          params: { type: "tv", limit: 25, sort: "bypopularity" },
-        }),
-        axios.get("https://api.jikan.moe/v4/seasons/now", {
-          params: { limit: 25 },
-        }),
-      ]);
-      const famososData = famososResponse.data.data
-        .filter(anime => anime.images?.jpg?.image_url)
-        .map(anime => ({
-          ...anime,
-          score: parseFloat(anime.score) || 0,
-        }));
-      const lancamentosData = lancamentosResponse.data.data
-        .filter(anime => anime.images?.jpg?.image_url)
-        .map(anime => ({
-          ...anime,
-          score: parseFloat(anime.score) || 0,
-        }));
-      setAnimesFamosos(famososData);
-      setLancamentos(lancamentosData);
-      sessionStorage.setItem("animesFamosos", JSON.stringify(famososData));
-      sessionStorage.setItem("lancamentos", JSON.stringify(lancamentosData));
-    } catch (error) {
-      console.error("Erro ao buscar animes:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!animesFamosos.length || !lancamentos.length) {
-      fetchAnimes();
-    } else {
-      setLoading(false);
-    }
-  }, []);
-
   const fetchCuriosidade = useCallback(async () => {
     setCurioLoading(true);
     try {
-      const res = await fetch("https://uselessfacts.jsph.pl/random.json?language=pt");
-      const data = await res.json();
-      if (data && data.text) {
-        setCuriosidades(prev => [data.text, ...prev.slice(0, 9)]);
+      const { text } = await getCuriosidade();
+      if (text) {
+        setCuriosidades(prev => [text, ...prev.slice(0, 9)]);
         setCurioIndex(0);
       } else {
         let novo;
@@ -307,31 +288,6 @@ export default function Inicio() {
   const handleClick = useCallback(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
-
-  const loadMoreFamosos = useCallback(async () => {
-    try {
-      const nextPage = famososPage + 1;
-      const response = await axios.get("https://api.jikan.moe/v4/top/anime", {
-        params: { type: "tv", limit: 25, sort: "bypopularity", page: nextPage },
-      });
-      const data = response.data.data
-        .filter(anime => anime.images?.jpg?.image_url)
-        .map(anime => ({
-          ...anime,
-          score: parseFloat(anime.score) || 0,
-        }));
-      if (data.length === 0) return false;
-      setAnimesFamosos(prev => [...prev, ...data]);
-      setFamososPage(nextPage);
-      return true;
-    } catch (error) {
-      return false;
-    }
-  }, [famososPage]);
-
-  const hasMoreFamosos = useMemo(() => {
-    return animesFamosos.length < famososPage * 25 || famososPage < 10;
-  }, [animesFamosos.length, famososPage]);
 
   const animeDoDia = useMemo(() => {
     if (lancamentos.length > 0) {
@@ -378,19 +334,16 @@ export default function Inicio() {
       <Banner
         title="Mais Famosos"
         description="Os animes mais populares do momento"
-        animes={animesFamosos.slice(0, maxAnimes + (famososPage - 1) * 25)}
-        loadMoreAnimes={loadMoreFamosos}
-        hasMore={hasMoreFamosos}
+        animes={animesFamosos.slice(0, 25)}
         onClick={handleClick}
       />
       <div style={{ height: isMobile ? 20 : 32 }} />
       <ListaDeAnimesHorizontal
         title="Mais Famosos"
         description="Os animes mais populares do momento"
-        animes={animesFamosos.slice(0, maxAnimes + (famososPage - 1) * 25)}
+        animes={animesFamosos.slice(0, 25)}
         onClick={handleClick}
         disableLoadingIndicator
-        loadMoreAnimes={loadMoreFamosos}
       />
       <div style={{ height: isMobile ? 10 : 18 }} />
       <Curiosidade
@@ -403,10 +356,9 @@ export default function Inicio() {
       <ListaDeAnimesHorizontal
         title="Lançamentos"
         description="Os animes mais recentes da temporada"
-        animes={lancamentos.slice(0, maxAnimes)}
+        animes={lancamentos.slice(0, 8)}
         onClick={handleClick}
         disableLoadingIndicator
-        loadMoreAnimes={() => {}}
       />
       <RankingGeneros isMobile={isMobile} />
       {animeDoDia && (
@@ -442,7 +394,6 @@ export default function Inicio() {
                 fontWeight: 600,
                 fontSize: isMobile ? 15 : 20
               }}>{animeDoDia.title}</h3>
-              <Estrelas avaliacao={animeDoDia.score} />
               <p style={{
                 fontSize: isMobile ? 12 : 15,
                 color: "#ccc",
