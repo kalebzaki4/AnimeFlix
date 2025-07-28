@@ -28,10 +28,11 @@ function Populares() {
   const loaderRef = useRef(null);
   const currentPage = useRef(1);
   const navigate = useNavigate();
+  const [blockUntil, setBlockUntil] = useState(0); // NEW: Rate limiting state
 
   // --- Fetch de animes ---
   const fetchPopulares = useCallback(async (pageNum = 1) => {
-    if (isFetching.current || loading) return;
+    if (isFetching.current || loading || (blockUntil && Date.now() < blockUntil)) return; // NEW: Check blockUntil
     isFetching.current = true;
     setLoading(true);
     try {
@@ -56,13 +57,16 @@ function Populares() {
       const elapsed = Date.now() - start;
       if (elapsed < 600) await new Promise(r => setTimeout(r, 600 - elapsed));
     } catch (err) {
+      if (err?.response?.status === 429) {
+        setBlockUntil(Date.now() + 8000); // NEW: Set blockUntil
+      }
       setHasMore(false);
       // Opcional: console.error("Erro ao buscar animes populares:", err);
     } finally {
       setLoading(false);
       isFetching.current = false;
     }
-  }, [loading]);
+  }, [loading, blockUntil]); // NEW: Add blockUntil to dependencies
 
   // --- Efeitos ---
   useEffect(() => {
@@ -116,6 +120,23 @@ function Populares() {
   }, [animes]);
 
   // --- Render ---
+  if (blockUntil && Date.now() < blockUntil) { // NEW: Display block message
+    return (
+      <div style={{
+        color: "#ffb300",
+        background: "#23272f",
+        borderRadius: 10,
+        padding: "18px 24px",
+        margin: "48px auto",
+        maxWidth: 420,
+        textAlign: "center",
+        fontWeight: 600
+      }}>
+        Muitas requisições em sequência. Aguarde alguns segundos para tentar novamente.
+      </div>
+    );
+  }
+
   if (loading && animes.length === 0) {
     return (
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "48px 0" }}>
