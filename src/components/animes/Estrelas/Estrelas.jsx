@@ -1,44 +1,63 @@
 import React from 'react';
-import PropTypes from 'prop-types';  
-import EstrelasImg from '../../../assets/images/star.png';  
+import PropTypes from 'prop-types';
 import './Estrelas.scss';
 
+const EstrelaSVG = ({ tipo }) => {
+  if (tipo === 'cheia') {
+    return (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="estrela">
+        <path fill="#FFD700" d="M12 .587l3.668 7.568L24 9.423l-6 5.843L19.335 24 12 19.897 4.665 24 6 15.266 0 9.423l8.332-1.268z"/>
+      </svg>
+    );
+  }
+  if (tipo === 'meia') {
+    return (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="estrela">
+        <defs>
+          <linearGradient id="meia">
+            <stop offset="50%" stopColor="#FFD700" />
+            <stop offset="50%" stopColor="#ccc" />
+          </linearGradient>
+        </defs>
+        <path fill="url(#meia)" d="M12 .587l3.668 7.568L24 9.423l-6 5.843L19.335 24 12 19.897 4.665 24 6 15.266 0 9.423l8.332-1.268z"/>
+      </svg>
+    );
+  }
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="estrela">
+      <path fill="#ccc" d="M12 .587l3.668 7.568L24 9.423l-6 5.843L19.335 24 12 19.897 4.665 24 6 15.266 0 9.423l8.332-1.268z"/>
+    </svg>
+  );
+};
+
 const Estrelas = ({ avaliacao }) => {
-  const renderEstrelas = () => {
-    const estrelas = [];
-    const maxEstrelas = 5;
+  const maxEstrelas = 5;
+  const estrelas = [];
 
-    const avaliacaoConvertida = avaliacao / 2;
-    const inteiras = Math.floor(avaliacaoConvertida);
-    const fracionadas = avaliacaoConvertida - inteiras;
+  const nota = avaliacao / 2;
+  const inteiras = Math.floor(nota);
+  const fracao = nota - inteiras;
 
-
-    for (let i = 0; i < inteiras && i < maxEstrelas; i++) {
-      estrelas.push(<img key={i} src={EstrelasImg} alt="Estrela" className="estrela" />);
+  for (let i = 0; i < maxEstrelas; i++) {
+    if (i < inteiras) {
+      estrelas.push(<EstrelaSVG key={i} tipo="cheia" />);
+    } else if (i === inteiras && fracao >= 0.5) {
+      estrelas.push(<EstrelaSVG key={i} tipo="meia" />);
+    } else {
+      estrelas.push(<EstrelaSVG key={i} tipo="vazia" />);
     }
-
-
-    if (fracionadas >= 0.5 && inteiras < maxEstrelas) {
-      estrelas.push(<img key="fracionada" src={EstrelasImg} alt="Estrela Fracionada" className="estrela fracionada" />);
-    }
-
-
-    for (let i = estrelas.length; i < maxEstrelas; i++) {
-      estrelas.push(<img key={`empty-${i}`} src={EstrelasImg} alt="Estrela Vazia" className="estrela empty" />);
-    }
-
-    return estrelas;
-  };
+  }
 
   return (
-    <div className="estrelas">
-      {renderEstrelas()}
+    <div className="estrelas-wrapper">
+      <div className="estrelas">{estrelas}</div>
+      <span className="nota">{avaliacao.toFixed(2)}</span>
     </div>
   );
 };
 
 Estrelas.propTypes = {
-  avaliacao: PropTypes.number.isRequired,  
+  avaliacao: PropTypes.number.isRequired,
 };
 
 export default Estrelas;
