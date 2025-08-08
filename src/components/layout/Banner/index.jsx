@@ -1,188 +1,167 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./Banner.scss";
 import play from "../../../assets/images/play_circle.png";
 
-// Utilitário global para imagens seguras e de alta qualidade
 function getSafeImage(anime, type = "large") {
   if (!anime?.images?.jpg) return "/fallback-image.jpg";
-  if (type === "large") {
-    return anime.images.jpg.large_image_url || anime.images.jpg.image_url || "/fallback-image.jpg";
-  }
-  return anime.images.jpg.image_url || anime.images.jpg.large_image_url || "/fallback-image.jpg";
+  const imgs = anime.images.jpg || {};
+  if (type === "large") return imgs.large_image_url || imgs.image_url || "/fallback-image.jpg";
+  return imgs.image_url || imgs.large_image_url || "/fallback-image.jpg";
 }
 
-export default function Banner({ animes }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [slideDirection, setSlideDirection] = useState("right"); // "right" ou "left"
-
-  // Embaralha apenas uma vez por reload, mantendo estável até recarregar a página
+export default function Banner({ animes = [] }) {
+  const [index, setIndex] = useState(0);
+  const [dir, setDir] = useState("right");
   const [shuffled, setShuffled] = useState([]);
+  const [paused, setPaused] = useState(false);
+  const sliderRef = useRef(null);
+  const touchStartX = useRef(null);
 
   useEffect(() => {
-    if (!Array.isArray(animes) || animes.length === 0) {
-      setShuffled([]);
-      return;
-    }
-    // Fisher-Yates shuffle
+    if (!Array.isArray(animes) || animes.length === 0) return setShuffled([]);
     const arr = [...animes];
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-
-    const unique = [];
+    // unique titles
     const seen = new Set();
-    for (const a of arr) {
-      if (!seen.has(a.title)) {
-        seen.add(a.title);
-        unique.push(a);
-      }
-    }
+    const unique = arr.filter(a => {
+      if (seen.has(a.title)) return false; seen.add(a.title); return true;
+    });
     setShuffled(unique);
+    setIndex(0);
   }, [animes]);
 
-  const dailyAnimes = shuffled;
-
+  // Auto advance
   useEffect(() => {
-    setActiveIndex(0);
-    if (dailyAnimes.length <= 1) return;
-    const intervalId = setInterval(() => {
-      setSlideDirection("right");
-      setActiveIndex(prev => (prev === dailyAnimes.length - 1 ? 0 : prev + 1));
-    }, 7000); // 7 segundos
-    return () => clearInterval(intervalId);
-  }, [dailyAnimes.length]);
+    if (shuffled.length <= 1 || paused) return;
+    const t = setInterval(() => {
+      setDir("right");
+      setIndex(i => (i === shuffled.length - 1 ? 0 : i + 1));
+    }, 6000);
+    return () => clearInterval(t);
+  }, [shuffled.length, paused]);
 
-  // Handler para clique nos controles do carrossel
-  const handleControlClick = useCallback((index) => {
-    if (index === activeIndex) return;
-    setSlideDirection(index < activeIndex ? "left" : "right");
-    setActiveIndex(index);
-  }, [activeIndex]);
+  // Keyboard
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'ArrowLeft') { setDir('left'); setIndex(i => (i === 0 ? shuffled.length - 1 : i - 1)); }
+      if (e.key === 'ArrowRight') { setDir('right'); setIndex(i => (i === shuffled.length - 1 ? 0 : i + 1)); }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [shuffled.length]);
 
-  // Renderiza apenas os banners próximos para performance
-  const renderWindow = 2;
-  const visibleIndexes = useMemo(() => {
-    const arr = [];
-    for (let i = -renderWindow; i <= renderWindow; i++) {
-      const idx = activeIndex + i;
-      if (idx >= 0 && idx < dailyAnimes.length) arr.push(idx);
-    }
-    return arr;
-  }, [activeIndex, dailyAnimes.length]);
+  const goTo = useCallback((to) => {
+    if (to === index) return;
+    setDir(to < index ? 'left' : 'right');
+    setIndex(to);
+  }, [index]);
 
-  // Renderização das informações do anime
-  const renderAnimeInfo = useCallback((anime) => (
-    <>
-      <h2 className="heading">{anime.title}</h2>
-      <div className="meta-list">
-        <div className="meta-item">{anime.year}</div>
-        <div className="meta-item card-badge">{anime.score}</div>
-        <div className="meta-item">Episódios: {anime.episodes || "N/A"}</div>
-      </div>
-      <p className="genre">
-        {anime.genres.map((genre) => genre.name).join(", ")}
-      </p>
-      <p className="banner-text">{anime.synopsis}</p>
-      <Link 
-        to={`/Detalhes/${anime.mal_id}`} 
-        className="btn" 
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      >
-        <img
-          src={play}
-          alt="Botão de Play"
-          width={24}
-          height={24}
-          aria-hidden="true"
-        />
-        <span className="span">Assistir</span>
-      </Link>
-    </>
-  ), []);
+  // Touch handlers for swipe
+  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
+  const onTouchMove = (e) => { if (!touchStartX.current) return; const dx = e.touches[0].clientX - touchStartX.current; if (Math.abs(dx) > 20) e.preventDefault(); };
+  const onTouchEnd = (e) => {
+    if (touchStartX.current == null) return;
+    const dx = (e.changedTouches[0].clientX - touchStartX.current);
+    if (dx > 60) { setDir('left'); setIndex(i => (i === 0 ? shuffled.length - 1 : i - 1)); }
+    else if (dx < -60) { setDir('right'); setIndex(i => (i === shuffled.length - 1 ? 0 : i + 1)); }
+    touchStartX.current = null;
+  };
 
-  if (!dailyAnimes.length) return null;
+  const visible = useMemo(() => {
+    // keep current, prev and next rendered for performance
+    const set = new Set();
+    if (!shuffled.length) return set;
+    set.add(index);
+    if (index > 0) set.add(index - 1); else set.add(shuffled.length - 1);
+    if (index < shuffled.length - 1) set.add(index + 1); else set.add(0);
+    return set;
+  }, [index, shuffled.length]);
+
+  if (!shuffled.length) return null;
+
+  const current = shuffled[index];
 
   return (
-    <article className="container">
-      <section className="banner" aria-label="Animes Populares">
-        <div className="banner-slider">
-          {dailyAnimes.map((anime, index) =>
-            visibleIndexes.includes(index) ? (
-              <div
-                key={anime.mal_id}
-                className={`slider-item ${index === activeIndex ? "active" : ""} slide-${index === activeIndex ? slideDirection : ""}`}
-                style={{ display: "block" }}
-              >
-                <img
-                  src={getSafeImage(anime, "large")}
-                  alt={anime.title}
-                  className="img-cover"
-                  loading={index === activeIndex ? "eager" : "lazy"}
-                  onError={e => { e.target.src = "/fallback-image.jpg"; }}
-                  decoding="async"
-                />
-                <div className="banner-content">{renderAnimeInfo(anime)}</div>
-              </div>
-            ) : (
-              <div
-                key={anime.mal_id}
-                style={{ display: "none" }}
-                aria-hidden="true"
-              />
-            )
-          )}
+    <article className="banner-wrapper">
+      <section
+        className="banner"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={() => setPaused(false)}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+        ref={sliderRef}
+        aria-roledescription="carousel"
+        aria-label="Animes em destaque"
+      >
+        {/* Background image with focus & progressive enhancements */}
+        <div className="banner-bg" aria-hidden>
+          <img src={getSafeImage(current, 'large')} alt="" className="banner-bg-img" loading="eager" onError={(e)=> e.target.src='/fallback-image.jpg'} decoding="async"/>
+          <div className="banner-gradient" />
         </div>
-        <div className="slider-control">
-          <div className="control-inner">
-            {dailyAnimes.map((anime, index) => (
+
+        {/* Content card - glass style */}
+        <div className="banner-content">
+          <div className="info">
+            <h2 className="title">{current.title}</h2>
+            <div className="meta">
+              <span className="year">{current.year ?? '—'}</span>
+              <span className="score">{current.score ?? '—'}</span>
+              <span className="eps">Episódios: {current.episodes ?? 'N/A'}</span>
+            </div>
+            <p className="synopsis">{current.synopsis}</p>
+            <div className="actions">
+              <Link to={`/Detalhes/${current.mal_id}`} className="btn-play" onClick={() => window.scrollTo({top:0, behavior:'smooth'})}>
+                <img src={play} alt="" width={20} height={20} aria-hidden /> Assistir
+              </Link>
+              <button className="btn-info" onClick={() => alert('Abrir trailer / modal - implemente conforme necessidade')}>Mais info</button>
+            </div>
+          </div>
+
+          {/* Poster carousel overlay (centrado em mobile) */}
+          <div className="poster-strip" aria-hidden>
+            {shuffled.map((a, i) => (
               <button
-                key={anime.mal_id}
-                className={`poster-box slider-item ${index === activeIndex ? "active" : ""}`}
-                onClick={() => handleControlClick(index)}
-                aria-label={`Exibir detalhes do anime ${anime.title}`}
+                key={a.mal_id}
+                className={`poster ${i === index ? 'active' : ''}`}
+                onClick={() => goTo(i)}
+                aria-label={`Ver ${a.title}`}
                 tabIndex={0}
               >
-                <img
-                  src={getSafeImage(anime, "thumb")}
-                  alt={`Poster de ${anime.title}`}
-                  loading="lazy"
-                  draggable="false"
-                  className="img-cover"
-                  onError={e => { e.target.src = "/fallback-image.jpg"; }}
-                  decoding="async"
-                />
+                <img src={getSafeImage(a, 'thumb')} alt={a.title} loading={i === index ? 'eager' : 'lazy'} onError={(e)=> e.target.src='/fallback-image.jpg'} decoding="async"/>
               </button>
             ))}
           </div>
         </div>
+
+        {/* Progressive slide elements for animations (keeps DOM light) */}
+        <div className={`slide-anim slide-${dir}`} aria-hidden>
+          {Array.from(visible).map(i => (
+            <img key={shuffled[i].mal_id} src={getSafeImage(shuffled[i], 'large')} alt="" className={`slide-img ${i === index ? 'current' : ''}`} loading="lazy"/>
+          ))}
+        </div>
+
+        {/* Vertical control (desktop) and dots (mobile) */}
+        <div className="controls">
+          <div className="dots" role="tablist">
+            {shuffled.map((_, i) => (
+              <button key={i} className={`dot ${i === index ? 'on' : ''}`} onClick={() => goTo(i)} aria-label={`Slide ${i+1}`}></button>
+            ))}
+          </div>
+        </div>
+
       </section>
     </article>
   );
 }
 
 Banner.propTypes = {
-  animes: PropTypes.arrayOf(
-    PropTypes.shape({
-      mal_id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      year: PropTypes.number,
-      score: PropTypes.number,
-      episodes: PropTypes.number,
-      synopsis: PropTypes.string,
-      genres: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string.isRequired,
-        })
-      ).isRequired,
-      images: PropTypes.shape({
-        jpg: PropTypes.shape({
-          large_image_url: PropTypes.string.isRequired,
-          image_url: PropTypes.string.isRequired,
-        }).isRequired,
-      }).isRequired,
-    })
-  ).isRequired,
+  animes: PropTypes.array.isRequired,
 };
