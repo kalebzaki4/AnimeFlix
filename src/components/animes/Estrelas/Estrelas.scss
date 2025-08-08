@@ -1,22 +1,33 @@
+.estrelas-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
 .estrelas {
   display: flex;
+  align-items: center;
 }
 
 .estrela {
-  width: 16px; 
-  height: 16px; 
-  margin-right: 4px; 
-  object-fit: contain; 
+  width: 18px;
+  height: 18px;
 }
 
-.fracionada {
-  width: 8px; 
-  height: 16px;
-  object-fit: cover;
-  opacity: 0.7; 
+.nota {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #fff;
 }
 
-
-.empty {
-  opacity: 0.3;  
+/* 📱 Responsivo */
+@media (max-width: 768px) {
+  .estrela {
+    width: 14px;
+    height: 14px;
+  }
+  .nota {
+    font-size: 0.8rem;
+  }
 }
