@@ -2,91 +2,82 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Estrelas from '../Estrelas/Estrelas';
 import { Link } from 'react-router-dom';
-import './ListaDeAnimes.scss';
+import '../ListaDeAnimesHorizontal/ListaDeAnimes.scss';
 
 const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes, getAnimeImage }) => {
   const sliderListRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
   const uniqueAnimes = animes.filter(
     (anime, index, self) => self.findIndex(a => a.mal_id === anime.mal_id) === index
   );
 
-  // Responsividade: detecta mobile
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+  // Responsividade
   useEffect(() => {
-    const onResize = () => setIsMobile(window.innerWidth <= 600);
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    const onResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  // Infinite scroll horizontal: carrega mais ao chegar no fim do slider
+  // Detecta se as setas devem aparecer
+  const updateScrollButtons = () => {
+    const slider = sliderListRef.current;
+    if (!slider) return;
+    setCanScrollLeft(slider.scrollLeft > 0);
+    setCanScrollRight(slider.scrollLeft + slider.clientWidth < slider.scrollWidth - 1);
+  };
+
+  useEffect(() => {
+    updateScrollButtons();
+    const slider = sliderListRef.current;
+    if (slider) slider.addEventListener('scroll', updateScrollButtons);
+    return () => slider?.removeEventListener('scroll', updateScrollButtons);
+  }, [animes.length]);
+
+  // Scroll suave para as setas
+  const scrollByAmount = (amount) => {
+    sliderListRef.current?.scrollBy({ left: amount, behavior: 'smooth' });
+  };
+
+  // Infinite scroll horizontal
   useEffect(() => {
     let loading = false;
     let hasMore = true;
-
     const handleScroll = async () => {
       if (!sliderListRef.current || loading || !hasMore) return;
       const { scrollLeft, scrollWidth, clientWidth } = sliderListRef.current;
-      if (scrollLeft + clientWidth >= scrollWidth - 10) {
+      if (scrollLeft + clientWidth >= scrollWidth - 50) {
         loading = true;
         const start = Date.now();
         const result = await loadMoreAnimes?.();
         const elapsed = Date.now() - start;
-        if (elapsed < 500) await new Promise(r => setTimeout(r, 500 - elapsed));
+        if (elapsed < 400) await new Promise(r => setTimeout(r, 400 - elapsed));
         if (result === false) hasMore = false;
         loading = false;
       }
     };
-
-    const sliderList = sliderListRef.current;
-    if (sliderList) {
-      sliderList.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (sliderList) {
-        sliderList.removeEventListener('scroll', handleScroll);
-      }
-    };
+    const slider = sliderListRef.current;
+    slider?.addEventListener('scroll', handleScroll);
+    return () => slider?.removeEventListener('scroll', handleScroll);
   }, [loadMoreAnimes, animes.length]);
 
   return (
-    <article className="container-inative">
+    <article className="anime-list-container">
       <section className="movie-list" aria-label={title}>
-        <div
-          className="title-wrapper"
-          style={{
-            display: "flex",
-            flexDirection: isMobile ? "column" : "row",
-            alignItems: isMobile ? "flex-start" : "center",
-            gap: isMobile ? 4 : 16,
-            marginBottom: isMobile ? 10 : 0,
-            width: "100%",
-          }}
-        >
-          <div style={{
-            display: "flex",
-            flexDirection: isMobile ? "column" : "row",
-            alignItems: isMobile ? "flex-start" : "center",
-            gap: isMobile ? 2 : 10,
-            flex: 1,
-            width: "100%",
-          }}>
-            <h2 className="title-large" style={{
-              fontSize: isMobile ? 22 : undefined,
-              marginBottom: isMobile ? 2 : 0,
-              lineHeight: 1.1
-            }}>{title}</h2>
-            <h6 className="descricao-famosos" style={{
-              fontSize: isMobile ? 13 : undefined,
-              marginTop: isMobile ? 2 : 12,
-              marginLeft: isMobile ? 0 : 8,
-              color: "#bbb",
-              fontWeight: 400
-            }}>{description}</h6>
+        <header className="title-wrapper">
+          <div className="title-group">
+            <h2 className="title-large">{title}</h2>
+            <h6 className="descricao-famosos">{description}</h6>
           </div>
-        </div>
-        <div className="slider-list" ref={sliderListRef}>
+        </header>
+
+        {!isMobile && canScrollLeft && (
+          <button className="scroll-btn left" aria-label="Ver anteriores" onClick={() => scrollByAmount(-300)}>‹</button>
+        )}
+
+        <div className={`slider-list ${isMobile ? 'mobile' : ''}`} ref={sliderListRef}>
           <div className="slider-inner">
             {uniqueAnimes.map((anime, index) => (
               <Link
@@ -103,6 +94,7 @@ const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes, g
                     }
                     alt={anime.title || "Anime sem título"}
                     className="img-cover"
+                    loading="lazy"
                     onError={(e) => (e.target.src = "/fallback-image.jpg")}
                   />
                 </figure>
@@ -118,6 +110,10 @@ const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes, g
             ))}
           </div>
         </div>
+
+        {!isMobile && canScrollRight && (
+          <button className="scroll-btn right" aria-label="Ver próximos" onClick={() => scrollByAmount(300)}>›</button>
+        )}
       </section>
     </article>
   );
