@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Calendario.scss";
 import { Link, useNavigate } from "react-router-dom";
-import Estrelas from "../../components/animes/Estrelas/Estrelas";
 
 const DIAS = [
   { key: "monday", label: "Segunda" },
