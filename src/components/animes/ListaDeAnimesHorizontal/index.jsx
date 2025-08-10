@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import Estrelas from '../Estrelas/Estrelas';
 import { Link } from 'react-router-dom';
-import '../ListaDeAnimesHorizontal/ListaDeAnimes.scss';
+import StarImg from '../../../assets/images/star.png';
+import './ListaDeAnimes.scss';
 
 const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes, getAnimeImage }) => {
   const sliderListRef = useRef(null);
@@ -13,15 +13,13 @@ const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes, g
   const uniqueAnimes = animes.filter(
     (anime, index, self) => self.findIndex(a => a.mal_id === anime.mal_id) === index
   );
-
-  // Responsividade
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  // Detecta se as setas devem aparecer
+  // Botões de rolagem
   const updateScrollButtons = () => {
     const slider = sliderListRef.current;
     if (!slider) return;
@@ -36,7 +34,6 @@ const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes, g
     return () => slider?.removeEventListener('scroll', updateScrollButtons);
   }, [animes.length]);
 
-  // Scroll suave para as setas
   const scrollByAmount = (amount) => {
     sliderListRef.current?.scrollBy({ left: amount, behavior: 'smooth' });
   };
@@ -62,6 +59,29 @@ const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes, g
     slider?.addEventListener('scroll', handleScroll);
     return () => slider?.removeEventListener('scroll', handleScroll);
   }, [loadMoreAnimes, animes.length]);
+
+  // Função para renderizar estrelas diretamente aqui
+  const renderEstrelas = (avaliacao) => {
+    const estrelas = [];
+    const maxEstrelas = 5;
+    const avaliacaoConvertida = (avaliacao || 0) / 2;
+    const inteiras = Math.floor(avaliacaoConvertida);
+    const fracionadas = avaliacaoConvertida - inteiras;
+
+    for (let i = 0; i < inteiras && i < maxEstrelas; i++) {
+      estrelas.push(<img key={i} src={StarImg} alt="Estrela" className="estrela" />);
+    }
+
+    if (fracionadas >= 0.5 && inteiras < maxEstrelas) {
+      estrelas.push(<img key="fracionada" src={StarImg} alt="Estrela Fracionada" className="estrela fracionada" />);
+    }
+
+    for (let i = estrelas.length; i < maxEstrelas; i++) {
+      estrelas.push(<img key={`empty-${i}`} src={StarImg} alt="Estrela Vazia" className="estrela empty" />);
+    }
+
+    return estrelas;
+  };
 
   return (
     <article className="anime-list-container">
@@ -101,7 +121,7 @@ const ListaDeAnimesHorizontal = ({ title, description, animes, loadMoreAnimes, g
                 <h4 className="title">{anime.title}</h4>
                 <div className="meta-list">
                   <div className="meta-item">
-                    <Estrelas avaliacao={Number(anime.score) || 0} />
+                    <div className="estrelas">{renderEstrelas(Number(anime.score))}</div>
                     <span className="span">{anime.score ?? "N/A"}</span>
                   </div>
                   <div className="card-badge">{anime.year ?? "Desconhecido"}</div>
