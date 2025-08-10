@@ -28,6 +28,7 @@
   scroll-behavior: smooth;
   margin: 0 -20px;
   padding-bottom: 16px;
+
   &.mobile {
     display: flex;
     scroll-snap-type: x mandatory;
@@ -37,9 +38,11 @@
 .slider-list::-webkit-scrollbar {
   height: 6px;
 }
+
 .slider-list::-webkit-scrollbar-thumb {
   background-color: transparent;
 }
+
 .slider-list:hover::-webkit-scrollbar-thumb {
   background-color: var(--fundo-banner);
 }
@@ -50,7 +53,7 @@
   padding: 0 20px;
 }
 
-.slider-inner > * {
+.slider-inner>* {
   scroll-snap-align: start;
 }
 
@@ -59,14 +62,17 @@
   min-width: 180px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .movie-card:hover {
   transform: translateY(-6px) scale(1.05);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
+
 .movie-card .card-banner {
   border-radius: 8px;
   overflow: hidden;
 }
+
 .movie-card img {
   width: 100%;
   height: auto;
@@ -87,12 +93,38 @@
   border-radius: 50%;
   transition: background 0.2s;
 }
+
 .scroll-btn:hover {
   background: rgba(0, 0, 0, 0.7);
 }
+
 .scroll-btn.left {
   left: 0;
 }
+
 .scroll-btn.right {
   right: 0;
+}
+
+.estrelas {
+  display: flex;
+  align-items: center;
+}
+
+.estrela {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  object-fit: contain;
+}
+
+.fracionada {
+  width: 8px;
+  height: 16px;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+.empty {
+  opacity: 0.3;
 }
