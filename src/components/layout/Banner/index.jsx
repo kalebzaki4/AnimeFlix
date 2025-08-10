@@ -5,10 +5,28 @@ import "./Banner.scss";
 import play from "../../../assets/images/play_circle.png";
 
 function getSafeImage(anime, type = "large") {
-  if (!anime?.images?.jpg) return "/fallback-image.jpg";
-  const imgs = anime.images.jpg || {};
-  if (type === "large") return imgs.large_image_url || imgs.image_url || "/fallback-image.jpg";
-  return imgs.image_url || imgs.large_image_url || "/fallback-image.jpg";
+  if (!anime?.images?.webp) {
+    if (anime?.images?.jpg) {
+      const jpgImgs = anime.images.jpg;
+      if (type === "large") {
+        return jpgImgs.large_image_url || jpgImgs.image_url || "/fallback-image.jpg";
+      }
+      return jpgImgs.image_url || jpgImgs.large_image_url || "/fallback-image.jpg";
+    }
+    return "/fallback-image.jpg";
+  }
+
+  const webpImgs = anime.images.webp;
+  if (type === "large") {
+    return webpImgs.large_image_url || webpImgs.image_url || "/fallback-image.jpg";
+  }
+  return webpImgs.image_url || webpImgs.large_image_url || "/fallback-image.jpg";
+}
+
+function getSrcSet(anime) {
+  if (!anime?.images?.webp) return "";
+  const imgs = anime.images.webp;
+  return `${imgs.small_image_url} 300w, ${imgs.image_url} 600w, ${imgs.large_image_url} 1200w`;
 }
 
 export default function Banner({ animes = [] }) {
@@ -26,7 +44,6 @@ export default function Banner({ animes = [] }) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    // unique titles
     const seen = new Set();
     const unique = arr.filter(a => {
       if (seen.has(a.title)) return false; seen.add(a.title); return true;
@@ -35,7 +52,6 @@ export default function Banner({ animes = [] }) {
     setIndex(0);
   }, [animes]);
 
-  // Auto advance
   useEffect(() => {
     if (shuffled.length <= 1 || paused) return;
     const t = setInterval(() => {
@@ -61,7 +77,6 @@ export default function Banner({ animes = [] }) {
     setIndex(to);
   }, [index]);
 
-  // Touch handlers for swipe
   const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
   const onTouchMove = (e) => { if (!touchStartX.current) return; const dx = e.touches[0].clientX - touchStartX.current; if (Math.abs(dx) > 20) e.preventDefault(); };
   const onTouchEnd = (e) => {
@@ -73,7 +88,6 @@ export default function Banner({ animes = [] }) {
   };
 
   const visible = useMemo(() => {
-    // keep current, prev and next rendered for performance
     const set = new Set();
     if (!shuffled.length) return set;
     set.add(index);
@@ -101,13 +115,22 @@ export default function Banner({ animes = [] }) {
         aria-roledescription="carousel"
         aria-label="Animes em destaque"
       >
-        {/* Background image with focus & progressive enhancements */}
+
         <div className="banner-bg" aria-hidden>
-          <img src={getSafeImage(current, 'large')} alt="" className="banner-bg-img" loading="eager" onError={(e)=> e.target.src='/fallback-image.jpg'} decoding="async"/>
+          {/* Implementação do srcset para carregamento responsivo e `decoding="async"` para melhor performance */}
+          <img
+            src={getSafeImage(current, 'large')}
+            srcSet={getSrcSet(current)}
+            sizes="(max-width: 600px) 100vw, 50vw"
+            alt=""
+            className="banner-bg-img"
+            loading="eager" // Carregamento prioritário para o banner principal
+            onError={(e) => { e.target.src = '/fallback-image.jpg'; }}
+            decoding="async"
+          />
           <div className="banner-gradient" />
         </div>
 
-        {/* Content card - glass style */}
         <div className="banner-content">
           <div className="info">
             <h2 className="title">{current.title}</h2>
@@ -118,14 +141,13 @@ export default function Banner({ animes = [] }) {
             </div>
             <p className="synopsis">{current.synopsis}</p>
             <div className="actions">
-              <Link to={`/Detalhes/${current.mal_id}`} className="btn-play" onClick={() => window.scrollTo({top:0, behavior:'smooth'})}>
+              <Link to={`/Detalhes/${current.mal_id}`} className="btn-play" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                 <img src={play} alt="" width={20} height={20} aria-hidden /> Assistir
               </Link>
               <button className="btn-info" onClick={() => alert('Abrir trailer / modal - implemente conforme necessidade')}>Mais info</button>
             </div>
           </div>
 
-          {/* Poster carousel overlay (centrado em mobile) */}
           <div className="poster-strip" aria-hidden>
             {shuffled.map((a, i) => (
               <button
@@ -135,20 +157,25 @@ export default function Banner({ animes = [] }) {
                 aria-label={`Ver ${a.title}`}
                 tabIndex={0}
               >
-                <img src={getSafeImage(a, 'thumb')} alt={a.title} loading={i === index ? 'eager' : 'lazy'} onError={(e)=> e.target.src='/fallback-image.jpg'} decoding="async"/>
+                {/* Lazy loading para as miniaturas */}
+                <img
+                  src={getSafeImage(a, 'thumb')}
+                  alt={a.title}
+                  loading={i === index ? 'eager' : 'lazy'}
+                  onError={(e) => { e.target.src = '/fallback-image.jpg'; }}
+                  decoding="async"
+                />
               </button>
             ))}
           </div>
         </div>
 
-        {/* Progressive slide elements for animations (keeps DOM light) */}
         <div className={`slide-anim slide-${dir}`} aria-hidden>
           {Array.from(visible).map(i => (
             <img key={shuffled[i].mal_id} src={getSafeImage(shuffled[i], 'large')} alt="" className={`slide-img ${i === index ? 'current' : ''}`} loading="lazy"/>
           ))}
         </div>
 
-        {/* Vertical control (desktop) and dots (mobile) */}
         <div className="controls">
           <div className="dots" role="tablist">
             {shuffled.map((_, i) => (
