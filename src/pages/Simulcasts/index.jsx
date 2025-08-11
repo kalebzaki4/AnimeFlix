@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import "./Simulcasts.scss";
 import { Link, useNavigate } from "react-router-dom";
-import Estrelas from "../../components/animes/Estrelas/Estrelas";
 import { fetchMissingImages } from "../../utils/fetchUtils";
 
 const LIMIT = 18;
