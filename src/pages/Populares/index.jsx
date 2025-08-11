@@ -8,7 +8,6 @@ import React, {
 } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import Estrelas from "../../components/animes/Estrelas/Estrelas";
 import "./Populares.scss";
 import { fetchMissingImages } from "../../utils/fetchUtils";
 
