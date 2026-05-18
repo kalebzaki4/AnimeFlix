@@ -1,65 +1,193 @@
-# AnimeFlix 🎮🍿
+# 🎬 AnimeFlix — Plataforma de Streaming e Descoberta de Conteúdo
 
-## 🚨 ATENÇÃO! PROJETO INCOMPLETO 🚨
+> Uma plataforma moderna de descoberta e organização de animes, criada para oferecer uma experiência intuitiva, rápida e escalável para usuários apaixonados por entretenimento digital.
 
-**Este projeto ainda está em desenvolvimento e não está finalizado. Utilize e contribua por sua conta e risco!**
+O AnimeFlix foi desenvolvido com foco em experiência do usuário, organização de catálogo, performance de navegação e construção de produto digital real.
 
----
-
-## AVISO!!
-
-O AnimeFlix é um projeto de código aberto, o que significa que você tem total liberdade para replicá-lo e personalizar o site conforme sua preferência.
-
-Este projeto foi criado inteiramente por mim, @kalebzaki4. Desde o conceito inicial até as modificações mais recentes, cada linha de código foi escrita e aprimorada com dedicação para oferecer a melhor experiência possível para os fãs de animes. Todos os elementos utilizados no AnimeFlix são de código aberto, garantindo que qualquer pessoa possa estudá-lo, modificá-lo e expandi-lo sem restrições.
-
-Se você estiver interessado em contribuir, melhorar o projeto ou simplesmente entender melhor como ele funciona, fique à vontade para entrar em contato comigo. O AnimeFlix foi desenvolvido para ser uma plataforma interativa e de fácil navegação, permitindo que os usuários encontrem e assistam a seus animes favoritos com simplicidade e qualidade.
-
-Bem-vindo ao AnimeFlix, o paraíso dos amantes de animes! Aqui, o mundo dos animes ganha vida com uma coleção diversificada e emocionante, criada com carinho e dedicação para todos os fãs.
-
-## Descrição 🌜
-
-AnimeFlix é um projeto apaixonado, criado com a missão de proporcionar uma experiência incrível para os aficionados por animes. Neste site, você terá acesso a uma vasta coleção de animes de diversos gêneros e épocas, prontos para serem assistidos e desfrutados.
-
-## Recursos 🚀
-
-- Navegação intuitiva para encontrar rapidamente os animes desejados.
-- Lista de reprodução personalizada para salvar seus animes favoritos.
-- Pesquisa avançada para encontrar animes por gênero, título ou palavras-chave.
-- Opções de filtro para classificar animes por popularidade, avaliação, lançamento, etc.
-- Reprodução de episódios em alta qualidade com legendas em vários idiomas.
-- Comentários e avaliações dos usuários para compartilhar opiniões e recomendações.
-
-## Como Contribuir 🤝
-
-Se você é um entusiasta de animes e deseja contribuir para a melhoria do AnimeFlix, siga os passos abaixo:
-
-1. Faça um fork deste repositório.
-2. Crie um novo branch com uma descrição clara da sua contribuição.
-3. Implemente suas alterações e melhorias no código.
-4. Faça commit das suas alterações e envie um pull request.
-
-## Tecnologias Utilizadas 🛠️
-
-- HTML5, CSS3 e JavaScript para a estrutura e interatividade do site.
-- Frameworks e bibliotecas como React para o desenvolvimento front-end.
-- Backend com tecnologias como Node.js, Express e bancos de dados como MongoDB ou MySQL.
-- Integração de APIs de terceiros para obter informações detalhadas sobre os animes.
-
-## Licença 📝
-
-Este projeto é licenciado sob a [Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional (CC BY-NC-SA 4.0)](LICENSE), o que significa que você pode copiar, modificar e distribuir o código, desde que seja para fins não comerciais e respeite as mesmas condições de compartilhamento.
-
-Caso queira saber mais sobre a licença ou tenha dúvidas sobre o uso do projeto, consulte o arquivo [LICENSE](LICENSE).
-
-## Segurança 🔒
-
-Este projeto também inclui informações importantes sobre segurança. Para mais detalhes sobre como relatar vulnerabilidades ou questões de segurança, consulte o arquivo [SECURITY.md](SECURITY.md).
-
-Agradeço por escolher o AnimeFlix como seu destino para a diversão anime. Espero que aproveite cada momento assistindo aos seus animes favoritos. Divirta-se e não se esqueça de compartilhar com seus amigos! 😄🎉
-
-## Criador 👨‍💻
-
-Este projeto foi criado e desenvolvido por @kalebzaki4!
+Mais do que um site sobre animes, o projeto representa a construção de uma plataforma de streaming e recomendação de conteúdo, com visão de escalabilidade, retenção de usuários e arquitetura evolutiva.
 
 ---
 
+# 🚀 Visão do Produto
+
+A proposta do AnimeFlix é unir:
+
+- descoberta de novos animes
+- catálogo organizado por gêneros e popularidade
+- sistema de favoritos
+- histórico de acompanhamento
+- busca inteligente
+- filtros avançados
+- experiência fluida de navegação
+- interface moderna e responsiva
+
+Inspirado em plataformas como:
+
+- Netflix
+- Crunchyroll
+- MyAnimeList
+- AniList
+- Prime Video
+
+O objetivo é transformar a experiência de descoberta e consumo de conteúdo em algo simples, agradável e eficiente.
+
+---
+
+# 🎯 Problema que o projeto resolve
+
+Muitos usuários enfrentam dificuldades como:
+
+- encontrar novos animes relevantes
+- organizar o que já assistiram
+- salvar favoritos
+- acompanhar lançamentos
+- descobrir conteúdos por gênero ou recomendação
+- ter uma experiência agradável de navegação
+
+O AnimeFlix foi pensado para resolver isso através de uma plataforma intuitiva e orientada à experiência do usuário.
+
+---
+
+# ⚡ Funcionalidades Implementadas
+
+## 🔎 Busca inteligente de conteúdo
+
+- pesquisa por nome
+- busca por gênero
+- filtros por categoria
+- navegação rápida entre títulos
+
+---
+
+## ❤️ Sistema de favoritos
+
+- salvar animes preferidos
+- criar lista personalizada
+- organização de conteúdos acompanhados
+
+---
+
+## 📺 Catálogo organizado
+
+- listagem por popularidade
+- lançamentos recentes
+- classificação por avaliação
+- separação por gênero e estilo
+
+---
+
+## 💬 Interação social
+
+- comentários de usuários
+- avaliações e recomendações
+- compartilhamento de opiniões
+
+---
+
+## 📱 Interface responsiva
+
+Experiência otimizada para:
+
+- desktop
+- tablet
+- mobile
+
+---
+
+# 🛠️ Tecnologias Utilizadas
+
+| Categoria | Tecnologia |
+|---|---|
+| Frontend | React |
+| Estilização | CSS / SCSS |
+| Build Tool | Vite |
+| Deploy | Vercel |
+| Backend (planejado) | Node.js + Express |
+| Banco de Dados (planejado) | MongoDB / MySQL |
+| APIs externas | APIs de catálogo de animes |
+
+---
+
+# 🏗️ Estrutura do Projeto
+
+```text
+animeflix/
+├── src/                    # Componentes e páginas React
+├── public/                 # Assets públicos
+├── .github/                # Workflows futuros
+├── package.json
+├── vite.config.js
+├── index.html
+└── README.md
+````
+
+---
+
+# 📈 Roadmap do Produto
+
+## Próximas funcionalidades planejadas
+
+* [ ] Sistema completo de autenticação
+* [ ] Perfil de usuário
+* [ ] Histórico de episódios assistidos
+* [ ] Sistema de recomendação personalizada
+* [ ] Watchlist avançada
+* [ ] Integração com APIs externas
+* [ ] Backend completo com persistência
+* [ ] Dashboard administrativo
+* [ ] Sistema de ranking por popularidade
+* [ ] Deploy completo em produção
+
+---
+
+# 🧠 Diferencial estratégico
+
+O AnimeFlix não foi pensado apenas como um projeto visual.
+
+A proposta é construir uma plataforma com visão real de produto digital, trabalhando conceitos importantes como:
+
+* retenção de usuários
+* experiência contínua de uso
+* descoberta de conteúdo
+* recomendação personalizada
+* organização de catálogo
+* escalabilidade futura
+
+Isso transforma o projeto em uma aplicação com mentalidade de produto e não apenas de interface.
+
+---
+
+# 📌 Status do Projeto
+
+## Em evolução contínua
+
+Este projeto segue em desenvolvimento e será expandido progressivamente com novas funcionalidades e melhorias de arquitetura.
+
+A proposta é evoluir o AnimeFlix como uma plataforma completa e não apenas como uma landing page ou protótipo inicial.
+
+---
+
+# 👨‍💻 Autor
+
+## Kaleb Santos
+
+Desenvolvedor Backend Java
+Focado em sistemas escaláveis, produtos digitais e arquitetura profissional.
+
+GitHub:
+[https://github.com/kalebzaki4](https://github.com/kalebzaki4)
+
+LinkedIn:
+[https://www.linkedin.com/in/kaleb-z-santos/](https://www.linkedin.com/in/kaleb-z-santos/)
+
+---
+
+# 📄 Licença
+
+Este projeto está sob licença open source e pode ser estudado, adaptado e expandido livremente para fins educacionais.
+
+Consulte o arquivo `LICENSE` para mais detalhes.
+
+---
+
+⭐ Se esse projeto te inspirou, considere deixar uma estrela.
