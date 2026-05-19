@@ -10,7 +10,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # ==========================
-# 🔹 DIRETÓRIOS DE BUILD & DEPENDÊNCIAS
+# 🔹 DEPENDÊNCIAS & BUILD
 # ==========================
 node_modules/
 dist/
@@ -26,23 +26,16 @@ coverage/
 .env.*.local
 
 # ==========================
-# 🔹 CACHES & CONFIGURAÇÕES INTERNAS
+# 🔹 CACHE & CONFIGS INTERNAS
 # ==========================
 .cache/
 .pnp/
 .pnp.js
 .pnpm/
-.vscode/
 .yarn/
 
 # ==========================
-# 🔹 ARQUIVOS DO SISTEMA OPERACIONAL
-# ==========================
-.DS_Store
-Thumbs.db
-
-# ==========================
-# 🔹 CONFIGURAÇÕES DE EDITORES & IDEs
+# 🔹 EDITORES & IDEs
 # ==========================
 .idea/
 .vscode/
@@ -54,47 +47,25 @@ Thumbs.db
 .vscode/extensions.json
 
 # ==========================
-# 🔹 ARQUIVOS DE LOCK DE DEPENDÊNCIAS
+# 🔹 SISTEMA OPERACIONAL
 # ==========================
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
+.DS_Store
+Thumbs.db
 
 # ==========================
-# 🔹 ARQUIVOS DE TESTES & PACOTES TEMPORÁRIOS
+# 🔹 TESTES & TEMPORÁRIOS
 # ==========================
 *.tgz
-*.test.js
-*.test.ts
-*.spec.js
-*.spec.ts
-coverage/
+*.tmp
+*.bak
+*.swp
+*.swo
+*.cache
 
 # ==========================
-# 🔹 ARQUIVOS DO DOCKER (CASO USE)
-# ==========================
-Dockerfile
-docker-compose.yml
-.dockerignore
-
-# ==========================
-# 🔹 BANCOS DE DADOS LOCAIS (CASO USE)
+# 🔹 BANCOS DE DADOS LOCAIS
 # ==========================
 *.sqlite
 *.db
 *.db-wal
 *.db-shm
-
-# ==========================
-# 🔹 BACKUPS & ARQUIVOS TEMPORÁRIOS
-# ==========================
-*.bak
-*.swp
-*.swo
-*.tmp
-*.cache
-
-# ==========================
-# 🔹 LOGS DE EXECUÇÃO
-# ==========================
-*.log.*
